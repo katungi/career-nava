@@ -1,18 +1,12 @@
 import {
   SiGithub,
-  SiNextdotjs,
-  SiPostgresql,
-  SiPosthog,
-  SiPrisma,
-  SiSentry,
-  SiStorybook,
-  SiTailwindcss,
-  SiTrpc,
+  SiMicrosoft,
+  SiMastercard,
+  SiGoogle
 } from "@icons-pack/react-simple-icons";
 
 import { type Metadata } from "next";
 
-import LsLogo from "./ls-logo";
 import { Button } from "~/components/ui/button";
 import { Badge } from "~/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "~/components/ui/tabs";
@@ -21,9 +15,6 @@ import { Terminal } from "lucide-react";
 import { Alert, AlertTitle, AlertDescription } from "~/components/ui/alert";
 import { Separator } from "~/components/ui/separator";
 import Image from "next/image";
-import VideoComponent from "./video-component";
-
-import CloneRepoBadge from "./clone-repo-badge";
 import { format } from "date-fns";
 
 export const metadata: Metadata = {
@@ -51,249 +42,132 @@ const Logos = () => {
   return (
     <>
       <li>
-        <SiNextdotjs className="h-14 w-14 p-2" />
+        <SiGoogle className="h-32 w-24 p-2 text-primary" />
       </li>
       <li>
-        <SiTrpc className="h-14 w-14 p-2" />
+        <SiMastercard className="h-32 w-24 p-2 text-primary" />
       </li>
       <li>
-        <LsLogo className="mb-auto h-12 w-12 fill-emerald-200" />
+        <SiMicrosoft className="h-32 w-24 p-2 text-primary" />
       </li>
       <li>
-        <SiPrisma className="h-14 w-14 p-2" />
-      </li>
-      <li>
-        <SiPostgresql className="h-14 w-14 p-2" />
-      </li>
-      <li>
-        <SiTailwindcss className="h-14 w-14 p-2" />
-      </li>
-      <li>
-        <SiSentry className="h-14 w-14 p-2" />
-      </li>
-      <li>
-        <SiPosthog className="h-14 w-14 p-2" />
-      </li>
-      <li>
-        <SiStorybook className="h-14 w-14 p-2" />
+        <SiGithub className="h-32 w-24 p-2 text-primary" />
       </li>
     </>
   );
 };
 
 export default async function Home() {
-  const stargazersQuery = await fetch(
-    `https://api.github.com/repos/d-ivashchuk/cascade`,
-    {
-      next: { revalidate: 60 * 60 },
-    },
-  );
-  const lastCommitQuery = await fetch(
-    `https://api.github.com/repos/d-ivashchuk/cascade/commits`,
-    {
-      next: { revalidate: 60 * 60 },
-    },
-  );
-
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const stargazersData: { stargazers_count: number } =
-    await stargazersQuery.json();
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const lastCommitData: { commit: { committer: { date: string } } }[] =
-    await lastCommitQuery.json();
 
   return (
-    <div className="px-4">
-      <Image
-        src="./cd.svg"
-        width={100}
-        height={100}
-        alt="cascade logo"
-        className=" mx-auto mb-4 rounded-md md:block "
-      />
-      <div className="mb-4 flex flex-col justify-center text-center align-middle">
-        <div className="mb-4">
-          <h1 className="mb-2 text-4xl font-bold uppercase">Cascade</h1>
-          <h2 className="mb-2 text-xl text-muted-foreground">
-            Free and <b>open-source</b> SaaS boilerplate. <br />
-          </h2>
-          {lastCommitData[0] && (
-            <Badge variant="outline" className="mx-auto max-w-4xl">
-              <div className=" mr-2 h-2 w-2 animate-ping rounded-full bg-green-400 duration-1000" />
-              Last updated on{" "}
-              {format(new Date(lastCommitData[0].commit.committer.date), "PP")}
-            </Badge>
-          )}
-        </div>
-
-        <div className="flex gap-2 self-center align-middle">
-          <Link href="/app/login">
-            <Button>Try demo</Button>
-          </Link>
-          <Link target="_blank" href="https://github.com/d-ivashchuk/cascade">
-            <Button variant="outline">
-              <SiGithub className="mr-2 h-4 w-4" />{" "}
-              {stargazersData
-                ? stargazersData.stargazers_count
-                : "Code on GitHub"}
+    <div className="">
+      {/* Hero */}
+      <div className="h-screen overflow-hidden bg-primary">
+        <div className="flex flex-row bg-primary ">
+          <div className="mx-4 mt-28 relative">
+            <Image src="/images/person-1.png" width={1800} height={800} alt="Person 1" className="hidden md:block" />
+            <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-primary to-transparent"></div>
+          </div>
+          {/* CTA */}
+          <div className="w-full h-[500px] flex-col justify-start items-center gap-6 inline-flex mt-48">
+            <div className="self-stretch text-center"><span className="text-white text-6xl font-bold">Navigate </span>
+              <span className="text-secondary text-6xl font-bold">Scholarships</span><span className="text-white text-6xl font-bold"> Smatter</span></div>
+            <Button variant={"secondary"} size={"lg"} className="w-[360px] h-[70px] my-2">
+              <span className="text-black text-2xl">Get Your Career Score Today</span>
             </Button>
-          </Link>
-          <Link href="https://stackonfire.mintlify.app/introduction">
-            <Button variant="outline">Docs</Button>
-          </Link>
+            <div className="self-stretch text-center text-white text-3xl">Looking to advance your education? Our scholarship guidance significantly increases your chance of success.</div>
+          </div>
+          <div className="mx-4 relative">
+            <Image src="/images/person-cta-2.png" width={1800} height={800} alt="Person 1" className="hidden md:block" />
+            <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-primary to-transparent"></div>
+          </div>
         </div>
-        <CloneRepoBadge />
-      </div>
-      <div className="mx-auto max-w-5xl">
-        <div className="mx-auto mt-4 inline-flex w-full  flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)]">
-          <ul className="flex animate-infinite-scroll items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-8">
-            <Logos />
-          </ul>
-          <ul
-            className="flex animate-infinite-scroll items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-8"
-            aria-hidden="true"
-          >
-            <Logos />
-          </ul>
-        </div>
-      </div>
-
-      <VideoComponent />
-
-      <div className="mx-auto max-w-4xl">
-        <div className="my-16">
-          <Tabs defaultValue="architecture">
-            <TabsList className="flex self-center">
-              <TabsTrigger value="architecture">Architecture</TabsTrigger>
-              <TabsTrigger value="tools">Tools</TabsTrigger>
-              <TabsTrigger value="concept">Concept</TabsTrigger>
-            </TabsList>
-            <TabsContent value="architecture">
-              <div className="max-w-3xl">
-                <p className="prose lg:prose-xl mx-auto">
-                  Cascade is based on{" "}
-                  <Link className="underline" href="https://create.t3.gg/">
-                    T3 Stack
-                  </Link>
-                  . It is a fullstack boilerplate that is relying on{" "}
-                  <Link className="underline" href="https://trpc.io/">
-                    tRPC
-                  </Link>{" "}
-                  &{" "}
-                  <Link className="underline" href="https://nextjs.org/">
-                    Next.js
-                  </Link>
-                  . <br />
-                  Cascade is a <b>SaaS boilerplate</b> meaning it is making
-                  opinionated choices when it comes to technologies used on top
-                  of T3 base stack. <br />
-                </p>
-                <Alert className="mt-4">
-                  <Terminal className="h-4 w-4" />
-                  <AlertTitle>Important</AlertTitle>
-                  <AlertDescription>
-                    Main goal of Cascade is to get you from <b>ideation</b> to{" "}
-                    <b>first sale</b> as fast as possible. After that the
-                    template is designed to support <b>growth and scale</b> .
-                  </AlertDescription>
-                </Alert>
-              </div>
-            </TabsContent>
-            <TabsContent value="tools">
-              Cascade mainly relies on <b>open-source</b> tools and services to
-              the main extent. There are some <b>paid services</b> included in
-              the starter template, but those are either industry standards or
-              tools critically acclaimed by the community. <br /> <br />
-              Most importantly Cascade is designed to be <b>cost-effective</b>.
-              All of the paid services are having generous free plans and will
-              not require any costs unless you have big amounts of users.
-            </TabsContent>
-            <TabsContent value="concept">
-              Cascade differs from the most of the templates because it covers
-              not only the <b>technical side</b> of the things but also the{" "}
-              <b>business side</b>.
-              <br /> <br />
-              Cascade template is designed in a way to help you:
-              <ul className="list-disc">
-                <li>
-                  Build your business logic from <b>Day 1</b> with existing code
-                  setup
-                </li>
-                <li>
-                  Get your first paying customers with simple but comprehensive
-                  payment setup
-                </li>
-                <li>
-                  Evolve your business with tools to monitor user behaviors &
-                  errors in your codebase.
-                </li>
+        <div className="rounded-t-7xl bg-white h-full pt-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="mx-auto mt-4 inline-flex w-full  flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)]">
+              <ul className="flex animate-infinite-scroll items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-8">
+                <Logos />
               </ul>
-            </TabsContent>
-          </Tabs>
+              <ul
+                className="flex animate-infinite-scroll items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-8"
+                aria-hidden="true"
+              >
+                <Logos />
+              </ul>
+            </div>
+          </div>
         </div>
-        <Separator className="my-4" />
-        <h2 className="mb-4 text-center text-3xl">
-          What is covered in template
-        </h2>
-        <h3 className="mb-4 text-center text-2xl">
-          <b>Technical</b>
-        </h3>
-        <ul className="list-disc">
-          <li>
-            Basic T3 stack setup with Next.js, Prisma, PostgreSQL, TailwindCSS.
-          </li>
-          <li>
-            Styling with shadcn/ui components for fast UI prototyping |{" "}
-            <b>Dark/light theme, TanStack Table integration</b>
-          </li>
-          <li>
-            Authentication with Next Auth | <b>Discord & Google examples</b>{" "}
-          </li>
-          <li>
-            Payments with Lemon Squeezy |{" "}
-            <b>Checkout sessions, Subscriptions, One time payments</b>
-          </li>
-          <li>
-            Background jobs with Trigger.dev |{" "}
-            <b>Slack notifications on new Users, background job processing</b>
-          </li>
-          <li>
-            Error handling with Sentry |{" "}
-            <b>Monitoring, Alerts, Issue tracking</b>
-          </li>
-          <li>
-            Storybook | <b>Component library, Documentation</b>
-          </li>
-          <li>
-            GitHub actions | <b>CI/CD, Automated testing</b>
-          </li>
-          <li>
-            Lost Pixel | <b>Visual regression testing</b>
-          </li>
-        </ul>
-        <h3 className="mb-4 mt-8 text-center text-2xl">
-          <b>Business</b>
-        </h3>
-        <ul className="list-disc">
-          <li>Simple markdown blog with Contentlayer </li>
-          <li>
-            SEO with Next.js |{" "}
-            <b>Dynamic Sitemap,Dynamic Open Graph, Twitter Cards</b>
-          </li>
-          <li>
-            Email user flows with Loops |{" "}
-            <b>
-              Welcome emails for newly signed up users, newsletter subscription
-            </b>
-          </li>
-          <li>
-            Analytics with Posthog |{" "}
-            <b>Event tracking, User behavior analysis</b>
-          </li>
-          <li>
-            Analytics with Plausible | <b>Page analytics</b>
-          </li>
-        </ul>
+      </div>
+      <div className="bg-white h-screen">
+        <div className="text-center pt-6">
+          <span className="text-secondary text-6xl font-bold">
+            What we as CareerNava value
+          </span>
+
+          <div className='flex flex-row justify-center mt-28'>
+            <div className="w-[212px] h-[130px] flex-col justify-start items-center gap-[22px] inline-flex">
+              <img className="w-28 h-28" src="https://via.placeholder.com/56x56" />
+              <div className="self-stretch h-[52px] flex-col justify-start items-center gap-2 flex">
+                <div className="self-stretch text-center text-neutral-800 text-2xl font-bold capitalize">Compatibility</div>
+                <div className="self-stretch opacity-60 text-center text-neutral-800 text-base font-normal capitalize">Lorem ipsum dolor</div>
+              </div>
+            </div>
+            <div className="w-[212px] h-[130px] flex-col justify-start items-center gap-[22px] inline-flex">
+              <img className="w-28 h-28" src="https://via.placeholder.com/56x56" />
+              <div className="self-stretch h-[52px] flex-col justify-start items-center gap-2 flex">
+                <div className="self-stretch text-center text-neutral-800 text-2xl font-bold capitalize">Compatibility</div>
+                <div className="self-stretch opacity-60 text-center text-neutral-800 text-base font-normal capitalize">Lorem ipsum dolor</div>
+              </div>
+            </div>
+            <div className="w-[212px] h-[130px] flex-col justify-start items-center gap-[22px] inline-flex">
+              <img className="w-28 h-28" src="https://via.placeholder.com/56x56" />
+              <div className="self-stretch h-[52px] flex-col justify-start items-center gap-2 flex">
+                <div className="self-stretch text-center text-neutral-800 text-2xl font-bold capitalize">Compatibility</div>
+                <div className="self-stretch opacity-60 text-center text-neutral-800 text-base font-normal capitalize">Lorem ipsum dolor</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mt-32 bg-primary h-full p-8">
+            <span className="text-secondary text-6xl font-bold mt-4">
+              Get your assessment score today
+            </span>
+            <div className="self-stretch text-center text-white text-lg mt-4">
+              With CareerNava’s assessment score there’s nowhere you’ll go wrong
+            </div>
+
+            <div className="flex flex-row px-96 mt-20 ml-44 mb-12">
+              <Button variant={"secondary"} size={"lg"} className="w-[360px] h-[70px] my-2">
+                <span className="text-black text-2xl">Get Assessment Score</span>
+              </Button>
+              <Button variant={"default"} size={"lg"} className="w-[360px] h-[70px] my-2">
+                <span className="text-white text-2xl">Get Assessment Score</span>
+              </Button>
+            </div>
+          </div>
+        </div>
+        <div className="p-8 flex flex-row">
+          <Image src={"/images/imgpeople.png"} width={800} height={800} alt="CTA 1" className="ml-4" />
+          <div className="p-12 flex-col">
+            <div className="text-black text-4xl font-bold">
+              Services we offer
+            </div>
+            <div className="text-black text-lg">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Curabitur nulla varius ac morbi pellentesque in nisi, aliquam.
+            </div>
+            <div className="rounded-lg bg-secondary w-64 p-4 mt-4">
+              <span className="font-bold">Online Mentor Sessions</span>
+            </div>
+            <div className="rounded-lg bg-secondary w-64 p-4 mt-4">
+              <span className="font-muted opacity-12">Document Reviews</span>
+            </div>
+            <div className="rounded-lg bg-secondary w-64 p-4 mt-4">
+              <span className="font-muted opacity-12">Scholarship Reviews</span>
+            </div>
+  
+          </div>
+        </div>
       </div>
     </div>
   );
