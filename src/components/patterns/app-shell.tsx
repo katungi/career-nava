@@ -92,9 +92,9 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
           <SheetTrigger asChild>
             {isInApplicationRoute ? (
               <Image
-                src="/cd.svg"
-                width={40}
-                height={40}
+                src="/logo.svg"
+                width={200}
+                height={0}
                 alt="cascade logo"
                 className="shrink-0 md:hidden"
               />
