@@ -36,7 +36,7 @@ export function LoginScreen() {
             <Button
               onClick={() =>
                 signIn("google", {
-                  callbackUrl: "/app/subscriptions/?loginState=signedIn",
+                  callbackUrl: "/app/dashboard/?loginState=signedIn",
                 })
               }
               variant="outline"
