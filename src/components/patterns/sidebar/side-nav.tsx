@@ -54,7 +54,7 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
                             <AccordionTrigger
                                 className={cn(
                                     buttonVariants({ variant: 'ghost' }),
-                                    'group relative flex h-12 justify-between px-4 py-2 text-base duration-200 hover:bg-muted hover:no-underline',
+                                    'group relative flex h-12 justify-between px-4 py-2 text-white duration-200 hover:bg-muted hover:no-underline',
                                 )}
                             >
                                 <div>
@@ -62,7 +62,7 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
                                 </div>
                                 <div
                                     className={cn(
-                                        'absolute left-12 text-base duration-200 ',
+                                        'absolute left-12 text-white duration-200 ',
                                         !isOpen && className,
                                     )}
                                 >
@@ -70,7 +70,7 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
                                 </div>
 
                                 {isOpen && (
-                                    <ChevronDownIcon className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" />
+                                    <ChevronDownIcon className="h-4 w-4 shrink-0 text-white-foreground transition-transform duration-200" />
                                 )}
                             </AccordionTrigger>
                             <AccordionContent className="mt-2 space-y-4 pb-1">
@@ -91,7 +91,7 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
                                         <child.icon className={cn('h-5 w-5', child.color)} />
                                         <div
                                             className={cn(
-                                                'absolute left-12 text-base duration-200',
+                                                'absolute left-12 text-white duration-200',
                                                 !isOpen && className,
                                             )}
                                         >
@@ -118,7 +118,7 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
                         <item.icon className={cn('h-5 w-5', item.color)} />
                         <span
                             className={cn(
-                                'absolute left-12 text-base duration-200',
+                                'absolute left-12 text-white duration-200',
                                 !isOpen && className,
                             )}
                         >

@@ -1,38 +1,29 @@
-import { BookOpenCheck, LayoutDashboard } from "lucide-react";
+import { AwardIcon, BookOpenCheck, LayoutDashboard } from "lucide-react";
 import { type NavItem } from "~/types";
 
 export const NavItems: NavItem[] = [
-  {
-    title: "Dashboard",
-    icon: LayoutDashboard,
-    href: "/",
-    color: "text-sky-500",
-  },
-  {
-    title: "Example",
-    icon: BookOpenCheck,
-    href: "/example",
-    color: "text-orange-500",
-    isChidren: true,
-    children: [
-      {
-        title: "Example-01",
+    {
+        title: "Home",
+        icon: LayoutDashboard,
+        href: "/app/dashboard",
+        color: "text-sky-500",
+    },
+    {
+        title: "My Sessions",
         icon: BookOpenCheck,
-        color: "text-red-500",
-        href: "/example/employees",
-      },
-      {
-        title: "Example-02",
+        href: "/app/sessions",
+        color: "text-green-500",
+    },
+    {
+        title: "My Scholarships",
+        icon: AwardIcon,
+        href: "/app/scholarships",
+        color: "text-blue-500",
+    },
+    {
+        title: "My Documents",
         icon: BookOpenCheck,
-        color: "text-red-500",
-        href: "/example/example-02",
-      },
-      {
-        title: "Example-03",
-        icon: BookOpenCheck,
-        color: "text-red-500",
-        href: "/example/example-03",
-      },
-    ],
-  },
+        href: "/app/documents",
+        color: "text-orange-500",
+    }
 ];
