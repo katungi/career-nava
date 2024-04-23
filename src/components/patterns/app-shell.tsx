@@ -22,8 +22,9 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
 
   const isInApplicationRoute = pathname.includes("/app");
   const isInOnboardingRoute = pathname.includes("/app/onboarding");
+  const isDashboardRoute = pathname.includes("/app/dashboard")
 
-  return isInOnboardingRoute ? (
+  return isInOnboardingRoute || isDashboardRoute ? (
     <main>{children}</main>
   ) : (
     <div className="flex min-h-screen w-full flex-col">
@@ -42,37 +43,37 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
             <>
               <Link
                 href="/app/onboarding/user"
-                className="text-muted-foreground transition-colors hover:text-foreground"
+                className="text-white transition-colors hover:text-foreground"
               >
                 Onboarding
               </Link>
               <Link
                 href="/app/subscriptions"
-                className="text-muted-foreground transition-colors hover:text-foreground"
+                className="text-white transition-colors hover:text-foreground"
               >
                 Subscriptions
               </Link>
               <Link
                 href="/app/billing"
-                className="text-muted-foreground transition-colors hover:text-foreground"
+                className="text-white transition-colors hover:text-foreground"
               >
                 Billing
               </Link>
               <Link
                 href="/app/usage"
-                className="text-muted-foreground transition-colors hover:text-foreground"
+                className="text-white transition-colors hover:text-foreground"
               >
                 Usage
               </Link>
               <Link
                 href="/app/examples"
-                className="text-muted-foreground transition-colors hover:text-foreground"
+                className="text-white transition-colors hover:text-foreground"
               >
                 Examples
               </Link>
               <Link
                 href="/app/user-management"
-                className="text-muted-foreground transition-colors hover:text-foreground"
+                className="text-white transition-colors hover:text-foreground"
               >
                 Management
               </Link>
@@ -81,7 +82,7 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
             <>
               <Link
                 href="/blog"
-                className="text-muted-foreground transition-colors hover:text-foreground"
+                className="text-white transition-colors hover:text-foreground"
               >
                 Blog
               </Link>
@@ -115,25 +116,25 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
                 <>
                   <Link
                     href="/app/subscriptions"
-                    className="text-muted-foreground transition-colors hover:text-foreground"
+                    className="text-white transition-colors hover:text-foreground"
                   >
                     Subscriptions
                   </Link>
                   <Link
                     href="/app/billing"
-                    className="text-muted-foreground transition-colors hover:text-foreground"
+                    className="text-white transition-colors hover:text-foreground"
                   >
                     Billing
                   </Link>
                   <Link
                     href="/app/usage"
-                    className="text-muted-foreground transition-colors hover:text-foreground"
+                    className="text-white transition-colors hover:text-foreground"
                   >
                     Usage
                   </Link>
                   <Link
                     href="/app/user-management"
-                    className="text-muted-foreground transition-colors hover:text-foreground"
+                    className="text-white transition-colors hover:text-foreground"
                   >
                     Management
                   </Link>
@@ -142,13 +143,13 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
                 <>
                   <Link
                     href="/"
-                    className="text-muted-foreground transition-colors hover:text-foreground"
+                    className="text-white transition-colors hover:text-foreground"
                   >
                     Home
                   </Link>
                   <Link
                     href="/blog"
-                    className="text-muted-foreground transition-colors hover:text-foreground"
+                    className="text-white transition-colors hover:text-foreground"
                   >
                     Blog
                   </Link>

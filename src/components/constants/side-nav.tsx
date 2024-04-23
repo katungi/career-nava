@@ -11,19 +11,19 @@ export const NavItems: NavItem[] = [
     {
         title: "My Sessions",
         icon: BookOpenCheck,
-        href: "/app/sessions",
+        href: "/app/dashboard/sessions",
         color: "text-green-500",
     },
     {
         title: "My Scholarships",
         icon: AwardIcon,
-        href: "/app/scholarships",
+        href: "/app/dashboard/scholarships",
         color: "text-blue-500",
     },
     {
         title: "My Documents",
         icon: BookOpenCheck,
-        href: "/app/documents",
+        href: "/app/dashboard/documents",
         color: "text-orange-500",
     }
 ];
