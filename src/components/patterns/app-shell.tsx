@@ -95,7 +95,7 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
                 src="/logo.svg"
                 width={200}
                 height={0}
-                alt="cascade logo"
+                alt="Career Nava logo"
                 className="shrink-0 md:hidden"
               />
             ) : (
