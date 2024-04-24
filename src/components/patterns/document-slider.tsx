@@ -1,9 +1,9 @@
 "use client"
 import React, { useState } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
-import SessionCard from '../sections/session-card';
+import DocumentCard from '../sections/document-card';
 
-const SessionSlider = ({ sessions }: any) => {
+const DocumentSlider = ({ sessions }: any) => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const maxVisibleCards = 3;
     const maxSlideIndex = Math.ceil(sessions.length / maxVisibleCards) - 1;
@@ -35,9 +35,9 @@ const SessionSlider = ({ sessions }: any) => {
                 </button>
             </div>
             <div className="flex flex-grow space-x-4">
-                {sessions.slice(currentSlide * maxVisibleCards, (currentSlide + 1) * maxVisibleCards).map((session: any, index: React.Key | null | undefined) => (
+                {sessions.slice(currentSlide * maxVisibleCards, (currentSlide + 1) * maxVisibleCards).map((session: React.JSX.IntrinsicAttributes & { title: any; status: any; pageCount: any; }, index: React.Key | null | undefined) => (
                     <div key={index} className="flex-shrink-0 w-1/3 p-4">
-                        <SessionCard {...session} />
+                        <DocumentCard {...session} />
                     </div>
                 ))}
             </div>
@@ -45,4 +45,4 @@ const SessionSlider = ({ sessions }: any) => {
     );
 };
 
-export default SessionSlider;
+export default DocumentSlider;
