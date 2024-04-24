@@ -22,7 +22,7 @@ const DocumentCard = ({ title, status, pageCount }: {
                 </div>
                 <div className="mt-4 mb-2">
                     {/* Image representing the document should go here */}
-                    <img src="/images/pdf.png" alt="Document Preview" className="w-full" />
+                    <img src="/images/pdf.png" alt="Document Preview" className="w-2/3" />
                 </div>
                 <div className="flex items-center justify-between text-sm text-gray-600">
                     <span>{pageCount} pages</span>
