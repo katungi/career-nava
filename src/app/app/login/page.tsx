@@ -8,7 +8,7 @@ const LoginPage = async () => {
   const session = await getServerAuthSession();
 
   if (session?.user) {
-    redirect("/app/usage");
+    redirect("/app/dashboard/?loginState=signedIn");
   }
 
   return (

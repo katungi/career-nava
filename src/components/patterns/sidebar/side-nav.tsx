@@ -1,7 +1,6 @@
 
 "use client";
-import Link from "next/link";
-
+import {Link} from "next-view-transitions";
 import { type NavItem } from "~/types";
 import { usePathname } from "next/navigation";
 import { useSidebar } from "~/hooks/use-sidebar";

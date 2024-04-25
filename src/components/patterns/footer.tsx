@@ -1,5 +1,5 @@
 import { Button } from "../ui/button"
-import Link from "next/link"
+import {Link} from "next-view-transitions"
 import { Input } from "../ui/input"
 
 export default function Footer() {

@@ -1,7 +1,7 @@
 "use client";
 import { Loader2, TestTube2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+import {Link} from "next-view-transitions";
 import React, { useEffect } from "react";
 import { Button } from "~/components/ui/button";
 import { Skeleton } from "~/components/ui/skeleton";

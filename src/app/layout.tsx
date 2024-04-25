@@ -11,6 +11,7 @@ import Script from "next/script";
 
 import { Toaster } from "~/components/ui/sonner";
 import { TailwindIndicator } from "~/components/patterns/tailwind-indicator";
+import { ViewTransitions } from 'next-view-transitions'
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,20 +24,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`font-sans ${inter.variable}`}>
-        <Script
-          src="https://app.lemonsqueezy.com/js/lemon.js"
-          strategy="beforeInteractive"
-        />
-        <Suspense>
-          <Providers>
-            <AppShell>{children}</AppShell>
-          </Providers>
-        </Suspense>
-        <Toaster />
-        <TailwindIndicator />
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang="en">
+        <body className={`font-sans ${inter.variable}`}>
+          <Script
+            src="https://app.lemonsqueezy.com/js/lemon.js"
+            strategy="beforeInteractive"
+          />
+          <Suspense>
+            <Providers>
+              <AppShell>{children}</AppShell>
+            </Providers>
+          </Suspense>
+          <Toaster />
+          <TailwindIndicator />
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

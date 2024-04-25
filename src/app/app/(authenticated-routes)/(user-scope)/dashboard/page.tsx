@@ -1,11 +1,15 @@
+"use client"
 import { ChevronRight, FileText, SquareArrowOutUpRight } from "lucide-react";
 import DashboardBanner from "~/components/sections/banner";
 import { Badge } from "~/components/ui/badge";
+import Modal from "~/components/ui/modal";
 import SessionSlider from "~/components/patterns/session-slider";
-import DocumentCard from "~/components/sections/document-card";
 import DocumentSlider from "~/components/patterns/document-slider";
+import { useState } from "react";
+import { Pencil1Icon } from "@radix-ui/react-icons";
 
 export default function Home() {
+    const [openDialog, setOpenDialog] = useState(false);
     const img1 = "https://i.ibb.co/ncrXc2V/1.png";
     const img2 = "https://i.ibb.co/B3s7v4h/2.png";
     const img3 = "https://i.ibb.co/XXR8kzF/3.png";

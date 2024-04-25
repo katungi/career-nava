@@ -6,7 +6,7 @@ import { UpgradeDialog } from "~/components/patterns/upgrade-dialog";
 import { Button } from "~/components/ui/button";
 import useGuardedSpendCredits from "~/hooks/use-guard-usage";
 import { api } from "~/trpc/react";
-import Link from "next/link";
+import {Link} from "next-view-transitions";
 import { Skeleton } from "~/components/ui/skeleton";
 
 const Usage = () => {

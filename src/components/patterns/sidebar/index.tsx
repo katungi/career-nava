@@ -6,7 +6,7 @@ import { NavItems } from "~/components/constants/side-nav";
 import { useSidebar } from "~/hooks/use-sidebar"
 import { BsArrowLeftShort } from "react-icons/bs";
 import { cn } from "~/lib/utils";
-import Link from "next/link";
+import {Link} from "next-view-transitions";
 import Image from "next/image";
 
 interface SidebarProps {

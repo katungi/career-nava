@@ -5,7 +5,7 @@ import { Button } from "~/components/ui/button";
 import { Skeleton } from "~/components/ui/skeleton";
 import { Badge } from "~/components/ui/badge";
 import { api } from "~/trpc/react";
-import Link from "next/link";
+import {Link} from "next-view-transitions";
 import { Separator } from "~/components/ui/separator";
 import { Card } from "~/components/ui/card";
 import { currency } from "~/lib/utils";
