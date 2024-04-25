@@ -17,7 +17,7 @@ export function LoginScreen() {
           <div className="grid gap-2 text-center">
             <h1 className="text-3xl font-bold">Login</h1>
             <p className="text-balance text-muted-foreground">
-              Authenticate with a common provider
+              Login to your account to continue!
             </p>
           </div>
           <div className="grid gap-4">

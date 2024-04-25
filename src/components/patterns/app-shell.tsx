@@ -47,7 +47,7 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
               >
                 Onboarding
               </Link>
-              <Link
+              {/* <Link
                 href="/app/subscriptions"
                 className="text-white transition-colors hover:text-foreground"
               >
@@ -76,7 +76,7 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
                 className="text-white transition-colors hover:text-foreground"
               >
                 Management
-              </Link>
+              </Link> */}
             </>
           ) : (
             <>
@@ -114,7 +114,7 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
             <nav className="grid gap-6 text-lg font-medium">
               {isInApplicationRoute ? (
                 <>
-                  <Link
+                  {/* <Link
                     href="/app/subscriptions"
                     className="text-white transition-colors hover:text-foreground"
                   >
@@ -137,7 +137,7 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
                     className="text-white transition-colors hover:text-foreground"
                   >
                     Management
-                  </Link>
+                  </Link> */}
                 </>
               ) : (
                 <>
