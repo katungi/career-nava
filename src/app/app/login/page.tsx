@@ -9,7 +9,7 @@ const LoginPage = async () => {
 
   if (session?.user) {
     redirect("/app/dashboard/?loginState=signedIn");
-  }
+  } 
 
   return (
     <div>

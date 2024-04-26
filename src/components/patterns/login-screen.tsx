@@ -2,11 +2,13 @@
 
 import { signIn } from "next-auth/react";
 import { Novatrix, Zenitho } from "uvcanvas";
-import { SiDiscord, SiGoogle } from "@icons-pack/react-simple-icons";
+import { SiGoogle } from "@icons-pack/react-simple-icons";
 
 import { Button } from "~/components/ui/button";
+import { useRouter } from "next/navigation";
 
 export function LoginScreen() {
+  const router = useRouter();
   return (
     <div className="min-h-[800px] w-full lg:grid lg:grid-cols-2">
       <div className="flex items-center justify-center py-12">
@@ -21,18 +23,6 @@ export function LoginScreen() {
             </p>
           </div>
           <div className="grid gap-4">
-            {/* <Button
-              onClick={() =>
-                signIn("discord", {
-                  callbackUrl: "/app/subscriptions/?loginState=signedIn",
-                })
-              }
-              variant="outline"
-              className="w-full"
-            >
-              <SiDiscord className="mr-2 h-4 w-4" />
-              Login with Discord
-            </Button> */}
             <Button
               onClick={() =>
                 signIn("google", {
@@ -46,6 +36,10 @@ export function LoginScreen() {
               Login with Google
             </Button>
           </div>
+          <Button variant={"ghost"} className="m-4 font-bold underline decoration-wavy decoration-primary"
+            onClick={() => router.push("/app/signup")}>
+            I don't have an Account
+          </Button>
         </div>
       </div>
       <div className="hidden lg:block [&_canvas]:rounded-lg">

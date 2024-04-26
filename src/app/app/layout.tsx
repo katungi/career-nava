@@ -10,7 +10,7 @@ const ProtectedRoutes = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
 
   useEffect(() => {
-    const allowedUnauthenticatedPaths = ["/app/login", "/"];
+    const allowedUnauthenticatedPaths = ["/app/login", "/app/signup", ""];
 
     if (
       status !== "loading" &&

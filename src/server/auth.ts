@@ -31,11 +31,6 @@ declare module "next-auth" {
       // role: UserRole;
     } & DefaultSession["user"];
   }
-
-  // interface User {
-  //   // ...other properties
-  //   // role: UserRole;
-  // }
 }
 
 /**
@@ -57,7 +52,7 @@ export const authOptions: NextAuthOptions = {
           ...session.user,
           id: user.id,
           planId: dbUser?.planId ?? null,
-          role: dbUser?.role,
+          role: dbUser?.role ?? "USER",
         },
       };
     },

@@ -182,11 +182,11 @@ export default async function Home() {
             </div>
 
             <div className="flex flex-row px-96 mt-20 ml-44 mb-12 gap-4">
-              <Link href="/app/login">
+              <Link href="/app/signup">
                 <Button variant={"default"} size={"lg"} className="w-[360px] h-[70px] my-2 hover:bg-secondary" onClick={() =>
-                  router.push("/app/login")
+                  router.push("/app/signup")
                 }>
-                  <span className="text-white text-2xl">sign In</span>
+                  <span className="text-white text-2xl">sign Up</span>
                 </Button>
               </Link>
               <Button variant={"secondary"} size={"lg"} className="w-[360px] h-[70px] my-2">
