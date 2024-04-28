@@ -15,6 +15,7 @@ import { loops } from "~/lib/loops";
 import { isTriggerEnabled } from "~/lib/trigger";
 import { slackNewUserNotification } from "~/jobs";
 import { type Role } from "@prisma/client";
+import { getCookie } from "cookies-next";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -58,7 +59,9 @@ export const authOptions: NextAuthOptions = {
     },
   },
   events: {
-    async signIn({ user, isNewUser }) {
+    async signIn({ user, isNewUser, profile, account }) {
+      let additionalAuthParams = JSON.parse(getCookie("additionalAuthParams") ?? "{}");
+      console.log("additionalAuthParams", additionalAuthParams);
       Sentry.setUser({ id: user.id, name: user.name, email: user.email ?? "" });
       if (isNewUser) {
         if (isTriggerEnabled) {
@@ -82,11 +85,19 @@ export const authOptions: NextAuthOptions = {
             },
           );
         }
+        await db.user.update({
+          where: {
+            id: user.id,
+          },
+          data: {
+            role: additionalAuthParams.role,
+          },
+        })
       }
     },
     signOut() {
       Sentry.setUser(null);
-    },
+    }
   },
   adapter: PrismaAdapter(db) as Adapter,
   providers: [

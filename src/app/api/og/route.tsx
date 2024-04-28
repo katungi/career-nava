@@ -3,7 +3,7 @@ import { ImageResponse } from "next/og";
 export const runtime = "edge";
 
 export async function GET() {
-  const imageData = await fetch(new URL("./cascade.png", import.meta.url)).then(
+  const imageData = await fetch(new URL("./career-nava-logo.png", import.meta.url)).then(
     (res) => res.arrayBuffer(),
   );
   return new ImageResponse(
@@ -29,7 +29,7 @@ export async function GET() {
             marginTop: "1rem",
           }}
         >
-          Open-source SaaS starter kit
+         Career Nava
         </h1>
         <p
           style={{
@@ -38,8 +38,7 @@ export async function GET() {
             color: "#666",
           }}
         >
-          Auth | Subscriptions | Background jobs | Emails | Analytics | User
-          management
+          Your career path starts here.
         </p>
       </div>
     ),

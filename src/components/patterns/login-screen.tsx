@@ -24,11 +24,11 @@ export function LoginScreen() {
           </div>
           <div className="grid gap-4">
             <Button
-              onClick={() =>
-                signIn("google", {
+              onClick={async () =>
+                await signIn("google", {
                   callbackUrl: "/app/dashboard/?loginState=signedIn",
                 })
-              }
+            }
               variant="outline"
               className="w-full"
             >
