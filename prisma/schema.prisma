@@ -8,7 +8,7 @@ generator client {
 datasource db {
     provider  = "postgresql"
     url       = env("POSTGRES_PRISMA_URL")
-    directUrl = env("POSTGRES_URL_NON_POOLING") 
+    directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 enum Role {
@@ -62,6 +62,8 @@ model User {
     createdAt       DateTime          @default(now())
     updatedAt       DateTime          @default(now()) @updatedAt
     oneTimePurchase OneTimePurchase[]
+    mentorSessions  BookingSession[]  @relation(name: "MentorSessions")
+    menteeSessions  BookingSession[]  @relation(name: "MenteeSessions")
 }
 
 model LemonSqueezyWebhookEvent {
@@ -143,4 +145,23 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model BookingSession {
+    id            String   @id @default(cuid())
+    title         String
+    description   String?
+    startTime     DateTime
+    endTime       DateTime
+    status        String
+    mentorId      String
+    menteeId      String
+    paymentStatus String
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @default(now()) @updatedAt
+
+    mentor User @relation(name: "MentorSessions", fields: [mentorId], references: [id])
+    mentee User @relation(name: "MenteeSessions", fields: [menteeId], references: [id])
+
+    @@unique([mentorId, startTime])
 }
