@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react';
-import { ChevronRight, PlusIcon } from 'lucide-react'; // Assuming you're using lucide-react for the icons
+import { ChevronRight, PlusIcon } from 'lucide-react';
 import { Button } from '~/components/ui/button';
 import TabsComponent from '~/components/patterns/tabs';
 import SessionSlider from '~/components/patterns/session-slider';
@@ -18,7 +18,6 @@ export default function Sessions() {
 
     return (
         <div className="p-4 mx-8">
-            {/* Banner */}
             <SessionsHeader />
             <div className='mt-10'>
                 <TabsComponent tabsData={tabsData} activeTab={activeTab} setActiveTab={setActiveTab} />

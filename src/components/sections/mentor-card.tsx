@@ -1,4 +1,6 @@
 import { toast } from "sonner";
+import { Button } from "../ui/button";
+import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, PromiseLikeOfReactNode, Key } from "react";
 
 export const MentorProfileCard = ({ mentor, selectMentor, setStep }: any) => {
     const bgImage = mentor.image ? mentor.image : '/images/mentor-img.png';
@@ -49,8 +51,6 @@ export const MentorBioCard = ({ mentor, setStep }: any) => {
         'Teamwork'
     ]
 
-    
-
     return (
         <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg">
             <div className="flex flex-col md:flex-row">
@@ -66,16 +66,17 @@ export const MentorBioCard = ({ mentor, setStep }: any) => {
                         <a href="#" className="text-indigo-500 hover:underline dark:text-indigo-400">Read More</a>
                     </div> */}
                     <div className="flex mt-4">
-                        <button className="text-white bg-primary hover:bg-indigo-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-indigo-500 dark:hover:bg-indigo-600">
+                        <Button className="text-white bg-primary hover:bg-indigo-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-indigo-500 dark:hover:bg-indigo-600"
+                            onClick={() => setStep('book-session')}>
                             Book a session
-                        </button>
+                        </Button>
                     </div>
                 </div>
             </div>
             <div className="pt-4 pb-2 px-4 py-8">
                 <span className="text-gray-500 dark:text-gray-300">Current Mentees: {mentor.currentMentees}</span>
                 <div className="flex mt-1">
-                    {mentor.skills.map((skill, index) => (
+                    {mentor.skills.map((skill: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined, index: Key | null | undefined) => (
                         <span key={index} className="text-xs font-semibold inline-block py-1 px-2.5 uppercase rounded-full text-purple-600 bg-purple-200 last:mr-0 mr-1">
                             {skill}
                         </span>
