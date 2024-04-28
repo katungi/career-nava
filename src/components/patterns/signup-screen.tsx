@@ -1,26 +1,18 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { Novatrix, Zenitho } from "uvcanvas";
+import { Zenitho } from "uvcanvas";
 import { SiGoogle } from "@icons-pack/react-simple-icons";
 import { Button } from "~/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { useState } from "react";
 import { setCookie } from "cookies-next";
 import { Role } from "@prisma/client";
-import {cookies} from "next/headers";
 
 export function SignUpScreen() {
     const [role, setRole] = useState<string>();
 
     const redirect = async () => {
-        // setCookie(
-        //     'additionalAuthParams',
-        //     JSON.stringify({
-        //         role: role,
-        //     })
-        // );
-        
         await signIn("google", {
             callbackUrl: "/app/dashboard/?loginState=signedIn",
         });

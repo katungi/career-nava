@@ -53,15 +53,13 @@ export const authOptions: NextAuthOptions = {
           ...session.user,
           id: user.id,
           planId: dbUser?.planId ?? null,
-          role: dbUser?.role ?? "USER",
+          role: "MENTOR"
         },
       };
     },
   },
   events: {
     async signIn({ user, isNewUser, profile, account }) {
-      let additionalAuthParams = JSON.parse(getCookie("additionalAuthParams") ?? "{}");
-      console.log("additionalAuthParams", additionalAuthParams);
       Sentry.setUser({ id: user.id, name: user.name, email: user.email ?? "" });
       if (isNewUser) {
         if (isTriggerEnabled) {
@@ -85,18 +83,21 @@ export const authOptions: NextAuthOptions = {
             },
           );
         }
-        await db.user.update({
-          where: {
-            id: user.id,
-          },
-          data: {
-            role: additionalAuthParams.role,
-          },
-        })
+        // await db.user.update({
+        //   where: {
+        //     id: user.id,
+        //   },
+        //   data: {
+        //     role: additionalAuthParams.role,
+        //   },
+        // })
       }
     },
     signOut() {
       Sentry.setUser(null);
+    },
+    updateUser({ user }) {
+      console.log("updateUser", user);
     }
   },
   adapter: PrismaAdapter(db) as Adapter,
