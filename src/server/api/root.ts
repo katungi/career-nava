@@ -6,6 +6,7 @@ import { exampleRouter } from "./routers/example";
 import { userRouter } from "./routers/user";
 import { aiRouter } from "./routers/ai";
 import { SessionRouter } from "./routers/sessions";
+import { mpesaPaymentRouter } from "./routers/daraja";
 
 /**
  * This is the primary router for your server.
@@ -19,12 +20,12 @@ export const appRouter = createTRPCRouter({
   marketing: marketingRouter,
   user: userRouter,
   ai: aiRouter,
+  daraja: mpesaPaymentRouter,
   mentorshipSessions: SessionRouter,
 });
 
 // export type definition of API
 export type AppRouter = typeof appRouter;
-
 /**
  * Create a server-side caller for the tRPC API.
  * @example
