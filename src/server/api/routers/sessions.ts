@@ -36,7 +36,6 @@ export const SessionRouter = createTRPCRouter({
           status: 'BOOKED',
         },
       });
-
       return { msg: "Session Booked!", session };
     }),
   getBookingSessions: publicProcedure
@@ -46,7 +45,7 @@ export const SessionRouter = createTRPCRouter({
     }))
     .query(async ({ input }) => {
       const sess = await getServerAuthSession();
-      const sessions = db.bookingSession.findMany({
+      const sessions = await db.bookingSession.findMany({
         where: {
           menteeId: sess?.user.id,
         },
