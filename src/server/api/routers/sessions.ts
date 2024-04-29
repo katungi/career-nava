@@ -37,5 +37,19 @@ export const SessionRouter = createTRPCRouter({
       });
 
       return { msg: "Session Booked!", session };
+    }),
+  getBookingSessions: publicProcedure
+    .input(z.object({
+      limit: z.number().optional(),
+      offset: z.number().optional(),
+    }))
+    .query(({ input }) => {
+      const sessions = db.bookingSession.findMany({
+        where: {
+          status: 'BOOKED'
+        }
+      })
+      if (!sessions) throw new Error('No sessions found')
+      return sessions
     })
 })

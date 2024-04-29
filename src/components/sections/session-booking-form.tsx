@@ -9,9 +9,7 @@ import { Textarea } from '~/components/ui/textarea';
 const BookingForm = ({ onSubmit }: any) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const handleFormSubmit = (data: any) => {
-        onSubmit(data);
-    };
+    const handleFormSubmit = (data: any) => { onSubmit(data) };
 
     return (
         <div className="max-w-md mx-auto p-4 space-y-4">

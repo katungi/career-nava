@@ -12,10 +12,6 @@ import * as Sentry from "@sentry/nextjs";
 import { env } from "~/env.mjs";
 import { db } from "~/server/db";
 import { loops } from "~/lib/loops";
-import { isTriggerEnabled } from "~/lib/trigger";
-import { slackNewUserNotification } from "~/jobs";
-import { type Role } from "@prisma/client";
-import { getCookie } from "cookies-next";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -28,7 +24,7 @@ declare module "next-auth" {
     user: {
       id: string;
       planId: string | null;
-      role: Role;
+      role: string;
       // role: UserRole;
     } & DefaultSession["user"];
   }
@@ -62,15 +58,15 @@ export const authOptions: NextAuthOptions = {
     async signIn({ user, isNewUser, profile, account }) {
       Sentry.setUser({ id: user.id, name: user.name, email: user.email ?? "" });
       if (isNewUser) {
-        if (isTriggerEnabled) {
-          await slackNewUserNotification.invoke({
-            user: {
-              name: user.name ?? "unknown",
-              email: user.email ?? undefined,
-              id: user.id,
-            },
-          });
-        }
+        // if (isTriggerEnabled) {
+        //   await slackNewUserNotification.invoke({
+        //     user: {
+        //       name: user.name ?? "unknown",
+        //       email: user.email ?? undefined,
+        //       id: user.id,
+        //     },
+        //   });
+        // }
         if (loops && user.email) {
           await loops.sendEvent(
             {
