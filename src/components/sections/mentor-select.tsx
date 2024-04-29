@@ -25,11 +25,11 @@ export default async function MentorSelection() {
         console.log("Loading...")
         FormData.mentorId = selectedMentor.id;
         FormData.menteeId = ''
-        // await pay.mutate({
-        //     amount: "1",
-        //     phoneNumber: FormData.number,
-        //     FormData: FormData,
-        // });
+        await pay.mutate({
+            amount: "1",
+            phoneNumber: FormData.number,
+            FormData: FormData,
+        });
 
         setIsPending(false);
         setStep("final");
