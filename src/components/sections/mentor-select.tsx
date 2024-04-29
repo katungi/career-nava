@@ -25,17 +25,15 @@ export default async function MentorSelection() {
         console.log("Loading...")
         FormData.mentorId = selectedMentor.id;
         FormData.menteeId = ''
-        await pay.mutate({
-            amount: "1",
-            phoneNumber: FormData.number,
-            FormData: FormData,
-        });
+        // await pay.mutate({
+        //     amount: "1",
+        //     phoneNumber: FormData.number,
+        //     FormData: FormData,
+        // });
 
-        // setTimeout(() => {
-        //     redirect("/app/dashboard/?loginState=signedIn");
-        //  }, 3000);
         setIsPending(false);
-        window.location.href = "/app/dashboard/?loginState=signedIn";
+        setStep("final");
+        // window.location.href = "/app/dashboard/?loginState=signedIn";
     };
 
     return (
@@ -60,11 +58,11 @@ export default async function MentorSelection() {
                 <MentorBioCard mentor={selectedMentor} setStep={setStep} />
             )}
             {selectedMentor && step === "book-session" && !isPending && (<BookingForm onSubmit={handleFormSubmit} />)}
-            {selectedMentor && step === "book-session" && isPending && (
+            {selectedMentor && step === "final" && (
                 <div>
                     <div className="flex h-full items-center justify-center p-12">
-                        <div className="h-16 w-16 animate-spin rounded-full border-b-2 border-primary"></div>
-                        <p>Creating Booking ...</p>
+                        {/* <div className="h-16 w-16 animate-spin rounded-full border-b-2 border-primary"></div> */}
+                        <p className="text-primary">Session with {selectedMentor.name} Booked Successfully 🎉</p>
                     </div>
                 </div>
             )}
