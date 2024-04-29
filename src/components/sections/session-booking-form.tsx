@@ -39,8 +39,8 @@ const BookingForm = ({ onSubmit }: any) => {
                         {errors.endTime && <span className="text-red-500">End Time is required</span>}
                     </div>
                 </div>
-                <Button className="w-full" type="submit">
-                    Book Session
+                <Button variant={'default'} className="w-full" type="submit">
+                    Proceed to payment
                 </Button>
             </form>
         </div>

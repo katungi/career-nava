@@ -14,9 +14,31 @@ export default async function MentorSelection() {
         limit: 3, offset: 0
     })
 
+    // useEffect(() => {
+    //     fetchUser()
+    // }, [])
+
+    // useEffect(() => {
+    //     console.log("Sess", sess)
+    // }, [sess])
+
+    // const handleFormSubmit = async (formData: any) => {
+    //     formData.mentorId = selectedMentor.id
+    //     // formData.menteeId = sess?.user.id
+    //     formData.paymentStatus = 'PENDING'
+    //     console.log(formData)
+    //     try {
+    //         // @ts-ignore
+    //         await SessionRouter.bookSession({ input: formData });
+    //         alert('Session booked successfully!');
+    //     } catch (error) {
+    //         alert('Failed to book session');
+    //         console.error(error);
+    //     }
+    // };
     const handleFormSubmit = async (FormData: any) => {
         // implement payment first
-        // call an API end point or procedure with the stuff
+        // call an API end point or procedure with the 
         console.log("Formdata", FormData)
     }
 
