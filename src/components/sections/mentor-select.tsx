@@ -4,30 +4,21 @@ import Modal from "../ui/modal"
 import { MentorBioCard, MentorProfileCard } from "./mentor-card"
 import { useState } from "react"
 import { SessionRouter } from "~/server/api/routers/sessions"
-import { getServerAuthSession } from "~/server/auth"
+import BookingForm from "./session-booking-form"
 
 export default async function MentorSelection() {
-    const sess = await getServerAuthSession()
+    // const { user: sess, fetchUser } = useUserStore();
     const [selectedMentor, setSelectedMentor] = useState<any>(null)
     const [step, setStep] = useState('init')
     const { data, isLoading } = api.mentorshipSessions.getMentors.useQuery({
         limit: 3, offset: 0
     })
 
-    const handleFormSubmit = async (formData: any) => {
-        formData.mentorId = selectedMentor.id
-        formData.menteeId = sess?.user.id
-        formData.paymentStatus = 'PENDING'
-        // console.log(formData)
-        try {
-            // @ts-ignore
-            await SessionRouter.bookSession({ input: formData });
-            alert('Session booked successfully!');
-        } catch (error) {
-            alert('Failed to book session');
-            console.error(error);
-        }
-    };
+    const handleFormSubmit = async (FormData: any) => {
+        // implement payment first
+        // call an API end point or procedure with the stuff
+        console.log("Formdata", FormData)
+    }
 
     return (
         <>
@@ -46,9 +37,9 @@ export default async function MentorSelection() {
             {selectedMentor && step === 'view-profile' &&
                 <MentorBioCard mentor={selectedMentor} setStep={setStep} />
             }
-            {/* {selectedMentor && step === 'book-session' &&
+            {selectedMentor && step === 'book-session' &&
                 <BookingForm onSubmit={handleFormSubmit} />
-            } */}
+            }
             <div className="mt-8 space-x-6 text-right p-3 px-8">
                 {step !== 'init' &&
                     <Button className="inline-flex items-center justify-center rounded bg-secondary px-4 py-2 text-sm font-medium text-white hover:bg-purple-600 group-disabled:pointer-events-none">

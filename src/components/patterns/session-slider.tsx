@@ -7,7 +7,7 @@ import Empty from '../constants/empty';
 const SessionSlider = ({ sessions }: any) => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const maxVisibleCards = 3;
-    const maxSlideIndex = Math.ceil(sessions.length / maxVisibleCards) - 1;
+    const maxSlideIndex = Math.ceil(sessions?.length / maxVisibleCards) - 1;
 
     const nextSlide = () => {
         setCurrentSlide((prev) => (prev === maxSlideIndex ? 0 : prev + 1));

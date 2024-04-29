@@ -27,7 +27,7 @@ export default function MentorModal() {
                     </div>
                 </div>
             }>
-                {/* <MentorSelection /> */}
+                <MentorSelection />
             </Modal.Content>
 
         </Modal>

@@ -2,7 +2,6 @@ import { useState } from "react";
 import MentorModal from "./mentor-modal";
 
 const SessionsHead = () => {
-
     return (
         <div className="relative bg-secondary text-white flex justify-between items-center h-60 rounded-xl" style={{
             backgroundImage: "url('/images/bagpack.png')",

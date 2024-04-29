@@ -25,7 +25,6 @@ declare module "next-auth" {
       id: string;
       planId: string | null;
       role: string;
-      // role: UserRole;
     } & DefaultSession["user"];
   }
 }
