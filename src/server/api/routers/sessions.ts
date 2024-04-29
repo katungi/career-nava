@@ -44,7 +44,7 @@ export const SessionRouter = createTRPCRouter({
       offset: z.number().optional(),
     }))
     .query(async ({ input }) => {
-      const sess = await getServerAuthSession();
+      const sess = await getServerAuthSession()
       const sessions = await db.bookingSession.findMany({
         where: {
           menteeId: sess?.user.id,
