@@ -4,7 +4,6 @@ import Modal from "../ui/modal"
 import { MentorBioCard, MentorProfileCard } from "./mentor-card"
 import { useState } from "react"
 import { SessionRouter } from "~/server/api/routers/sessions"
-import BookingForm from "./session-booking-form"
 import { getServerAuthSession } from "~/server/auth"
 
 export default async function MentorSelection() {
@@ -19,7 +18,7 @@ export default async function MentorSelection() {
         formData.mentorId = selectedMentor.id
         formData.menteeId = sess?.user.id
         formData.paymentStatus = 'PENDING'
-        console.log(formData)
+        // console.log(formData)
         try {
             // @ts-ignore
             await SessionRouter.bookSession({ input: formData });
@@ -47,9 +46,9 @@ export default async function MentorSelection() {
             {selectedMentor && step === 'view-profile' &&
                 <MentorBioCard mentor={selectedMentor} setStep={setStep} />
             }
-            {selectedMentor && step === 'book-session' &&
+            {/* {selectedMentor && step === 'book-session' &&
                 <BookingForm onSubmit={handleFormSubmit} />
-            }
+            } */}
             <div className="mt-8 space-x-6 text-right p-3 px-8">
                 {step !== 'init' &&
                     <Button className="inline-flex items-center justify-center rounded bg-secondary px-4 py-2 text-sm font-medium text-white hover:bg-purple-600 group-disabled:pointer-events-none">
