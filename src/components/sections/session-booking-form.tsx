@@ -5,17 +5,20 @@ import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { Textarea } from "~/components/ui/textarea";
+import { PhoneInput } from "../ui/phone-input";
 
 const BookingForm = ({ onSubmit }: any) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+    const [number, setNumber] = React.useState("");
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
 
-  const handleFormSubmit = (data: any) => {
-    onSubmit(data);
-  };
+    const handleFormSubmit = (data: any) => {
+        data.number = number.replace('+', '');
+        onSubmit(data);
+    };
 
     async function createCalendarEvent({ eventName, eventDescription, start, end, session }: any) {
         console.log("Creating calendar event");
@@ -73,13 +76,26 @@ const BookingForm = ({ onSubmit }: any) => {
                         <Input id="end-time" type="datetime-local" {...register('endTime', { required: true })} />
                         {errors.endTime && <span className="text-red-500">End Time is required</span>}
                     </div>
+                    <div className="space-y-1 w-full">
+                        <Label htmlFor="number">Mobile Number (For Payment)</Label>
+                        <PhoneInput
+                            id="number"
+                            {...register('number', { required: true })}
+                            defaultCountry="KE"
+                            onChange={(value: any) => {
+                                setNumber(value);
+                            }}
+                            className="w-[420px]"
+                        />
+                        {errors.number && <span className="text-red-500">Number is required for payments</span>}
+                    </div>
                 </div>
                 <Button variant={'default'} className="w-full" type="submit">
                     Proceed to payment
                 </Button>
             </form>
         </div>
-  );
+    );
 };
 
 export default BookingForm;

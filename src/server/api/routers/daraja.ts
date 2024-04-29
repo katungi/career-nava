@@ -2,12 +2,17 @@ import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { type MpesaStkRequestBody } from "~/types";
 import { z } from "zod";
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { db } from "~/server/db";
+import { toast } from "sonner";
+import { getServerAuthSession } from "~/server/auth";
 
 export function absoluteUrl(path: string) {
   if (typeof window !== "undefined") return path;
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}${path}`;
-  return `https://rnuge-154-159-254-234.a.free.pinggy.link${path}`;
+  return `https://rnyss-196-201-218-201.a.free.pinggy.link${path}`;
 }
+
 
 type MpesaApiResponseToken = {
   access_token: string;
@@ -18,15 +23,14 @@ const generateTimestamp = () => {
   const timestamp = `${date.getFullYear()}${(date.getMonth() + 1)
     .toString()
     .padStart(2, "0")}${date.getDate().toString().padStart(2, "0")}${date
-    .getHours()
-    .toString()
-    .padStart(2, "0")}${date.getMinutes().toString().padStart(2, "0")}${date
-    .getSeconds()
-    .toString()
-    .padStart(2, "0")}`;
+      .getHours()
+      .toString()
+      .padStart(2, "0")}${date.getMinutes().toString().padStart(2, "0")}${date
+        .getSeconds()
+        .toString()
+        .padStart(2, "0")}`;
   return timestamp;
 };
-
 const getToken = async () => {
   const consumerKey = process.env.CONSUMER_KEY!;
   const consumerSecret = process.env.CONSUMER_SECRET!;
@@ -53,14 +57,50 @@ const getToken = async () => {
 export const mpesaPaymentRouter = createTRPCRouter({
   getToken: publicProcedure.query(async () => {
     const response = await getToken();
-    console.log(response);
     return response;
   }),
   stkPush: publicProcedure
-    .input(z.object({ amount: z.string(), phoneNumber: z.string() }))
+    .input(z.object({
+      amount: z.string(),
+      phoneNumber: z.string(),
+      FormData: z.object({
+        number: z.string(),
+        title: z.string(),
+        description: z.string(),
+        startTime: z.string(),
+        endTime: z.string(),
+        mentorId: z.string(),
+      })
+    }))
     .mutation(async ({ input }) => {
-      const url = process.env.STKPUSHURL!;
+      const session = await getServerAuthSession();
+      console.log("Session:::", session)
+      const dbSession = await db.bookingSession.create({
+        data: {
+          title: input.FormData.title,
+          description: input.FormData.description,
+          startTime: new Date(input.FormData.startTime),
+          endTime: new Date(input.FormData.endTime),
+          // mentorId: input.FormData.mentorId,
+          // menteeId: session?.user?.id!,
+          paymentStatus: "pending",
+          status: "pending",
+          mentor: {
+            connect: {
+              id: input.FormData.mentorId,
+            },
+          },
+          mentee: {
+            connect: {
+              id: session?.user.id,
+            },
+          }
+        }
+      })
 
+      console.log(dbSession)
+
+      const url = process.env.STKPUSHURL!;
       const passkey = process.env.PASSKEY!;
       const shortcode = process.env.SHORTCODE!;
 
@@ -68,8 +108,7 @@ export const mpesaPaymentRouter = createTRPCRouter({
       const stk_password = Buffer.from(
         `${shortcode}${passkey}${timestamp}`,
       ).toString("base64");
-      console.log(stk_password);
-
+      // console.log(stk_password);
       const requestBody: MpesaStkRequestBody = {
         BusinessShortCode: shortcode,
         Password: stk_password,
@@ -79,7 +118,7 @@ export const mpesaPaymentRouter = createTRPCRouter({
         PartyA: input.phoneNumber,
         PartyB: shortcode,
         PhoneNumber: input.phoneNumber,
-        CallBackURL: absoluteUrl("/api/callback"), //i'm using ngrok to tunnel request but on production you can use your VERCEL_URL/api/callback-(/api/callback would be better)
+        CallBackURL: absoluteUrl("/api/callback"),
         AccountReference: "account",
         TransactionDesc: "test",
       };
