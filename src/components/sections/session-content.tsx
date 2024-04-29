@@ -6,7 +6,7 @@ import SessionTabComponent from "./session-tab-component";
 const SessionContents = () => {
 
     const {data: sessions} = api.mentorshipSessions.getBookingSessions.useQuery({
-        limit: 3, offset: 0
+        limit: 100, offset: 0
     })
 
     console.log(sessions)

@@ -55,5 +55,13 @@ export const SessionRouter = createTRPCRouter({
       })
       if (!sessions) throw new Error('No sessions found')
       return sessions
+    }),
+    getSessionPast: publicProcedure
+    .input(z.object({
+      limit: z.number().optional(),
+      offset: z.number().optional(),
+    }))
+    .query(async ({ input }) => {
+     return {message: "Hello There, Working"}
     })
 })

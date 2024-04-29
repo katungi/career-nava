@@ -11,8 +11,13 @@ import { api } from "~/trpc/react";
 
 export default function Home() {
     const { data: sessions, isLoading } = api.mentorshipSessions.getBookingSessions.useQuery({
-        limit: 3, offset: 0
+        limit: 100, offset: 0
     })
+
+    const {data: testData} = api.mentorshipSessions.getSessionPast.useQuery({
+        limit: 100, offset: 0
+    })
+
     return (
         <div className="p-4 mx-12">
             {/* Banner */}
