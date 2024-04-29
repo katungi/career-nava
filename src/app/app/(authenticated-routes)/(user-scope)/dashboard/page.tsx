@@ -18,6 +18,8 @@ export default function Home() {
         limit: 100, offset: 0
     })
 
+    console.log(testData)
+
     return (
         <div className="p-4 mx-12">
             {/* Banner */}
