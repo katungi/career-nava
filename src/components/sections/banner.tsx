@@ -16,9 +16,6 @@ export default function DashboardBanner() {
                 <p className="text-gray-900 text-xl">
                     You can also view your usage and manage your account.
                 </p>
-                <p className="text-gray-900 text-xl">
-                    You can also view your usage and manage your account.
-                </p>
             </div>
             <div className="ml-28">
                 <Image src="/images/banner.png" width={300} height={250} alt="Career Nava Banner Logo" />

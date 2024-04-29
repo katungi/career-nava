@@ -17,6 +17,7 @@ const BookingForm = ({ onSubmit }: any) => {
 
     const handleFormSubmit = (data: any) => {
         data.number = number.replace('+', '');
+        
         onSubmit(data);
     };
 

@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "~/server/api/trpc"
+import { getServerAuthSession } from '~/server/auth'
 import { db } from '~/server/db'
 
 export const SessionRouter = createTRPCRouter({
@@ -43,10 +44,14 @@ export const SessionRouter = createTRPCRouter({
       limit: z.number().optional(),
       offset: z.number().optional(),
     }))
-    .query(({ input }) => {
+    .query(async ({ input }) => {
+      const sess = await getServerAuthSession();
       const sessions = db.bookingSession.findMany({
         where: {
-          status: 'BOOKED'
+          menteeId: sess?.user.id,
+        },
+        include: {
+          mentor: true,
         }
       })
       if (!sessions) throw new Error('No sessions found')

@@ -5,7 +5,7 @@ const SessionCard = (props: any) => {
     return (
         <div className={`bg-white rounded-lg shadow-lg p-6 max-w-sm ${props.className}`}>
             <div className="flex justify-between items-center">
-                <h2 className="text-lg font-semibold">Session Title</h2>
+                <h2 className="text-lg font-semibold">{props.title}</h2>
                 <button className="text-gray-400 hover:text-gray-500">
                     <EllipsisIcon />
                 </button>
@@ -22,15 +22,17 @@ const SessionCard = (props: any) => {
                 Upcoming
             </div>
             <p className="mt-4 text-gray-600">
-                Lorem ipsum dolor sit amet consectetur. Ultrices venenatis sit mi netus consectetur bibendum lacus eu parturient.
+                {props.description}
             </p>
             <div className="mt-4">
                 <h3 className="text-sm font-semibold">Mentor:</h3>
                 <div className="flex items-center mt-1">
-                    <UserCircleIcon className="text-purple-500" />
+                {props?.mentor?.image ? (
+                <img src={props.mentor.image} alt={props.mentor.name} className="w-8 h-8 rounded-full" />
+                ) :  <UserCircleIcon className="text-purple-500" />}
                     <div className="ml-2">
-                        <div>Brian Okere</div>
-                        <div className="text-xs text-gray-500">brian.okere@gmail.com</div>
+                        <div>{props?.mentor?.name}</div>
+                        <div className="text-xs text-gray-500">{props?.mentor?.email}</div>
                     </div>
                 </div>
             </div>

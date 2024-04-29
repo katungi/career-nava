@@ -7,16 +7,12 @@ import SessionSlider from "~/components/patterns/session-slider";
 import DocumentSlider from "~/components/patterns/document-slider";
 import { useState } from "react";
 import { Pencil1Icon } from "@radix-ui/react-icons";
+import { api } from "~/trpc/react";
 
 export default function Home() {
-    const [openDialog, setOpenDialog] = useState(false);
-    const img1 = "https://i.ibb.co/ncrXc2V/1.png";
-    const img2 = "https://i.ibb.co/B3s7v4h/2.png";
-    const img3 = "https://i.ibb.co/XXR8kzF/3.png";
-    const img4 = "https://i.ibb.co/yg7BSdM/4.png";
-
-    const slides = [img1, img2, img3, img4, img1, img2, img3, img4, img1, img2, img3, img4, img1, img2, img3, img4];
-
+    const { data: sessions, isLoading } = api.mentorshipSessions.getBookingSessions.useQuery({
+        limit: 3, offset: 0
+    })
     return (
         <div className="p-4 mx-12">
             {/* Banner */}
@@ -54,7 +50,7 @@ export default function Home() {
                 <div className="p-3">
                     <div className="flex w-full p-3 justify-between items-center">
                         <div className="">
-                            <h1 className="text-4xl font-bold text-gray-800">Upcoming Sessions (4)</h1>
+                            <h1 className="text-4xl font-bold text-gray-800">Upcoming Sessions ({sessions?.length || 0})</h1>
                             <p className="text-gray-900 text-xl mt-2">
                                 Manage your documents, subscriptions, and billing here. You can also view your usage and manage your account.
                             </p>
@@ -66,17 +62,18 @@ export default function Home() {
                             </button>
                         </div>
                     </div>
-
                 </div>
             </div>
             <div className="mt-4">
-                <SessionSlider sessions={slides} />
+                {isLoading ? <div className="flex h-full items-center justify-center p-12">
+                    <div className="h-16 w-16 animate-spin rounded-full border-b-2 border-primary"></div>
+                </div> : <SessionSlider sessions={sessions} />}
             </div>
             <div className="flex flex-row mt-20 w-full">
                 <div className="p-3">
                     <div className="flex w-full p-3 justify-between items-center">
                         <div className="">
-                            <h1 className="text-4xl font-bold text-gray-800">Upcoming Sessions (4)</h1>
+                            <h1 className="text-4xl font-bold text-gray-800">Upcoming Sessions ({sessions?.length || 0})</h1>
                             <p className="text-gray-900 text-xl mt-2">
                                 Manage your documents, subscriptions, and billing here. You can also view your usage and manage your account.
                             </p>
@@ -92,7 +89,10 @@ export default function Home() {
                 </div>
             </div>
             <div className="mt-4">
-                <DocumentSlider sessions={slides} />
+                {isLoading ? <div className="flex h-full items-center justify-center p-12">
+                    <div className="h-16 w-16 animate-spin rounded-full border-b-2 border-primary"></div>
+                </div>
+                    : <DocumentSlider sessions={sessions} />}
             </div>
         </div>
     );
