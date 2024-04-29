@@ -64,4 +64,5 @@ export const SessionRouter = createTRPCRouter({
     .query(async ({ input }) => {
      return {message: "Hello There, Working"}
     })
-})
+  }
+)
