@@ -1,4 +1,4 @@
-import {Link} from "next-view-transitions";
+import { Link } from "next-view-transitions";
 import { Menu } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
@@ -15,11 +15,11 @@ import { Sheet, SheetContent, SheetTrigger } from "~/components/ui/sheet";
 import LoginLogoutButton from "./login-logout-button";
 import UserButton from "./user-button";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
+import { getServerAuthSession } from "~/server/auth";
 
 export async function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-
   const isInApplicationRoute = pathname.includes("/app");
   const isInOnboardingRoute = pathname.includes("/app/onboarding");
   const isDashboardRoute = pathname.includes("/app/dashboard")
@@ -172,6 +172,11 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
+             <DropdownMenuItem
+                onClick={() =>
+                  redirect("/app/dashboard/?loginState=signedIn")
+                }
+              >Dashboard</DropdownMenuItem>
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <LoginLogoutButton />

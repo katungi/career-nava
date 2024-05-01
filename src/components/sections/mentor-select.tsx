@@ -9,12 +9,14 @@ import { toast } from "sonner";
 import { getServerSession } from "next-auth";
 import { getServerAuthSession } from "~/server/auth";
 import { redirect } from "next/navigation";
+import { useAtom } from "jotai";
+import { modalProgressAtom } from "~/atoms/mentor.atom";
 
 export default async function MentorSelection() {
     const pay = api.daraja.stkPush.useMutation();
     const [selectedMentor, setSelectedMentor] = useState<any>(null);
     const [isPending, setIsPending] = useState(false);
-    const [step, setStep] = useState("init");
+    const [step, setStep] = useAtom(modalProgressAtom);
     const { data, isLoading } = api.mentorshipSessions.getMentors.useQuery({
         limit: 3,
         offset: 0,
