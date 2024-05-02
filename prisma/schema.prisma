@@ -61,6 +61,7 @@ model User {
     FeatureUsage FeatureUsage[]
 
     Transactions MpesaTransaction[]
+    Documents   Documents[]
 
     createdAt       DateTime          @default(now())
     updatedAt       DateTime          @default(now()) @updatedAt
@@ -188,4 +189,11 @@ model Scholarship {
   deadline                String?
   courseOfStudyInformation String?
   link                    String?
+}
+
+model Documents {
+    id          Int      @id @default(autoincrement())
+    documentUrl String
+    userId      String
+    user        User     @relation(fields: [userId], references: [id])
 }
