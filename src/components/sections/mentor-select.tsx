@@ -27,11 +27,13 @@ export default async function MentorSelection() {
         console.log("Loading...")
         FormData.mentorId = selectedMentor.id;
         FormData.menteeId = ''
-        await pay.mutate({
+        const paymentCallback = await pay.mutate({
             amount: "1",
             phoneNumber: FormData.number,
             FormData: FormData,
         });
+
+        console.log("CallBack...", paymentCallback)
 
         setIsPending(false);
         setStep("final");

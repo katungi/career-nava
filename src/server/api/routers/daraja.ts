@@ -75,30 +75,6 @@ export const mpesaPaymentRouter = createTRPCRouter({
     .mutation(async ({ input }) => {
       const session = await getServerAuthSession();
       console.log("Session:::", session)
-      const dbSession = await db.bookingSession.create({
-        data: {
-          title: input.FormData.title,
-          description: input.FormData.description,
-          startTime: new Date(input.FormData.startTime),
-          endTime: new Date(input.FormData.endTime),
-          // mentorId: input.FormData.mentorId,
-          // menteeId: session?.user?.id!,
-          paymentStatus: "pending",
-          status: "pending",
-          mentor: {
-            connect: {
-              id: input.FormData.mentorId,
-            },
-          },
-          mentee: {
-            connect: {
-              id: session?.user.id,
-            },
-          }
-        }
-      })
-
-      console.log(dbSession)
 
       const url = process.env.STKPUSHURL!;
       const passkey = process.env.PASSKEY!;
@@ -123,7 +99,6 @@ export const mpesaPaymentRouter = createTRPCRouter({
         TransactionDesc: "test",
       };
       const token = await getToken();
-      console.log(token);
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -142,6 +117,30 @@ export const mpesaPaymentRouter = createTRPCRouter({
         });
       }
       if (response.ok) {
+        const dbSession = await db.bookingSession.create({
+          data: {
+            title: input.FormData.title,
+            description: input.FormData.description,
+            startTime: new Date(input.FormData.startTime),
+            endTime: new Date(input.FormData.endTime),
+            // mentorId: input.FormData.mentorId,
+            // menteeId: session?.user?.id!,
+            paymentStatus: "pending",
+            status: "pending",
+            mentor: {
+              connect: {
+                id: input.FormData.mentorId,
+              },
+            },
+            mentee: {
+              connect: {
+                id: session?.user.id,
+              },
+            }
+          }
+        })
+
+        console.log(dbSession)
         return NextResponse.json("sucess", {
           status: response.status,
         });

@@ -1,9 +1,11 @@
 /* eslint-disable */ /* eslint-disable @typescript-eslint/ban-ts-comment */
-
 import { NextResponse } from "next/server";
+import { getServerAuthSession } from "~/server/auth";
+import { db } from "~/server/db";
 
 export async function POST(req: Request) {
   try {
+    const sess = await getServerAuthSession()
     const body = await req.json();
 
     const resultCode = body.Body.stkCallback.ResultCode;
@@ -29,6 +31,16 @@ export async function POST(req: Request) {
     );
     const phone = getPhoneNumber.Value;
     console.log(amount, mpesaCode, phone);
+    // create a transaction record in the db
+
+    // const transactionSaved = await db.mpesaTransaction.create({
+    //   data: {
+    //     amount: amount,
+    //     mpesaCode: mpesaCode,
+    //     phone: phone
+    //   }
+    // })
+  
     return new NextResponse("success", {
       status: 200,
     });

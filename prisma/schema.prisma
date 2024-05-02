@@ -3,7 +3,7 @@
 
 generator client {
     provider = "prisma-client-js"
-    output = "../../node_modules/.prisma/client"
+    output   = "../../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -59,6 +59,8 @@ model User {
     plan         Plan?          @relation(fields: [planId], references: [id])
     planId       Int?
     FeatureUsage FeatureUsage[]
+
+    Transactions MpesaTransaction[]
 
     createdAt       DateTime          @default(now())
     updatedAt       DateTime          @default(now()) @updatedAt
@@ -165,4 +167,25 @@ model BookingSession {
     mentee User @relation(name: "MenteeSessions", fields: [menteeId], references: [id])
 
     @@unique([mentorId, startTime])
+}
+
+model MpesaTransaction {
+    id        String   @id @default(cuid())
+    amount    Float
+    phone     String
+    mpesaCode String
+    userId    String
+    User      User     @relation(fields: [userId], references: [id])
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now()) @updatedAt
+}
+
+model Scholarship {
+  id                      Int      @id @default(autoincrement())
+  scholarshipName         String
+  country                 String
+  openingDates            String?
+  deadline                String?
+  courseOfStudyInformation String?
+  link                    String?
 }
