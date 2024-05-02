@@ -75,6 +75,8 @@ export const env = createEnv({
         : z.string().optional(),
     NEXT_PUBLIC_DEPLOYMENT_URL: z.string(),
     NEXT_PUBLIC_PLAUSIBLE_SELFHOSTED_URL: z.string().optional(),
+    NEXT_PUBLIC_STREAM_VIDEO_API_SECRET: z.string().optional(),
+    NEXT_PUBLIC_STREAM_VIDEO_API_KEY: z.string().optional(),
   },
 
   /**
@@ -105,6 +107,8 @@ export const env = createEnv({
     NEXT_PUBLIC_PLAUSIBLE_SELFHOSTED_URL:
       process.env.NEXT_PUBLIC_PLAUSIBLE_SELFHOSTED_URL,
     CASCADE_DEMO: process.env.CASCADE_DEMO,
+    NEXT_PUBLIC_STREAM_VIDEO_API_KEY: process.env.NEXT_PUBLIC_STREAM_VIDEO_API_KEY,
+    NEXT_PUBLIC_STREAM_VIDEO_API_SECRET: process.env.NEXT_PUBLIC_STREAM_VIDEO_API_SECRET,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
