@@ -77,17 +77,10 @@ export default async function Home() {
         <div className="h-screen overflow-hidden bg-primary">
       <div className="flex flex-row bg-primary relative">
         {/* Left Image */}
-        <div className="mx-4 mt-28 relative">
+        <div className="mx-4 mt-28">
           <Image src="/images/person-1.png" width={1800} height={800} alt="Person 1" className="hidden md:block" />
           <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-primary to-transparent"></div>
         </div>
-
-        {/* Gradient Background behind the text */}
-        {/* <div className="absolute left-0 right-0 top-1/2 transform -translate-y-1/2">
-          <div className="bg-gradient-to-r from-yellow-500 via-yellow-700 to-secondary h-[500px] w-full opacity-30 blur-lg"></div>
-        </div> */}
-
-        {/* CTA and Text */}
         <div className="w-full h-[500px] flex flex-col justify-center items-center gap-6 relative z-10">
           <div className="self-stretch text-center">
             <span className="text-white text-6xl font-bold">Navigate </span>
@@ -101,10 +94,8 @@ export default async function Home() {
             Looking to advance your education? Our scholarship guidance significantly increases your chance of success.
           </div>
         </div>
-
-        {/* Right Image */}
-        <div className="mx-4 relative">
-          <Image src="/images/person-cta-2.png" width={1800} height={800} alt="Person 2" className="hidden md:block" />
+        <div className="mx-4 w-full relative">
+          <Image src="/images/person-cta-2.png" width={500} height={300} alt="Person 2" className="hidden md:block " />
           <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-primary to-transparent"></div>
         </div>
       </div>

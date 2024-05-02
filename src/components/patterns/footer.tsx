@@ -5,7 +5,7 @@ import { Input } from "../ui/input"
 export default function Footer() {
     return (
         <footer className="bg-primary text-white p-10 bottom-0 z-50">
-            <img src="/images/graduants.svg" alt="Career Nava Logo" className="w-3/4 absolute object-cover ml-24" />
+            <img src="/images/graduants.svg" alt="Career Nava Logo" className="w-3/4 absolute object-cover ml-24 mt-12" />
             <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-10 z-10">
                 <div className="space-y-2 col-span-2">
                     <h2 className="text-3xl font-bold">Integrate, Align & Optimize your social value with us!</h2>
