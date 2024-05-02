@@ -34,6 +34,6 @@ declare global {
 
 const db = globalThis.prisma ?? prismaClientSingleton()
 
-export { db }
+export {db}
 
-globalThis.prisma = prisma
+globalThis.prisma = db
