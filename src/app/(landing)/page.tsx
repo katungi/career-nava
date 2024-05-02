@@ -74,6 +74,7 @@ export default async function Home() {
               <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-primary to-transparent"></div>
             </div>
             {/* CTA */}
+            <div className='bg-gradient-to-r from-green-400 to-blue-500 h-3/4 w-4'></div>
             <div className="w-full h-[500px] flex-col justify-start items-center gap-6 inline-flex mt-48">
               <div className="self-stretch text-center"><span className="text-white text-6xl font-bold">Navigate </span>
                 <span className="text-secondary text-6xl font-bold">Scholarships</span><span className="text-white text-6xl font-bold"> Smatter</span></div>
