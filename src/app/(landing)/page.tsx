@@ -1,63 +1,25 @@
 "use client"
-import {
-  SiGithub,
-  SiMicrosoft,
-  SiMastercard,
-  SiGoogle
-} from "@icons-pack/react-simple-icons";
-
-import { type Metadata } from "next";
 import { useRouter } from "next/navigation";
-
 import { Button } from "~/components/ui/button";
-import { Badge } from "~/components/ui/badge";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "~/components/ui/tabs";
-import {Link} from "next-view-transitions";
-import { ClockIcon, GraduationCap, PuzzleIcon, Terminal } from "lucide-react";
-import { Alert, AlertTitle, AlertDescription } from "~/components/ui/alert";
-import { Separator } from "~/components/ui/separator";
+import { Link } from "next-view-transitions";
+import { ClockIcon, GraduationCap, PuzzleIcon } from "lucide-react";
 import Image from "next/image";
-import { format } from "date-fns";
 import PricingSection from "~/components/sections/pricing";
 import Footer from "~/components/patterns/footer";
-
-// export const metadata: Metadata = {
-//   title: "CareerNava",
-//   description:
-//     "Navigate Scholarships Smatter",
-//   icons: [{ rel: "icon", url: "/favicon.ico" }],
-//   openGraph: {
-//     title: "CareerNava",
-//     description:
-//       "Navigate Scholarships Smatter",
-//     // images: [
-//     //   {
-//     //     url: "https://cascade.stackonfire.com/api/og",
-//     //     width: 800,
-//     //     height: 600,
-//     //     alt: "Cascade logo",
-//     //   },
-//     // ],
-//   },
-// };
 
 const Logos = () => {
   return (
     <>
       <li>
-        {/* <SiGoogle className="h-32 w-24 p-2 text-primary" /> */}
         <img src="/images/chevening-sc.png" alt="Google" className="h-44 w-44  p-2 text-primary" />
       </li>
       <li>
-        {/* <SiMastercard className="h-32  p-2 text-primary" /> */}
         <img src="/images/mastercard-foundation-sc.png" alt="Google" className="h-32  p-2 text-primary" />
       </li>
       <li>
-        {/* <SiMicrosoft className="h-32  p-2 text-primary" /> */}
         <img src="/images/mext-scholarship-sc.png" alt="Google" className="h-32  p-2 text-primary" />
       </li>
       <li>
-        {/* <SiGithub className="h-32  p-2 text-primary" /> */}
         <img src="/images/mwf-stacked-rgb.png" alt="Google" className="h-32  p-2 text-primary" />
       </li>
       <li>
@@ -75,48 +37,45 @@ export default async function Home() {
       <div className="">
         {/* Hero */}
         <div className="h-screen overflow-hidden bg-primary">
-      <div className="flex flex-row bg-primary relative">
-        {/* Left Image */}
-        <div className="mx-4 mt-28">
-          <Image src="/images/person-1.png" width={1800} height={800} alt="Person 1" className="hidden md:block" />
-          <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-primary to-transparent"></div>
-        </div>
-        <div className="w-full h-[500px] flex flex-col justify-center items-center gap-6 relative z-10">
-          <div className="self-stretch text-center">
-            <span className="text-white text-6xl font-bold">Navigate </span>
-            <span className="text-secondary text-6xl font-bold">Scholarships</span>
-            <span className="text-white text-6xl font-bold"> Smatter</span>
+          <div className="flex flex-row bg-primary relative">
+            {/* Left Image */}
+            <div className="mx-4 mt-28">
+              <Image src="/images/person-1.png" width={1800} height={800} alt="Person 1" className="hidden md:block" />
+              <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-primary to-transparent"></div>
+            </div>
+            <div className="w-full h-[500px] flex flex-col justify-center items-center gap-6 relative z-10">
+              <div className="self-stretch text-center">
+                <span className="text-white text-6xl font-bold">Navigate </span>
+                <span className="text-secondary text-6xl font-bold">Scholarships</span>
+                <span className="text-white text-6xl font-bold"> Smatter</span>
+              </div>
+              <Button variant={"secondary"} size={"lg"} className="w-[360px] h-[70px] my-2">
+                <span className="text-black text-2xl">Get Your Career Score Today</span>
+              </Button>
+              <div className="self-stretch text-center text-white text-3xl">
+                Looking to advance your education? Our scholarship guidance significantly increases your chance of success.
+              </div>
+            </div>
+            <div className="mx-4 w-full relative">
+              <Image src="/images/person-cta-2.png" width={1800} height={300} alt="Person 2" className="hidden md:block " />
+              <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-primary to-transparent"></div>
+            </div>
           </div>
-          <Button variant={"secondary"} size={"lg"} className="w-[360px] h-[70px] my-2">
-            <span className="text-black text-2xl">Get Your Career Score Today</span>
-          </Button>
-          <div className="self-stretch text-center text-white text-3xl">
-            Looking to advance your education? Our scholarship guidance significantly increases your chance of success.
-          </div>
-        </div>
-        <div className="mx-4 w-full relative">
-          <Image src="/images/person-cta-2.png" width={500} height={300} alt="Person 2" className="hidden md:block " />
-          <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-primary to-transparent"></div>
-        </div>
-      </div>
 
-      {/* Logos Section */}
-      <div className="rounded-t-7xl bg-white h-full pt-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="mx-auto mt-4 inline-flex w-full flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)]">
-            <ul className="flex animate-infinite-scroll items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-8">
-              <Logos />
-            </ul>
-            <ul
-              className="flex animate-infinite-scroll items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-8"
-              aria-hidden="true"
-            >
-              <Logos />
-            </ul>
+          {/* Logos Section */}
+          <div className="rounded-t-7xl bg-white h-full pt-8">
+            <div className="mx-auto max-w-7xl">
+              <div className="mx-auto mt-4 inline-flex w-full flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)]">
+                <ul className="flex animate-infinite-scroll items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-8">
+                  <Logos />
+                </ul>
+                <ul className="flex animate-infinite-scroll items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-8" aria-hidden="true">
+                  <Logos />
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
         <div className="bg-white h-screen">
           <div className="text-center pt-6">
             <span className="text-secondary text-6xl font-bold">

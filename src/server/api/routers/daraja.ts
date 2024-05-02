@@ -70,12 +70,11 @@ export const mpesaPaymentRouter = createTRPCRouter({
         startTime: z.string(),
         endTime: z.string(),
         mentorId: z.string(),
+        meetingLink: z.string(),
       })
     }))
     .mutation(async ({ input }) => {
       const session = await getServerAuthSession();
-      console.log("Session:::", session)
-
       const url = process.env.STKPUSHURL!;
       const passkey = process.env.PASSKEY!;
       const shortcode = process.env.SHORTCODE!;

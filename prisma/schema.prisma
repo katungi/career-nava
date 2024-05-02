@@ -161,6 +161,7 @@ model BookingSession {
     mentorId      String
     menteeId      String
     paymentStatus String
+    meetingLink   String?
     createdAt     DateTime @default(now())
     updatedAt     DateTime @default(now()) @updatedAt
 

@@ -3,14 +3,11 @@ import { Button } from "../ui/button";
 import Modal from "../ui/modal";
 import { MentorBioCard, MentorProfileCard } from "./mentor-card";
 import { useState } from "react";
-import { SessionRouter } from "~/server/api/routers/sessions";
 import BookingForm from "./session-booking-form";
-import { toast } from "sonner";
-import { getServerSession } from "next-auth";
-import { getServerAuthSession } from "~/server/auth";
-import { redirect } from "next/navigation";
 import { useAtom } from "jotai";
 import { modalProgressAtom } from "~/atoms/mentor.atom";
+import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
+import { Description } from "@radix-ui/react-dialog";
 
 export default async function MentorSelection() {
     const pay = api.daraja.stkPush.useMutation();
@@ -22,23 +19,57 @@ export default async function MentorSelection() {
         offset: 0,
     });
 
+    const [call, setCall] = useState<Call | undefined>()
+
+    const client = useStreamVideoClient();
+
     const handleFormSubmit = async (FormData: any) => {
         setIsPending(true);
-        console.log("Loading...")
-        FormData.mentorId = selectedMentor.id;
+        let meetLink;
+        await createMeeting(FormData).then((call) => {
+            meetLink = `${process.env.NEXT_PUBLIC_DEPLOYMENT_URL}/meeting/${call?.id}`
+        })
+
+        FormData.meetingLink = meetLink;
+        FormData.mentorId = meetLink
         FormData.menteeId = ''
+
+
         const paymentCallback = await pay.mutate({
             amount: "1",
             phoneNumber: FormData.number,
             FormData: FormData,
         });
 
-        console.log("CallBack...", paymentCallback)
-
         setIsPending(false);
         setStep("final");
         // window.location.href = "/app/dashboard/?loginState=signedIn";
     };
+
+    async function createMeeting(formData: any) {
+        if (!client) {
+            return
+        }
+
+        try {
+            const id = crypto.randomUUID();
+            const call = client.call("default", id);
+
+            await call.getOrCreate({
+                data: {
+                    custom: { Description: formData.title }
+                }
+            }).catch((error) => {
+                console.error(error);
+                alert("Kimeumana")
+            });
+            setCall(call);
+            return call;
+        } catch (error) {
+            console.error(error);
+            alert("Failed to create meeting")
+        }
+    }
 
     return (
         <div className="overflow-y-scroll">
@@ -80,6 +111,21 @@ export default async function MentorSelection() {
                     Cancel
                 </Modal.Close>
             </div>
+        </div>
+    );
+}
+
+interface MeetingLinkProps {
+    call: Call;
+}
+
+function MeetingLink({ call }: MeetingLinkProps) {
+    const meetinLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${call.id}`
+    return (
+        <div>
+            <Description>
+                <a href={meetinLink}>Join Meeting</a>
+            </Description>
         </div>
     );
 }
