@@ -13,7 +13,7 @@ import { Button } from "~/components/ui/button";
 import { Badge } from "~/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "~/components/ui/tabs";
 import {Link} from "next-view-transitions";
-import { Terminal } from "lucide-react";
+import { ClockIcon, GraduationCap, PuzzleIcon, Terminal } from "lucide-react";
 import { Alert, AlertTitle, AlertDescription } from "~/components/ui/alert";
 import { Separator } from "~/components/ui/separator";
 import Image from "next/image";
@@ -45,16 +45,23 @@ const Logos = () => {
   return (
     <>
       <li>
-        <SiGoogle className="h-32 w-24 p-2 text-primary" />
+        {/* <SiGoogle className="h-32 w-24 p-2 text-primary" /> */}
+        <img src="/images/chevening-sc.png" alt="Google" className="h-44 w-44  p-2 text-primary" />
       </li>
       <li>
-        <SiMastercard className="h-32 w-24 p-2 text-primary" />
+        {/* <SiMastercard className="h-32  p-2 text-primary" /> */}
+        <img src="/images/mastercard-foundation-sc.png" alt="Google" className="h-32  p-2 text-primary" />
       </li>
       <li>
-        <SiMicrosoft className="h-32 w-24 p-2 text-primary" />
+        {/* <SiMicrosoft className="h-32  p-2 text-primary" /> */}
+        <img src="/images/mext-scholarship-sc.png" alt="Google" className="h-32  p-2 text-primary" />
       </li>
       <li>
-        <SiGithub className="h-32 w-24 p-2 text-primary" />
+        {/* <SiGithub className="h-32  p-2 text-primary" /> */}
+        <img src="/images/mwf-stacked-rgb.png" alt="Google" className="h-32  p-2 text-primary" />
+      </li>
+      <li>
+        <img src="/images/Yoast-social-logo.png" alt="Google" className="h-52 w-64  p-2 text-primary" />
       </li>
     </>
   );
@@ -68,42 +75,57 @@ export default async function Home() {
       <div className="">
         {/* Hero */}
         <div className="h-screen overflow-hidden bg-primary">
-          <div className="flex flex-row bg-primary ">
-            <div className="mx-4 mt-28 relative">
-              <Image src="/images/person-1.png" width={1800} height={800} alt="Person 1" className="hidden md:block" />
-              <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-primary to-transparent"></div>
-            </div>
-            {/* CTA */}
-            <div className='bg-gradient-to-r from-green-400 to-blue-500 h-3/4 w-4'></div>
-            <div className="w-full h-[500px] flex-col justify-start items-center gap-6 inline-flex mt-48">
-              <div className="self-stretch text-center"><span className="text-white text-6xl font-bold">Navigate </span>
-                <span className="text-secondary text-6xl font-bold">Scholarships</span><span className="text-white text-6xl font-bold"> Smatter</span></div>
-              <Button variant={"secondary"} size={"lg"} className="w-[360px] h-[70px] my-2">
-                <span className="text-black text-2xl">Get Your Career Score Today</span>
-              </Button>
-              <div className="self-stretch text-center text-white text-3xl">Looking to advance your education? Our scholarship guidance significantly increases your chance of success.</div>
-            </div>
-            <div className="mx-4 relative">
-              <Image src="/images/person-cta-2.png" width={1800} height={800} alt="Person 1" className="hidden md:block" />
-              <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-primary to-transparent"></div>
-            </div>
+      <div className="flex flex-row bg-primary relative">
+        {/* Left Image */}
+        <div className="mx-4 mt-28 relative">
+          <Image src="/images/person-1.png" width={1800} height={800} alt="Person 1" className="hidden md:block" />
+          <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-primary to-transparent"></div>
+        </div>
+
+        {/* Gradient Background behind the text */}
+        {/* <div className="absolute left-0 right-0 top-1/2 transform -translate-y-1/2">
+          <div className="bg-gradient-to-r from-yellow-500 via-yellow-700 to-secondary h-[500px] w-full opacity-30 blur-lg"></div>
+        </div> */}
+
+        {/* CTA and Text */}
+        <div className="w-full h-[500px] flex flex-col justify-center items-center gap-6 relative z-10">
+          <div className="self-stretch text-center">
+            <span className="text-white text-6xl font-bold">Navigate </span>
+            <span className="text-secondary text-6xl font-bold">Scholarships</span>
+            <span className="text-white text-6xl font-bold"> Smatter</span>
           </div>
-          <div className="rounded-t-7xl bg-white h-full pt-8">
-            <div className="mx-auto max-w-7xl">
-              <div className="mx-auto mt-4 inline-flex w-full  flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)]">
-                <ul className="flex animate-infinite-scroll items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-8">
-                  <Logos />
-                </ul>
-                <ul
-                  className="flex animate-infinite-scroll items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-8"
-                  aria-hidden="true"
-                >
-                  <Logos />
-                </ul>
-              </div>
-            </div>
+          <Button variant={"secondary"} size={"lg"} className="w-[360px] h-[70px] my-2">
+            <span className="text-black text-2xl">Get Your Career Score Today</span>
+          </Button>
+          <div className="self-stretch text-center text-white text-3xl">
+            Looking to advance your education? Our scholarship guidance significantly increases your chance of success.
           </div>
         </div>
+
+        {/* Right Image */}
+        <div className="mx-4 relative">
+          <Image src="/images/person-cta-2.png" width={1800} height={800} alt="Person 2" className="hidden md:block" />
+          <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-primary to-transparent"></div>
+        </div>
+      </div>
+
+      {/* Logos Section */}
+      <div className="rounded-t-7xl bg-white h-full pt-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="mx-auto mt-4 inline-flex w-full flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)]">
+            <ul className="flex animate-infinite-scroll items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-8">
+              <Logos />
+            </ul>
+            <ul
+              className="flex animate-infinite-scroll items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-8"
+              aria-hidden="true"
+            >
+              <Logos />
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
         <div className="bg-white h-screen">
           <div className="text-center pt-6">
             <span className="text-secondary text-6xl font-bold">
@@ -112,24 +134,30 @@ export default async function Home() {
 
             <div className='flex flex-row justify-center mt-28'>
               <div className="w-[212px] h-[130px] flex-col justify-start items-center gap-[22px] inline-flex">
-                <img className="w-28 h-28" src="https://via.placeholder.com/56x56" />
+                <ClockIcon className="w-32 h-32 text-primary" />
                 <div className="self-stretch h-[52px] flex-col justify-start items-center gap-2 flex">
                   <div className="self-stretch text-center text-neutral-800 text-2xl font-bold capitalize">Compatibility</div>
-                  <div className="self-stretch opacity-60 text-center text-neutral-800 text-base font-normal capitalize">Lorem ipsum dolor</div>
+                  <div className="self-stretch opacity-60 text-center text-neutral-800 text-base font-normal capitalize">
+                    Compatible with people of all ages and backgrounds
+                  </div>
                 </div>
               </div>
               <div className="w-[212px] h-[130px] flex-col justify-start items-center gap-[22px] inline-flex">
-                <img className="w-28 h-28" src="https://via.placeholder.com/56x56" />
+                <PuzzleIcon className="w-32 h-32 text-primary" />
                 <div className="self-stretch h-[52px] flex-col justify-start items-center gap-2 flex">
-                  <div className="self-stretch text-center text-neutral-800 text-2xl font-bold capitalize">Compatibility</div>
-                  <div className="self-stretch opacity-60 text-center text-neutral-800 text-base font-normal capitalize">Lorem ipsum dolor</div>
+                  <div className="self-stretch text-center text-neutral-800 text-2xl font-bold capitalize">Convenience</div>
+                  <div className="self-stretch opacity-60 text-center text-neutral-800 text-base font-normal capitalize">
+                    Convenience is key, we make it easy for you
+                  </div>
                 </div>
               </div>
               <div className="w-[212px] h-[130px] flex-col justify-start items-center gap-[22px] inline-flex">
-                <img className="w-28 h-28" src="https://via.placeholder.com/56x56" />
+                <GraduationCap className="w-32 h-32 text-primary" />
                 <div className="self-stretch h-[52px] flex-col justify-start items-center gap-2 flex">
-                  <div className="self-stretch text-center text-neutral-800 text-2xl font-bold capitalize">Compatibility</div>
-                  <div className="self-stretch opacity-60 text-center text-neutral-800 text-base font-normal capitalize">Lorem ipsum dolor</div>
+                  <div className="self-stretch text-center text-neutral-800 text-2xl font-bold capitalize">Qualified Mentors</div>
+                  <div className="self-stretch opacity-60 text-center text-neutral-800 text-base font-normal capitalize">
+                    Our mentors are highly qualified and experienced
+                  </div>
                 </div>
               </div>
             </div>
