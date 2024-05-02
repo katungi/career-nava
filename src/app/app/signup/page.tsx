@@ -3,7 +3,6 @@ import { redirect } from 'next/navigation';
 import { getServerAuthSession } from '~/server/auth';
 import { SignUpScreen } from '~/components/patterns/signup-screen';
 
-
 const SignUpPage = async () => {
     const session = await getServerAuthSession();
 

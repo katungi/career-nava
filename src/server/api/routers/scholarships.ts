@@ -1,6 +1,5 @@
 import { z } from 'zod'
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc"
-import { getServerAuthSession } from '~/server/auth'
 import { db } from '~/server/db'
 
 export const ScholarshipRouter = createTRPCRouter({
