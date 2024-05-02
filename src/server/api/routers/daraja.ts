@@ -83,7 +83,6 @@ export const mpesaPaymentRouter = createTRPCRouter({
       const stk_password = Buffer.from(
         `${shortcode}${passkey}${timestamp}`,
       ).toString("base64");
-      // console.log(stk_password);
       const requestBody: MpesaStkRequestBody = {
         BusinessShortCode: shortcode,
         Password: stk_password,
