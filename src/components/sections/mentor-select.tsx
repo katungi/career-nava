@@ -34,8 +34,7 @@ export default async function MentorSelection() {
         FormData.mentorId = meetLink
         FormData.menteeId = ''
 
-
-        const paymentCallback = await pay.mutate({
+        pay.mutate({
             amount: "1",
             phoneNumber: FormData.number,
             FormData: FormData,
