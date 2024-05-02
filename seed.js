@@ -8,9 +8,7 @@ function sanitizeDates(data) {
     if (typeof data === 'string') {
         return data
     }
-    console.log("Date String", data?.toISOString())
     return data?.toISOString() || null;
-
 }
 async function main() {
     const workbook = xlsx.readFile('./sheets/Postgraduate_scholarships_2023_2024.xlsx', {
@@ -22,8 +20,6 @@ async function main() {
         workbook.Sheets[workbook_sheet[0]],
         { header: 1 },
     );
-
-    console.log(worksheet)
 
     for (let i = 2; i < worksheet.length; i++) {
         const [scholarshipName, country, openingDates, deadline, courseOfStudyInfo, link] = worksheet[i];
