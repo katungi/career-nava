@@ -5,11 +5,11 @@ import { SignUpScreen } from '~/components/patterns/signup-screen';
 
 
 const SignUpPage = async () => {
-    // const session = await getServerAuthSession();
+    const session = await getServerAuthSession();
 
-    // if (session?.user) {
-    //     redirect("/app/dashboard/?loginState=signedIn");
-    // } 
+    if (session?.user) {
+        redirect("/app/dashboard/?loginState=signedIn");
+    } 
 
     return (
         <div>

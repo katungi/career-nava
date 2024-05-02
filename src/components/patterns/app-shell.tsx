@@ -24,6 +24,10 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
   const isInOnboardingRoute = pathname.includes("/app/onboarding");
   const isDashboardRoute = pathname.includes("/app/dashboard")
 
+  const app_env = process.env.NODE_ENV;
+
+  console.log("APP ENV::", app_env)
+
   return isInOnboardingRoute || isDashboardRoute ? (
     <main>{children}</main>
   ) : (

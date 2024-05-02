@@ -57,7 +57,7 @@ export default async function Home() {
               </div>
             </div>
             <div className="mx-4 w-full relative">
-              <Image src="/images/person-cta-2.png" width={1800} height={300} alt="Person 2" className="hidden md:block " />
+              <Image src="/images/background-lady.png" width={1800} height={300} alt="Person 2" className="hidden md:block " />
               <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-primary to-transparent"></div>
             </div>
           </div>
