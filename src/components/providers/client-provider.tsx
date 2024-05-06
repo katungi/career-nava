@@ -1,7 +1,7 @@
 "use client"
 
 import { StreamVideo, StreamVideoClient, User } from "@stream-io/video-react-sdk"
-import { Loader2 } from "lucide-react"
+import { Loader } from "lucide-react"
 import { useSession } from "next-auth/react"
 import React, { useEffect, useState } from "react"
 import { nanoid } from "nanoid"
@@ -17,7 +17,7 @@ export default function ClientProvider({ children }: clientProviderProps) {
 
     if (!videoClient) {
         return <div className="flex h-screen items-center justify-center">
-            <Loader2 className="mx-auto animate-spin" />
+            <Loader className="mx-auto animate-spin" />
         </div>
     }
 
@@ -30,7 +30,7 @@ export default function ClientProvider({ children }: clientProviderProps) {
 
 function useInitializeVideoClient() {
     const { data: session, status } = useSession()
-    const userLoaded = status === "authenticated" && session?.user
+    const userLoaded = status === "authenticated" && session?.user   
     const user = session?.user
     const [videClient, setVideoClient] = useState<StreamVideoClient | null>(null)
 
@@ -62,6 +62,9 @@ function useInitializeVideoClient() {
             tokenProvider: user?.id ? getToken : undefined
         });
 
+        console.log(".......................Client initialized.....................")
+        console.log(client)
+        console.log(".......................Client initialized End.....................")
         setVideoClient(client);
 
         return () => {

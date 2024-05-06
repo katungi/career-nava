@@ -5,7 +5,6 @@ import posthog from "posthog-js";
 import { PostHogProvider, usePostHog } from "posthog-js/react";
 import { SessionProvider, useSession } from "next-auth/react";
 import PlausibleProvider from "next-plausible";
-
 import { TRPCReactProvider } from "~/trpc/react";
 import { env } from "~/env.mjs";
 import { useSearchParams } from "next/navigation";
@@ -64,7 +63,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
           </PlausibleProvider>
         </SessionProvider>
       </TRPCReactProvider>
-    </ThemeProvider>
+    </ThemeProvider >
   );
 };
 

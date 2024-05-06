@@ -8,8 +8,11 @@ import { useAtom } from "jotai";
 import { modalProgressAtom } from "~/atoms/mentor.atom";
 import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
 import { Description } from "@radix-ui/react-dialog";
+import { useSession } from "next-auth/react";
 
 export default async function MentorSelection() {
+    const { data: session, status } = useSession()
+    console.log(session, status)
     const pay = api.daraja.stkPush.useMutation();
     const [selectedMentor, setSelectedMentor] = useState<any>(null);
     const [isPending, setIsPending] = useState(false);
@@ -18,6 +21,8 @@ export default async function MentorSelection() {
         limit: 3,
         offset: 0,
     });
+
+    console.log(selectedMentor)
 
     const [call, setCall] = useState<Call | undefined>()
 
@@ -30,8 +35,8 @@ export default async function MentorSelection() {
             meetLink = `${process.env.NEXT_PUBLIC_DEPLOYMENT_URL}/meeting/${call?.id}`
         })
 
-        FormData.meetingLink = meetLink;
-        FormData.mentorId = meetLink
+        FormData.meetingLink = `${process.env.NEXT_PUBLIC_DEPLOYMENT_URL}/meeting/${call?.id}`;
+        FormData.mentorId = selectedMentor.id;
         FormData.menteeId = ''
 
         pay.mutate({
@@ -45,6 +50,8 @@ export default async function MentorSelection() {
         // window.location.href = "/app/dashboard/?loginState=signedIn";
     };
 
+
+
     async function createMeeting(formData: any) {
         if (!client) {
             return
@@ -52,10 +59,12 @@ export default async function MentorSelection() {
 
         try {
             const id = crypto.randomUUID();
-            const call = client.call("default", id);
+            const callType = "private-meeting"
+            const call = client.call(callType, id);
 
             await call.getOrCreate({
                 data: {
+                    // members: [selectedMentor.id, session?.user?.id], // This will add specific users to the call
                     custom: { Description: formData.title }
                 }
             }).catch((error) => {

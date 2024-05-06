@@ -1,4 +1,4 @@
-import { Loader2 } from "lucide-react";
+import { Loader } from "lucide-react";
 import React from "react";
 
 const SplashScreen = () => {
@@ -10,7 +10,7 @@ const SplashScreen = () => {
           Your career path starts here.
         </h2>
       </div>
-      <Loader2 className="h-8 w-8 animate-spin" />
+      <Loader className="h-8 w-8 animate-spin" />
     </div>
   );
 };
