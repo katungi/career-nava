@@ -35,7 +35,7 @@ export default async function MentorSelection() {
             meetLink = `${process.env.NEXT_PUBLIC_DEPLOYMENT_URL}/meeting/${call?.id}`
         })
 
-        FormData.meetingLink = `${process.env.NEXT_PUBLIC_DEPLOYMENT_URL}/meeting/${call?.id}`;
+        FormData.meetingLink = `${process.env.NEXT_PUBLIC_DEPLOYMENT_URL}/app/meeting/${call?.id}`;
         FormData.mentorId = selectedMentor.id;
         FormData.menteeId = ''
 
