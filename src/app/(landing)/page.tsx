@@ -40,13 +40,13 @@ export default async function Home() {
           <div className="flex flex-row bg-primary relative">
             {/* Left Image */}
             <div className="mx-4 mt-28">
-              <Image src="/images/person-1.png" width={1800} height={800} alt="Person 1" className="hidden md:block" />
+              <Image src="/images/person-1.png" width={800} height={300} alt="Person 1" className="hidden md:block" />
               <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-primary to-transparent"></div>
             </div>
-            <div className="w-full h-[500px] flex flex-col justify-center items-center gap-6 relative z-10">
+            <div className="w-full flex flex-col justify-center items-center gap-6 relative z-10 bg-gradient-to-r from-primary via-purple-500 to-primary">
               <div className="self-stretch text-center">
                 <span className="text-white text-6xl font-bold">Navigate </span>
-                <span className="text-secondary text-6xl font-bold">Scholarships</span>
+                <span className="text-white text-6xl font-bold">Scholarships</span>
                 <span className="text-white text-6xl font-bold"> Smatter</span>
               </div>
               <Button variant={"secondary"} size={"lg"} className="w-[360px] h-[70px] my-2">
@@ -56,8 +56,8 @@ export default async function Home() {
                 Looking to advance your education? Our scholarship guidance significantly increases your chance of success.
               </div>
             </div>
-            <div className="mx-4 w-full relative">
-              <Image src="/images/background-lady.png" width={1800} height={300} alt="Person 2" className="hidden md:block " />
+            <div className="mx-4 ">
+              <Image src="/images/background-lady.png" width={800} height={300} alt="Person 2" className="hidden md:block " />
               <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-primary to-transparent"></div>
             </div>
           </div>
@@ -111,7 +111,7 @@ export default async function Home() {
                 </div>
               </div>
             </div>
-
+{/* 
             <div className="text-center mt-32 bg-primary h-full p-8">
               <span className="text-secondary text-6xl font-bold mt-4">
                 Get your assessment score today
@@ -128,9 +128,9 @@ export default async function Home() {
                   <span className="text-white text-2xl">Get Assessment Score</span>
                 </Button>
               </div>
-            </div>
+            </div> */}
           </div>
-          <div className="p-8 flex flex-row">
+          <div className="p-8 flex flex-row mt-32">
             <Image src={"/images/imgpeople.png"} width={800} height={800} alt="CTA 1" className="ml-4" />
             <div className="p-12 flex-col">
               <div className="text-black text-4xl font-bold">
@@ -165,11 +165,11 @@ export default async function Home() {
                 <Button variant={"default"} size={"lg"} className="w-[360px] h-[70px] my-2 hover:bg-secondary" onClick={() =>
                   router.push("/app/signup")
                 }>
-                  <span className="text-white text-2xl">sign Up</span>
+                  <span className="text-white text-2xl">Sign Up</span>
                 </Button>
               </Link>
               <Button variant={"secondary"} size={"lg"} className="w-[360px] h-[70px] my-2">
-                <span className="text-black text-2xl">Get Assessment Score Today!</span>
+                <span className="text-black text-2xl">Log In</span>
               </Button>
             </div>
           </div>

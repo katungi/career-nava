@@ -75,7 +75,7 @@ export default function Footer() {
                 </div>
             </div>
             <div className="text-center mt-10 border-t border-gray-800 pt-4">
-                <p>Copyright 2023</p>
+                <p>Copyright 2024</p>
             </div>
         </footer>
     )
