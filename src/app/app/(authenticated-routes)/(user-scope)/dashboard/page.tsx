@@ -1,5 +1,5 @@
 "use client"
-import { ChevronRight, FileText, SquareArrowOutUpRight } from "lucide-react";
+import { ChevronRight, FileText, Loader, SquareArrowOutUpRight } from "lucide-react";
 import DashboardBanner from "~/components/sections/banner";
 import { Badge } from "~/components/ui/badge";
 import Modal from "~/components/ui/modal";
@@ -14,7 +14,7 @@ export default function Home() {
         limit: 100, offset: 0
     })
 
-    const {data: testData} = api.mentorshipSessions.getSessionPast.useQuery({
+    const { data: testData } = api.mentorshipSessions.getSessionPast.useQuery({
         limit: 100, offset: 0
     })
 
@@ -27,7 +27,7 @@ export default function Home() {
                 <div className="flex-1">
                     <DashboardBanner />
                 </div>
-                <div className="rounded-lg border border-1 border-primary p-3">
+                {/* <div className="rounded-lg border border-1 border-primary p-3">
                     <div className="w-96">
                         <div className="bg-grey-200 border-b-2">
                             <p className="text-3xl mx-6">Notifications</p>
@@ -49,55 +49,46 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
 
             {/* Upcoming Sessions */}
-            <div className="flex flex-row mt-20 w-full">
-                <div className="p-3">
-                    <div className="flex w-full p-3 justify-between items-center">
-                        <div className="">
-                            <h1 className="text-4xl font-bold text-gray-800">Upcoming Sessions ({sessions?.length || 0})</h1>
-                            <p className="text-gray-900 text-xl mt-2">
-                                Manage your documents, subscriptions, and billing here. You can also view your usage and manage your account.
-                            </p>
-                        </div>
-                        <div className="bg-blue-300">
-                            <button className="flex items-center bg-primary text-white w-40 h-12 justify-center rounded-md hover:bg-primary-dark">
-                                See Sessions
-                                <ChevronRight className="w-6 h-6 text-white ml-2" />
-                            </button>
-                        </div>
-                    </div>
+            <div className="flex flex-row mt-20 w-full justify-between">
+                <div className="">
+                    <h1 className="text-3xl font-bold text-gray-800">Upcoming Sessions</h1>
+                    <p className="text-gray-900 text-xl mt-2">
+                        Manage your documents, subscriptions, and billing here.
+                    </p>
+                </div>
+                <div className="">
+                    <button className="flex items-center bg-primary text-white w-44 h-12 justify-center rounded-md hover:bg-primary-dark">
+                        See All Sessions
+                        <ChevronRight className="w-6 h-6 text-white ml-2" />
+                    </button>
                 </div>
             </div>
             <div className="mt-4">
                 {isLoading ? <div className="flex h-full items-center justify-center p-12">
-                    <div className="h-16 w-16 animate-spin rounded-full border-b-2 border-primary"></div>
+                    <Loader className="h-8 w-8 animate-spin rounded-full"></Loader>
                 </div> : <SessionSlider sessions={sessions} />}
             </div>
-            <div className="flex flex-row mt-20 w-full">
-                <div className="p-3">
-                    <div className="flex w-full p-3 justify-between items-center">
-                        <div className="">
-                            <h1 className="text-4xl font-bold text-gray-800">Upcoming Sessions ({sessions?.length || 0})</h1>
-                            <p className="text-gray-900 text-xl mt-2">
-                                Manage your documents, subscriptions, and billing here. You can also view your usage and manage your account.
-                            </p>
-                        </div>
-                        <div className="bg-blue-300">
-                            <button className="flex items-center bg-primary text-white w-40 h-12 justify-center rounded-md hover:bg-primary-dark">
-                                See Sessions
-                                <ChevronRight className="w-6 h-6 text-white ml-2" />
-                            </button>
-                        </div>
-                    </div>
-
+            <div className="flex flex-row mt-20 w-full justify-between">
+                <div className="">
+                    <h1 className="text-3xl font-bold text-gray-800">New Document</h1>
+                    <p className="text-gray-900 text-xl mt-2">
+                        Manage your documents, subscriptions, and billing here.
+                    </p>
+                </div>
+                <div className="">
+                    <button className="flex items-center bg-primary text-white w-40 h-12 justify-center rounded-md hover:bg-primary-dark">
+                        See Sessions
+                        <ChevronRight className="w-6 h-6 text-white ml-2" />
+                    </button>
                 </div>
             </div>
             <div className="mt-4">
                 {isLoading ? <div className="flex h-full items-center justify-center p-12">
-                    <div className="h-16 w-16 animate-spin rounded-full border-b-2 border-primary"></div>
+                    <Loader className="h-8 w-8 animate-spin rounded-full"></Loader>
                 </div>
                     : <DocumentSlider sessions={sessions} />}
             </div>
