@@ -1,12 +1,11 @@
 import { Button } from "../ui/button"
 import {Link} from "next-view-transitions"
-import { Input } from "../ui/input"
 
 export default function Footer() {
     return (
         <footer className="bg-primary text-white p-10 bottom-0 z-50">
             <img src="/images/graduants.svg" alt="Career Nava Logo" className="w-3/4 absolute object-cover ml-24 mt-12" />
-            <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-10 z-10">
+            <div className="max-w-full mx-auto grid grid-cols-3 md:grid-cols-6 gap-10 z-10">
                 <div className="space-y-2 col-span-2">
                     <h2 className="text-3xl font-bold">Integrate, Align & Optimize your social value with us!</h2>
                     <p className="mb-4">With CareerNava's science-backed platform, You can now</p>
@@ -57,7 +56,6 @@ export default function Footer() {
                 <div className="space-y-1 md:col-start-4">
                     <h3 className="font-semibold">Location</h3>
                     <p>Karen Village, Nairobi (Kenya)</p>
-                    <p>20 Aluguntugui, Accra (Ghana)</p>
                     <p>
                         <MailboxIcon className="inline" /> career.nava.app@gmail.com
                     </p>
@@ -65,14 +63,7 @@ export default function Footer() {
                         <PhoneIcon className="inline" /> +254 715 429 997
                     </p>
                 </div>
-                <div className="space-y-4 md:col-start-5">
-                    <h3 className="font-semibold">Join Our Newsletter</h3>
-                    <p>Sign up and receive product updates and our blogs.</p>
-                    <div className="flex">
-                        <Input className="flex-1" placeholder="Email Address" type="email" />
-                        <Button className="ml-2 bg-secondary hover:bg-secondary text-black">Join Newsletter</Button>
-                    </div>
-                </div>
+      
             </div>
             <div className="text-center mt-10 border-t border-gray-800 pt-4">
                 <p>Copyright 2024</p>

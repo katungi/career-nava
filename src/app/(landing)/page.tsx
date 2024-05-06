@@ -156,8 +156,8 @@ export default async function Home() {
             <span className="text-grey-900 text-6xl font-bold mt-4">
               Ready to get started?
             </span>
-            <div className="self-stretch text-center text-grey-900 text-lg mt-4">
-              With Mundaly’s there’s nowhere you’ll go wrong
+            <div className="self-stretch text-center text-grey-900 text-xl mt-4">
+              Sign up for free and get started with your career journey
             </div>
 
             <div className="flex flex-row px-96 mt-20 ml-44 mb-12 gap-4">
@@ -168,7 +168,9 @@ export default async function Home() {
                   <span className="text-white text-2xl">Sign Up</span>
                 </Button>
               </Link>
-              <Button variant={"secondary"} size={"lg"} className="w-[360px] h-[70px] my-2">
+              <Button variant={"secondary"} size={"lg"} className="w-[360px] h-[70px] my-2" onClick={() =>
+                  router.push("/app/login")
+                }>
                 <span className="text-black text-2xl">Log In</span>
               </Button>
             </div>
