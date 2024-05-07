@@ -74,14 +74,14 @@ export default function Home() {
             </div>
             <div className="flex flex-row mt-20 w-full justify-between">
                 <div className="">
-                    <h1 className="text-3xl font-bold text-gray-800">New Document</h1>
+                    <h1 className="text-3xl font-bold text-gray-800">New Documents</h1>
                     <p className="text-gray-900 text-xl mt-2">
                         Manage your documents, subscriptions, and billing here.
                     </p>
                 </div>
                 <div className="">
                     <button className="flex items-center bg-primary text-white w-40 h-12 justify-center rounded-md hover:bg-primary-dark">
-                        See Sessions
+                        See All Documents
                         <ChevronRight className="w-6 h-6 text-white ml-2" />
                     </button>
                 </div>

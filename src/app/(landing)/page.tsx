@@ -43,7 +43,7 @@ export default async function Home() {
               <Image src="/images/person-1.png" width={800} height={300} alt="Person 1" className="hidden md:block" />
               <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-primary to-transparent"></div>
             </div>
-            <div className="w-full flex flex-col justify-center items-center gap-6 relative z-10 bg-gradient-to-r from-primary via-purple-500 to-primary">
+            <div className="w-full flex flex-col justify-center items-center gap-6 relative z-10 bg-gradient-to-r from-primary via-purple-700 to-primary">
               <div className="self-stretch text-center">
                 <span className="text-white text-6xl font-bold">Navigate </span>
                 <span className="text-white text-6xl font-bold">Scholarships</span>

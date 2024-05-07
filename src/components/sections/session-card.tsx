@@ -1,5 +1,6 @@
 import React from 'react';
 import { CalendarIcon, ClockIcon, EllipsisIcon, UserCircleIcon } from 'lucide-react';
+import Link from 'next/link';
 
 const SessionCard = (props: any) => {
     return (
@@ -27,18 +28,20 @@ const SessionCard = (props: any) => {
             <div className="mt-4">
                 <h3 className="text-sm font-semibold">Mentor:</h3>
                 <div className="flex items-center mt-1">
-                {props?.mentor?.image ? (
-                <img src={props.mentor.image} alt={props.mentor.name} className="w-8 h-8 rounded-full" />
-                ) :  <UserCircleIcon className="text-purple-500" />}
+                    {props?.mentor?.image ? (
+                        <img src={props.mentor.image} alt={props.mentor.name} className="w-8 h-8 rounded-full" />
+                    ) : <UserCircleIcon className="text-purple-500" />}
                     <div className="ml-2">
                         <div>{props?.mentor?.name}</div>
                         <div className="text-xs text-gray-500">{props?.mentor?.email}</div>
                     </div>
                 </div>
             </div>
-            <button className="mt-4 bg-purple-500 text-white text-sm py-2 px-4 rounded-lg w-full hover:bg-purple-600">
-                Attend Session
-            </button>
+            <Link href={props?.meetingLink || "#"} target='_BLANK'>
+                <button className="mt-4 bg-purple-500 text-white text-sm py-2 px-4 rounded-lg w-full hover:bg-purple-600">
+                    Attend Session
+                </button>
+            </Link>
         </div>
     );
 };

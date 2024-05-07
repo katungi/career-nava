@@ -64,28 +64,6 @@ export function authOptions(req?: NextApiRequest, res?: NextApiResponse): NextAu
         const userRole: Role = req?.cookies?.role as Role ?? Role.USER;
         Sentry.setUser({ id: user.id, name: user.name, email: user.email ?? "" });
         if (isNewUser) {
-          console.log("New user signed up:", user.name, userRole);
-          // if (isTriggerEnabled) {
-          //   await slackNewUserNotification.invoke({
-          //     user: {
-          //       name: user.name ?? "unknown",
-          //       email: user.email ?? undefined,
-          //       id: user.id,
-          //     },
-          //   });
-          // }
-          if (loops && user.email) {
-            await loops.sendEvent(
-              {
-                email: user.email,
-              },
-              "cascade_sign_up",
-              {
-                ...(user.name && { name: user.name }),
-                email: user.email,
-              },
-            );
-          }
           await db.user.update({
             where: {
               id: user.id,
