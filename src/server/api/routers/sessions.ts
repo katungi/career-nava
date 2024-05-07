@@ -1,3 +1,4 @@
+import { Role } from '@prisma/client'
 import { z } from 'zod'
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "~/server/api/trpc"
@@ -56,7 +57,7 @@ export const SessionRouter = createTRPCRouter({
       if (!sessions) throw new Error('No sessions found')
       return sessions
     }),
-    getMentorBookingSession: publicProcedure
+  getMentorBookingSession: publicProcedure
     .input(z.object({
       limit: z.number().optional(),
       offset: z.number().optional(),
@@ -73,5 +74,28 @@ export const SessionRouter = createTRPCRouter({
       })
       if (!sessions) throw new Error('No sessions found')
       return sessions
-    })
+    }),
+  getMentees: publicProcedure
+    .input(z.object({
+      limit: z.number().optional(),
+      offset: z.number().optional(),
+    }))
+    .query(async ({ input }) => {
+      const sess = await getServerAuthSession()
+      const mentees = db.user.findMany({
+        where: {
+          role: Role.USER,
+          menteeSessions: {
+            some: {
+              mentorId: sess?.user.id,
+            },
+          },
+        },
+        include: {
+          menteeSessions: true,
+        },
+      })
+      if (!mentees) throw new Error('No mentees found')
+      return mentees
+    }),
 })
