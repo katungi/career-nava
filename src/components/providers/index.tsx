@@ -53,13 +53,13 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
             }}
             domain={env.NEXT_PUBLIC_DEPLOYMENT_URL.replace("https://", "")}
           >
-           
+            <ClientProvider>
               <PostHogProvider client={posthog}>
                 <TooltipProvider>
                   <Identification>{children}</Identification>
                 </TooltipProvider>
               </PostHogProvider>
-
+            </ClientProvider>
           </PlausibleProvider>
         </SessionProvider>
       </TRPCReactProvider>

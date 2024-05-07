@@ -15,9 +15,9 @@ const MenteeSlider = ({ mentees }: MenteeSliderProps) => {
                 <MenteeCard key={mentee.id} mentee={mentee} />
             ))}
             {
-                mentees.length === 0 && <div className="flex flex-grow w-[500px] h-[500px] mx-96">
+                mentees.length === 0 ? <div className="flex flex-grow w-[500px] h-[500px] mx-96">
                     <Empty />
-                </div>
+                </div> : null
             }
         </div>
     )

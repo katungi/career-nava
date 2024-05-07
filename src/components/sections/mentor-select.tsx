@@ -9,6 +9,7 @@ import { modalProgressAtom } from "~/atoms/mentor.atom";
 import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
 import { Description } from "@radix-ui/react-dialog";
 import { useSession } from "next-auth/react";
+import { Loader } from "lucide-react";
 
 export default async function MentorSelection() {
     const { data: session, status } = useSession()
@@ -30,13 +31,9 @@ export default async function MentorSelection() {
 
     const handleFormSubmit = async (FormData: any) => {
         setIsPending(true);
-        let meetLink = '';
-        await createMeeting(FormData).then((call) => {
-            meetLink = `${process.env.NEXT_PUBLIC_DEPLOYMENT_URL}/app/meeting/${call?.id}`
-        })
 
-
-
+        const call = await createMeeting(FormData)
+        let meetLink = `${process.env.NEXT_PUBLIC_DEPLOYMENT_URL}/app/meeting/${call?.id}`
         if (meetLink !== '') {
             FormData.meetingLink = meetLink;
             FormData.mentorId = selectedMentor.id;
@@ -46,11 +43,17 @@ export default async function MentorSelection() {
                 phoneNumber: FormData.number,
                 FormData: FormData,
             });
+            console.log("Form Data:::", FormData)
+        } else {
+            alert("Failed to create meeting")
         }
+
+        setTimeout(() => {
+            console.log("Redirecting")
+        }, 5000);
 
         setIsPending(false);
         setStep("final");
-        // window.location.href = "/app/dashboard/?loginState=signedIn";
     };
 
 
@@ -72,7 +75,7 @@ export default async function MentorSelection() {
                 }
             }).catch((error) => {
                 console.error(error);
-                alert("Kimeumana")
+                // alert("Kimeumana")
             });
             setCall(call);
             return call;
@@ -85,12 +88,10 @@ export default async function MentorSelection() {
     return (
         <div className="overflow-y-scroll">
             {isLoading && (
-                <div className="flex h-full items-center justify-center p-12">
-                    <div className="h-16 w-16 animate-spin rounded-full border-b-2 border-primary"></div>
-                </div>
+                <Loader className="h-8 w-8 animate-spin rounded-full"></Loader>
             )}
             {step === "init" && (
-                <div className="flex h-full w-screen flex-row gap-2 p-8">
+                <div className="flex h-full w-full flex-row gap-2 p-8">
                     {data?.map((mentor, index) => (
                         <MentorProfileCard
                             mentor={mentor}

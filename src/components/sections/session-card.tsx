@@ -3,6 +3,7 @@ import { CalendarIcon, ClockIcon, EllipsisIcon, UserCircleIcon } from 'lucide-re
 import Link from 'next/link';
 
 const SessionCard = (props: any) => {
+    console.log("SessionCard::", props)
     return (
         <div className={`bg-white rounded-lg shadow-lg p-6 max-w-sm ${props.className}`}>
             <div className="flex justify-between items-center">

@@ -8,8 +8,8 @@ interface MenteeCardProps {
 }
 export default function MenteeCard({ mentee }: MenteeCardProps) {
     return (
-        <Card className="w-full max-w-sm p-6 flex flex-col items-center gap-4">
-            <Avatar className="w-20 h-20">
+        <Card className="max-w-sm p-6 flex flex-col items-center gap-4">
+            <Avatar className="w-20 h-20 rounded-full">
                 <AvatarImage alt="Mentee" src={mentee.image!} />
                 <AvatarFallback>JD</AvatarFallback>
             </Avatar>
