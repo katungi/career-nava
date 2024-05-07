@@ -14,12 +14,6 @@ export default function Home() {
         limit: 100, offset: 0
     })
 
-    const { data: testData } = api.mentorshipSessions.getSessionPast.useQuery({
-        limit: 100, offset: 0
-    })
-
-    console.log(testData)
-
     return (
         <div className="p-4 mx-12">
             {/* Banner */}
@@ -27,29 +21,6 @@ export default function Home() {
                 <div className="flex-1">
                     <DashboardBanner />
                 </div>
-                {/* <div className="rounded-lg border border-1 border-primary p-3">
-                    <div className="w-96">
-                        <div className="bg-grey-200 border-b-2">
-                            <p className="text-3xl mx-6">Notifications</p>
-                        </div>
-                        <div className="p-4 flex-col gap-4">
-                            <div className="flex flex-row">
-                                <SquareArrowOutUpRight className="w-6 h-6 text-primary" />
-                                <p className="text-gray-800 ml-2">Sessions
-                                    <Badge className="bg-gray-400 text-white ml-2">2</Badge>
-                                </p>
-                                <ChevronRight className="w-6 h-6 text-primary ml-auto" />
-                            </div>
-                            <div className="flex flex-row mt-5">
-                                <FileText className="w-6 h-6 text-primary" />
-                                <p className="text-gray-800 ml-2">Document Review
-                                    <Badge className="bg-gray-400 text-white ml-2">2</Badge>
-                                </p>
-                                <ChevronRight className="w-6 h-6 text-primary ml-auto" />
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
             </div>
 
             {/* Upcoming Sessions */}

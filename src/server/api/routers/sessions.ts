@@ -56,13 +56,22 @@ export const SessionRouter = createTRPCRouter({
       if (!sessions) throw new Error('No sessions found')
       return sessions
     }),
-    getSessionPast: publicProcedure
+    getMentorBookingSession: publicProcedure
     .input(z.object({
       limit: z.number().optional(),
       offset: z.number().optional(),
     }))
     .query(async ({ input }) => {
-     return {message: "Hello There, Working"}
+      const sess = await getServerAuthSession()
+      const sessions = await db.bookingSession.findMany({
+        where: {
+          mentorId: sess?.user.id,
+        },
+        include: {
+          mentor: true,
+        }
+      })
+      if (!sessions) throw new Error('No sessions found')
+      return sessions
     })
-  }
-)
+})

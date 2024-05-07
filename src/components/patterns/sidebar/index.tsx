@@ -67,7 +67,7 @@ export default function Sidebar({ className }: SidebarProps) {
                     <div className="mt-3 space-y-1">
                         <SideNav
                             className="text-background opacity-0 transition-all duration-300 group-hover:z-50 group-hover:ml-4 group-hover:rounded group-hover:bg-black group-hover:p-2"
-                            items={isMentor ? NavItems : MentorNavItems}
+                            items={isMentor ? MentorNavItems : NavItems}
                         />
                     </div>
                 </div>
