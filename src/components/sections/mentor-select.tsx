@@ -30,20 +30,23 @@ export default async function MentorSelection() {
 
     const handleFormSubmit = async (FormData: any) => {
         setIsPending(true);
-        let meetLink;
+        let meetLink = '';
         await createMeeting(FormData).then((call) => {
-            meetLink = `${process.env.NEXT_PUBLIC_DEPLOYMENT_URL}/meeting/${call?.id}`
+            meetLink = `${process.env.NEXT_PUBLIC_DEPLOYMENT_URL}/app/meeting/${call?.id}`
         })
 
-        FormData.meetingLink = `${process.env.NEXT_PUBLIC_DEPLOYMENT_URL}/app/meeting/${call?.id}`;
-        FormData.mentorId = selectedMentor.id;
-        FormData.menteeId = ''
 
-        pay.mutate({
-            amount: "1",
-            phoneNumber: FormData.number,
-            FormData: FormData,
-        });
+
+        if (meetLink !== '') {
+            FormData.meetingLink = meetLink;
+            FormData.mentorId = selectedMentor.id;
+            FormData.menteeId = ''
+            pay.mutate({
+                amount: "1",
+                phoneNumber: FormData.number,
+                FormData: FormData,
+            });
+        }
 
         setIsPending(false);
         setStep("final");
