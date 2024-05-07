@@ -22,7 +22,7 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isInApplicationRoute = pathname.includes("/app");
   const isInOnboardingRoute = pathname.includes("/app/onboarding");
-  const isDashboardRoute = pathname.includes("/app/dashboard") || pathname.includes("/app/meeting")
+  const isDashboardRoute = pathname.includes("/app/dashboard") || pathname.includes("/app/meeting") || pathname.includes("/app/mentor")
 
   const app_env = process.env.NODE_ENV;
 
@@ -176,7 +176,7 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
-             <DropdownMenuItem
+              <DropdownMenuItem
                 onClick={() =>
                   redirect("/app/dashboard/?loginState=signedIn")
                 }

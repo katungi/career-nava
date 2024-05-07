@@ -33,7 +33,7 @@ const Onboarding = () => {
       >
         <h1 className="text-center text-4xl font-bold tracking-tight">
           {session.status === "authenticated"
-            ? `Welcome, ${getUserQuery.data?.name || session.user?.name}`
+            ? `Welcome, ${getUserQuery.data?.name || ""}`
             : "Welcome to CareerNava"}
         </h1>
         <h2 className="text-center text-xl text-muted-foreground">
