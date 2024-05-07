@@ -1,3 +1,4 @@
+import { Role } from "@prisma/client";
 import { z } from "zod";
 
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
@@ -5,7 +6,11 @@ import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 export const userRouter = createTRPCRouter({
   updateUser: protectedProcedure
     .input(
-      z.object({ image: z.string().optional(), name: z.string().optional() }),
+      z.object({
+        image: z.string().optional(), role: z.enum(
+          [Role.MENTOR, Role.USER]
+        )
+      }),
     )
     .mutation(async ({ input, ctx }) => {
       const user = ctx.session?.user;

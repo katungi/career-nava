@@ -3,17 +3,17 @@
 import { ChevronRight, Loader2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-
-import React from "react";
-
+import React, { useState } from "react";
 import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
 import { api } from "~/trpc/react";
 import { motion } from "framer-motion";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select";
+import { Role } from "@prisma/client";
 
 const Onboarding = () => {
   const session = useSession();
-  const [name, setName] = React.useState(session.data?.user.name ?? "");
+  const [role, setRole] = useState<any>(Role.USER);
+
   const utils = api.useUtils();
   const getUserQuery = api.user.getUser.useQuery();
   const updateUserMutation = api.user.updateUser.useMutation({
@@ -33,28 +33,36 @@ const Onboarding = () => {
       >
         <h1 className="text-center text-4xl font-bold tracking-tight">
           {session.status === "authenticated"
-            ? `Welcome, ${name.length > 0 ? name : getUserQuery.data?.name}`
-            : "Welcome to Pullout.so"}
+            ? `Welcome, ${getUserQuery.data?.name || session.user?.name}`
+            : "Welcome to CareerNava"}
         </h1>
         <h2 className="text-center text-xl text-muted-foreground">
-          Change your name or avatar so we can personalize your experience
+          Update your Role and avatar so we can personalize your experience!
         </h2>
       </motion.div>
       <motion.div
         transition={{ delay: 0.4, duration: 0.4 }}
         initial={{ x: "-5px", opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
-        className="mx-auto flex w-fit gap-2 "
-      >
-        <Input
-          className="mx-auto max-w-[200px]"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+        className="mx-auto flex w-fit gap-2">
+        <div>
+          <label className="sr-only" htmlFor="role">
+            Role
+          </label>
+          <Select name="role" required onValueChange={(e: Role) => setRole(e)}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Select your role" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value={Role.MENTOR}>Mentor</SelectItem>
+              <SelectItem value={Role.USER}>Mentee</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
         <Button
           disabled={updateUserMutation.isPending}
           onClick={() => {
-            updateUserMutation.mutate({ name });
+            updateUserMutation.mutate({ role });
           }}
           className="mx-auto w-fit"
         >
