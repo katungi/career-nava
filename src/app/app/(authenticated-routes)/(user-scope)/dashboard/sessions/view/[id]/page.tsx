@@ -1,10 +1,7 @@
 "use client"
-import { useAtomValue } from "jotai"
 import { useParams } from "next/navigation"
-import { mentorAtom } from "~/atoms/mentor.atom"
 import { MentorBioCard } from "~/components/sections/mentor-card"
 import { BreadcrumbLink, BreadcrumbItem, BreadcrumbSeparator, BreadcrumbPage, BreadcrumbList, Breadcrumb } from "~/components/ui/breadcrumb"
-import { useRouter } from "next/navigation"
 import { api } from "~/trpc/react"
 import { Loader } from "lucide-react"
 import { Button } from "~/components/ui/button"
@@ -14,9 +11,18 @@ import BookingForm from "~/components/sections/session-booking-form"
 
 export default function ViewUser() {
     const [openModal, setOpenModal] = useState(false)
+    const [isPending, setIsPending] = useState(false)
     const params = useParams()
     const id = params.id as string
     const { data, isLoading } = api.user.getUserById.useQuery({ id });
+
+    const handleFormSubmit = async (FormData: any) => {
+        setIsPending(true);
+        setTimeout(() => {
+            console.log(FormData);
+            setIsPending(false);
+        }, 5000);
+    };
 
     return (
         <div className="px-8">
@@ -50,7 +56,13 @@ export default function ViewUser() {
                     </Button>
                 </Modal.Button>
                 <Modal.Content title={"Book a session"}>
-                    <BookingForm />
+                    {isPending ?
+                        <div className="flex align-middle h-full items-center justify-center p-12 flex-col">
+                            <Loader className="h-8 w-8 animate-spin rounded-full"></Loader>
+                            <p className="text-primary font-bold">Booking Session...</p>
+                        </div>
+                        : <BookingForm onSubmit={handleFormSubmit} />
+                    }
                 </Modal.Content>
             </Modal>
         </div>

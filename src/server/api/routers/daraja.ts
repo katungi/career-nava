@@ -138,7 +138,6 @@ export const mpesaPaymentRouter = createTRPCRouter({
           }
         })
 
-        console.log(dbSession)
         return NextResponse.json("sucess", {
           status: response.status,
         });
