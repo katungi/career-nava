@@ -40,7 +40,7 @@ export default function Home() {
             </div>
             <div className="mt-4">
                 {isLoading ? <div className="flex h-full items-center justify-center p-12">
-                 c
+                    <Loader className="h-8 w-8 animate-spin rounded-full"></Loader>
                 </div> : <SessionSlider sessions={sessions} />}
             </div>
             <div className="flex flex-row mt-20 w-full justify-between">

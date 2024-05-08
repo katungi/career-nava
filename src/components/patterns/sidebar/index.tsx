@@ -65,10 +65,19 @@ export default function Sidebar({ className }: SidebarProps) {
                 </Link>
                 <div className="px-3 py-2">
                     <div className="mt-3 space-y-1">
-                        <SideNav
-                            className="text-background opacity-0 transition-all duration-300 group-hover:z-50 group-hover:ml-4 group-hover:rounded group-hover:bg-black group-hover:p-2"
-                            items={isMentor ? MentorNavItems : NavItems}
-                        />
+                        {
+                            isMentor ? (
+                                <SideNav
+                                    className="text-background opacity-0 transition-all duration-300 group-hover:z-50 group-hover:ml-4 group-hover:rounded group-hover:bg-black group-hover:p-2"
+                                    items={MentorNavItems}
+                                />
+                            ) : (
+                                <SideNav
+                                    className="text-background opacity-0 transition-all duration-300 group-hover:z-50 group-hover:ml-4 group-hover:rounded group-hover:bg-black group-hover:p-2"
+                                    items={NavItems}
+                                />
+                            )
+                        }
                     </div>
                 </div>
             </div>

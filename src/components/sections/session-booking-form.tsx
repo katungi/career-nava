@@ -19,36 +19,7 @@ const BookingForm = ({ onSubmit }: any) => {
         data.number = number.replace('+', '');
         onSubmit(data);
     };
-
-    async function createCalendarEvent({ eventName, eventDescription, start, end, session }: any) {
-        console.log("Creating calendar event");
-        const event = {
-            'summary': eventName,
-            'description': eventDescription,
-            'start': {
-                'dateTime': start.toISOString(),
-                'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
-            },
-            'end': {
-                'dateTime': end.toISOString(),
-                'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
-            }
-        }
-        await fetch("https://www.googleapis.com/calendar/v3/calendars/primary/events", {
-            method: "POST",
-            headers: {
-                'Authorization': 'Bearer ' + session.provider_token
-            },
-            body: JSON.stringify(event)
-        }).then((data) => {
-            return data.json();
-        }).then((data) => {
-            console.log(data);
-            alert("Event created, check your Google Calendar!");
-        });
-    }
-
-
+    
     return (
         <div className="max-w-md mx-auto p-4 space-y-4">
             <div className="space-y-2">

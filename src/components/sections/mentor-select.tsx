@@ -23,8 +23,6 @@ export default async function MentorSelection() {
         offset: 0,
     });
 
-    console.log(selectedMentor)
-
     const [call, setCall] = useState<Call | undefined>()
 
     const client = useStreamVideoClient();
