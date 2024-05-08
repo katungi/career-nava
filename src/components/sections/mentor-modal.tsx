@@ -14,10 +14,9 @@ export default function MentorModal() {
                 </button>
             </Modal.Button>
             <Modal.Content title={
-                <div className='ml-12 mt-4 flex flex-col'>
+                <div className='ml-12 mt-4 flex flex-col overflow-y-scroll'>
                     <p className='text-4xl font-bold text-secondary'>Book a Mentor {" "} </p>
-                </div>
-            }>
+                </div>}>
                 <MentorSelection />
             </Modal.Content>
         </Modal>

@@ -16,9 +16,8 @@ export default function ClientProvider({ children }: clientProviderProps) {
     const videoClient = useInitializeVideoClient();
 
     if (!videoClient) {
-        return <div className="flex h-screen items-center justify-center">
-            <Loader className="mx-auto animate-spin" />
-        </div>
+        console.log("Client not initialized")
+        return
     }
 
     return (
@@ -30,7 +29,7 @@ export default function ClientProvider({ children }: clientProviderProps) {
 
 function useInitializeVideoClient() {
     const { data: session, status } = useSession()
-    const userLoaded = status === "authenticated" && session?.user   
+    const userLoaded = status === "authenticated" && session?.user
     const user = session?.user
     const [videClient, setVideoClient] = useState<StreamVideoClient | null>(null)
 

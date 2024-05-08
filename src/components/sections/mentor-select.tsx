@@ -86,12 +86,12 @@ export default async function MentorSelection() {
     }
 
     return (
-        <div className="overflow-y-scroll">
+        <div className="">
             {isLoading && (
                 <Loader className="h-8 w-8 animate-spin rounded-full"></Loader>
             )}
             {step === "init" && (
-                <div className="flex h-full w-full flex-row gap-2 p-8">
+                <div className="grid grid-cols-3 gap-2 p-8">
                     {data?.map((mentor, index) => (
                         <MentorProfileCard
                             mentor={mentor}
@@ -107,9 +107,9 @@ export default async function MentorSelection() {
             {selectedMentor && step === "book-session" && !isPending && (<BookingForm onSubmit={handleFormSubmit} />)}
             {selectedMentor && step === "final" && (
                 <div>
-                    <div className="flex h-full items-center justify-center p-12">
+                    <div className="flex align-middle h-full items-center justify-center p-12">
                         {/* <div className="h-16 w-16 animate-spin rounded-full border-b-2 border-primary"></div> */}
-                        <p className="text-primary">Session with {selectedMentor.name} Booked Successfully 🎉</p>
+                        <p className="text-primary font-bold">Session with {selectedMentor.name} Booked Successfully 🎉</p>
                     </div>
                 </div>
             )}
