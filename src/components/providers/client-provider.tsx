@@ -37,9 +37,6 @@ function useInitializeVideoClient() {
     const [videClient, setVideoClient] = useState<StreamVideoClient | null>(null)
 
     useEffect(() => {
-        if (!userLoaded) {
-            router.push("/app/login")
-        }
         let streamUser: User;
         if (user?.id) {
             streamUser = {
