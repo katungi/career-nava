@@ -37,9 +37,7 @@ declare module "next-auth" {
  *
  * @see https://next-auth.js.org/configuration/options
  */
-export function authOptions(req?: NextApiRequest, res?: NextApiResponse): NextAuthOptions {
-  const cook = getCookie("userType")
-  console.log("cookie", cook)
+export function authOptions(): NextAuthOptions {
   const options: NextAuthOptions = {
     callbacks: {
       session: async ({ session, user }) => {
@@ -61,7 +59,6 @@ export function authOptions(req?: NextApiRequest, res?: NextApiResponse): NextAu
     },
     events: {
       async signIn({ user, isNewUser, profile, account }) {
-        const userRole: Role = req?.cookies?.role as Role ?? Role.USER;
         Sentry.setUser({ id: user.id, name: user.name, email: user.email ?? "" });
         if (isNewUser) {
           await db.user.update({
@@ -69,7 +66,7 @@ export function authOptions(req?: NextApiRequest, res?: NextApiResponse): NextAu
               id: user.id,
             },
             data: {
-              role: userRole
+              role: Role.USER
             },
           })
         }

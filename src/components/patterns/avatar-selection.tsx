@@ -57,7 +57,7 @@ export function AvatarSelection({}) {
     resolver: zodResolver(schema),
     defaultValues: {
       images: [],
-    },
+  },
   });
 
   async function onSubmit(input: Schema) {
@@ -69,7 +69,7 @@ export function AvatarSelection({}) {
     if (res && res?.length > 0 && res[0]?.url) {
       toast.success("File uploaded successfully");
       updateUserMutation.mutate({
-        image: res[0]?.url,
+        image: res[0]?.url!,
       });
       form.reset();
     }

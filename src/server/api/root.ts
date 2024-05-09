@@ -8,6 +8,7 @@ import { aiRouter } from "./routers/ai";
 import { SessionRouter } from "./routers/sessions";
 import { mpesaPaymentRouter } from "./routers/daraja";
 import { ScholarshipRouter } from "./routers/scholarships";
+import { DocumentRouter } from "./routers/documents";
 
 /**
  * This is the primary router for your server.
@@ -23,7 +24,8 @@ export const appRouter = createTRPCRouter({
   ai: aiRouter,
   daraja: mpesaPaymentRouter,
   mentorshipSessions: SessionRouter,
-  scholarshipSessions: ScholarshipRouter
+  scholarshipSessions: ScholarshipRouter, 
+  documents: DocumentRouter,
 });
 
 // export type definition of API

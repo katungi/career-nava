@@ -11,7 +11,7 @@ export const ourFileRouter = {
   imageUploader: f({ image: { maxFileSize: "4MB", maxFileCount: 8 } })
     // Set permissions and file types for this FileRoute
     .middleware(async () => {
-      const session = await getServerSession(authOptions);
+      const session = await getServerSession(authOptions());
       // This code runs on your server before upload
 
       // If you throw, the user will not be able to upload
@@ -27,6 +27,25 @@ export const ourFileRouter = {
       console.log("file url", file.url);
 
       return { uploadedBy: metadata.userId };
+    }),
+
+  documentUploader: f({
+    image: { maxFileSize: "8MB", maxFileCount: 4 },
+    pdf: { maxFileSize: "32MB", maxFileCount: 8 },
+  })
+    .middleware(async () => {
+      const session = await getServerSession(authOptions());
+      // This code runs on your server before upload
+
+      // If you throw, the user will not be able to upload
+      if (!session) throw new UploadThingError("Unauthorized");
+
+      // Whatever is returned here is accessible in onUploadComplete as `metadata`
+      return { userId: session?.user.id };
+    })
+    .onUploadComplete(async ({ metadata, file }) => {
+      // This code RUNS ON YOUR SERVER after upload
+      return { uploadedBy: metadata.userId, fileUrl: file.url };
     }),
 } satisfies FileRouter;
 
