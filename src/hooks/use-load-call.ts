@@ -1,9 +1,12 @@
 import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
+import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { getServerAuthSession } from "~/server/auth";
 
 export default function useLoadCall(id: string) {
+    const sess = useSession();
     const client = useStreamVideoClient();
-    // client?.connectUser({ id: "user-id" });
+    client?.connectUser({ id: sess.data?.user.id!, type: "authenticated"});
 
     const [call, setCall] = useState<Call>();
     const [callLoading, setCallLoading] = useState(true);

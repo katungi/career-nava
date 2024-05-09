@@ -28,7 +28,6 @@ export default function ViewUser() {
         if (!client) {
             return
         }
-
         try {
             const id = crypto.randomUUID();
             const callType = "private-meeting"

@@ -20,7 +20,6 @@ export default function MeetingPageComponent({ id }: MeetingPageProps) {
     const { call, callLoading } = useLoadCall(id)
 
     if (callLoading) {
-        console.log("Client not found")
         return <Loader className="mx-auto animate-spin" />
     }
 

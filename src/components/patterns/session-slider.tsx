@@ -19,7 +19,7 @@ const SessionSlider = ({ sessions, loading }: any) => {
 
     return (
         <div className="items-center space-x-4 overflow-hidden relative px-2 flex-col">
-            {loading && <div className="flex align-middle h-full items-center justify-center p-12 flex-col">
+            {loading && <div className="flex align-middle h-full itemsP-center justify-center p-12 flex-col">
                 <Loader className="h-8 w-8 animate-spin rounded-full"></Loader>
             </div>
             }
