@@ -67,7 +67,7 @@ function MeetingScreen() {
         <h1 className="text-2xl font-bold">Meeting</h1>
         {description && <p className="text-xl">{description}</p>}
         {setupComplete ? (
-            <SpeakerLayout />
+            <CallUI />
         ) : (
             <SetupUI onSetupComplete={handleSetupComplete} />
         )}
