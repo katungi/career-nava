@@ -1,29 +1,24 @@
 'use client'
 import React, { useState } from 'react';
-import { ChevronRight, PlusIcon } from 'lucide-react'; // Assuming you're using lucide-react for the icons
+import { Loader, PlusIcon } from 'lucide-react'; // Assuming you're using lucide-react for the icons
 import { Button } from '~/components/ui/button';
 import TabsComponent from '~/components/patterns/tabs';
-import SessionSlider from '~/components/patterns/session-slider';
 import DocumentSlider from '~/components/patterns/document-slider';
 import Modal from '~/components/ui/modal';
 import { Card, CardContent } from '~/components/ui/card';
-import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
-import Link from 'next/link';
 import DocumentUploadForm from './document-upload-form';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { api } from '~/trpc/react';
 
 export default function Documents() {
     const [activeTab, setActiveTab] = useState(0);
     const [openModal, setOpenModal] = useState(false);
     const [fileUploaded, setFileUploaded] = useState(false);
-    const img1 = "https://i.ibb.co/ncrXc2V/1.png";
-    const img2 = "https://i.ibb.co/B3s7v4h/2.png";
-    const img3 = "https://i.ibb.co/XXR8kzF/3.png";
-    const img4 = "https://i.ibb.co/yg7BSdM/4.png";
 
-    const slides = [img1, img2, img3, img4, img1, img2, img3, img4];
+    const { data: documents, isLoading } = api.documents.getUserDocuments.useQuery();
 
+    console.log("documents:::", documents)
     return (
         <div className="p-4 mx-8">
             {/* Banner */}
@@ -58,7 +53,12 @@ export default function Documents() {
                 </div>
             </div>
             <div className="mt-4">
-                <DocumentSlider sessions={slides} />
+                {isLoading ?
+                    <div className="flex justify-center items-center h-96">
+                        <Loader className="h-8 w-8 animate-spin rounded-full"></Loader>
+                    </div> :
+                    <DocumentSlider sessions={documents} />
+                }
             </div>
         </div>
     )

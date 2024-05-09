@@ -14,5 +14,15 @@ export const DocumentRouter = createTRPCRouter({
                 }
             })
             return document
-        })
+        }),
+
+    getUserDocuments: protectedProcedure
+        .query(async ({ ctx }) => {
+            const documents = await ctx.db.documents.findMany({
+                where: {
+                    userId: ctx.session?.user.id
+                }
+            })
+            return documents
+        }),
 })

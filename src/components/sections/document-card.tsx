@@ -1,6 +1,6 @@
 import React from 'react';
-import { FileText } from 'lucide-react';
-import { DotsVerticalIcon } from '@radix-ui/react-icons';
+import { FileIcon } from 'lucide-react';
+import Link from 'next/link';
 
 const DocumentCard = ({ title, status, pageCount }: {
     title: string;
@@ -8,33 +8,29 @@ const DocumentCard = ({ title, status, pageCount }: {
     pageCount: number;
 }) => {
     return (
-        <div className="max-w-xs rounded-lg overflow-hidden shadow-lg bg-white relative">
-            <div className="absolute right-2 top-2">
-                <DotsVerticalIcon className="w-6 h-6 text-gray-600" />
-            </div>
+        <Link href="#"
+            className="group block w-full max-w-sm rounded-lg border border-gray-200 bg-white shadow-sm transition-all hover:scale-[1.02] hover:shadow-md dark:border-gray-800 dark:bg-gray-950"
+        >
             <div className="p-4">
-                <div className="flex items-center">
-                    <FileText className="w-8 h-8 text-primary" />
-                    <div className="ml-2">
-                        <h2 className="text-lg font-bold">{title}</h2>
-                        <p className="text-gray-500">{status}</p>
-                    </div>
-                </div>
-                <div className="mt-4 mb-2">
-                    {/* Image representing the document should go here */}
-                    <img src="/images/pdf.png" alt="Document Preview" className="w-2/3" />
-                </div>
-                <div className="flex items-center justify-between text-sm text-gray-600">
-                    <span>{pageCount} pages</span>
-                    <span>Word</span>
+                <div className="mt-4 mb-2 flex align-middle justify-center">
+                    <img src="/images/pdf.png" alt="Document Preview" className="w-1/3 " />
                 </div>
             </div>
-            <div className="bg-blue-100 text-blue-800 text-center py-2">
-                Resume Document
-                <br />
-                Ready for review
+            <div className="flex items-center gap-4 p-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-md bg-gray-100 dark:bg-gray-800">
+                    <FileIcon className="h-6 w-6 text-gray-500 dark:text-gray-400" />
+                </div>
+                <div className="flex-1">
+                    {/** 
+                     * Add a title to the schema and display it here.
+                     * Add a Type dropdown as well, so we can filter by type. and show the correct filler document icon.
+                     *  
+                     * */}
+                    <h4 className="text-lg font-medium leading-none">Annual Report 2024</h4>
+                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">PDF Document</p>
+                </div>
             </div>
-        </div>
+        </Link>
     );
 };
 
