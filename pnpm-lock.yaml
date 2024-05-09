@@ -24,7 +24,7 @@ dependencies:
     specifier: ^5.10.2
     version: 5.11.0(prisma@5.11.0)
   '@prisma/extension-pulse':
-    specifier: ^1.0.2
+    specifier: ^1.0.0
     version: 1.0.2(@prisma/client@5.11.0)
   '@radix-ui/react-accordion':
     specifier: ^1.1.2
@@ -182,6 +182,9 @@ dependencies:
   next-view-transitions:
     specifier: ^0.1.1
     version: 0.1.1(next@14.1.4)(react-dom@18.2.0)(react@18.2.0)
+  next-ws:
+    specifier: ^1.0.1
+    version: 1.0.1(next@14.1.4)(react@18.2.0)(ws@8.17.0)
   openai:
     specifier: ^4.33.0
     version: 4.33.0
@@ -245,6 +248,9 @@ dependencies:
   uvcanvas:
     specifier: ^0.2.1
     version: 0.2.1(@types/react@18.2.62)(react-dom@18.2.0)(react@18.2.0)
+  ws:
+    specifier: ^8.17.0
+    version: 8.17.0
   xlsx:
     specifier: ^0.18.5
     version: 0.18.5
@@ -3001,7 +3007,7 @@ packages:
       '@prisma/client': '>=4.16.1'
     dependencies:
       '@prisma/client': 5.11.0(prisma@5.11.0)
-      ws: 8.16.0
+      ws: 8.17.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -4681,7 +4687,7 @@ packages:
       util: 0.12.5
       util-deprecate: 1.0.2
       watchpack: 2.4.1
-      ws: 8.16.0
+      ws: 8.17.0
     transitivePeerDependencies:
       - bufferutil
       - encoding
@@ -5125,12 +5131,12 @@ packages:
       '@types/ws': 8.5.10
       axios: 1.6.5
       base64-js: 1.5.1
-      isomorphic-ws: 5.0.0(ws@8.16.0)
+      isomorphic-ws: 5.0.0(ws@8.17.0)
       rxjs: 7.8.1
       sdp-transform: 2.14.2
       ua-parser-js: 1.0.37
       webrtc-adapter: 8.2.3
-      ws: 8.16.0
+      ws: 8.17.0
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -5375,7 +5381,7 @@ packages:
       terminal-link: 3.0.0
       ulid: 2.3.0
       uuid: 9.0.1
-      ws: 8.16.0
+      ws: 8.17.0
       zod: 3.22.3
     transitivePeerDependencies:
       - bufferutil
@@ -10423,12 +10429,12 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /isomorphic-ws@5.0.0(ws@8.16.0):
+  /isomorphic-ws@5.0.0(ws@8.17.0):
     resolution: {integrity: sha512-muId7Zzn9ywDsyXgTIafTry2sV3nySZeUDe6YedVd1Hvuuep5AsIlqK+XefWpYTyJG5e503F2xIuT2lcU6rCSw==}
     peerDependencies:
       ws: '*'
     dependencies:
-      ws: 8.16.0
+      ws: 8.17.0
     dev: false
 
   /iterator.prototype@1.1.2:
@@ -12123,6 +12129,18 @@ packages:
       next: 14.1.4(@babel/core@7.24.3)(@opentelemetry/api@1.8.0)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /next-ws@1.0.1(next@14.1.4)(react@18.2.0)(ws@8.17.0):
+    resolution: {integrity: sha512-OIxASK7gU17y4J84FRnLA0kSAj5sDpC2DPgtiNQCevNbf3GXk7AOuqY+6kwcw2iVG5aDOoxT8TLsNRtHb+/Znw==}
+    peerDependencies:
+      next: '>=13.1.1'
+      react: '*'
+      ws: '*'
+    dependencies:
+      next: 14.1.4(@babel/core@7.24.3)(@opentelemetry/api@1.8.0)(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      ws: 8.17.0
     dev: false
 
   /next@14.1.4(@babel/core@7.24.3)(@opentelemetry/api@1.8.0)(react-dom@18.2.0)(react@18.2.0):
@@ -15914,8 +15932,8 @@ packages:
       signal-exit: 3.0.7
     dev: true
 
-  /ws@8.16.0:
-    resolution: {integrity: sha512-HS0c//TP7Ina87TfiPUz1rQzMhHrl/SG2guqRcTOIUYD2q8uhUdNHZYJUaQ8aTGPzCh+c6oawMKW35nFl1dxyQ==}
+  /ws@8.17.0:
+    resolution: {integrity: sha512-uJq6108EgZMAl20KagGkzCKfMEjxmKvZHG7Tlq0Z6nOky7YF7aq4mOx6xK8TJ/i1LeK4Qus7INktacctDgY8Ow==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1

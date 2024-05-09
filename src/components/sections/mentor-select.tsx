@@ -13,7 +13,6 @@ import { Loader } from "lucide-react";
 
 export default async function MentorSelection() {
     const { data: session, status } = useSession()
-    console.log(session, status)
     const pay = api.daraja.stkPush.useMutation();
     const [selectedMentor, setSelectedMentor] = useState<any>(null);
     const [isPending, setIsPending] = useState(false);
@@ -23,28 +22,8 @@ export default async function MentorSelection() {
         offset: 0,
     });
 
-    const [call, setCall] = useState<Call | undefined>()
-
-    const client = useStreamVideoClient();
-
     const handleFormSubmit = async (FormData: any) => {
         setIsPending(true);
-
-        const call = await createMeeting(FormData)
-        let meetLink = `${process.env.NEXT_PUBLIC_DEPLOYMENT_URL}/app/meeting/${call?.id}`
-        if (meetLink !== '') {
-            FormData.meetingLink = meetLink;
-            FormData.mentorId = selectedMentor.id;
-            FormData.menteeId = ''
-            pay.mutate({
-                amount: "1",
-                phoneNumber: FormData.number,
-                FormData: FormData,
-            });
-            console.log("Form Data:::", FormData)
-        } else {
-            alert("Failed to create meeting")
-        }
 
         setTimeout(() => {
             console.log("Redirecting")
@@ -56,32 +35,6 @@ export default async function MentorSelection() {
 
 
 
-    async function createMeeting(formData: any) {
-        if (!client) {
-            return
-        }
-
-        try {
-            const id = crypto.randomUUID();
-            const callType = "private-meeting"
-            const call = client.call(callType, id);
-
-            await call.getOrCreate({
-                data: {
-                    // members: [selectedMentor.id, session?.user?.id], // This will add specific users to the call
-                    custom: { Description: formData.title }
-                }
-            }).catch((error) => {
-                console.error(error);
-                // alert("Kimeumana")
-            });
-            setCall(call);
-            return call;
-        } catch (error) {
-            console.error(error);
-            alert("Failed to create meeting")
-        }
-    }
 
     return (
         <div className="">

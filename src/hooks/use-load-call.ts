@@ -3,20 +3,18 @@ import { useEffect, useState } from "react";
 
 export default function useLoadCall(id: string) {
     const client = useStreamVideoClient();
+    // client?.connectUser({ id: "user-id" });
 
-    const [call, setCall] = useState<Call | undefined>();
-
-    const [callLoading, setCallLoading] = useState<boolean>(true);
+    const [call, setCall] = useState<Call>();
+    const [callLoading, setCallLoading] = useState(true);
 
     useEffect(() => {
         async function loadCall() {
             setCallLoading(true);
             if (!client) return;
-
             const { calls } = await client.queryCalls({
-                filter_conditions: { id }
-            })
-
+                filter_conditions: { id },
+            });
             if (calls.length > 0) {
                 const call = calls[0];
                 await call?.get();
@@ -25,8 +23,7 @@ export default function useLoadCall(id: string) {
             setCallLoading(false);
         }
         loadCall();
-    }, [client, id])
+    }, [client, id]);
 
-    return { call, callLoading }
-
+    return { call, callLoading };
 }
