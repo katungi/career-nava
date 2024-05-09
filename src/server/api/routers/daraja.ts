@@ -121,6 +121,7 @@ export const mpesaPaymentRouter = createTRPCRouter({
             description: input.FormData.description,
             startTime: new Date(input.FormData.startTime),
             endTime: new Date(input.FormData.endTime),
+            meetingLink: input.FormData.meetingLink,
             // mentorId: input.FormData.mentorId,
             // menteeId: session?.user?.id!,
             paymentStatus: "pending",

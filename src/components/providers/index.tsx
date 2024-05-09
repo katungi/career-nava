@@ -12,6 +12,7 @@ import { ThemeProvider } from "./theme-provider";
 import * as Sentry from "@sentry/nextjs";
 import { TooltipProvider } from "~/components/ui/tooltip";
 import ClientProvider from "./client-provider";
+import { WebSocketProvider } from 'next-ws/client';
 
 if (typeof window !== "undefined" && process.env.NODE_ENV === "production") {
   posthog.init(env.NEXT_PUBLIC_POSTHOG_API_KEY!, {
@@ -53,13 +54,13 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
             }}
             domain={env.NEXT_PUBLIC_DEPLOYMENT_URL.replace("https://", "")}
           >
-            <ClientProvider>
-              <PostHogProvider client={posthog}>
-                <TooltipProvider>
-                  <Identification>{children}</Identification>
-                </TooltipProvider>
-              </PostHogProvider>
-            </ClientProvider>
+              <ClientProvider>
+                <PostHogProvider client={posthog}>
+                  <TooltipProvider>
+                    <Identification>{children}</Identification>
+                  </TooltipProvider>
+                </PostHogProvider>
+              </ClientProvider>
           </PlausibleProvider>
         </SessionProvider>
       </TRPCReactProvider>

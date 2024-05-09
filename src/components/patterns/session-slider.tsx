@@ -1,10 +1,10 @@
 "use client"
 import React, { useState } from 'react';
-import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
+import { ChevronLeftIcon, ChevronRightIcon, Loader } from 'lucide-react';
 import SessionCard from '../sections/session-card';
 import Empty from '../constants/empty';
 
-const SessionSlider = ({ sessions }: any) => {
+const SessionSlider = ({ sessions, loading }: any) => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const maxVisibleCards = 3;
     const maxSlideIndex = Math.ceil(sessions?.length / maxVisibleCards) - 1;
@@ -19,6 +19,10 @@ const SessionSlider = ({ sessions }: any) => {
 
     return (
         <div className="items-center space-x-4 overflow-hidden relative px-2 flex-col">
+            {loading && <div className="flex align-middle h-full itemsP-center justify-center p-12 flex-col">
+                <Loader className="h-8 w-8 animate-spin rounded-full"></Loader>
+            </div>
+            }
             {sessions?.length > 0 &&
                 <div className='left-0 flex flex-row items-center mb-3 w-64 ml-7'>
                     <button onClick={prevSlide} className="mb-2 bg-gray-200 rounded-full p-2">
