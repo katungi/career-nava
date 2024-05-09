@@ -1,13 +1,10 @@
 "use client"
-import { ChevronRight, FileText, Loader, SquareArrowOutUpRight } from "lucide-react";
+import { ChevronRight, Loader } from "lucide-react";
 import DashboardBanner from "~/components/sections/banner";
-import { Badge } from "~/components/ui/badge";
-import Modal from "~/components/ui/modal";
 import SessionSlider from "~/components/patterns/session-slider";
 import DocumentSlider from "~/components/patterns/document-slider";
-import { useState } from "react";
-import { Pencil1Icon } from "@radix-ui/react-icons";
 import { api } from "~/trpc/react";
+import { Button } from "~/components/ui/button";
 
 export default function Home() {
     const { data: sessions, isLoading } = api.mentorshipSessions.getBookingSessions.useQuery({
@@ -53,10 +50,10 @@ export default function Home() {
                     </p>
                 </div>
                 <div className="">
-                    <button className="flex items-center bg-primary text-white w-40 h-12 justify-center rounded-md hover:bg-primary-dark">
+                    <Button className="flex items-center bg-primary text-white w-48 h-12 justify-center rounded-md hover:bg-primary-dark">
                         See All Documents
                         <ChevronRight className="w-6 h-6 text-white ml-2" />
-                    </button>
+                    </Button>
                 </div>
             </div>
             <div className="mt-4">

@@ -17,7 +17,12 @@ export default function Documents() {
     const [fileUploaded, setFileUploaded] = useState(false);
 
     const { data: documents, isLoading } = api.documents.getUserDocuments.useQuery();
-
+    const tabsData = [
+        { title: 'All Documents' },
+        { title: 'Ready for Review' },
+        { title: 'Pending' },
+        { title: 'Deleted' },
+    ];
     return (
         <div className="p-4 mx-8">
             {/* Banner */}
@@ -36,7 +41,7 @@ export default function Documents() {
                 <div className="p-3">
                     <div className="flex flex-row w-full p-3 justify-between items-center">
                         <div className="">
-                            <h1 className="text-4xl font-bold text-gray-800">{tabsData[activeTab]?.title} Documents (4)</h1>
+                            <h1 className="text-4xl font-bold text-gray-800">{tabsData[activeTab]?.title} Documents</h1>
                             <p className="text-gray-900 text-xl mt-2">
                                 Manage your documents, subscriptions, and billing here. You can also view your usage and manage your account.
                             </p>
@@ -121,9 +126,3 @@ function DocumentUploaded({ setOpenModal }: any) {
     )
 }
 
-const tabsData = [
-    { title: 'All Documents', count: 4 },
-    { title: 'Ready for Review', count: 1 },
-    { title: 'Pending', count: 3 },
-    { title: 'Deleted', count: 0 },
-];

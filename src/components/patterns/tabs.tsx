@@ -17,7 +17,7 @@ const TabsComponent = ({ tabsData, setActiveTab, activeTab}: any) => {
               }`}
               onClick={() => setActiveTab(index)}
             >
-              {tab.title} ({tab.count})
+              {tab.title} 
             </button>
           ))}
         </div>
