@@ -18,7 +18,6 @@ export default function Documents() {
 
     const { data: documents, isLoading } = api.documents.getUserDocuments.useQuery();
 
-    console.log("documents:::", documents)
     return (
         <div className="p-4 mx-8">
             {/* Banner */}

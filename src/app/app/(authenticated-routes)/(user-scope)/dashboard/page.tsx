@@ -14,6 +14,8 @@ export default function Home() {
         limit: 100, offset: 0
     })
 
+    const { data: documents } = api.documents.getUserDocuments.useQuery();
+
     return (
         <div className="p-4 mx-12">
             {/* Banner */}
@@ -61,7 +63,7 @@ export default function Home() {
                 {isLoading ? <div className="flex h-full items-center justify-center p-12">
                     <Loader className="h-8 w-8 animate-spin rounded-full"></Loader>
                 </div>
-                    : <DocumentSlider sessions={sessions} />}
+                    : <DocumentSlider sessions={documents} />}
             </div>
         </div>
     );
