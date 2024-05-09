@@ -8,6 +8,7 @@ import { Button } from "~/components/ui/button"
 import Modal from "~/components/ui/modal"
 import { useState } from "react"
 import BookingForm from "~/components/sections/session-booking-form"
+import { db } from "~/server/db"
 
 export default function ViewUser() {
     const [openModal, setOpenModal] = useState(false)
