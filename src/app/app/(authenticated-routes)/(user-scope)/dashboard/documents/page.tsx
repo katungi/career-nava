@@ -10,10 +10,13 @@ import { Card, CardContent } from '~/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
 import Link from 'next/link';
 import DocumentUploadForm from './document-upload-form';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 export default function Documents() {
     const [activeTab, setActiveTab] = useState(0);
     const [openModal, setOpenModal] = useState(false);
+    const [fileUploaded, setFileUploaded] = useState(false);
     const img1 = "https://i.ibb.co/ncrXc2V/1.png";
     const img2 = "https://i.ibb.co/B3s7v4h/2.png";
     const img3 = "https://i.ibb.co/XXR8kzF/3.png";
@@ -27,7 +30,9 @@ export default function Documents() {
             <DocumentsHeader setOpenModal={setOpenModal} />
             <Modal open={openModal} onOpenChange={setOpenModal}>
                 <Modal.Content title={"Upload A Document"}>
-                    <DocumentUploadForm setOpenModal={setOpenModal} />
+                    {fileUploaded ? <DocumentUploaded setOpenModal={setOpenModal} /> :
+                        <DocumentUploadForm setFileUploaded={setFileUploaded} />
+                    }
                 </Modal.Content>
             </Modal>
             <div className='mt-10'>
@@ -85,6 +90,37 @@ const DocumentsHeader = ({ setOpenModal }: any) => {
         </div>
     );
 };
+
+function DocumentUploaded({ setOpenModal }: any) {
+    const router = useRouter()
+    return (
+        <Card className="w-full mx-auto">
+            <CardContent className="flex flex-col items-center justify-center gap-4 p-8">
+                <img
+                    alt="Success"
+                    className="rounded-lg"
+                    height="300"
+                    src="/images/paper-documents.svg"
+                    style={{
+                        objectFit: "cover",
+                    }}
+                    width="300"
+                />
+                <div className="space-y-2 text-center">
+                    <h3 className="text-lg font-semibold text-primary">Your documents were uploaded successfully</h3>
+                    <p className="text-gray-500 dark:text-gray-400">You can now view all your uploaded documents.</p>
+                </div>
+                <Button onClick={() => {
+                    router.push('/app/dashboard/documents')
+                    toast.info("Redirecting to Documents Page")
+                }
+                }>
+                    View all Documents
+                </Button>
+            </CardContent>
+        </Card>
+    )
+}
 
 const tabsData = [
     { title: 'All Documents', count: 4 },

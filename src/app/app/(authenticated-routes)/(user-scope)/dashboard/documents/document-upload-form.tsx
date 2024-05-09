@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { api } from "~/trpc/react";
 import { Button } from "~/components/ui/button";
 
-export default function DocumentUploadForm({ setOpenModal }) {
+export default function DocumentUploadForm({ setFileUploaded }: any) {
     const [loading, setLoading] = useState(false);
     const schema = z.object({
         documents: z.array(z.instanceof(File)),
@@ -46,13 +46,12 @@ export default function DocumentUploadForm({ setOpenModal }) {
                 document: res[0]?.url!,
             });
             form.reset();
-            setOpenModal(false);
+            setFileUploaded(true)
         }
         if (res?.length === 0) {
             toast.error("Something went wrong during upload");
         }
-        setLoading(false);
-        setOpenModal(false);
+        setLoading(false);  
     }
 
     return (
