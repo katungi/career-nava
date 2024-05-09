@@ -52,7 +52,7 @@ export const SessionRouter = createTRPCRouter({
         },
         include: {
           mentor: true,
-        }
+        },
       })
       if (!sessions) throw new Error('No sessions found')
       return sessions

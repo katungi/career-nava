@@ -5,7 +5,7 @@ import SessionTabComponent from "./session-tab-component";
 
 const SessionContents = () => {
 
-    const {data: sessions} = api.mentorshipSessions.getBookingSessions.useQuery({
+    const {data: sessions, isLoading} = api.mentorshipSessions.getBookingSessions.useQuery({
         limit: 100, offset: 0
     })
 
@@ -14,7 +14,7 @@ const SessionContents = () => {
         <>
             <SessionTabComponent />
             <div className="mt-4">
-                <SessionSlider sessions={sessions} />
+                <SessionSlider sessions={sessions} loading={isLoading} />
             </div>
         </>
     )

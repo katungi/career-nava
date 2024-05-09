@@ -6,13 +6,9 @@ import { api } from "~/trpc/react"
 import { Loader } from "lucide-react"
 import { Button } from "~/components/ui/button"
 import Modal from "~/components/ui/modal"
-import { useCallback, useEffect, useState } from "react"
+import { useState } from "react"
 import BookingForm from "~/components/sections/session-booking-form"
-import { db } from "~/server/db"
 import { useStreamVideoClient } from "@stream-io/video-react-sdk"
-import { useSession } from "next-auth/react"
-import { toast } from "sonner"
-import { useWebSocket } from "next-ws/client"
 import { Card, CardContent } from "~/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar"
 import Link from "next/link"
@@ -68,10 +64,9 @@ export default function ViewUser() {
 
         try {
             const call = await createMeeting(FormData);
-            let meetLink = `${process.env.NEXT_PUBLIC_DEPLOYMENT_URL}/app/meeting/${call?.id}`;
 
-            if (meetLink !== '') {
-                FormData.meetingLink = meetLink;
+            if (call) {
+                FormData.meetingLink = `${process.env.NEXT_PUBLIC_DEPLOYMENT_URL}/app/meeting/${call?.id}`;;
                 FormData.mentorId = data?.id;
                 FormData.menteeId = '';
                 pay.mutate({
