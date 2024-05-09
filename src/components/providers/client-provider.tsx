@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react"
 import React, { useEffect, useState } from "react"
 import { nanoid } from "nanoid"
 import { getToken } from "~/app/app/actions"
+import { useRouter } from "next/navigation"
 
 interface clientProviderProps {
     children: React.ReactNode
@@ -29,13 +30,16 @@ export default function ClientProvider({ children }: clientProviderProps) {
 }
 
 function useInitializeVideoClient() {
+    const router = useRouter()
     const { data: session, status } = useSession()
-    const userLoaded = status === "authenticated" && session?.user   
+    const userLoaded = status === "authenticated" && session?.user
     const user = session?.user
     const [videClient, setVideoClient] = useState<StreamVideoClient | null>(null)
 
     useEffect(() => {
-        if (!userLoaded) return
+        if (!userLoaded) {
+            router.push("/app/login")
+        }
         let streamUser: User;
         if (user?.id) {
             streamUser = {
