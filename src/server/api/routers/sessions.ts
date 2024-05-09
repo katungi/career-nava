@@ -53,6 +53,9 @@ export const SessionRouter = createTRPCRouter({
         include: {
           mentor: true,
         },
+        orderBy: {
+          createdAt: 'desc', 
+        }
       })
       if (!sessions) throw new Error('No sessions found')
       return sessions
@@ -70,6 +73,9 @@ export const SessionRouter = createTRPCRouter({
         },
         include: {
           mentor: true,
+        },
+        orderBy: {
+          createdAt: 'desc', 
         }
       })
       if (!sessions) throw new Error('No sessions found')
@@ -94,6 +100,9 @@ export const SessionRouter = createTRPCRouter({
         include: {
           menteeSessions: true,
         },
+        orderBy: {
+          createdAt: 'desc', 
+        }
       })
       if (!mentees) throw new Error('No mentees found')
       return mentees
