@@ -48,6 +48,7 @@ const Onboarding = () => {
     //@ts-ignore
     const values = selectedScholarships.map(scholarship => scholarship.value);
     updateUserMutation.mutate({
+      bio,
       scholarshipAffiliations: values
     })
     toast.success("All done with onboarding! Redirecting to dashboard...");

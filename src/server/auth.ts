@@ -41,6 +41,7 @@ export function authOptions(): NextAuthOptions {
   const options: NextAuthOptions = {
     callbacks: {
       session: async ({ session, user }) => {
+        //@ts-ignore
         const dbUser = await db.user.findUnique({
           where: {
             id: user.id,
@@ -53,6 +54,8 @@ export function authOptions(): NextAuthOptions {
             id: user.id,
             planId: dbUser?.planId ?? null,
             role: dbUser?.role ?? "MENTEE",
+            bio: dbUser?.Bio ?? "",
+            scholarshipAffiliation: dbUser?.scholarshipAffiliations ?? [],
           },
         };
       },
