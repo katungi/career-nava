@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronRight, Loader2 } from "lucide-react";
+import { ChevronRight, Loader, Loader2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -67,7 +67,7 @@ const Onboarding = () => {
           className="mx-auto w-fit"
         >
           {updateUserMutation.isPending ? (
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            <Loader className="mr-2 h-4 w-4 animate-spin" />
           ) : (
             <ChevronRight className="mr-2 h-4 w-4" />
           )}

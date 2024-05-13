@@ -62,6 +62,9 @@ model User {
     Transactions MpesaTransaction[]
     Documents    Documents[]
 
+    Bio                     String?  @db.Text
+    scholarshipAffiliations String[] @default([])
+
     createdAt       DateTime          @default(now())
     updatedAt       DateTime          @default(now()) @updatedAt
     oneTimePurchase OneTimePurchase[]
