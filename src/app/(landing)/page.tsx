@@ -49,8 +49,10 @@ export default async function Home() {
                 <span className="text-white text-6xl font-bold">Scholarships</span>
                 <span className="text-white text-6xl font-bold"> Smatter</span>
               </div>
-              <Button variant={"secondary"} size={"lg"} className="w-[360px] h-[70px] my-2">
-                <span className="text-black text-2xl">Get Your Career Score Today</span>
+              <Button variant={"secondary"} size={"lg"} className="w-[360px] h-[70px] my-2"
+              onClick={() => router.push("/app/login")}
+              >
+                <span className="text-black text-2xl">Book a session Now!</span>
               </Button>
               <div className="self-stretch text-center text-white text-3xl">
                 Looking to advance your education? Our scholarship guidance significantly increases your chance of success.
@@ -111,24 +113,6 @@ export default async function Home() {
                 </div>
               </div>
             </div>
-{/* 
-            <div className="text-center mt-32 bg-primary h-full p-8">
-              <span className="text-secondary text-6xl font-bold mt-4">
-                Get your assessment score today
-              </span>
-              <div className="self-stretch text-center text-white text-lg mt-4">
-                With CareerNava’s assessment score there’s nowhere you’ll go wrong
-              </div>
-
-              <div className="flex flex-row px-96 mt-20 ml-44 mb-12">
-                <Button variant={"secondary"} size={"lg"} className="w-[360px] h-[70px] my-2">
-                  <span className="text-black text-2xl">Get Assessment Score</span>
-                </Button>
-                <Button variant={"default"} size={"lg"} className="w-[360px] h-[70px] my-2">
-                  <span className="text-white text-2xl">Get Assessment Score</span>
-                </Button>
-              </div>
-            </div> */}
           </div>
           <div className="p-8 flex flex-row mt-32">
             <Image src={"/images/imgpeople.png"} width={800} height={800} alt="CTA 1" className="ml-4" />
@@ -169,8 +153,8 @@ export default async function Home() {
                 </Button>
               </Link>
               <Button variant={"secondary"} size={"lg"} className="w-[360px] h-[70px] my-2" onClick={() =>
-                  router.push("/app/login")
-                }>
+                router.push("/app/login")
+              }>
                 <span className="text-black text-2xl">Log In</span>
               </Button>
             </div>
