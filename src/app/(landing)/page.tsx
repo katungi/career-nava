@@ -1,10 +1,6 @@
 "use client"
 import { useRouter } from "next/navigation";
 import { Button } from "~/components/ui/button";
-import { Link } from "next-view-transitions";
-import { ClockIcon, GraduationCap, PuzzleIcon } from "lucide-react";
-import Image from "next/image";
-import PricingSection from "~/components/sections/pricing";
 import Footer from "~/components/patterns/footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card";
 import { SiCheckmarx } from "@icons-pack/react-simple-icons";
@@ -48,8 +44,7 @@ export default async function HomeNew() {
               </p>
               <div className="flex gap-4">
                 <Button className="text-white hover:bg-primary/20 w-48" variant="default"
-                  onClick={() => router.push("/app/dashboard")}
-                >
+                  onClick={() => router.push("/app/dashboard")}>
                   Book Session Now
                 </Button>
               </div>
@@ -309,7 +304,7 @@ export default async function HomeNew() {
               </p>
               <div className="flex items-center gap-4">
                 <Avatar>
-                  <AvatarImage alt="Founder Avatar" src="/founder-avatar.png" />
+                  <AvatarImage alt="Founder Avatar" src="/lameck.png" />
                   <AvatarFallback>JD</AvatarFallback>
                 </Avatar>
                 <div>
@@ -325,7 +320,6 @@ export default async function HomeNew() {
     </main>
   )
 }
-
 
 function AccessibilityIcon(props: any) {
   return (
@@ -350,7 +344,6 @@ function AccessibilityIcon(props: any) {
   )
 }
 
-
 function CreativeCommonsIcon(props: any) {
   return (
     <svg
@@ -371,7 +364,6 @@ function CreativeCommonsIcon(props: any) {
     </svg>
   )
 }
-
 
 function MilestoneIcon(props: any) {
   return (
