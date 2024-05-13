@@ -47,10 +47,9 @@ export default async function HomeNew() {
                 Discover and apply for scholarships tailored to your unique background and aspirations.
               </p>
               <div className="flex gap-4">
-                <Button className="bg-white text-primary hover:bg-gray-200" variant="default">
-                  Get Started
-                </Button>
-                <Button className="text-white hover:bg-white/20" variant="outline">
+                <Button className="text-white hover:bg-primary/20 w-48" variant="default"
+                  onClick={() => router.push("/app/dashboard")}
+                >
                   Book Session Now
                 </Button>
               </div>
@@ -62,7 +61,7 @@ export default async function HomeNew() {
                 height={400}
                 src="/images/person-1.png"
                 style={{
-                  aspectRatio: "500/400",
+                  aspectRatio: "300/300",
                   objectFit: "cover",
                 }}
                 width={500}
