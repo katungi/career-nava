@@ -74,8 +74,8 @@ export const MentorBioCard = ({ mentor, setStep }: any) => {
                 </div>
                 <div className="px-8 flex flex-col justify-between">
                     <h3 className="text-xl font-bold leading-none text-gray-900 dark:text-white">{mentor?.name}</h3>
-                    <p className="text-gray-500 dark:text-gray-400">{mentor?.description
-                        || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Donec ut sem sed metus elementum ultrices.'
+                    <p className="text-gray-500 dark:text-gray-400">{mentor?.Bio
+                        || 'No Bio'
                     }</p>
                 </div>
             </div>
