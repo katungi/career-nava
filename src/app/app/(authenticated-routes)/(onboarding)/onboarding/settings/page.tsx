@@ -51,7 +51,7 @@ const Onboarding = () => {
       scholarshipAffiliations: values
     })
     toast.success("All done with onboarding! Redirecting to dashboard...");
-    // await router.push("/app/dashboard/?loginState=signedIn");
+    await router.push("/app/dashboard/?loginState=signedIn");
   }
 
 
