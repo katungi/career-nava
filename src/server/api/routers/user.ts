@@ -9,9 +9,9 @@ export const userRouter = createTRPCRouter({
       z.object({
         image: z.string().optional(), role: z.enum(
           [Role.MENTOR, Role.USER]
-        ).optional(), 
-        bio: z.string().optional(), 
-        scholarshipAffiliations: z.array(z.string()).optional()
+        ).optional(),
+        Bio: z.string().optional(),
+        scholarshipAffiliation: z.array(z.string()).optional()
       }),
     )
     .mutation(async ({ input, ctx }) => {
@@ -19,7 +19,7 @@ export const userRouter = createTRPCRouter({
 
       const updatedUser = await ctx.db.user.update({
         where: {
-          id: user?.id,   
+          id: user?.id,
         },
         data: {
           ...input,
