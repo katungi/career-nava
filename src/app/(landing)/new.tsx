@@ -1,42 +1,16 @@
-"use client"
-import { useRouter } from "next/navigation";
-import { Button } from "~/components/ui/button";
-import { Link } from "next-view-transitions";
-import { ClockIcon, GraduationCap, PuzzleIcon } from "lucide-react";
-import Image from "next/image";
-import PricingSection from "~/components/sections/pricing";
-import Footer from "~/components/patterns/footer";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card";
-import { SiCheckmarx } from "@icons-pack/react-simple-icons";
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+/**
+ * v0 by Vercel.
+ * @see https://v0.dev/t/JJcGxUoLlTs
+ * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
+ */
+import { Button } from "@/components/ui/button"
+import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar"
+import { CardTitle, CardDescription, CardHeader, CardContent, Card } from "@/components/ui/card"
 
-const Logos = () => {
-  return (
-    <>
-      <li>
-        <img src="/images/chevening-sc.png" alt="Google" className="h-44 w-44  p-2 text-primary" />
-      </li>
-      <li>
-        <img src="/images/mastercard-foundation-sc.png" alt="Google" className="h-32  p-2 text-primary" />
-      </li>
-      <li>
-        <img src="/images/mext-scholarship-sc.png" alt="Google" className="h-32  p-2 text-primary" />
-      </li>
-      <li>
-        <img src="/images/mwf-stacked-rgb.png" alt="Google" className="h-32  p-2 text-primary" />
-      </li>
-      <li>
-        <img src="/images/Yoast-social-logo.png" alt="Google" className="h-52 w-64  p-2 text-primary" />
-      </li>
-    </>
-  );
-};
-
-export default async function HomeNew() {
-  const router = useRouter();
+export default function Component() {
   return (
     <main className="flex flex-col">
-      <section className="bg-gradient-to-r from-[#6366F1] to-primary py-20 md:py-32">
+      <section className="bg-gradient-to-r from-[#6366F1] to-[#9333EA] py-20 md:py-32">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="space-y-6">
@@ -47,11 +21,11 @@ export default async function HomeNew() {
                 Discover and apply for scholarships tailored to your unique background and aspirations.
               </p>
               <div className="flex gap-4">
-                <Button className="bg-white text-primary hover:bg-gray-200" variant="default">
+                <Button className="bg-white text-[#6366F1] hover:bg-gray-200" variant="solid">
                   Get Started
                 </Button>
                 <Button className="text-white hover:bg-white/20" variant="outline">
-                  Book Session Now
+                  Learn More
                 </Button>
               </div>
             </div>
@@ -60,7 +34,7 @@ export default async function HomeNew() {
                 alt="Banner Image"
                 className="w-full max-w-md"
                 height={400}
-                src="/images/person-1.png"
+                src="/placeholder.svg"
                 style={{
                   aspectRatio: "500/400",
                   objectFit: "cover",
@@ -72,16 +46,63 @@ export default async function HomeNew() {
         </div>
       </section>
       <section className="py-12 md:py-20">
-        <div className="rounded-t-7xl bg-white h-full pt-8">
-          <div className="mx-auto max-w-7xl">
-            <div className="mx-auto mt-4 inline-flex w-full flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)]">
-              <ul className="flex animate-infinite-scroll items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-8">
-                <Logos />
-              </ul>
-              <ul className="flex animate-infinite-scroll items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-8" aria-hidden="true">
-                <Logos />
-              </ul>
-            </div>
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 items-center">
+            <img
+              alt="Microsoft Logo"
+              className="w-full max-w-[120px] mx-auto"
+              height={40}
+              src="/placeholder.svg"
+              style={{
+                aspectRatio: "120/40",
+                objectFit: "cover",
+              }}
+              width={120}
+            />
+            <img
+              alt="Google Logo"
+              className="w-full max-w-[120px] mx-auto"
+              height={40}
+              src="/placeholder.svg"
+              style={{
+                aspectRatio: "120/40",
+                objectFit: "cover",
+              }}
+              width={120}
+            />
+            <img
+              alt="Amazon Logo"
+              className="w-full max-w-[120px] mx-auto"
+              height={40}
+              src="/placeholder.svg"
+              style={{
+                aspectRatio: "120/40",
+                objectFit: "cover",
+              }}
+              width={120}
+            />
+            <img
+              alt="Apple Logo"
+              className="w-full max-w-[120px] mx-auto"
+              height={40}
+              src="/placeholder.svg"
+              style={{
+                aspectRatio: "120/40",
+                objectFit: "cover",
+              }}
+              width={120}
+            />
+            <img
+              alt="Meta Logo"
+              className="w-full max-w-[120px] mx-auto"
+              height={40}
+              src="/placeholder.svg"
+              style={{
+                aspectRatio: "120/40",
+                objectFit: "cover",
+              }}
+              width={120}
+            />
           </div>
         </div>
       </section>
@@ -89,21 +110,21 @@ export default async function HomeNew() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="space-y-4">
-              <AccessibilityIcon className="h-12 w-12 text-primary" />
+              <AccessibilityIcon className="h-12 w-12 text-[#6366F1]" />
               <h3 className="text-2xl font-bold">Compatibility</h3>
               <p className="text-gray-600">
                 We match students with scholarships that align with their unique backgrounds, interests, and goals.
               </p>
             </div>
             <div className="space-y-4">
-              <CreativeCommonsIcon className="h-12 w-12 text-primary" />
+              <CreativeCommonsIcon className="h-12 w-12 text-[#6366F1]" />
               <h3 className="text-2xl font-bold">Creativity</h3>
               <p className="text-gray-600">
                 Our platform encourages creative thinking and problem-solving to help students stand out.
               </p>
             </div>
             <div className="space-y-4">
-              <MilestoneIcon className="h-12 w-12 text-primary" />
+              <MilestoneIcon className="h-12 w-12 text-[#6366F1]" />
               <h3 className="text-2xl font-bold">Qualified Mentors</h3>
               <p className="text-gray-600">
                 Our team of experienced mentors provides personalized guidance throughout the scholarship process.
@@ -112,7 +133,7 @@ export default async function HomeNew() {
           </div>
         </div>
       </section>
-      {/* <section className="py-12 md:py-20">
+      <section className="py-12 md:py-20">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="space-y-4">
@@ -168,8 +189,8 @@ export default async function HomeNew() {
             </div>
           </div>
         </div>
-      </section> */}
-      {/* <section className="bg-gray-100 py-12 md:py-20">
+      </section>
+      <section className="bg-gray-100 py-12 md:py-20">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="flex justify-center">
@@ -205,7 +226,7 @@ export default async function HomeNew() {
             </div>
           </div>
         </div>
-      </section> */}
+      </section>
       <section className="py-12 md:py-20">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center space-y-6">
@@ -219,65 +240,47 @@ export default async function HomeNew() {
                 <CardDescription>Get started for free</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="text-4xl font-bold">Free</div>
-                <div className="space-y-2 text-gray-600">
-                  <p className="flex flex-row">
-                    <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> Unlimited scholarship opportunities
-                  </p>
-                  <p className="flex flex-row">
-                    <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> Readiness Assessment
-                  </p>
-                  <p className="flex flex-row">
-                    <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> Limited Application Resources
-                  </p>
-                </div>
-                <Button className="bg-primary text-white hover:bg-primary" variant="solid">
+                <div className="text-4xl font-bold">$0</div>
+                <ul className="space-y-2 text-gray-600">
+                  <li>Access to scholarship database</li>
+                  <li>Basic application assistance</li>
+                  <li>Limited mentor sessions</li>
+                </ul>
+                <Button className="bg-[#6366F1] text-white hover:bg-[#4F46E5]" variant="solid">
                   Get Started
                 </Button>
               </CardContent>
             </Card>
             <Card className="bg-white shadow-lg">
               <CardHeader>
-                <CardTitle>Basic</CardTitle>
+                <CardTitle>Premium</CardTitle>
                 <CardDescription>Unlock your full potential</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="text-4xl font-bold">$19/mo</div>
-                <div className="space-y-2 text-gray-600">
-                  <p className="flex flex-row">
-                    <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> 5 guidance sessions - 45 min each
-                  </p>
-                  <p className="flex flex-row">
-                    <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> Individual/group sessions
-                  </p>
-                  <p className="flex flex-row">
-                    <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> Complete within 3 weeks
-                  </p>
-                </div>
-                <Button className="bg-primary text-white hover:bg-primary" variant="solid">
+                <ul className="space-y-2 text-gray-600">
+                  <li>Personalized mentor sessions</li>
+                  <li>Advanced scholarship matching</li>
+                  <li>Essay writing assistance</li>
+                </ul>
+                <Button className="bg-[#6366F1] text-white hover:bg-[#4F46E5]" variant="solid">
                   Get Started
                 </Button>
               </CardContent>
             </Card>
             <Card className="bg-white shadow-lg">
               <CardHeader>
-                <CardTitle>End to End</CardTitle>
+                <CardTitle>Enterprise</CardTitle>
                 <CardDescription>Custom solutions for organizations</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="text-4xl font-bold">Contact Us</div>
-                <div className="space-y-2 text-gray-600">
-                  <p className="flex flex-row">
-                    <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> 5 Guided sessions - unlimited
-                  </p>
-                  <p className="flex flex-row">
-                    <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> document creation & reviews
-                  </p>
-                  <p className="flex flex-row">
-                    <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> Interview preparation
-                  </p>
-                </div>
-                <Button className="bg-primary text-white hover:bg-[#4F46E5]" variant="solid">
+                <ul className="space-y-2 text-gray-600">
+                  <li>Dedicated account manager</li>
+                  <li>Customized scholarship programs</li>
+                  <li>Comprehensive reporting</li>
+                </ul>
+                <Button className="bg-[#6366F1] text-white hover:bg-[#4F46E5]" variant="solid">
                   Contact Us
                 </Button>
               </CardContent>
@@ -314,21 +317,19 @@ export default async function HomeNew() {
                   <AvatarFallback>JD</AvatarFallback>
                 </Avatar>
                 <div>
-                  <h4 className="text-lg font-semibold">Lameck Owesi</h4>
-                  <p className="text-gray-600">Co-Founder, CareerNava</p>
+                  <h4 className="text-lg font-semibold">Jada Daniels</h4>
+                  <p className="text-gray-600">Founder, CareerNava</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-      <Footer />
     </main>
   )
 }
 
-
-function AccessibilityIcon(props: any) {
+function AccessibilityIcon(props) {
   return (
     <svg
       {...props}
@@ -352,7 +353,7 @@ function AccessibilityIcon(props: any) {
 }
 
 
-function CreativeCommonsIcon(props: any) {
+function CreativeCommonsIcon(props) {
   return (
     <svg
       {...props}
@@ -374,7 +375,7 @@ function CreativeCommonsIcon(props: any) {
 }
 
 
-function MilestoneIcon(props: any) {
+function MilestoneIcon(props) {
   return (
     <svg
       {...props}
