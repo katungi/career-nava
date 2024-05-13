@@ -40,7 +40,6 @@ const Onboarding = () => {
   const animatedComponents = makeAnimated();
 
   function handleSelectScholarships(e: any) {
-    console.log(e)
     setSelectedScholarships(e)
   }
 
@@ -49,7 +48,7 @@ const Onboarding = () => {
     const values = selectedScholarships.map(scholarship => scholarship.value);
     updateUserMutation.mutate({
       Bio: bio,
-      scholarshipAffiliation: values
+      scholarshipAffiliations: values
     })
     toast.success("All done with onboarding! Redirecting to dashboard...");
     // await router.push("/app/dashboard/?loginState=signedIn");

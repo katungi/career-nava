@@ -55,7 +55,7 @@ export function authOptions(): NextAuthOptions {
             planId: dbUser?.planId ?? null,
             role: dbUser?.role ?? "MENTEE",
             bio: dbUser?.Bio ?? "",
-            scholarshipAffiliation: dbUser?.scholarshipAffiliations ?? [],
+            scholarshipAffiliations: dbUser?.scholarshipAffiliations ?? [],
           },
         };
       },
