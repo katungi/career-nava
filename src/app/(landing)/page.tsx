@@ -32,7 +32,7 @@ export default async function HomeNew() {
   const router = useRouter();
   return (
     <main className="flex flex-col">
-      <section className="bg-gradient-to-r from-[#6366F1] to-primary py-20 md:py-32">
+      <section className="bg-gradient-to-r from-[#8046b3] to-primary py-20 md:py-32">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="space-y-6">
@@ -43,7 +43,7 @@ export default async function HomeNew() {
                 Discover and apply for scholarships tailored to your unique background and aspirations.
               </p>
               <div className="flex gap-4">
-                <Button className="text-white hover:bg-primary/20 w-48" variant="default"
+                <Button className="text-white hover:bg-primary/20 w-48 h-24 rounded-full" variant="default"
                   onClick={() => router.push("/app/dashboard")}>
                   Book Session Now
                 </Button>
@@ -287,7 +287,7 @@ export default async function HomeNew() {
                 alt="Founder Image"
                 className="w-full max-w-md rounded-lg"
                 height={500}
-                src="/placeholder.svg"
+                src="/images/lameck.png"
                 style={{
                   aspectRatio: "400/500",
                   objectFit: "cover",
@@ -304,7 +304,7 @@ export default async function HomeNew() {
               </p>
               <div className="flex items-center gap-4">
                 <Avatar>
-                  <AvatarImage alt="Founder Avatar" src="/lameck.png" />
+                  <AvatarImage alt="Founder Avatar" src="/images/lameck.png" />
                   <AvatarFallback>JD</AvatarFallback>
                 </Avatar>
                 <div>
