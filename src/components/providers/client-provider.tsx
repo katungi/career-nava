@@ -62,10 +62,7 @@ function useInitializeVideoClient() {
             user: streamUser,
             tokenProvider: user?.id ? getToken : undefined
         });
-
-        console.log(".......................Client initialized.....................")
-        console.log(client)
-        console.log(".......................Client initialized End.....................")
+        
         setVideoClient(client);
 
         return () => {

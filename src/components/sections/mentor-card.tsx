@@ -81,13 +81,13 @@ export const MentorBioCard = ({ mentor, setStep }: any) => {
             </div>
             <div className="pt-4 pb-2 px-4 py-8">
                 <span className="text-gray-500 dark:text-gray-300">Current Mentees: {mentor?.currentMentees}</span>
-                <div className="flex mt-1">
+                {/* <div className="flex mt-1">
                     {mentor?.scholarshipAffiliation.map((skill: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined, index: Key | null | undefined) => (
                         <span key={index} className="text-xs font-semibold inline-block py-1 px-2.5 uppercase rounded-full text-purple-600 bg-purple-200 last:mr-0 mr-1">
                             {skill}
                         </span>
                     ))}
-                </div>
+                </div> */}
             </div>
         </div>
     );
