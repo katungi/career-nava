@@ -7,7 +7,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 export const MentorProfileCard = ({ mentor, selectMentor, setStep }: any) => {
     const router = useRouter();
     function selectMentorHandler() {
-        console.log("Selected Mentor::::", mentor)
         toast.success(`You have selected ${mentor.name} as your mentor`);
         selectMentor(mentor);
         setStep('view-profile');
@@ -53,19 +52,6 @@ export const MentorProfileCard = ({ mentor, selectMentor, setStep }: any) => {
 
 
 export const MentorBioCard = ({ mentor, setStep }: any) => {
-    // mentor.awards = [
-    //     'Mastercard Scholarship',
-    //     'Google Scholarship',
-    //     'Microsoft Scholarship'
-    // ]
-
-    // mentor.skills = [
-    //     'React',
-    //     'Node.js',
-    //     'Communication',
-    //     'Teamwork'
-    // ]
-
     return (
         <div className="max-w-7xl mx-auto p-6 bg-white rounded-lg">
             <div className="flex flex-col md:flex-row">

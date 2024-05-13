@@ -1,5 +1,3 @@
-"use client"
-
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
 
@@ -15,7 +13,7 @@ export default function LeftPage({ params: { id } }: PageProps) {
                 href={`/app/meeting/${id}`}
                 className="bg-gray-500 hover:bg-gray-600"
             >
-                <Button>Rejoin</Button>
+                <p>Rejoin</p>
             </Link>
         </div>
     );
