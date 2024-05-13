@@ -1,9 +1,9 @@
 import { Button } from "../ui/button"
-import {Link} from "next-view-transitions"
+import { Link } from "next-view-transitions"
 
 export default function Footer() {
     return (
-        <footer className="bg-primary text-white p-10 bottom-0 z-50">
+        <footer className="bg-gradient-to-r from-[#af63f1] to-primary text-white bottom-0 z-50">
             <img src="/images/graduants.svg" alt="Career Nava Logo" className="w-3/4 absolute object-cover ml-24 mt-12" />
             <div className="max-w-full mx-auto grid grid-cols-3 md:grid-cols-6 gap-10 z-10">
                 <div className="space-y-2 col-span-2">
@@ -63,7 +63,7 @@ export default function Footer() {
                         <PhoneIcon className="inline" /> +254 715 429 997
                     </p>
                 </div>
-      
+
             </div>
             <div className="text-center mt-10 border-t border-gray-800 pt-4">
                 <p>Copyright 2024</p>

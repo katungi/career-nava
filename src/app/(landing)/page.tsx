@@ -32,7 +32,7 @@ export default async function HomeNew() {
   const router = useRouter();
   return (
     <main className="flex flex-col">
-      <section className="bg-gradient-to-r from-[#8046b3] to-primary py-20 md:py-32">
+      <section className="bg-gradient-to-r from-[#af63f1] to-primary py-20 md:py-32">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="space-y-6">
@@ -106,100 +106,7 @@ export default async function HomeNew() {
           </div>
         </div>
       </section>
-      {/* <section className="py-12 md:py-20">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="space-y-4">
-              <img
-                alt="Mentor Sessions"
-                className="w-full rounded-lg"
-                height={200}
-                src="/placeholder.svg"
-                style={{
-                  aspectRatio: "300/200",
-                  objectFit: "cover",
-                }}
-                width={300}
-              />
-              <h3 className="text-2xl font-bold">Mentor Sessions</h3>
-              <p className="text-gray-600">
-                Connect with experienced mentors who can provide personalized guidance and support.
-              </p>
-            </div>
-            <div className="space-y-4">
-              <img
-                alt="Scholarship Network"
-                className="w-full rounded-lg"
-                height={200}
-                src="/placeholder.svg"
-                style={{
-                  aspectRatio: "300/200",
-                  objectFit: "cover",
-                }}
-                width={300}
-              />
-              <h3 className="text-2xl font-bold">Scholarship Network</h3>
-              <p className="text-gray-600">
-                Explore a vast database of scholarships and connect with organizations offering funding opportunities.
-              </p>
-            </div>
-            <div className="space-y-4">
-              <img
-                alt="Application Assistance"
-                className="w-full rounded-lg"
-                height={200}
-                src="/placeholder.svg"
-                style={{
-                  aspectRatio: "300/200",
-                  objectFit: "cover",
-                }}
-                width={300}
-              />
-              <h3 className="text-2xl font-bold">Application Assistance</h3>
-              <p className="text-gray-600">
-                Get expert guidance on crafting compelling scholarship applications and essays.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section> */}
-      {/* <section className="bg-gray-100 py-12 md:py-20">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div className="flex justify-center">
-              <img
-                alt="Testimonial Image"
-                className="w-full max-w-md rounded-lg"
-                height={500}
-                src="/placeholder.svg"
-                style={{
-                  aspectRatio: "400/500",
-                  objectFit: "cover",
-                }}
-                width={400}
-              />
-            </div>
-            <div className="space-y-6">
-              <h2 className="text-3xl md:text-4xl font-bold">"CareerNava Helped Me Unlock My Scholarship Potential"</h2>
-              <p className="text-gray-600 text-lg">
-                "I was struggling to find the right scholarships for my background and goals, but CareerNava's platform
-                and mentors made the process so much easier. I'm now able to focus on my studies with the financial
-                support I needed."
-              </p>
-              <div className="flex items-center gap-4">
-                <Avatar>
-                  <AvatarImage alt="Testimonial Avatar" src="/testimonial-avatar.png" />
-                  <AvatarFallback>JD</AvatarFallback>
-                </Avatar>
-                <div>
-                  <h4 className="text-lg font-semibold">Jada Daniels</h4>
-                  <p className="text-gray-600">College Student</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
+      
       <section className="py-12 md:py-20">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center space-y-6">
