@@ -231,7 +231,7 @@ export default async function HomeNew() {
                     <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> Limited Application Resources
                   </p>
                 </div>
-                <Button className="bg-primary text-white hover:bg-primary" variant="solid">
+                <Button className="bg-primary text-white hover:bg-primary" variant="default">
                   Get Started
                 </Button>
               </CardContent>
@@ -254,7 +254,7 @@ export default async function HomeNew() {
                     <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> Complete within 3 weeks
                   </p>
                 </div>
-                <Button className="bg-primary text-white hover:bg-primary" variant="solid">
+                <Button className="bg-primary text-white hover:bg-primary" variant="default">
                   Get Started
                 </Button>
               </CardContent>
@@ -277,7 +277,7 @@ export default async function HomeNew() {
                     <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> Interview preparation
                   </p>
                 </div>
-                <Button className="bg-primary text-white hover:bg-[#4F46E5]" variant="solid">
+                <Button className="bg-primary text-white hover:bg-[#4F46E5]" variant="default">
                   Contact Us
                 </Button>
               </CardContent>
