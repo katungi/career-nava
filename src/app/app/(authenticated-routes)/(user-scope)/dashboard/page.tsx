@@ -18,7 +18,7 @@ export default function Home() {
             {/* Banner */}
             <div className="flex flex-row gap-4">
                 <div className="flex-1">
-                    <DashboardBanner />
+                    <DashboardBanner sessions={sessions} documents={documents} />
                 </div>
             </div>
 

@@ -16,7 +16,7 @@ export default function MentorPage() {
         <div className="p-4 mx-12">
             <div className="flex flex-row gap-4">
                 <div className="flex-1">
-                    <DashboardBanner />
+                <DashboardBanner sessions={sessions} documents={documents} />
                 </div>
             </div>
             <div className="flex flex-row mt-20 w-full justify-between">
