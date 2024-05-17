@@ -5,6 +5,7 @@ import Footer from "~/components/patterns/footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card";
 import { SiCheckmarx } from "@icons-pack/react-simple-icons";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+import { ArrowRight } from "lucide-react";
 
 const Logos = () => {
   return (
@@ -43,9 +44,10 @@ export default async function HomeNew() {
                 Discover and apply for scholarships tailored to your unique background and aspirations.
               </p>
               <div className="flex gap-4">
-                <Button className="text-white hover:bg-primary/20 w-52 h-16 rounded-full" variant="default"
+                <Button className="text-white hover:bg-primary/20 w-[300px] h-16 rounded-full flex flex-row justify-between px-5" variant="default"
                   onClick={() => router.push("/app/dashboard")}>
-                  Book Session Now
+                  <p>Book Session Now</p>
+                  <ArrowRight className="h-6 w-6" />
                 </Button>
               </div>
             </div>

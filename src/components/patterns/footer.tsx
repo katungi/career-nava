@@ -3,15 +3,18 @@ import { Link } from "next-view-transitions"
 
 export default function Footer() {
     return (
-        <footer className="bg-gradient-to-r from-[#af63f1] p-10 to-primary text-white bottom-0 z-50">
-            <img src="/images/graduants.svg" alt="Career Nava Logo" className="w-3/4 absolute object-cover ml-24 mt-12" />
+        <footer className="bg-gradient-to-r from-[#af63f1] p-10 to-primary text-white bottom-0 z-50"
+        // style={{ backgroundImage: `url(${'/images/graduants.svg'})`, objectFit: 'cover' }}
+        >
+            {/* <img src="/images/graduants.svg" alt="Career Nava Logo" className="w-3/4 absolute object-cover ml-24 mt-12" /> */}
             <div className="max-w-full mx-auto grid grid-cols-3 md:grid-cols-6 gap-10 z-10">
                 <div className="space-y-2 col-span-2">
-                    <h2 className="text-3xl font-bold">Integrate, Align & Optimize your social value with us!</h2>
-                    <p className="mb-4">With CareerNava's science-backed platform, You can now</p>
-                    <Button variant={"default"} className="bg-secondary hover:bg-secondary text-black">Join Us Today</Button>
+                    <h2 className="text-3xl font-bold">
+                        Join the Future of Mentorship Today, <br /> with CareerNava
+                    </h2>
+                    <Button variant={"default"} className="bg-secondary hover:bg-secondary text-black">Book a session Now!</Button>
                 </div>
-                <div className="space-y-1">
+                {/* <div className="space-y-1">
                     <h3 className="font-semibold">For Mentees</h3>
                     <ul className="space-y-1">
                         <li>
@@ -38,7 +41,7 @@ export default function Footer() {
                             <Link href="#">Teams</Link>
                         </li>
                     </ul>
-                </div>
+                </div> */}
                 <div className="space-y-1 md:col-span-2">
                     <h3 className="font-semibold">For Company</h3>
                     <ul className="space-y-1">

@@ -80,6 +80,9 @@ export default function ViewUser() {
 
                 book.mutate(FormData);
 
+                const intervalId = setInterval(() => {
+                    console.log("Polling transaction")
+                }, 3000)
                 pay.mutate({
                     amount: "1",
                     phoneNumber: FormData.number,
@@ -88,6 +91,8 @@ export default function ViewUser() {
                 const pollTransaction = async () => {
                     try {
                         refetch();
+
+                        console.log("Payment status::", transaction?.paymentStatus)
                         if (transaction?.paymentStatus === 'SUCCESS') {
                             setLoadingText('Success');
                             setIsPending(false);
