@@ -12,6 +12,8 @@ import { useStreamVideoClient } from "@stream-io/video-react-sdk"
 import { Card, CardContent } from "~/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar"
 import Link from "next/link"
+import { db } from "~/server/db"
+import { getSession } from "next-auth/react"
 
 export default function ViewUser() {
     const pay = api.daraja.stkPush.useMutation();
@@ -23,6 +25,7 @@ export default function ViewUser() {
     const [loadingText, setLoadingText] = useState('Booking Session...')
     const client = useStreamVideoClient();
     const [done, setDone] = useState(false);
+    const [error, setError] = useState(null);
 
     async function createMeeting(formData: any) {
         if (!client) {
@@ -55,11 +58,12 @@ export default function ViewUser() {
     const handleFormSubmit = async (FormData: any) => {
         setIsPending(true);
         let messageIndex = 0;
+        const session = await getSession()
         const intervalId = setInterval(() => {
             //@ts-ignore
             setLoadingText(messages[messageIndex]);
             messageIndex = (messageIndex + 1) % messages.length;
-        }, 5000);
+        }, 6000);
 
         try {
             const call = await createMeeting(FormData);
@@ -73,6 +77,35 @@ export default function ViewUser() {
                     phoneNumber: FormData.number,
                     FormData: FormData,
                 });
+
+                // Polling function
+                const pollTransaction = async () => {
+                    try {
+                        const transaction = await db.bookingSession.findFirst({
+                            where: {
+                                menteeId: session?.user?.id,
+                                paymentStatus: "SUCCESS"
+                            },
+                            orderBy: {
+                                createdAt: 'desc',
+                            },
+                        })
+
+                        if (transaction) {
+                            clearInterval(pollingInterval);
+                            alert('Transaction successful!');
+                            setLoadingText('Success');
+                            setIsPending(false);
+                            setDone(true);
+                        }
+                    } catch (error) {
+                        console.error('Polling error:', error);
+                    }
+                };
+
+                // Set polling interval
+                const pollingInterval = setInterval(pollTransaction, 1000);
+
             } else {
                 alert("Failed to create meeting");
                 clearInterval(intervalId);

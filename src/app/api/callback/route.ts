@@ -1,6 +1,5 @@
 /* eslint-disable */ /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { NextResponse } from "next/server";
-import { WebSocket } from "ws";
 import { getServerAuthSession } from "~/server/auth";
 import { db } from "~/server/db";
 
@@ -46,15 +45,21 @@ export async function POST(req: Request) {
         amount: amount,
         mpesaCode: mpesaCode,
         phone: phone,
-        userId: sess?.user.id,
-        //@ts-ignore
+        userId: sess?.user.id!,
         bookingSessionId: bookingSession?.id!,
       }
     })
 
-    if (transactionSaved) {
-
-    }
+    // Update the booking session status
+    const session = await db.bookingSession.update({
+      where: {
+        id: bookingSession?.id
+      },
+      data: {
+        paymentStatus: "SUCCESS",
+        status: "upcoming"
+      }
+    })
 
     return new NextResponse("success", {
       status: 200,

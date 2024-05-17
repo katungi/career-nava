@@ -1,11 +1,12 @@
 "use client"
-import Lottie from "lottie-react";
-import EmptyLogo from "../../../public/empty-logo.json"
+// import Lottie from "lottie-react";
+// import EmptyLogo from "../../../public/empty-logo.json"
 
 export default function Empty() {
     return (
         <div className="flex justify-center align-middle">
-            <Lottie animationData={EmptyLogo} loop={true} />
+            {/* <Lottie animationData={EmptyLogo} loop={true} /> */}
+            <p>{"Not Found :-)"}</p>
         </div>
     )
 }

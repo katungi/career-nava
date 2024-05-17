@@ -36,7 +36,7 @@ export default function RootLayout({
           </Providers>
         </Suspense>
         <Toaster />
-        <TailwindIndicator />
+        {/* <TailwindIndicator /> */}
       </body>
     </html>
   );
