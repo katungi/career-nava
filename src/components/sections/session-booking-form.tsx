@@ -7,8 +7,9 @@ import { Label } from "~/components/ui/label";
 import { Textarea } from "~/components/ui/textarea";
 import { PhoneInput } from "../ui/phone-input";
 
-const BookingForm = ({ onSubmit }: any) => {
+const BookingForm = ({ onSubmit, title }: any) => {
     const [number, setNumber] = React.useState("");
+    
     const {
         register,
         handleSubmit,
@@ -19,19 +20,14 @@ const BookingForm = ({ onSubmit }: any) => {
         data.number = number.replace('+', '');
         onSubmit(data);
     };
-    
+
     return (
         <div className="max-w-md mx-auto p-4 space-y-4">
             <div className="space-y-2">
-                <h2 className="text-2xl font-bold">Book a Session</h2>
+                <h2 className="text-2xl font-bold">{title}</h2>
                 <p className="text-gray-500 dark:text-gray-400">Fill out the form to book your session.</p>
             </div>
             <form className="space-y-4" onSubmit={handleSubmit(handleFormSubmit)}>
-                <div className="space-y-1">
-                    <Label htmlFor="title">Title</Label>
-                    <Input id="title" placeholder="Enter a title" {...register('title', { required: true })} />
-                    {errors.title && <span className="text-red-500">Title is required</span>}
-                </div>
                 <div className="space-y-1">
                     <Label htmlFor="description">Description</Label>
                     <Textarea className="min-h-[100px]" id="description" placeholder="Enter a description" {...register('description')} />

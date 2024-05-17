@@ -12,6 +12,8 @@ export default function MentorPage() {
         limit: 100, offset: 0
     })
 
+    const { data: documents } = api.documents.getUserDocuments.useQuery();
+
     return (
         <div className="p-4 mx-12">
             <div className="flex flex-row gap-4">

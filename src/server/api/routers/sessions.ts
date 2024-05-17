@@ -54,7 +54,7 @@ export const SessionRouter = createTRPCRouter({
           mentor: true,
         },
         orderBy: {
-          createdAt: 'desc', 
+          createdAt: 'desc',
         }
       })
       if (!sessions) throw new Error('No sessions found')
@@ -75,7 +75,7 @@ export const SessionRouter = createTRPCRouter({
           mentor: true,
         },
         orderBy: {
-          createdAt: 'desc', 
+          createdAt: 'desc',
         }
       })
       if (!sessions) throw new Error('No sessions found')
@@ -101,10 +101,62 @@ export const SessionRouter = createTRPCRouter({
           menteeSessions: true,
         },
         orderBy: {
-          createdAt: 'desc', 
+          createdAt: 'desc',
         }
       })
       if (!mentees) throw new Error('No mentees found')
       return mentees
     }),
+
+  getLatestTransaction: publicProcedure
+    .query(async () => {
+      const sess = await getServerAuthSession()
+      const transaction = await db.bookingSession.findFirst({
+        where: {
+          menteeId: sess?.user?.id,
+        },
+        orderBy: {
+          createdAt: 'desc',
+        },
+      })
+      if (!transaction) throw new Error('No transaction found')
+      return transaction
+    }),
+  createBookingSesssion: publicProcedure
+    .input(
+      z.object({
+        number: z.string(),
+        title: z.string(),
+        description: z.string(),
+        startTime: z.string(),
+        endTime: z.string(),
+        mentorId: z.string(),
+        meetingLink: z.string(),
+      }))
+    .mutation(async ({ input }) => {
+      const session = await getServerAuthSession();
+      const booked  = db.bookingSession.create({
+        data: {
+          title: input.title,
+          description: input.description,
+          startTime: new Date(input.startTime),
+          endTime: new Date(input.endTime),
+          meetingLink: input.meetingLink,
+          paymentStatus: "PENDING",
+          status: "PENDING",
+          mentor: {
+            connect: {
+              id: input.mentorId,
+            },
+          },
+          mentee: {
+            connect: {
+              id: session?.user.id,
+            },
+          }
+        }
+      })
+      console.log(booked, "booked in server")
+      return booked
+    })
 })

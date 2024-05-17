@@ -21,23 +21,13 @@ export const MentorProfileCard = ({ mentor, selectMentor, setStep }: any) => {
                         <AvatarImage alt="Mentee" src={mentor.image} />
                         <AvatarFallback>{mentor.name.split(' ').map((n: any) => n[0]).join('')}</AvatarFallback>
                     </Avatar>
-                    {/* {
-                        mentor.image ? (
-                            <img className="w-32 h-32 rounded-full" src={mentor.image} alt={mentor.name} />
-                        ) : (
-                            <Avatar className="w-32 h-32 bg-secondary" >
-                               <p className="text-gray-800">{mentor.name.split(' ').map((n: any) => n[0]).join('')}</p>
-                            </Avatar>
-                        )
-                    } */}
                     <div className="font-bold text-xl my-2">{mentor.name}</div>
-                    <div className="mt-4 bg-purple-100 text-purple-700 text-xs uppercase font-semibold px-2 mx-8 py-1 inline-block rounded-full">
+                    <div className="mt-4 bg-purple-100 text-purple-700 text-xs uppercase font-semibold px-2 mx-8 py-1 inline-block rounded-2xl">
                         Mastercard Scholarship
                     </div>
                     <div className="text-primary text-sm mb-2">Google Scholarship</div>
-                    <button className="bg-secondary hover:bg-yellow-300 text-white font-bold py-2 px-4 rounded-full"
-                        onClick={selectMentorHandler}
-                    >
+                    <button className="bg-secondary hover:bg-yellow-300 text-white font-bold py-2 px-4 rounded-2xl"
+                        onClick={selectMentorHandler}>
                         View {mentor.name} Profile
                     </button>
                     <div className="text-gray-700 text-base mt-3">
@@ -48,7 +38,6 @@ export const MentorProfileCard = ({ mentor, selectMentor, setStep }: any) => {
         </div>
     );
 };
-
 
 
 export const MentorBioCard = ({ mentor, setStep }: any) => {

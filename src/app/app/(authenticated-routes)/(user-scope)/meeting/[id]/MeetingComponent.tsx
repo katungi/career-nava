@@ -64,7 +64,7 @@ function MeetingScreen() {
     const description = call.state.custom.description;
 
     return <div className="space-y-6">
-        <h1 className="text-2xl font-bold">Meeting</h1>
+        {/* <h1 className="text-2xl font-bold">Meeting</h1> */}
         {description && <p className="text-xl">{description}</p>}
         {setupComplete ? (
             <CallUI />
@@ -102,14 +102,17 @@ function SetupUI({ onSetupComplete }: SetupUIProps) {
     }
 
     return (
-        <div className="flex flex-col items-center gap-3">
-            <h1 className="text-center text-2xl font-bold">Setup</h1>
+        <div className="flex flex-col items-center gap-3 w-screen h-screen bg-center align-middle justify-center bg-primary"
+        //style={{ backgroundImage: `url(${'/images/transparent-bg.png'})`, objectFit: 'cover' }}
+        >
+            <h1 className="text-center text-5xl font-bold text-white">Setup Meeting ✨</h1>
+            <h1 className="text-center text-xl font-bold text-white">Ready to join?</h1>
             <VideoPreview />
             <div className="flex h-16 items-center gap-3">
                 <AudioVolumeIndicator />
                 <DeviceSettings />
             </div>
-            <label className="flex items-center gap-2 font-medium">
+            <label className="flex items-center gap-2 font-medium text-white">
                 <input
                     type="checkbox"
                     checked={micCamDisabled}
@@ -117,27 +120,27 @@ function SetupUI({ onSetupComplete }: SetupUIProps) {
                 />
                 Join with mic and camera off
             </label>
-            <Button onClick={onSetupComplete}>Join meeting</Button>
+            <Button onClick={onSetupComplete} variant={'secondary'} className="text-white">Join meeting</Button>
         </div>
     );
 }
 
 function CallUI() {
     const { useCallCallingState } = useCallStateHooks();
-  
+
     const callingState = useCallCallingState();
-  
+
     if (callingState !== CallingState.JOINED) {
-      return <Loader className="mx-auto animate-spin" />;
-    } 
-  
+        return <Loader className="mx-auto animate-spin" />;
+    }
+
     return <FlexibleCallLayout />;
-  }
-  
+}
+
 function UpcomingMeetingScreen() {
     const call = useStreamCall()
     return (
-        <div className="flex flex-col items-center justify-center h-screen">
+        <div className="flex flex-col items-center justify-center h-screen ">
             <p className="text-2xl">Meeting starts soon - {" "}
                 <span className="text-2xl">{call?.state?.startsAt?.toLocaleString()}</span>
             </p>

@@ -25,6 +25,7 @@ export default function FlexibleCallLayout() {
 
   return (
     <div className="space-y-3">
+      <h1 className="text-2xl font-bold text-white">Meeting</h1>
       <CallLayoutButtons layout={layout} setLayout={setLayout} />
       <CallLayoutView layout={layout} />
       <CallControls onLeave={() => router.push(`/meeting/${call.id}/left`)} />

@@ -1,7 +1,10 @@
 "use client"
 import { useParams } from "next/navigation"
 import { MentorBioCard } from "~/components/sections/mentor-card"
-import { BreadcrumbLink, BreadcrumbItem, BreadcrumbSeparator, BreadcrumbPage, BreadcrumbList, Breadcrumb } from "~/components/ui/breadcrumb"
+import {
+    BreadcrumbLink, BreadcrumbItem, BreadcrumbSeparator,
+    BreadcrumbPage, BreadcrumbList, Breadcrumb
+} from "~/components/ui/breadcrumb"
 import { api } from "~/trpc/react"
 import { Loader } from "lucide-react"
 import { Button } from "~/components/ui/button"
@@ -11,12 +14,12 @@ import BookingForm from "~/components/sections/session-booking-form"
 import { useStreamVideoClient } from "@stream-io/video-react-sdk"
 import { Card, CardContent } from "~/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar"
-import Link from "next/link"
-import { db } from "~/server/db"
-import { getSession } from "next-auth/react"
+import { Link } from "next-view-transitions"
 
 export default function ViewUser() {
     const pay = api.daraja.stkPush.useMutation();
+    const book = api.mentorshipSessions.createBookingSesssion.useMutation();
+    const { data: transaction, refetch } = api.mentorshipSessions.getLatestTransaction.useQuery();
     const [openModal, setOpenModal] = useState(false)
     const [isPending, setIsPending] = useState(false)
     const params = useParams()
@@ -25,7 +28,9 @@ export default function ViewUser() {
     const [loadingText, setLoadingText] = useState('Booking Session...')
     const client = useStreamVideoClient();
     const [done, setDone] = useState(false);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('')
+    const title = "Mentorship session with " + data?.name;
 
     async function createMeeting(formData: any) {
         if (!client) {
@@ -58,7 +63,6 @@ export default function ViewUser() {
     const handleFormSubmit = async (FormData: any) => {
         setIsPending(true);
         let messageIndex = 0;
-        const session = await getSession()
         const intervalId = setInterval(() => {
             //@ts-ignore
             setLoadingText(messages[messageIndex]);
@@ -69,36 +73,35 @@ export default function ViewUser() {
             const call = await createMeeting(FormData);
 
             if (call) {
+                FormData.title = title;
                 FormData.meetingLink = `${process.env.NEXT_PUBLIC_DEPLOYMENT_URL}/app/meeting/${call?.id}`;;
                 FormData.mentorId = data?.id;
                 FormData.menteeId = '';
+
+                book.mutate(FormData);
+
                 pay.mutate({
                     amount: "1",
                     phoneNumber: FormData.number,
-                    FormData: FormData,
                 });
-
                 // Polling function
                 const pollTransaction = async () => {
                     try {
-                        const transaction = await db.bookingSession.findFirst({
-                            where: {
-                                menteeId: session?.user?.id,
-                                paymentStatus: "SUCCESS"
-                            },
-                            orderBy: {
-                                createdAt: 'desc',
-                            },
-                        })
-
-                        if (transaction) {
-                            clearInterval(pollingInterval);
-                            alert('Transaction successful!');
+                        refetch();
+                        if (transaction?.paymentStatus === 'SUCCESS') {
                             setLoadingText('Success');
                             setIsPending(false);
                             setDone(true);
+                        } else if (transaction?.paymentStatus === 'CANCELLED') {
+
+                            setError(true);
+                            setErrorMessage('Transaction was cancelled by User');
+                            setLoadingText('Cancelled');
+                            setIsPending(false);
                         }
                     } catch (error) {
+                        setError(true);
+                        setErrorMessage('Failed to validate transaction');
                         console.error('Polling error:', error);
                     }
                 };
@@ -107,21 +110,24 @@ export default function ViewUser() {
                 const pollingInterval = setInterval(pollTransaction, 1000);
 
             } else {
+                setError(true);
+                setErrorMessage('Failed to create meeting');
                 alert("Failed to create meeting");
                 clearInterval(intervalId);
             }
         } catch (error) {
             console.error('Error:', error);
             alert("Failed to process the form");
+            setError(true);
+            setErrorMessage('Failed to process your information');
             clearInterval(intervalId);
         } finally {
-            setTimeout(() => {
-                console.log(FormData);
-                setIsPending(false);
-                clearInterval(intervalId);
-                setLoadingText('Finishing Up...');
-                setDone(true);
-            }, 20000);
+            // setTimeout(() => {
+            //     setIsPending(false);
+            //     clearInterval(intervalId);
+            //     setLoadingText('Finishing Up...');
+            //     setDone(true);
+            // }, 20000);
         }
     };
 
@@ -177,13 +183,38 @@ export default function ViewUser() {
                                     </div>
                                     <Link
                                         className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
-                                        href="/app/dashboard/sessions"
-                                    >
+                                        href="/app/dashboard/sessions">
                                         View Session
                                     </Link>
                                 </CardContent>
                             </Card>
-                            : <BookingForm onSubmit={handleFormSubmit} />
+                            : error ?
+                                <Card className="w-full">
+                                    <CardContent className="flex flex-col items-center gap-4 p-6">
+                                        <img
+                                            alt="Success"
+                                            className="rounded-lg"
+                                            height="300"
+                                            src="/images/timed-out-error.svg"
+                                            style={{
+                                                objectFit: "cover",
+                                            }}
+                                            width="300"
+                                        />
+                                        <div className="space-y-2 text-center">
+                                            <h3 className="text-2xl font-bold">Oops! Error Processing your request</h3>
+                                            <p className="text-gray-500 dark:text-gray-400">
+                                                {errorMessage}
+                                            </p>
+                                        </div>
+                                        <Link className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
+                                            href="/app/dashboard/sessions">
+                                            Close and Retry
+                                        </Link>
+                                    </CardContent>
+                                </Card>
+                                : <BookingForm onSubmit={handleFormSubmit} title={title} />
+
                     }
                 </Modal.Content>
             </Modal>

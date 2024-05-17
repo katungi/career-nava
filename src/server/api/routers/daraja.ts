@@ -62,23 +62,12 @@ export const mpesaPaymentRouter = createTRPCRouter({
   stkPush: publicProcedure
     .input(z.object({
       amount: z.string(),
-      phoneNumber: z.string(),
-      FormData: z.object({
-        number: z.string(),
-        title: z.string(),
-        description: z.string(),
-        startTime: z.string(),
-        endTime: z.string(),
-        mentorId: z.string(),
-        meetingLink: z.string(),
-      })
+      phoneNumber: z.string()
     }))
     .mutation(async ({ input }) => {
-      const session = await getServerAuthSession();
       const url = process.env.STKPUSHURL!;
       const passkey = process.env.PASSKEY!;
       const shortcode = process.env.SHORTCODE!;
-
       const timestamp = generateTimestamp();
       const stk_password = Buffer.from(
         `${shortcode}${passkey}${timestamp}`,
@@ -107,41 +96,13 @@ export const mpesaPaymentRouter = createTRPCRouter({
         body: JSON.stringify(requestBody),
       });
       if (!response.ok) {
-        console.log(response.statusText);
-        console.log(response.json());
-
         return Response.json("An error occurred", {
           status: response.status,
         });
       }
-      if (response.ok) {
-        const dbSession = await db.bookingSession.create({
-          data: {
-            title: input.FormData.title,
-            description: input.FormData.description,
-            startTime: new Date(input.FormData.startTime),
-            endTime: new Date(input.FormData.endTime),
-            meetingLink: input.FormData.meetingLink,
-            // mentorId: input.FormData.mentorId,
-            // menteeId: session?.user?.id!,
-            paymentStatus: "PENDING",
-            status: "PENDING",
-            mentor: {
-              connect: {
-                id: input.FormData.mentorId,
-              },
-            },
-            mentee: {
-              connect: {
-                id: session?.user.id,
-              },
-            }
-          }
-        })
+      return NextResponse.json("sucess", {
+        status: response.status,
+      });
 
-        return NextResponse.json("sucess", {
-          status: response.status,
-        });
-      }
     }),
 });

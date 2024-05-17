@@ -8,8 +8,30 @@ export async function POST(req: Request) {
     const sess = await getServerAuthSession()
     const body = await req.json();
 
+
+    // Get the booking session id from the db
+    const bookingSession = await db.bookingSession.findFirst({
+      where: {
+        menteeId: sess?.user.id,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    })
+
+    console.log(bookingSession?.id, "bookingSessionId Callback")
+
     const resultCode = body.Body.stkCallback.ResultCode;
     if (resultCode !== 0) {
+      await db.bookingSession.update({
+        where: {
+          id: bookingSession?.id
+        },
+        data: {
+          paymentStatus: "CANCELLED",
+          status: "cancelled"
+        }
+      })
       return new NextResponse("Request cancelled by the user", {
         status: 200,
       });
@@ -30,17 +52,9 @@ export async function POST(req: Request) {
     const phone = getPhoneNumber.Value;
     console.log(amount, mpesaCode, phone);
 
-    // Get the booking session id from the db
-    const bookingSession = await db.bookingSession.findFirst({
-      where: {
-        menteeId: sess?.user.id,
-      },
-      orderBy: {
-        createdAt: 'desc',
-      },
-    })
+
     // create a transaction record in the db
-    const transactionSaved = await db.mpesaTransaction.create({
+    await db.mpesaTransaction.create({
       data: {
         amount: amount,
         mpesaCode: mpesaCode,
@@ -51,7 +65,7 @@ export async function POST(req: Request) {
     })
 
     // Update the booking session status
-    const session = await db.bookingSession.update({
+    await db.bookingSession.update({
       where: {
         id: bookingSession?.id
       },
