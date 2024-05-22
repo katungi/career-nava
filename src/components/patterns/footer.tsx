@@ -3,72 +3,53 @@ import { Link } from "next-view-transitions"
 
 export default function Footer() {
     return (
-        <footer className="bg-gradient-to-r from-[#af63f1] p-10 to-primary text-white bottom-0 z-50"
-        // style={{ backgroundImage: `url(${'/images/graduants.svg'})`, objectFit: 'cover' }}
-        >
-            {/* <img src="/images/graduants.svg" alt="Career Nava Logo" className="w-3/4 absolute object-cover ml-24 mt-12" /> */}
-            <div className="max-w-full mx-auto grid grid-cols-3 md:grid-cols-6 gap-10 z-10">
-                <div className="space-y-2 col-span-2">
+        <footer className="relative bg-gradient-to-r from-[#af63f1] p-10 to-primary text-white bottom-0 z-50">
+            <div
+                className="absolute inset-0 w-full h-full mx-4"
+                style={{
+                    backgroundImage: 'url(/images/graduants.svg)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    zIndex: 0,
+                }}
+            ></div>
+            <div className="relative max-w-full mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 z-10">
+                <div className="space-y-2 col-span-1 md:col-span-1">
                     <h2 className="text-3xl font-bold">
                         Join the Future of Mentorship Today, <br /> with CareerNava
                     </h2>
                     <Button variant={"default"} className="bg-secondary hover:bg-secondary text-black">Book a session Now!</Button>
                 </div>
-                {/* <div className="space-y-1">
-                    <h3 className="font-semibold">For Mentees</h3>
-                    <ul className="space-y-1">
-                        <li>
-                            <Link href="#">About Us</Link>
-                        </li>
-                        <li>
-                            <Link href="#">Services</Link>
-                        </li>
-                        <li>
-                            <Link href="#">Teams</Link>
-                        </li>
-                    </ul>
+                <div className="space-y-1 col-span-1 md:col-span-2">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <div>
+                            <h3 className="font-semibold">For Company</h3>
+                            <ul className="space-y-1">
+                                <li>
+                                    <Link href="#">Terms of Services</Link>
+                                </li>
+                                <li>
+                                    <Link href="#">Privacy Policy</Link>
+                                </li>
+                                <li>
+                                    <Link href="#">Documentation</Link>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 className="font-semibold">Location</h3>
+                            <p>Karen Village, Nairobi (Kenya)</p>
+                            <p>
+                                <MailboxIcon className="inline" /> career.nava.app@gmail.com
+                            </p>
+                            <p>
+                                <PhoneIcon className="inline" /> +254 715 429 997
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div className="space-y-1">
-                    <h3 className="font-semibold">For Mentors</h3>
-                    <ul className="space-y-1">
-                        <li>
-                            <Link href="#">About Us</Link>
-                        </li>
-                        <li>
-                            <Link href="#">Services</Link>
-                        </li>
-                        <li>
-                            <Link href="#">Teams</Link>
-                        </li>
-                    </ul>
-                </div> */}
-                <div className="space-y-1 md:col-span-2">
-                    <h3 className="font-semibold">For Company</h3>
-                    <ul className="space-y-1">
-                        <li>
-                            <Link href="#">Terms of Services</Link>
-                        </li>
-                        <li>
-                            <Link href="#">Privacy Policy</Link>
-                        </li>
-                        <li>
-                            <Link href="#">Documentation</Link>
-                        </li>
-                    </ul>
-                </div>
-                <div className="space-y-1 md:col-start-4">
-                    <h3 className="font-semibold">Location</h3>
-                    <p>Karen Village, Nairobi (Kenya)</p>
-                    <p>
-                        <MailboxIcon className="inline" /> career.nava.app@gmail.com
-                    </p>
-                    <p>
-                        <PhoneIcon className="inline" /> +254 715 429 997
-                    </p>
-                </div>
-
             </div>
-            <div className="text-center mt-10 border-t border-gray-800 pt-4">
+            <div className="relative text-center mt-10 border-t border-primary pt-4 z-10">
                 <p>Copyright 2024</p>
             </div>
         </footer>

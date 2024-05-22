@@ -135,7 +135,7 @@ export const SessionRouter = createTRPCRouter({
       }))
     .mutation(async ({ input }) => {
       const session = await getServerAuthSession();
-      const booked  = db.bookingSession.create({
+      const booked = db.bookingSession.create({
         data: {
           title: input.title,
           description: input.description,

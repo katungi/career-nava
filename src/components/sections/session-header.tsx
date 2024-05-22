@@ -16,10 +16,9 @@ const SessionsHead = () => {
                 <p className="text-lg text-gray-900">Lorem ipsum dolor sit amet consectetur. Ultrices venenatis sit mi netus consectetur bibendum lacus eu parturient.</p>
                 {/* <MentorModal /> */}
                 <Button className="flex items-center bg-primary text-white font-bold py-2 px-4 rounded mt-8 hover:bg-primary-dark"
-                onClick={() => 
-                    router.push('/app//dashboard/sessions/new')
-                }
-                >
+                    onClick={() =>
+                        router.push('/app//dashboard/sessions/new')
+                    }>
                     <PlusIcon className="mr-2" /> Create New Sessions
                 </Button>
             </div>

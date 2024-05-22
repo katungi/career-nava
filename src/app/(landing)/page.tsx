@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/com
 import { SiCheckmarx } from "@icons-pack/react-simple-icons";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { ArrowRight } from "lucide-react";
+import FounderCarousel from "./founder-carousel";
 
 const Logos = () => {
   return (
@@ -33,9 +34,20 @@ export default async function HomeNew() {
   const router = useRouter();
   return (
     <main className="flex flex-col">
-      <section className="bg-gradient-to-r from-[#af63f1] to-primary py-20 md:py-32">
+      <section className="relative bg-gradient-to-r from-[#af63f1] to-primary py-20 md:py-32 border-none">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <img
+              alt="Banner Image"
+              className="w-full max-w-md"
+              height={700}
+              src="/images/person-1.png"
+              style={{
+                aspectRatio: "400/400",
+                objectFit: "cover",
+              }}
+              width={700}
+            />
             <div className="space-y-6">
               <h1 className="text-4xl md:text-5xl font-bold text-white">
                 Unlock Your Scholarship Potential with CareerNava
@@ -46,30 +58,20 @@ export default async function HomeNew() {
               <div className="flex gap-4">
                 <Button className="text-white hover:bg-primary/20 w-[300px] h-16 rounded-full flex flex-row justify-between px-5" variant="default"
                   onClick={() => router.push("/app/dashboard")}>
-                  <p>Book Session Now</p>
+                  <p className='text-xl font-bold'>Book Session Now</p>
                   <ArrowRight className="h-6 w-6" />
                 </Button>
               </div>
             </div>
-     
-              <img
-                alt="Banner Image"
-                className="w-full max-w-md"
-                height={700}
-              
-                src="/images/person-1.png"
-                style={{
-                  aspectRatio: "400/400",
-                  objectFit: "cover",
-                }}
-                width={700}
-              />
- 
           </div>
         </div>
+        <svg className="absolute bottom-0 left-0 w-full" viewBox="0 0 1440 120">
+          <path fill="#F6C360" fillOpacity="1" d="M0,64L30,69.3C60,75,120,85,180,90.7C240,96,300,96,360,85.3C420,75,480,53,540,48C600,43,660,53,720,74.7C780,96,840,128,900,122.7C960,117,1020,75,1080,69.3C1140,64,1200,96,1260,106.7C1320,117,1380,107,1410,101.3L1440,96L1440,120L1410,120C1380,120,1320,120,1260,120C1200,120,1140,120,1080,120C1020,120,960,120,900,120C840,120,780,120,720,120C660,120,600,120,540,120C480,120,420,120,360,120C300,120,240,120,180,120C120,120,60,120,30,120L0,120Z"></path>
+        </svg>
       </section>
-      <section className="py-12 md:py-20">
-        <div className="rounded-t-7xl bg-white h-full pt-8">
+
+      <section className="py-10 md:py-18 bg-secondary">
+        <div className="rounded-t-7xl bg-secondary h-full pt-8">
           <div className="mx-auto max-w-7xl">
             <div className="mx-auto mt-4 inline-flex w-full flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)]">
               <ul className="flex animate-infinite-scroll items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-8">
@@ -87,29 +89,29 @@ export default async function HomeNew() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="space-y-4">
               <AccessibilityIcon className="h-12 w-12 text-primary" />
-              <h3 className="text-2xl font-bold">Compatibility</h3>
+              <h3 className="text-2xl font-bold">Scholarship Application Guidance</h3>
               <p className="text-gray-600">
-                We match students with scholarships that align with their unique backgrounds, interests, and goals.
+                Our platform provides step-by-step guidance to help students navigate the scholarship application process.
               </p>
             </div>
             <div className="space-y-4">
               <CreativeCommonsIcon className="h-12 w-12 text-primary" />
-              <h3 className="text-2xl font-bold">Creativity</h3>
+              <h3 className="text-2xl font-bold">Scholarship Essays Review</h3>
               <p className="text-gray-600">
-                Our platform encourages creative thinking and problem-solving to help students stand out.
+                Our team of experts reviews scholarship essays to ensure they meet the highest standards.
               </p>
             </div>
             <div className="space-y-4">
               <MilestoneIcon className="h-12 w-12 text-primary" />
-              <h3 className="text-2xl font-bold">Qualified Mentors</h3>
+              <h3 className="text-2xl font-bold">Updates on Available Scholarships</h3>
               <p className="text-gray-600">
-                Our team of experienced mentors provides personalized guidance throughout the scholarship process.
+                Stay informed about new scholarship opportunities that match your profile and interests.
               </p>
             </div>
           </div>
         </div>
       </section>
-      
+
       <section className="py-12 md:py-20">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center space-y-6">
@@ -189,43 +191,7 @@ export default async function HomeNew() {
           </div>
         </div>
       </section>
-      <section className="bg-gray-100 py-12 md:py-20">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div className="flex justify-center">
-              <img
-                alt="Founder Image"
-                className="w-full max-w-md rounded-lg"
-                height={500}
-                src="/images/lameck.png"
-                style={{
-                  aspectRatio: "400/500",
-                  objectFit: "cover",
-                }}
-                width={400}
-              />
-            </div>
-            <div className="space-y-6">
-              <h2 className="text-3xl md:text-4xl font-bold">A Message from Our Founder</h2>
-              <p className="text-gray-600 text-lg">
-                "At CareerNava, we believe that every student deserves access to the resources and support they need to
-                achieve their educational goals. Our mission is to empower students from all backgrounds to unlock their
-                full scholarship potential and pursue their dreams without financial barriers."
-              </p>
-              <div className="flex items-center gap-4">
-                <Avatar>
-                  <AvatarImage alt="Founder Avatar" src="/images/lameck.png" />
-                  <AvatarFallback>JD</AvatarFallback>
-                </Avatar>
-                <div>
-                  <h4 className="text-lg font-semibold">Lameck Owesi</h4>
-                  <p className="text-gray-600">Co-Founder, CareerNava</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <FounderCarousel />
       <Footer />
     </main>
   )

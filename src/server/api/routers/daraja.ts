@@ -2,10 +2,7 @@ import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { type MpesaStkRequestBody } from "~/types";
 import { z } from "zod";
 import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
 import { db } from "~/server/db";
-import { toast } from "sonner";
-import { getServerAuthSession } from "~/server/auth";
 
 export function absoluteUrl(path: string) {
   if (typeof window !== "undefined") return path;
@@ -103,6 +100,5 @@ export const mpesaPaymentRouter = createTRPCRouter({
       return NextResponse.json("sucess", {
         status: response.status,
       });
-
     }),
 });
