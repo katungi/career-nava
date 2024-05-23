@@ -179,14 +179,9 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
                 Blog
               </Link>
               <Link
-                href="/blog"
+                href="/about"
                 className="text-white transition-colors hover:text-secondary">
                 About
-              </Link>
-              <Link
-                href="/blog"
-                className="text-white transition-colors hover:text-secondary">
-                Scholarship Reviews
               </Link>
             </nav>
           </div>
