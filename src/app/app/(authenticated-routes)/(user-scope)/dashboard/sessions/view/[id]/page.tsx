@@ -82,34 +82,42 @@ export default function ViewUser() {
             setLoadingText(messages[messageIndex]);
             messageIndex = (messageIndex + 1) % messages.length;
         }, 6000);
-
+    
         try {
-            // const call = true;
-            const call = await createMeeting(FormData);
-
-            if (call) {
-                FormData.title = title;
-                FormData.meetingLink = `${process.env.NEXT_PUBLIC_DEPLOYMENT_URL}/app/meeting/${call?.id}`;
-                FormData.mentorId = data?.id;
-                FormData.menteeId = '';
-
-                // Wrap the book mutation in a Promise
-                await new Promise<void>((resolve, reject) => {
+            // Create a timeout promise
+            const timeoutPromise = new Promise<void>((resolve, reject) => {
+                setTimeout(() => {
+                    resolve();
+                    setLoadingText('Success');
+                    setIsPending(false);
+                    setDone(true);
+                }, 60000); // 1 minute timeout
+            });
+    
+            // Original process wrapped in a promise
+            const processPromise = new Promise<void>(async (resolve, reject) => {
+                const call = await createMeeting(FormData);
+    
+                if (call) {
+                    FormData.title = title;
+                    FormData.meetingLink = `${process.env.NEXT_PUBLIC_DEPLOYMENT_URL}/app/meeting/${call?.id}`;
+                    FormData.mentorId = data?.id;
+                    FormData.menteeId = '';
+    
                     book.mutate(FormData, {
                         onSuccess: async () => {
-                            await refetch(); // Refetch the latest transaction data after booking is successful
-
+                            await refetch();
+    
                             pay.mutate({
                                 amount: "1",
                                 phoneNumber: FormData.number,
                             });
-
+    
                             // Polling function
                             const pollTransaction = async () => {
                                 try {
-                                    refetch();
-                                    console.log("Payment status::", transaction);
-
+                                    await refetch();
+    
                                     if (transaction?.paymentStatus === 'SUCCESS') {
                                         setLoadingText('Success');
                                         setIsPending(false);
@@ -131,8 +139,6 @@ export default function ViewUser() {
                                     reject(error); // Reject the Promise
                                 }
                             };
-
-                            // Set polling interval
                             const pollingInterval = setInterval(pollTransaction, 1000);
                         },
                         onError: (error) => {
@@ -140,32 +146,31 @@ export default function ViewUser() {
                             setErrorMessage('Failed to book session');
                             console.error('Booking error:', error);
                             clearInterval(intervalId);
-                            reject(error); // Reject the Promise
+                            reject(error); 
                         }
                     });
-                });
-            } else {
-                setError(true);
-                setErrorMessage('Failed to create meeting');
-                alert("Failed to create meeting");
-                clearInterval(intervalId);
-                setIsPending(false);
-            }
+                } else {
+                    setError(true);
+                    setErrorMessage('Failed to create meeting');
+                    alert("Failed to create meeting");
+                    clearInterval(intervalId);
+                    setIsPending(false);
+                    reject(new Error('Failed to create meeting'));
+                }
+            });
+    
+            // Race the original process against the timeout
+            await Promise.race([processPromise, timeoutPromise]);
         } catch (error) {
             console.error('Error:', error);
             alert("Failed to process the form");
             setError(true);
             setErrorMessage('Failed to process your information');
-            clearInterval(intervalId);
         } finally {
-            // setTimeout(() => {
-            //     setIsPending(false);
-            //     clearInterval(intervalId);
-            //     setLoadingText('Finishing Up...');
-            //     setDone(true);
-            // }, 20000);
+            clearInterval(intervalId);
         }
     };
+    
 
     return (
         <div className="px-8">

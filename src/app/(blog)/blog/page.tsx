@@ -3,6 +3,9 @@ import Link from "next/link";
 import { allPosts } from "contentlayer/generated";
 import { compareDesc } from "date-fns";
 import { formatDate } from "~/lib/utils";
+import BlogHeader from "./_components/blogHeader";
+import Footer from "~/components/patterns/footer";
+import BlogShCard from "./_components/scholarshipcard";
 
 export const metadata = {
   title: "Blog",
@@ -15,9 +18,63 @@ export default async function BlogPage() {
       return compareDesc(new Date(a.date), new Date(b.date));
     });
 
+  const scholarshipArray = [
+    {
+      scholarshipName: "Google Scholarship",
+      courseOfStudyInformation: "loremsdfdsf Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+      country: "Any",
+      openingDates: "12/12/2022",
+      deadline: "12/12/2022",
+      link: "#",
+      headerimage: "/images/google-sc.png"
+    },
+    {
+      scholarshipName: "MasterCard Foundation Scholarship",
+      courseOfStudyInformation: "loremsdfdsf Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+      country: "Any",
+      openingDates: "12/12/2022",
+      deadline: "12/12/2022",
+      link: "#",
+      headerimage: "/images/mastercard-sc.png"
+    },
+    {
+      scholarshipName: "Harvard Scholarship",
+      courseOfStudyInformation: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+      country: "Any",
+      openingDates: "12/12/2022",
+      deadline: "12/12/2022",
+      link: "#",
+      headerimage: "/images/harvard-sc.png"
+    },
+  ]
   return (
-    <div className="container max-w-4xl py-6 lg:py-10">
-      {posts?.length ? (
+    <main className="flex flex-col">
+      <section className="w-full">
+        <BlogHeader />
+      </section>
+      <div className="flex flex-col justify-center items-center p-8">
+        <div className="text-center mb-8">
+          <p className="text-3xl font-bold">Our Scholarship Insights</p>
+          <p className="text-md">With CareerNava’s assessment score there’s nowhere you’ll go wrong</p>
+        </div>
+        <div className="flex flex-row flex-wrap justify-center gap-8">
+          {scholarshipArray.map((scholarship, index) => (
+            <BlogShCard key={index} scholarship={scholarship} />
+          ))}
+        </div>
+      </div>
+
+      <Footer />
+    </main>
+  );
+}
+
+
+
+
+/****
+ * 
+ *  {posts?.length ? (
         <div className="grid gap-10 sm:grid-cols-2">
           {posts.map((post, index) => (
             <article
@@ -52,6 +109,4 @@ export default async function BlogPage() {
       ) : (
         <p>No posts published.</p>
       )}
-    </div>
-  );
-}
+      */

@@ -16,7 +16,6 @@ import LoginLogoutButton from "./login-logout-button";
 import UserButton from "./user-button";
 import Image from "next/image";
 import { redirect, usePathname } from "next/navigation";
-import { getServerAuthSession } from "~/server/auth";
 
 export async function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -42,7 +41,7 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
             className=" hidden md:block"
           />
         </Link>
-        <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+        <nav className="hidden flex-col gap-8 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
           {isInApplicationRoute ? (
             <>
               <Link
@@ -84,12 +83,21 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
             </>
           ) : (
             <>
-              <Link
+              {/* <Link
                 href="/blog"
-                className="text-white transition-colors hover:text-foreground"
-              >
+                className="text-white transition-colors hover:text-secondary">
                 Blog
               </Link>
+              <Link
+                href="/blog"
+                className="text-white transition-colors hover:text-secondary">
+                About
+              </Link>
+              <Link
+                href="/blog"
+                className="text-white transition-colors hover:text-secondary">
+                Scholarship Reviews
+              </Link> */}
             </>
           )}
         </nav>
@@ -164,7 +172,23 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
         </Sheet>
         <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
           <div className="ml-auto">
-            {/* <ColorModeSwitch /> */}
+            <nav className="w-full flex gap-12">
+              <Link
+                href="/blog"
+                className="text-white transition-colors hover:text-secondary">
+                Blog
+              </Link>
+              <Link
+                href="/blog"
+                className="text-white transition-colors hover:text-secondary">
+                About
+              </Link>
+              <Link
+                href="/blog"
+                className="text-white transition-colors hover:text-secondary">
+                Scholarship Reviews
+              </Link>
+            </nav>
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
