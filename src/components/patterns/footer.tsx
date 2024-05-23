@@ -3,7 +3,7 @@ import { Link } from "next-view-transitions"
 
 export default function Footer() {
     return (
-        <footer className="relative bg-gradient-to-r from-[#af63f1] p-10 to-primary text-white bottom-0 z-50">
+        <footer className="relative bg-gradient-to-r from-[#af63f1] p-24 to-primary text-white bottom-0 z-50">
             <div
                 className="absolute inset-0 w-full h-full mx-4"
                 style={{
