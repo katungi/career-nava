@@ -4,7 +4,6 @@ import { Button } from "~/components/ui/button";
 import Footer from "~/components/patterns/footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card";
 import { SiCheckmarx } from "@icons-pack/react-simple-icons";
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { ArrowRight } from "lucide-react";
 import FounderCarousel from "./founder-carousel";
 

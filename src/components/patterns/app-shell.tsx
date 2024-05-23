@@ -1,6 +1,5 @@
 import { Link } from "next-view-transitions";
 import { Menu } from "lucide-react";
-
 import { Button } from "~/components/ui/button";
 
 import {
