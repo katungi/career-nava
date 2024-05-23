@@ -56,8 +56,8 @@ export default async function HomeNew() {
                 Discover and apply for scholarships tailored to your unique background and aspirations.
               </p>
               <div className="flex gap-4">
-                <Button className="text-white hover:bg-primary/20 w-[300px] h-16 rounded-full flex flex-row justify-between px-5" variant="default"
-                  onClick={() => router.push("/app/dashboard")}>
+                <Button className="text-white hover:bg-primary/20 w-[300px] h-16 rounded-lg flex flex-row justify-between px-5" variant="secondary"
+                  onClick={() => router.push("/app/dashboard?loginState=signedIn")}>
                   <p className='text-xl font-bold'>Book Session Now</p>
                   <ArrowRight className="h-6 w-6" />
                 </Button>
