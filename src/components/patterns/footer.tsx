@@ -1,6 +1,7 @@
-import { useRouter } from "next/navigation"
+"use client"
 import { Button } from "../ui/button"
 import { Link } from "next-view-transitions"
+import { useRouter } from "next/navigation"
 
 export default function Footer() {
     const router = useRouter()
