@@ -16,7 +16,7 @@ export default function Footer() {
             <div className="relative max-w-full mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 z-10">
                 <div className="space-y-2 col-span-1 md:col-span-1">
                     <h2 className="text-3xl font-bold">
-                        Join the Future of Mentorship Today, <br /> with CareerNava
+                        Scholarship Navigation, <br /> with CareerNava
                     </h2>
                     <Button variant={"default"} className="bg-secondary hover:bg-secondary text-black">Book a session Now!</Button>
                 </div>

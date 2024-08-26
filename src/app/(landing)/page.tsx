@@ -36,17 +36,21 @@ export default async function HomeNew() {
       <section className="relative bg-gradient-to-r from-[#af63f1] to-primary py-20 md:py-32 border-none">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <img
-              alt="Banner Image"
-              className="w-full max-w-md"
-              height={700}
-              src="/images/person-1.png"
-              style={{
-                aspectRatio: "400/400",
-                objectFit: "cover",
-              }}
-              width={700}
-            />
+            <div className="relative w-full max-w-md">
+              <div
+                className="absolute inset-0"
+                style={{
+                  backgroundImage: `linear-gradient(to bottom, rgba(175, 99, 241, 0) 70%, rgba(175, 99, 241, 1) 100%), url('/images/person-1.png')`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              />
+              <div
+                style={{
+                  paddingBottom: '100%',
+                }}
+              />
+            </div>
             <div className="space-y-6">
               <h1 className="text-4xl md:text-5xl font-bold text-white">
                 Unlock Your Scholarship Potential with CareerNava
