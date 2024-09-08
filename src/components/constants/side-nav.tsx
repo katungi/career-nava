@@ -37,7 +37,7 @@ export const MentorNavItems: NavItem[] = [
         color: "text-sky-500",
     },
     {
-        title: "My Mentees",
+        title: "My Scholars",
         icon: User2Icon,
         href: "/app/mentor/mentees",
         color: "text-green-500",

@@ -6,7 +6,7 @@ import TabsComponent from "~/components/patterns/tabs";
 export default function MenteeTabComponent() {
     const [activeTab, setActiveTab] = useState(0);
     const tabsData = [
-        { title: 'All Mentees', count: 4 },
+        { title: 'All Scholars', count: 4 },
         { title: 'Online', count: 1 },
         { title: 'Pending Confirmation', count: 3 },
         { title: 'Deleted', count: 0 },

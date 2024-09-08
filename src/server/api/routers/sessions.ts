@@ -17,7 +17,7 @@ export const SessionRouter = createTRPCRouter({
           role: 'MENTOR'
         }
       })
-      if (!mentors) throw new Error('No mentors found')
+      if (!mentors) throw new Error('No coaches found')
       return mentors
     }),
   bookSession: publicProcedure
@@ -104,7 +104,7 @@ export const SessionRouter = createTRPCRouter({
           createdAt: 'desc',
         }
       })
-      if (!mentees) throw new Error('No mentees found')
+      if (!mentees) throw new Error('No scholars found')
       return mentees
     }),
 

@@ -35,7 +35,7 @@ export default function ViewUser() {
     const [done, setDone] = useState(false);
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('')
-    const title = "Mentorship session with " + data?.name;
+    const title = "Coaching session with " + data?.name;
 
     const handleInserts = (payload: any) => {
         console.log('Change received!', payload)

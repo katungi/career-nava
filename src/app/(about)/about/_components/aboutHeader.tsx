@@ -10,7 +10,7 @@ export default function AboutHeader() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
                 <div className="space-y-6">
                     <h1 className="text-7xl md:text-7xl font-bold text-white">
-                        Finding great mentors to succeed in your career
+                        Finding great coaches to succeed in your career
                     </h1>
                     <p className="text-lg md:text-xl text-gray-200">
                         At CareerNava, we firmly believe in the power of community voices. They are the driving force behind the verification of your social impact, distinguishing us from traditional third-party registries.

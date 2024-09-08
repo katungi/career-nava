@@ -40,7 +40,7 @@ export default function AboutPage() {
                     <div className="text-4xl text-primary font-bold">
                         <CountUp end={25000} /> +
                     </div>
-                    <div className="text-gray-600">Mentors</div>
+                    <div className="text-gray-600">Coaches</div>
                 </div>
                 <div className="text-center mx-4">
                     <div className="text-4xl text-primary font-bold">
@@ -52,9 +52,9 @@ export default function AboutPage() {
             <section>
                 <div className="flex flex-col justify-center items-center p-8">
                     <div className="text-center mb-8">
-                        <p className="text-3xl font-bold">Our Top Mentors</p>
+                        <p className="text-3xl font-bold">Our Top Coaches</p>
                         <p className="text-md">
-                            Our mentors are carefully selected to ensure you get the best guidance in your career.
+                            Our coaches are carefully selected to ensure you get the best guidance in your career.
                         </p>
                     </div>
                     <div className="flex flex-row flex-wrap justify-center gap-8">
