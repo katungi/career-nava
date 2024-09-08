@@ -21,7 +21,7 @@ const founders: Founder[] = [
     {
         name: "Oduor Kevin",
         title: "Co-Founder, CareerNava",
-        quote:  'At CareerNava, we believe that every student deserves access to the resources and support they need to achieve their educational goals. Our mission is to empower students from all backgrounds to unlock their full scholarship potential and pursue their dreams without financial barriers.',
+        quote:  'Scholarships changed our lives. At CareerNava, we’re committed to helping you unlock the same opportunities and achieve your full potential',
         image: '/images/kevin.jpeg',
     }
 ]

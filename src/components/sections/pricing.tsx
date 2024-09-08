@@ -23,7 +23,7 @@ export default function PricingSection() {
                 "Individual/Group Sessions",
                 "Complete within 3 weeks"
             ],
-            ctaText: "Checkout Basic Package",
+            ctaText: "Checkout Package",
             highlight: false,
             includesLower: "All Free Services"
         },
@@ -35,7 +35,7 @@ export default function PricingSection() {
                 "Document Creation & Reviews",
                 "Interview Preparation"
             ],
-            ctaText: "Checkout End-to-End Package",
+            ctaText: "Checkout Package",
             highlight: true,
             includesLower: "All Basic Services"
         },
@@ -47,7 +47,7 @@ export default function PricingSection() {
                 "Flexible Options",
                 "Pay Per Service"
             ],
-            ctaText: "Checkout Stand Alone Package",
+            ctaText: "Checkout Package",
             highlight: false,
             includesLower: "Stand Alone Services"
         }
@@ -81,7 +81,7 @@ export default function PricingSection() {
                                     * {tier.includesLower}
                                 </div>
                             )}
-                            <Button 
+                            <Button
                                 variant={tier.highlight ? "default" : "outline"}
                                 className={`w-full ${tier.highlight ? 'bg-purple-600 hover:bg-purple-700' : 'text-purple-600 border-purple-600 hover:bg-purple-50 p-3'}`}
                             >

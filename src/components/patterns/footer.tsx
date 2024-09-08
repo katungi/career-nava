@@ -19,13 +19,13 @@ export default function Footer() {
             <div className="relative max-w-full mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 z-10">
                 <div className="space-y-2 col-span-1 md:col-span-1">
                     <h2 className="text-3xl font-bold">
-                        Scholarship Navigation, <br /> with CareerNava
+                        Start your Scholarship Journey, <br /> with CareerNava
                     </h2>
                     <Button variant={"default"}
-                    onClick={() => {
-                        router.push("/app/dashboard?loginState=signedIn")
-                    }}
-                    className="bg-secondary hover:bg-secondary text-black">Book a session Now!</Button>
+                        onClick={() => {
+                            router.push("/app/dashboard?loginState=signedIn")
+                        }}
+                        className="bg-secondary hover:bg-secondary text-black">Book a session Now!</Button>
                 </div>
                 <div className="space-y-1 col-span-1 md:col-span-2">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-10">

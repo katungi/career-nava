@@ -59,7 +59,10 @@ export default async function HomeNew() {
                 Unlock Your Scholarship Potential with CareerNava
               </h1>
               <p className="text-lg md:text-xl text-gray-200">
-                Discover and apply for scholarships tailored to your unique background and aspirations.
+                We guide you through every step of the scholarship application process, empowering you with
+                proven insights that boost your chances of securing a scholarship. From identifying suitable
+                scholarships and meeting requirements to essay reviews and interview preparation, we provide
+                the comprehensive support you need to secure your scholarship.
               </p>
               <div className="flex gap-4">
                 <Button className="text-white hover:bg-primary/20 w-[300px] h-16 rounded-lg flex flex-row justify-between px-5" variant="secondary"
@@ -97,21 +100,40 @@ export default async function HomeNew() {
               <AccessibilityIcon className="h-12 w-12 text-primary" />
               <h3 className="text-2xl font-bold">Scholarship Application Guidance</h3>
               <p className="text-gray-600">
-                Our platform provides step-by-step guidance to help students navigate the scholarship application process.
+                We take the guesswork out of the scholarship application process. Our expert guidance helps
+                you navigate each step with confidence, from identifying the most suitable scholarships to
+                crafting a strong, compelling application. We provide personalized coaching to ensure that your
+                application stands out, increasing your chances of success.
               </p>
             </div>
             <div className="space-y-4">
               <CreativeCommonsIcon className="h-12 w-12 text-primary" />
               <h3 className="text-2xl font-bold">Scholarship Essays Review</h3>
               <p className="text-gray-600">
-                Our team of experts reviews scholarship essays to ensure they meet the highest standards.
+                Your scholarship essay is your opportunity to shine—and we’re here to help you make it
+                unforgettable. Our essay review service offers detailed feedback and expert recommendations
+                to refine your writing, ensuring your story is powerful, clear, and aligned with what scholarship
+                committees are looking for. We help you present your best self on paper.
               </p>
             </div>
             <div className="space-y-4">
               <MilestoneIcon className="h-12 w-12 text-primary" />
               <h3 className="text-2xl font-bold">Updates on Available Scholarships</h3>
               <p className="text-gray-600">
-                Stay informed about new scholarship opportunities that match your profile and interests.
+                Never miss an opportunity with CareerNava&#39;s up-to-date scholarship alerts. We keep you
+                informed about the latest scholarships tailored to your academic and career goals. Our service
+                ensures that you’re always in the know, giving you a competitive edge by allowing you to apply
+                as soon as opportunities arise.
+              </p>
+            </div>
+            <div className="space-y-4">
+              <MilestoneIcon className="h-12 w-12 text-primary" />
+              <h3 className="text-2xl font-bold">Scholarship Readiness Assessment</h3>
+              <p className="text-gray-600">
+                Are you ready to apply for scholarships? Our Scholarship Readiness Assessment evaluates
+                your preparedness, identifying strengths and areas for improvement. We provide actionable
+                insights and personalized recommendations, so you can approach the application process with
+                confidence, knowing you’re fully prepared to succeed.
               </p>
             </div>
           </div>
