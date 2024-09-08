@@ -108,7 +108,7 @@ export function UploadWithDialog({}) {
               render={({ field }) => (
                 <div className="space-y-6">
                   <FormItem className="w-full">
-                    <FormLabel>Images</FormLabel>
+                    <FormLabel></FormLabel>
                     <FormControl>
                       <FileUploader
                         value={field.value}

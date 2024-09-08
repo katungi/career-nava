@@ -1,106 +1,96 @@
-import { Button } from "../ui/button";
-import { SiCheckmarx } from "@icons-pack/react-simple-icons";
+import React from 'react';
+import { Button } from "~/components/ui/button";
+import { CheckCheck } from "lucide-react";
 
 export default function PricingSection() {
-    return (
-        <div className="w-full mx-auto bg-secondary px-5 py-10 text-grey-900">
-            <div className="text-center max-w-4xl mx-auto">
-                <h1 className="text-5xl md:text-6xl font-bold mb-5">Our Pricing Packages</h1>
-                <h3 className="text-xl font-medium mb-10">We provide suitable pricing for your specific needs</h3>
-            </div>
-            <div className="w-full md:flex mb-5">
-                <div className="w-full md:w-1/4 md:max-w-none bg-white px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto md:my-6 rounded-md shadow-lg shadow-gray-600 md:flex md:flex-col">
-                    <div className="w-full flex-grow">
-                        <h2 className="text-center font-bold uppercase mb-4 text-3xl">Free</h2>
-                        <div className="text-xl mb-8 flex flex-col gap-8 mt-4">
-                            <p className="flex flex-row">
-                                <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> Unlimited scholarship opportunities
-                            </p>
-                            <p className="flex flex-row">
-                                <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> Readiness Assessment
-                            </p>
-                            <p className="flex flex-row">
-                                <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> Limited Application Resources
-                            </p>
-                        </div>
-                    </div>
-                    <div className="w-full">
-                        <Button variant={"default"} className="font-bold text-white rounded-md px-10 py-2 transition-colors w-full">
-                            Checkout Free Package
-                        </Button>
-                    </div>
-                </div>
-                <div className="w-full md:w-1/4 md:max-w-none bg-white px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto md:-mx-3 md:my-3 rounded-md shadow-lg shadow-gray-600 md:relative md:z-50 md:flex md:flex-col">
-                    <div className="w-full flex-grow">
-                        <h2 className="text-center font-bold uppercase mb-4 text-3xl">BASIC</h2>
-                        <h3 className="text-center font-bold text-3xl md:text-4xl mb-2">$40<span className="text-lg">/mo</span></h3>
+    const pricingTiers = [
+        {
+            title: "Free",
+            price: "Free",
+            features: [
+                "Unlimited Scholarship Opportunities",
+                "Readiness Assessment",
+                "Limited Application Resources"
+            ],
+            ctaText: "Checkout Free Package",
+            highlight: false
+        },
+        {
+            title: "Basic",
+            price: "$40",
+            features: [
+                "5 guidance sessions - 45 min each",
+                "Individual/Group Sessions",
+                "Complete within 3 weeks"
+            ],
+            ctaText: "Checkout Basic Package",
+            highlight: false,
+            includesLower: "All Free Services"
+        },
+        {
+            title: "End-to-End",
+            price: "$100",
+            features: [
+                "5 Guided Sessions - Unlimited",
+                "Document Creation & Reviews",
+                "Interview Preparation"
+            ],
+            ctaText: "Checkout End-to-End Package",
+            highlight: true,
+            includesLower: "All Basic Services"
+        },
+        {
+            title: "Stand Alone",
+            price: "Varies",
+            features: [
+                "Document Reviews",
+                "Flexible Options",
+                "Pay Per Service"
+            ],
+            ctaText: "Checkout Stand Alone Package",
+            highlight: false,
+            includesLower: "Stand Alone Services"
+        }
+    ];
 
-                        <div className="text-xl mb-8 flex flex-col gap-8 mt-4">
-                            <p className="flex flex-row">
-                                <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> 5 guidance sessions - 45 min each
-                            </p>
-                            <p className="flex flex-row">
-                                <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> Individual/group sessions
-                            </p>
-                            <p className="flex flex-row">
-                                <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> Complete within 3 weeks
-                            </p>
+    return (
+        <div className="w-full mx-auto bg-secondary px-5 py-16 text-gray-800">
+            <div className="text-center max-w-4xl mx-auto mb-16">
+                <h1 className="text-5xl md:text-6xl font-bold mb-5">Our Pricing Packages</h1>
+                <h3 className="text-xl font-medium">We provide suitable pricing for your specific needs</h3>
+            </div>
+            <div className="flex flex-wrap justify-center gap-6">
+                {pricingTiers.map((tier, index) => (
+                    <div key={index} className={`w-full sm:w-64 bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 ${tier.highlight ? 'ring-4 ring-purple-500' : ''}`}>
+                        <div className={`p-6 ${tier.highlight ? 'bg-purple-600 text-white' : 'bg-purple-100'}`}>
+                            <h2 className="text-2xl font-bold text-center mb-2">{tier.title}</h2>
+                            <p className="text-3xl font-bold text-center">{tier.price}</p>
+                            {tier.highlight && <p className="text-center text-purple-200 mt-2">Recommended</p>}
                         </div>
-                        <div className="bg-secondary p-4 mb-5 rounded-tr-3xl rounded-bl-3xl">
-                            <span className="font-bold ml-12"> * All Free Services</span>
-                        </div>
-                    </div>
-                    <div className="w-full">
-                        <Button className="font-bold text-white rounded-md px-10 py-2 transition-colors w-full">
-                            Checkout Basic Package
-                        </Button>
-                    </div>
-                </div>
-                <div className="w-full md:w-1/4 md:max-w-none bg-white px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto md:-mx-3 md:mb-0 rounded-md shadow-lg shadow-gray-600 md:relative md:z-50 md:flex md:flex-col">
-                    <div className="w-full flex-grow">
-                        <h2 className="text-center font-bold uppercase mb-4 text-3xl">End to End</h2>
-                        <h3 className="text-center font-bold text-4xl md:text-5xl mb-2">$100<span className="text-lg">/mo</span></h3>
-                        <p className="text-center font-bold mb-5">
-                            <a href="#" className="hover:underline hover:text-gray-700 transition-all transform hover:scale-110 inline-block">Read more<i className="mdi mdi-arrow-right-thick ml-1"></i></a>
-                        </p>
-                        <div className="text-xl mb-8 flex flex-col gap-8 mt-4">
-                            <p className="flex flex-row">
-                                <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> 5 Guided sessions - unlimited
-                            </p>
-                            <p className="flex flex-row">
-                                <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> document creation & reviews
-                            </p>
-                            <p className="flex flex-row">
-                                <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> Interview preparation
-                            </p>
-                        </div>
-                        <div className="bg-secondary p-4 mb-5 rounded-tr-3xl rounded-bl-3xl">
-                            <span className="font-bold ml-12"> * All Basic Services</span>
+                        <div className="p-6">
+                            <ul className="mb-6 space-y-4">
+                                {tier.features.map((feature, featureIndex) => (
+                                    <li key={featureIndex} className="flex items-start">
+                                        <CheckCheck className="text-purple-500 mr-2 mt-1 flex-shrink-0" size={16} />
+                                        <span>{feature}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                            {tier.includesLower && (
+                                <div className="bg-secondary opacity-65 text-black text-sm p-2 rounded-md mb-6">
+                                    * {tier.includesLower}
+                                </div>
+                            )}
+                            <Button 
+                                variant={tier.highlight ? "default" : "outline"}
+                                className={`w-full ${tier.highlight ? 'bg-purple-600 hover:bg-purple-700' : 'text-purple-600 border-purple-600 hover:bg-purple-50 p-3'}`}
+                            >
+                                {tier.ctaText}
+                            </Button>
                         </div>
                     </div>
-                    <div className="w-full">
-                        <Button className="font-bold text-white rounded-md px-10 py-2 transition-colors w-full">
-                            Checkout End to End Package
-                        </Button>
-                    </div>
-                </div>
-                <div className="w-full md:w-1/4 md:max-w-none bg-white px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto md:my-3 rounded-md shadow-lg shadow-gray-600 md:flex md:flex-col">
-                    <div className="w-full flex-grow">
-                        <h2 className="text-center text-3xl font-bold uppercase mb-2">Stand Alone</h2>
-                        <div className="text-xl mb-8 flex flex-col gap-8 mt-16">
-                            <p className="flex flex-row">
-                                <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} />Document Reviews
-                            </p>
-                        </div>
-                        <div className="bg-secondary p-4 mb-5 rounded-tr-3xl rounded-bl-3xl mt-44">
-                            <span className="font-bold ml-12"> * Stand Alone Services</span>
-                        </div>
-                    </div>
-                    <div className="w-full">
-                        <Button className="font-bold text-white rounded-md px-10 py-2 transition-colors w-full">Checkout Stand Alone Package</Button>
-                    </div>
-                </div>
+                ))}
             </div>
         </div>
-    )
+    );
 }

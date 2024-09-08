@@ -6,6 +6,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/com
 import { SiCheckmarx } from "@icons-pack/react-simple-icons";
 import { ArrowRight } from "lucide-react";
 import FounderCarousel from "./founder-carousel";
+import FounderShowcase from "./founders";
+import TestimonialSection from "./testimonials";
+import PricingSection from "~/components/sections/pricing";
 
 const Logos = () => {
   return (
@@ -40,7 +43,7 @@ export default async function HomeNew() {
               <div
                 className="absolute inset-0"
                 style={{
-                  backgroundImage: `linear-gradient(to bottom, rgba(175, 99, 241, 0) 70%, rgba(175, 99, 241, 1) 100%), url('/images/person-1.png')`,
+                  backgroundImage: `linear-gradient(to bottom, rgba(175, 99, 241, 0) 70%, rgb(175, 99, 241) 100%), url('/images/person-1.png')`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                 }}
@@ -114,87 +117,9 @@ export default async function HomeNew() {
           </div>
         </div>
       </section>
-
-      <section className="py-12 md:py-20">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold">Pricing</h2>
-            <p className="text-gray-600 text-lg">Choose the plan that best fits your needs and budget.</p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8">
-            <Card className="bg-white shadow-lg">
-              <CardHeader>
-                <CardTitle>Free</CardTitle>
-                <CardDescription>Get started for free</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="text-4xl font-bold">Free</div>
-                <div className="space-y-2 text-gray-600">
-                  <p className="flex flex-row">
-                    <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> Unlimited scholarship opportunities
-                  </p>
-                  <p className="flex flex-row">
-                    <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> Readiness Assessment
-                  </p>
-                  <p className="flex flex-row">
-                    <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> Limited Application Resources
-                  </p>
-                </div>
-                <Button className="bg-primary text-white hover:bg-primary" variant="default">
-                  Get Started
-                </Button>
-              </CardContent>
-            </Card>
-            <Card className="bg-white shadow-lg">
-              <CardHeader>
-                <CardTitle>Basic</CardTitle>
-                <CardDescription>Unlock your full potential</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="text-4xl font-bold">$19/mo</div>
-                <div className="space-y-2 text-gray-600">
-                  <p className="flex flex-row">
-                    <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> 5 guidance sessions - 45 min each
-                  </p>
-                  <p className="flex flex-row">
-                    <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> Individual/group sessions
-                  </p>
-                  <p className="flex flex-row">
-                    <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> Complete within 3 weeks
-                  </p>
-                </div>
-                <Button className="bg-primary text-white hover:bg-primary" variant="default">
-                  Get Started
-                </Button>
-              </CardContent>
-            </Card>
-            <Card className="bg-white shadow-lg">
-              <CardHeader>
-                <CardTitle>End to End</CardTitle>
-                <CardDescription>Custom solutions for organizations</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="text-4xl font-bold">Contact Us</div>
-                <div className="space-y-2 text-gray-600">
-                  <p className="flex flex-row">
-                    <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> 5 Guided sessions - unlimited
-                  </p>
-                  <p className="flex flex-row">
-                    <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> document creation & reviews
-                  </p>
-                  <p className="flex flex-row">
-                    <SiCheckmarx className="text-primary mt-2 mr-3" width={14} height={14} /> Interview preparation
-                  </p>
-                </div>
-                <Button className="bg-primary text-white hover:bg-[#4F46E5]" variant="default">
-                  Contact Us
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-      <FounderCarousel />
+      <TestimonialSection />
+      <PricingSection />
+      <FounderShowcase />
       <Footer />
     </main>
   )
