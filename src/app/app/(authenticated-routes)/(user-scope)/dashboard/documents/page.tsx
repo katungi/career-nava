@@ -77,7 +77,7 @@ const DocumentsHeader = ({ setOpenModal }: any) => {
             <div className='relative p-8 bg-secondary' style={{ backgroundColor: 'rgba(234, 189, 29, 0.5)' }}>
                 <h1 className="text-3xl font-bold text-gray-900">My Documents</h1>
                 <p className="text-lg text-gray-900">
-                    Manage your documents, subscriptions, and billing here. You can also view your usage and manage your account.
+                    Upload and  manage your documents here.
                 </p>
                 <Button className="flex items-center text-white font-bold py-2 px-4 rounded mt-8"
                     onClick={() => setOpenModal(true)}

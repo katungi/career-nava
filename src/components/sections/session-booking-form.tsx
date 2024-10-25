@@ -25,7 +25,7 @@ const BookingForm = ({ onSubmit, title }: any) => {
         <div className="max-w-md mx-auto p-4 space-y-4">
             <div className="space-y-2">
                 <h2 className="text-2xl font-bold">{title}</h2>
-                <p className="text-gray-500 dark:text-gray-400">Fill out the form to book your session.</p>
+                <p className="text-gray-500 dark:text-gray-400">Briefly describe your scholarship needs below.</p>
             </div>
             <form className="space-y-4" onSubmit={handleSubmit(handleFormSubmit)}>
                 <div className="space-y-1">
