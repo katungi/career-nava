@@ -11,7 +11,6 @@ export const BookmarkRouter = createTRPCRouter({
             const { scholarshipId } = input;
             const userId = ctx.session.user.id; 
 
-            // Add bookmark to the database
             await db.bookmark.create({
                 data: {
                     userId,
@@ -29,8 +28,6 @@ export const BookmarkRouter = createTRPCRouter({
         .mutation(async ({ input, ctx }) => {
             const { scholarshipId } = input;
             const userId = ctx.session.user.id;
-
-            // Remove bookmark from the database
             await db.bookmark.deleteMany({
                 where: {
                     userId,
@@ -44,12 +41,11 @@ export const BookmarkRouter = createTRPCRouter({
     getUserBookmarks: protectedProcedure
         .query(async ({ ctx }) => {
             const userId = ctx.session.user.id;
-
             const bookmarks = await db.bookmark.findMany({
                 where: { userId },
                 include: { scholarship: true }, 
             });
-
+            
             return bookmarks;
         }),
 });
