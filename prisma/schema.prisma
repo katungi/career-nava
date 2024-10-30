@@ -70,6 +70,7 @@ model User {
     oneTimePurchase OneTimePurchase[]
     mentorSessions  BookingSession[]  @relation(name: "MentorSessions")
     menteeSessions  BookingSession[]  @relation(name: "MenteeSessions")
+    bookmarks        Bookmark[]
 }
 
 model LemonSqueezyWebhookEvent {
@@ -193,6 +194,7 @@ model Scholarship {
     deadline                 String?
     courseOfStudyInformation String?
     link                     String?
+    bookmarks                Bookmark[]
 }
 
 model Documents {
@@ -200,4 +202,15 @@ model Documents {
     documentUrl String
     userId      String
     user        User   @relation(fields: [userId], references: [id])
+}
+model Bookmark {
+    id            Int          @id @default(autoincrement())
+    userId        String
+    scholarshipId Int
+    createdAt     DateTime     @default(now())
+
+    user          User         @relation(fields: [userId], references: [id])
+    scholarship   Scholarship  @relation(fields: [scholarshipId], references: [id])
+
+    @@unique([userId, scholarshipId])
 }
