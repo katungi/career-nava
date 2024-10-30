@@ -28,9 +28,9 @@ const ScholarshipCard: React.FC<ScholarshipCardProps> = ({ scholarship }) => {
                         aria-label="Bookmark scholarship"
                     >
                         {isBookmarked ? (
-                            <BookmarkCheck className="w-6 h-6" />
+                            <BookmarkCheck size={28} className="w-6 h-6" />
                         ) : (
-                            <Bookmark className="w-6 h-6" />
+                            <Bookmark size={28} className="w-6 h-6" />
                         )}
                     </button>
                 </div>
