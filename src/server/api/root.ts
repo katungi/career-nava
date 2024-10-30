@@ -9,6 +9,7 @@ import { SessionRouter } from "./routers/sessions";
 import { mpesaPaymentRouter } from "./routers/daraja";
 import { ScholarshipRouter } from "./routers/scholarships";
 import { DocumentRouter } from "./routers/documents";
+import { BookmarkRouter } from "./routers/bookmark";
 
 /**
  * This is the primary router for your server.
@@ -26,6 +27,7 @@ export const appRouter = createTRPCRouter({
   mentorshipSessions: SessionRouter,
   scholarshipSessions: ScholarshipRouter, 
   documents: DocumentRouter,
+  bookmark: BookmarkRouter,
 });
 
 // export type definition of API
