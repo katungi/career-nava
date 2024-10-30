@@ -1,4 +1,3 @@
-// server/api/routers/bookmark.ts
 import { z } from 'zod';
 import { createTRPCRouter, publicProcedure, protectedProcedure } from '~/server/api/trpc';
 import { db } from '~/server/db';
@@ -46,7 +45,6 @@ export const BookmarkRouter = createTRPCRouter({
         .query(async ({ ctx }) => {
             const userId = ctx.session.user.id;
 
-            // Fetch bookmarks for the user
             const bookmarks = await db.bookmark.findMany({
                 where: { userId },
                 include: { scholarship: true }, 

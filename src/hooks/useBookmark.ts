@@ -1,6 +1,4 @@
-// hooks/useBookmark.ts
-import { api } from '~/trpc/react'; 
-
+import { api } from '~/trpc/react';
 const useBookmark = () => {
    
     const { data: bookmarks, refetch } = api.bookmark.getUserBookmarks.useQuery();
@@ -13,7 +11,7 @@ const useBookmark = () => {
     
     const removeBookmarkMutation = api.bookmark.removeBookmark.useMutation({
         onSuccess: () => {
-            refetch(); // Refetch bookmarks after removing
+            refetch(); 
         },
     });
 
