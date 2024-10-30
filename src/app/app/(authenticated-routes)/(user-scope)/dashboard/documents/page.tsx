@@ -77,9 +77,9 @@ const DocumentsHeader = ({ setOpenModal }: any) => {
             <div className='relative p-8 bg-secondary' style={{ backgroundColor: 'rgba(234, 189, 29, 0.5)' }}>
                 <h1 className="text-3xl font-bold text-gray-900">My Documents</h1>
                 <p className="text-lg text-gray-900">
-                    Upload and  manage your documents here.
+                    Upload and  manage all your documents here.
                 </p>
-                <Button className="flex items-center text-white font-bold py-2 px-4 rounded mt-8"
+                <Button className="flex items-center text-white bg-purple-600 font-bold py-2 px-4 rounded mt-8"
                     onClick={() => setOpenModal(true)}
                 >
                     <PlusIcon className="mr-2" /> Upload New Documents

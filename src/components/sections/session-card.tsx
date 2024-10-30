@@ -26,7 +26,7 @@ const SessionCard = (props: any) => {
                 {props.description}
             </p>
             <div className="mt-4">
-                <h3 className="text-sm font-semibold">Mentor:</h3>
+                <h3 className="text-sm font-semibold">Coach:</h3>
                 <div className="flex items-center mt-1">
                     {props?.mentor?.image ? (
                         <img src={props.mentor.image} alt={props.mentor.name} className="w-8 h-8 rounded-full" />

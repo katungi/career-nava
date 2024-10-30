@@ -24,9 +24,9 @@ export default function BlogShCard({ scholarship }: any) {
                     {/* <CalendarIcon className="text-purple-500" />
                     <span className="ml-2">{scholarship?.openingDates}</span> */}
                 </div>
-                <div className="flex items-center text-purple-600 mt-2">
+                <div className="flex items-center text--600 mt-2">
                 </div>
-                {/* <ClockIcon className="text-purple-500" />
+                {/* <ClockIcon className="text--500" />
                     <span className="ml-2">{scholarship?.deadline}</span> */}
                 <div className="mt-4 w-full bg-primary p-3 rounded-lg">
                     <a href={scholarship?.link!} className="text-white ml-2 flex-row flex justify-between" target='_BLANK'>
