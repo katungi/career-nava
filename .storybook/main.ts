@@ -1,4 +1,8 @@
 import type { StorybookConfig } from "@storybook/nextjs";
+import dotenv from "dotenv";
+
+// Load environment variables from the .env file
+dotenv.config();
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
@@ -18,4 +22,6 @@ const config: StorybookConfig = {
   },
   staticDirs: ["../public"],
 };
+
 export default config;
+

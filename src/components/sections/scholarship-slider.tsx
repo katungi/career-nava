@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import ScholarshipCard from './scholarship-card';
 import Empty from '../constants/empty';
@@ -11,6 +11,9 @@ const ScholarshipSlider = ({ scholarships }: any) => {
     const maxVisibleCards = 3;
     const maxSlideIndex = Math.ceil(scholarships?.length / maxVisibleCards) - 1;
 
+    
+    const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
     const nextSlide = () => {
         setCurrentSlide((prev) => (prev === maxSlideIndex ? 0 : prev + 1));
     };
@@ -19,10 +22,21 @@ const ScholarshipSlider = ({ scholarships }: any) => {
         setCurrentSlide((prev) => (prev === 0 ? maxSlideIndex : prev - 1));
     };
 
-    // Filter scholarships based on the search text
     const filteredScholarships = scholarships?.filter((scholarship: any) =>
         scholarship?.scholarshipName.toLowerCase().includes(searchText.toLowerCase())
     );
+
+    useEffect(() => {
+       
+        intervalRef.current = setInterval(nextSlide, 3000); 
+
+        return () => {
+            
+            if (intervalRef.current) {
+                clearInterval(intervalRef.current);
+            }
+        };
+    }, [currentSlide, maxSlideIndex]); 
 
     return (
         <div className="items-center space-x-4 overflow-hidden relative px-2 flex-col">
@@ -33,6 +47,14 @@ const ScholarshipSlider = ({ scholarships }: any) => {
                     onChange={(e) => setSearchText(e.target.value)}
                     placeholder="Search scholarships..."
                     className="ml-8 m-4 p-6 border rounded w-[900px]"
+                    onFocus={() => {
+                        if (intervalRef.current) {
+                            clearInterval(intervalRef.current); 
+                        }
+                    }}
+                    onBlur={() => {
+                        intervalRef.current = setInterval(nextSlide, 3000);
+                    }}
                 />
                 <button onClick={prevSlide} className="mb-2 bg-gray-200 rounded-full p-2">
                     <ChevronLeftIcon className="w-6 h-6 text-gray-600" />
@@ -46,7 +68,6 @@ const ScholarshipSlider = ({ scholarships }: any) => {
                 <button onClick={nextSlide} className="bg-gray-200 rounded-full p-2">
                     <ChevronRightIcon className="w-6 h-6 text-gray-600" />
                 </button>
-
             </div>
 
             {filteredScholarships?.length > 0 ?
@@ -66,3 +87,5 @@ const ScholarshipSlider = ({ scholarships }: any) => {
 };
 
 export default ScholarshipSlider;
+
+
