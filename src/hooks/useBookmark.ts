@@ -7,11 +7,19 @@ const useBookmark = () => {
         onSuccess: () => {
             refetch();
         },
+        onError: (error) => {
+            console.error("Failed to add bookmark:", error);
+            alert("There was an issue adding this bookmark.");
+        },
     });
     
     const removeBookmarkMutation = api.bookmark.removeBookmark.useMutation({
         onSuccess: () => {
             refetch(); 
+        },
+        onError: (error) => {
+            console.error("Failed to remove bookmark:", error);
+            alert("There was an issue removing this bookmark.");
         },
     });
 
