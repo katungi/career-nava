@@ -11,7 +11,6 @@ const ScholarshipSlider = ({ scholarships }: any) => {
     const maxVisibleCards = 3;
     const maxSlideIndex = Math.ceil(scholarships?.length / maxVisibleCards) - 1;
 
-    
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
     const nextSlide = () => {
@@ -27,65 +26,69 @@ const ScholarshipSlider = ({ scholarships }: any) => {
     );
 
     useEffect(() => {
-       
-        intervalRef.current = setInterval(nextSlide, 3000); 
+        intervalRef.current = setInterval(nextSlide, 8000);
 
         return () => {
-            
             if (intervalRef.current) {
                 clearInterval(intervalRef.current);
             }
         };
-    }, [currentSlide, maxSlideIndex]); 
+    }, [currentSlide, maxSlideIndex]);
 
     return (
-        <div className="items-center space-x-4 overflow-hidden relative px-2 flex-col">
-            <div className='flex flex-row items-center mb-3 w-full px-12'>
-                <Input
-                    type="text"
-                    value={searchText}
-                    onChange={(e) => setSearchText(e.target.value)}
-                    placeholder="Search scholarships..."
-                    className="ml-8 m-4 p-6 border rounded w-[900px]"
-                    onFocus={() => {
-                        if (intervalRef.current) {
-                            clearInterval(intervalRef.current); 
-                        }
-                    }}
-                    onBlur={() => {
-                        intervalRef.current = setInterval(nextSlide, 3000);
-                    }}
-                />
-                <button onClick={prevSlide} className="mb-2 bg-gray-200 rounded-full p-2">
-                    <ChevronLeftIcon className="w-6 h-6 text-gray-600" />
-                </button>
-                <div className="flex flex-row justify-center mb-2 px-1 space-x-1">
-                    {Array.from({ length: maxSlideIndex + 1 }, (_, index) => (
-                        <div key={index} className={`h-2 w-2 rounded-full ${index === currentSlide ? 'bg-blue-600' : 'bg-gray-400'}`}>
+        <div className="relative">
+            <Input
+                type="text"
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                placeholder="Search scholarships..."
+                className="ml-8 m-4 p-6 border rounded w-[900px]"
+                onFocus={() => {
+                    if (intervalRef.current) {
+                        clearInterval(intervalRef.current);
+                    }
+                }}
+                onBlur={() => {
+                    intervalRef.current = setInterval(nextSlide, 3000);
+                }}
+            />
+
+            <div className="flex items-center justify-center mt-6 relative">
+                {/* Slider Content */}
+                <div className="flex gap-6 overflow-hidden relative w-[900px]">
+                    {filteredScholarships?.length > 0 ?
+                        filteredScholarships.slice(currentSlide * maxVisibleCards, (currentSlide + 1) * maxVisibleCards).map((scholarship: any, index: React.Key | null | undefined) => (
+                            <div key={index} className="w-[300px]"> {/* Customize width for each card */}
+                                <ScholarshipCard scholarship={scholarship} />
+                            </div>
+                        )) :
+                        <div className="w-full text-center">
+                            <Empty />
                         </div>
-                    ))}
+                    }
                 </div>
-                <button onClick={nextSlide} className="bg-gray-200 rounded-full p-2">
-                    <ChevronRightIcon className="w-6 h-6 text-gray-600" />
+
+                {/* Left Button */}
+                <button 
+                    className="absolute left-0 bottom-0 p-2 text-xl bg-white rounded-full shadow-md hover:bg-gray-200 transition-all transform translate-y-1/2"
+                    onClick={prevSlide}>
+                    <ChevronLeftIcon />
+                </button>
+
+                {/* Right Button */}
+                <button 
+                    className="absolute right-0 bottom-0 p-2 text-xl bg-white rounded-full shadow-md hover:bg-gray-200 transition-all transform translate-y-1/2"
+                    onClick={nextSlide}>
+                    <ChevronRightIcon />
                 </button>
             </div>
-
-            {filteredScholarships?.length > 0 ?
-                <div className="flex flex-grow space-x-4">
-                    {filteredScholarships.slice(currentSlide * maxVisibleCards, (currentSlide + 1) * maxVisibleCards).map((scholarship: any, index: React.Key | null | undefined) => (
-                        <div key={index} className="flex-shrink-0 w-1/3 p-4">
-                            <ScholarshipCard scholarship={scholarship} />
-                        </div>
-                    ))}
-                </div> :
-                <div className="flex flex-grow w-[500px] h-[500px] mx-96">
-                    <Empty />
-                </div>
-            }
         </div>
     );
 };
 
 export default ScholarshipSlider;
+
+
+
 
 
