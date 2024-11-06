@@ -31,7 +31,7 @@ export default function MeetingPageComponent({ id }: MeetingPageProps) {
 
     return (
         <StreamCall call={call}>
-            <StreamTheme className="space-y-3">
+            <StreamTheme className="h-screen">
                 <MeetingScreen />
             </StreamTheme>
         </StreamCall>

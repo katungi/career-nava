@@ -26,9 +26,23 @@ export default function FlexibleCallLayout() {
   return (
     <div className="space-y-3">
       <h1 className="text-2xl font-bold text-white">Meeting</h1>
-      <CallLayoutButtons layout={layout} setLayout={setLayout} />
-      <CallLayoutView layout={layout} />
-      <CallControls onLeave={() => router.push(`/meeting/${call.id}/left`)} />
+      
+      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10">
+        <CallLayoutButtons layout={layout} setLayout={setLayout} />
+      </div>
+
+      <div className="flex-1 w-full">
+        <CallLayoutView layout={layout} />
+      </div>
+
+      
+      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/50 to-transparent">
+        <CallControls 
+          onLeave={() => router.push(`/meeting/${call.id}/left`)} 
+        />
+        <EndCallButton />
+      </div>
+
       <EndCallButton />
     </div>
   );
@@ -65,15 +79,27 @@ interface CallLayoutViewProps {
 
 function CallLayoutView({ layout }: CallLayoutViewProps) {
   if (layout === "speaker-vert") {
-    return <SpeakerLayout />;
+    return (
+      <div className="h-full">
+        <SpeakerLayout />
+      </div>
+    );
   }
 
   if (layout === "speaker-horiz") {
-    return <SpeakerLayout participantsBarPosition="right" />;
+    return (
+      <div className="h-full">
+        <SpeakerLayout participantsBarPosition="right" />
+      </div>
+    );
   }
 
   if (layout === "grid") {
-    return <PaginatedGridLayout />;
+    return (
+      <div className="h-full">
+        <PaginatedGridLayout />
+      </div>
+    );
   }
 
   return null;
