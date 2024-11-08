@@ -68,14 +68,14 @@ const ScholarshipSlider = ({ scholarships }: any) => {
                     }
                 </div>
 
-                {/* Left Button */}
+                
                 <button 
                     className="absolute left-0 bottom-0 p-2 text-xl bg-white rounded-full shadow-md hover:bg-gray-200 transition-all transform translate-y-1/2"
                     onClick={prevSlide}>
                     <ChevronLeftIcon />
                 </button>
 
-                {/* Right Button */}
+                
                 <button 
                     className="absolute right-0 bottom-0 p-2 text-xl bg-white rounded-full shadow-md hover:bg-gray-200 transition-all transform translate-y-1/2"
                     onClick={nextSlide}>

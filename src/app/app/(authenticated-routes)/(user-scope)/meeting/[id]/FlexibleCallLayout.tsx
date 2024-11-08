@@ -3,6 +3,8 @@ import {
   CallControls,
   PaginatedGridLayout,
   SpeakerLayout,
+  screenSharing,
+  VideoPreview,
 } from "@stream-io/video-react-sdk";
 import {
   BetweenHorizonalEnd,
@@ -22,6 +24,7 @@ export default function FlexibleCallLayout() {
   const call = useStreamCall();
 
   const router = useRouter();
+ 
 
   return (
     <div className="space-y-3">
