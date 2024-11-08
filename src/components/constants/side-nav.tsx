@@ -1,4 +1,4 @@
-import { AwardIcon, BookOpenCheck, CalendarIcon, LayoutDashboard, User2Icon } from "lucide-react";
+import { AwardIcon, BookOpenCheck, CalendarIcon, LayoutDashboard, User2Icon, Bookmark } from "lucide-react";
 import { type NavItem } from "~/types";
 
 export const NavItems: NavItem[] = [
@@ -25,6 +25,12 @@ export const NavItems: NavItem[] = [
         icon: BookOpenCheck,
         href: "/app/dashboard/documents",
         color: "text-orange-500",
+    },
+    {
+        title:"My Bookmarks",
+        icon: Bookmark,
+        href: "/app/dashboard/bookmarks",
+        color: "text-red-500",
     }
 ];
 
