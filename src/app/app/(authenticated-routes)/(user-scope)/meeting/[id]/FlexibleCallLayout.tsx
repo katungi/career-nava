@@ -1,10 +1,9 @@
-
 import {
   CallControls,
   PaginatedGridLayout,
   SpeakerLayout,
-  screenSharing,
-  VideoPreview,
+  useCallStateHooks,
+  useCall
 } from "@stream-io/video-react-sdk";
 import {
   BetweenHorizonalEnd,
