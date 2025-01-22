@@ -1,3 +1,5 @@
+'use client';
+
 import ScholarshipCard from "../sections/scholarship-card";
 import useBookmark from "~/hooks/useBookmark";
 import { PlusIcon } from "lucide-react";

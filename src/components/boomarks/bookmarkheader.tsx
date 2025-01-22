@@ -1,3 +1,4 @@
+"use client"
 import { PlusIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";

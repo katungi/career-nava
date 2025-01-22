@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { type Scholarship } from '@prisma/client';
 import { ArrowRight, CalendarIcon, ClockIcon, Bookmark, BookmarkCheck } from 'lucide-react';
