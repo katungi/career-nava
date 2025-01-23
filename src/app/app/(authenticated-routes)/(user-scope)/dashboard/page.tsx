@@ -15,14 +15,11 @@ export default function Home() {
 
     return (
         <div className="p-4 mx-12">
-            {/* Banner */}
             <div className="flex flex-row gap-4">
                 <div className="flex-1">
                     <DashboardBanner sessions={sessions} documents={documents} />
                 </div>
             </div>
-
-            {/* Upcoming Sessions */}
             <div className="flex flex-row mt-20 w-full justify-between">
                 <div className="">
                     <h1 className="text-3xl font-bold text-gray-800">Upcoming Sessions</h1>

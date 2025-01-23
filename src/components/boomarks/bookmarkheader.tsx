@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client"
 import { PlusIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
