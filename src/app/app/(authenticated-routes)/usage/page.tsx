@@ -1,18 +1,17 @@
-"use client";
-import { Separator } from "~/components/ui/separator";
-import { Loader2 } from "lucide-react";
-import React from "react";
-import { UpgradeDialog } from "~/components/patterns/upgrade-dialog";
-import { Button } from "~/components/ui/button";
-import useGuardedSpendCredits from "~/hooks/use-guard-usage";
-import { api } from "~/trpc/react";
-import {Link} from "next-view-transitions";
-import { Skeleton } from "~/components/ui/skeleton";
+'use client';
+import { Loader2 } from 'lucide-react';
+import { Link } from 'next-view-transitions';
+import { UpgradeDialog } from '~/components/patterns/upgrade-dialog';
+import { Button } from '~/components/ui/button';
+import { Separator } from '~/components/ui/separator';
+import { Skeleton } from '~/components/ui/skeleton';
+import useGuardedSpendCredits from '~/hooks/use-guard-usage';
+import { api } from '~/trpc/react';
 
 const Usage = () => {
-  const guardedUsage = useGuardedSpendCredits("buttonClicks");
+  const guardedUsage = useGuardedSpendCredits('buttonClicks');
   const getUsageForUserQuery = api.paymentManagement.getUsageForUser.useQuery({
-    feature: "buttonClicks",
+    feature: 'buttonClicks',
   });
 
   const getSubscriptionForUserQuery =
@@ -26,10 +25,10 @@ const Usage = () => {
         <h1 className="mb-2 text-2xl">Usage</h1>
         <h2 className="text-md text-muted-foreground">
           On this screen you can see the usage of the credits. After you set up
-          your plans via{" "}
+          your plans via{' '}
           <Link className="underline" href="/ls-setup">
             Lemon Squeezy setup page
-          </Link>{" "}
+          </Link>{' '}
           you need to modify the credits directly in the database.
         </h2>
       </div>
@@ -47,11 +46,11 @@ const Usage = () => {
             Monthly credits available: <b>{plan?.buttonClicks ?? 50}</b>
           </p>
           <p>
-            Credits spent today:{" "}
+            Credits spent today:{' '}
             <b>{getUsageForUserQuery.data?.totalUsageForFeatureThisDay}</b>
           </p>
           <p>
-            Credits spent this month:{" "}
+            Credits spent this month:{' '}
             <b> {getUsageForUserQuery.data?.totalUsageForFeatureThisMonth}</b>
           </p>
         </div>
@@ -65,8 +64,8 @@ const Usage = () => {
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           )}
           {guardedUsage.hasRunOutOfCredits
-            ? "Upgrade to spend 1 credit"
-            : "Spend 1 credit"}
+            ? 'Upgrade to spend 1 credit'
+            : 'Spend 1 credit'}
         </Button>
         <Button
           onClick={() => guardedUsage.guardAndSpendCredits(5)}
@@ -76,8 +75,8 @@ const Usage = () => {
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           )}
           {guardedUsage.hasRunOutOfCredits
-            ? "Upgrade to spend 5 credits"
-            : "Spend 5 credits"}
+            ? 'Upgrade to spend 5 credits'
+            : 'Spend 5 credits'}
         </Button>
         <Button
           onClick={() => guardedUsage.guardAndSpendCredits(10)}
@@ -87,8 +86,8 @@ const Usage = () => {
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           )}
           {guardedUsage.hasRunOutOfCredits
-            ? "Upgrade to spend 10 credits"
-            : "Spend 10 credits"}
+            ? 'Upgrade to spend 10 credits'
+            : 'Spend 10 credits'}
         </Button>
       </div>
       <UpgradeDialog

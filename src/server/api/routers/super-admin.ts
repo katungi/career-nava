@@ -1,8 +1,8 @@
-import { type Prisma } from "@prisma/client";
-import { z } from "zod";
-import { env } from "~/env.mjs";
+import type { Prisma } from '@prisma/client';
+import { z } from 'zod';
+import { env } from '~/env.mjs';
 
-import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
+import { createTRPCRouter, protectedProcedure } from '~/server/api/trpc';
 
 export const superAdminRouter = createTRPCRouter({
   getUserData: protectedProcedure
@@ -16,7 +16,7 @@ export const superAdminRouter = createTRPCRouter({
         planId: z.string().optional(),
         from: z.string().optional(),
         to: z.string().optional(),
-      }),
+      })
     )
     .query(async ({ ctx, input }) => {
       const {
@@ -31,10 +31,10 @@ export const superAdminRouter = createTRPCRouter({
       } = input;
 
       if (
-        ctx.session.user.role !== "SUPER_ADMIN" &&
-        env.CASCADE_DEMO !== "true"
+        ctx.session.user.role !== 'SUPER_ADMIN' &&
+        env.CASCADE_DEMO !== 'true'
       ) {
-        throw new Error("Unauthorized access to the resource");
+        throw new Error('Unauthorized access to the resource');
       }
 
       const skip = (page - 1) * take;
@@ -42,11 +42,11 @@ export const superAdminRouter = createTRPCRouter({
       // Sorting logic
       let orderBy = {};
       if (sort) {
-        const [sortField, sortOrder] = sort.split(".");
+        const [sortField, sortOrder] = sort.split('.');
         //@ts-expect-error ignore this line
         orderBy[sortField] = sortOrder;
       } else {
-        orderBy = { createdAt: "desc" };
+        orderBy = { createdAt: 'desc' };
       }
 
       // Start with an empty where condition
@@ -64,39 +64,36 @@ export const superAdminRouter = createTRPCRouter({
       if (email) {
         where.email = {
           contains: email,
-          mode: "insensitive",
+          mode: 'insensitive',
         };
       }
 
       if (role) {
-        const RoleSchema = z.enum(["SUPER_ADMIN", "USER"]);
+        const RoleSchema = z.enum(['SUPER_ADMIN', 'USER']);
 
         // Attempt to parse each role value and filter out any that are invalid
         const roles = role
-          .split(".")
+          .split('.')
           .map((r) => {
             try {
               return RoleSchema.parse(r);
-            } catch (error) {
-              console.error(`Invalid role: ${r}`); // Optionally log the error or handle it as needed
+            } catch (_error) {
               return null;
             }
           })
           .filter((r): r is z.infer<typeof RoleSchema> => r !== null);
-
-        console.log({ roles });
         where.role = { in: roles };
       }
 
       // PlanId filter supports multiple values
       if (planId) {
-        const planIds = planId.split(".");
-        where.planId = { in: planIds.map((id) => parseInt(id, 10)) };
+        const planIds = planId.split('.');
+        where.planId = { in: planIds.map((id) => Number.parseInt(id, 10)) };
       }
 
-      if (env.CASCADE_DEMO === "true") {
+      if (env.CASCADE_DEMO === 'true') {
         where.id = {
-          contains: "DEMO_USER",
+          contains: 'DEMO_USER',
         };
       }
 

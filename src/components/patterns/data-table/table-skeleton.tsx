@@ -1,4 +1,4 @@
-import { Skeleton } from "~/components/ui/skeleton";
+import { Skeleton } from '~/components/ui/skeleton';
 import {
   Table,
   TableBody,
@@ -6,7 +6,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "~/components/ui/table";
+} from '~/components/ui/table';
 
 type DataTableSkeletonProps = {
   /**
@@ -66,7 +66,7 @@ export function TableSkeleton({
   searchableColumnCount = 0,
   filterableColumnCount = 0,
   showViewOptions = true,
-  cellWidths = ["auto"],
+  cellWidths = ['auto'],
   shrinkZero = false,
 }: DataTableSkeletonProps) {
   return (
@@ -98,7 +98,7 @@ export function TableSkeleton({
                     key={j}
                     style={{
                       width: cellWidths[j],
-                      minWidth: shrinkZero ? cellWidths[j] : "auto",
+                      minWidth: shrinkZero ? cellWidths[j] : 'auto',
                     }}
                   >
                     <Skeleton className="h-6 w-full" />
@@ -115,7 +115,7 @@ export function TableSkeleton({
                     key={j}
                     style={{
                       width: cellWidths[j],
-                      minWidth: shrinkZero ? cellWidths[j] : "auto",
+                      minWidth: shrinkZero ? cellWidths[j] : 'auto',
                     }}
                   >
                     <Skeleton className="h-6 w-full" />
@@ -133,7 +133,7 @@ export function TableSkeleton({
             <Skeleton className="h-8 w-24" />
             <Skeleton className="h-8 w-[4.5rem]" />
           </div>
-          <div className="flex items-center justify-center text-sm font-medium">
+          <div className="flex items-center justify-center font-medium text-sm">
             <Skeleton className="h-8 w-20" />
           </div>
           <div className="flex items-center space-x-2">

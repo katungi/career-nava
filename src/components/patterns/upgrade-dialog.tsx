@@ -1,5 +1,5 @@
-import React from "react";
-import { Button } from "~/components/ui/button";
+import { Link } from 'next-view-transitions';
+import { Button } from '~/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -7,8 +7,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "~/components/ui/dialog";
-import {Link} from "next-view-transitions";
+} from '~/components/ui/dialog';
 
 export function UpgradeDialog({
   open,

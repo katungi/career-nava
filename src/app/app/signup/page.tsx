@@ -1,19 +1,18 @@
-import React from 'react'
 import { redirect } from 'next/navigation';
-import { getServerAuthSession } from '~/server/auth';
 import { SignUpScreen } from '~/components/patterns/signup-screen';
+import { getServerAuthSession } from '~/server/auth';
 
 const SignUpPage = async () => {
-    const session = await getServerAuthSession();
+  const session = await getServerAuthSession();
 
-    if (session?.user) {
-        redirect("/app/dashboard/?loginState=signedIn");
-    } 
+  if (session?.user) {
+    redirect('/app/dashboard/?loginState=signedIn');
+  }
 
-    return (
-        <div>
-            <SignUpScreen />
-        </div>
-    )
-}
-export default SignUpPage
+  return (
+    <div>
+      <SignUpScreen />
+    </div>
+  );
+};
+export default SignUpPage;

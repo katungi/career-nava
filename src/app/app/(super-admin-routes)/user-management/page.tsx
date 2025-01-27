@@ -1,10 +1,9 @@
-"use client";
-import { Separator } from "~/components/ui/separator";
-import { AlertCircle } from "lucide-react";
-import React from "react";
-import { UserTableProvider } from "~/components/patterns/data-table/data-table-provider";
-import { UserTable } from "~/components/patterns/data-table/user-table/user-table";
-import { Alert, AlertTitle, AlertDescription } from "~/components/ui/alert";
+'use client';
+import { AlertCircle } from 'lucide-react';
+import { UserTableProvider } from '~/components/patterns/data-table/data-table-provider';
+import { UserTable } from '~/components/patterns/data-table/user-table/user-table';
+import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
+import { Separator } from '~/components/ui/separator';
 
 const UserManagement = () => {
   return (
@@ -20,7 +19,7 @@ const UserManagement = () => {
           <AlertDescription>
             For demo purposes some random users are shown here. In production
             you should restrict access to this page. To see real users you need
-            to modify your user role in the database and set it to{" "}
+            to modify your user role in the database and set it to{' '}
             <b>SUPER_ADMIN</b>.
           </AlertDescription>
         </Alert>

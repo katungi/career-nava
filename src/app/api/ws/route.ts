@@ -1,15 +1,11 @@
 export function SOCKET(
-    client: import('ws').WebSocket,
-    request: import('http').IncomingMessage,
-    server: import('ws').WebSocketServer,
+  client: import('ws').WebSocket,
+  _request: import('http').IncomingMessage,
+  _server: import('ws').WebSocketServer
 ) {
-    console.log('A client connected!');
+  client.on('message', (message) => {
+    client.send(message);
+  });
 
-    client.on('message', message => {
-        client.send(message);
-    });
-
-    client.on('close', () => {
-        console.log('A client disconnected!');
-    });
+  client.on('close', () => {});
 }

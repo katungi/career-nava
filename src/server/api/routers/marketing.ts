@@ -1,8 +1,8 @@
-import { z } from "zod";
-import { slackNewNewsletterSubscriberNotification } from "~/jobs";
-import { loops } from "~/lib/loops";
+import { z } from 'zod';
+import { slackNewNewsletterSubscriberNotification } from '~/jobs';
+import { loops } from '~/lib/loops';
 
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import { createTRPCRouter, publicProcedure } from '~/server/api/trpc';
 
 export const marketingRouter = createTRPCRouter({
   subscribeToNewsletter: publicProcedure
@@ -10,7 +10,7 @@ export const marketingRouter = createTRPCRouter({
     .mutation(async ({ input }) => {
       if (loops) {
         await loops.createContact(input.email, {
-          source: "CASCADE_NEWSLETTER",
+          source: 'CASCADE_NEWSLETTER',
         });
       }
       await slackNewNewsletterSubscriberNotification.invoke({

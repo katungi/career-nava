@@ -1,41 +1,41 @@
 // contentlayer.config.ts
-import { defineDocumentType, makeSource } from "contentlayer/source-files";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypePrettyCode from "rehype-pretty-code";
-import rehypeSlug from "rehype-slug";
+import { defineDocumentType, makeSource } from 'contentlayer/source-files';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypePrettyCode from 'rehype-pretty-code';
+import rehypeSlug from 'rehype-slug';
 
 export const Post = defineDocumentType(() => ({
-  name: "Post",
-  filePathPattern: `blog/**/*.md`,
-  contentType: "mdx",
+  name: 'Post',
+  filePathPattern: 'blog/**/*.md',
+  contentType: 'mdx',
   fields: {
-    title: { type: "string", required: true },
+    title: { type: 'string', required: true },
     image: {
-      type: "string",
+      type: 'string',
       required: true,
     },
-    description: { type: "string", required: true },
-    date: { type: "date", required: true },
+    description: { type: 'string', required: true },
+    date: { type: 'date', required: true },
     published: {
-      type: "boolean",
+      type: 'boolean',
       required: true,
       default: false,
     },
   },
   computedFields: {
     slug: {
-      type: "string",
+      type: 'string',
       resolve: (post) => `/${post._raw.flattenedPath}`,
     },
     slugAsParams: {
-      type: "string",
-      resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/"),
+      type: 'string',
+      resolve: (doc) => doc._raw.flattenedPath.split('/').slice(1).join('/'),
     },
   },
 }));
 
 export default makeSource({
-  contentDirPath: "./content",
+  contentDirPath: './content',
   documentTypes: [Post],
   mdx: {
     rehypePlugins: [
@@ -44,23 +44,23 @@ export default makeSource({
         //@ts-expect-error would still work even though types are incorrect, need to fix this after contentlayer gets enough maintenenace
         rehypePrettyCode,
         {
-          theme: "dracula",
+          theme: 'dracula',
           onVisitLine(node: { children: string | unknown[] }) {
             // Prevent lines from collapsing in `display: grid` mode, and allow empty
             // lines to be copy/pasted
             if (node.children.length === 0) {
-              node.children = [{ type: "text", value: " " }];
+              node.children = [{ type: 'text', value: ' ' }];
             }
           },
           onVisitHighlightedLine(node: {
             properties: { className: string[] };
           }) {
-            node.properties.className.push("line--highlighted");
+            node.properties.className.push('line--highlighted');
           },
           onVisitHighlightedWord(node: {
             properties: { className: string[] };
           }) {
-            node.properties.className = ["word--highlighted"];
+            node.properties.className = ['word--highlighted'];
           },
         },
       ],
@@ -68,8 +68,8 @@ export default makeSource({
         rehypeAutolinkHeadings,
         {
           properties: {
-            className: ["subheading-anchor"],
-            ariaLabel: "Link to section",
+            className: ['subheading-anchor'],
+            ariaLabel: 'Link to section',
           },
         },
       ],

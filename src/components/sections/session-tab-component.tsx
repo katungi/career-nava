@@ -1,42 +1,51 @@
-"use client"
+'use client';
 
-import { ChevronRight } from "lucide-react"
-import TabsComponent from "../patterns/tabs"
-import { Button } from "../ui/button"
-import { useState } from "react";
+import { ChevronRight } from 'lucide-react';
+import { useState } from 'react';
+import TabsComponent from '../patterns/tabs';
+import { Button } from '../ui/button';
 
 export default function SessionTabComponent() {
-    const [activeTab, setActiveTab] = useState(0);
-    const tabsData = [
-        { title: 'All', count: 4 },
-        { title: 'Active', count: 1 },
-        { title: 'Upcoming', count: 3 },
-        { title: 'Deleted', count: 0 },
-    ];
-    return (
-        <>
-            <div className='mt-10'>
-                <TabsComponent tabsData={tabsData} activeTab={activeTab} setActiveTab={setActiveTab} />
+  const [activeTab, setActiveTab] = useState(0);
+  const tabsData = [
+    { title: 'All', count: 4 },
+    { title: 'Active', count: 1 },
+    { title: 'Upcoming', count: 3 },
+    { title: 'Deleted', count: 0 },
+  ];
+  return (
+    <>
+      <div className="mt-10">
+        <TabsComponent
+          tabsData={tabsData}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+        />
+      </div>
+      <div className="flex w-full flex-row">
+        <div className="p-3">
+          <div className="flex w-full flex-row items-center justify-between p-3">
+            <div className="">
+              <h1 className="font-bold text-4xl text-gray-800">
+                {tabsData[activeTab]?.title} Sessions
+              </h1>
+              <p className="mt-2 text-gray-900 text-xl">
+                Manage your documents, subscriptions, and billing here. You can
+                also view your usage and manage your account.
+              </p>
             </div>
-            <div className="flex flex-row w-full">
-                <div className="p-3">
-                    <div className="flex flex-row w-full p-3 justify-between items-center">
-                        <div className="">
-                            <h1 className="text-4xl font-bold text-gray-800">{tabsData[activeTab]?.title} Sessions</h1>
-                            <p className="text-gray-900 text-xl mt-2">
-                                Manage your documents, subscriptions, and billing here. You can also view your usage and manage your account.
-                            </p>
-                        </div>
-                        <div className="ml-12">
-                            <Button className="flex items-center text-white w-40 h-12 justify-center rounded-md hover:bg-secondary-dark"
-                                variant={'secondary'}   >
-                                See Sessions
-                                <ChevronRight className="w-6 h-6 text-white ml-2" />
-                            </Button>
-                        </div>
-                    </div>
-                </div>
+            <div className="ml-12">
+              <Button
+                className="flex h-12 w-40 items-center justify-center rounded-md text-white hover:bg-secondary-dark"
+                variant={'secondary'}
+              >
+                See Sessions
+                <ChevronRight className="ml-2 h-6 w-6 text-white" />
+              </Button>
             </div>
-        </>
-    )
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }

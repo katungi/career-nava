@@ -2,7 +2,7 @@
  * Check if the value is an object.
  */
 function isObject(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && value !== null;
+  return typeof value === 'object' && value !== null;
 }
 
 /**
@@ -20,9 +20,9 @@ export function webhookHasMeta(obj: unknown): obj is {
   if (
     isObject(obj) &&
     isObject(obj.meta) &&
-    typeof obj.meta.event_name === "string" &&
+    typeof obj.meta.event_name === 'string' &&
     isObject(obj.meta.custom_data) &&
-    typeof obj.meta.custom_data.user_id_in_database === "string"
+    typeof obj.meta.custom_data.user_id_in_database === 'string'
   ) {
     return true;
   }

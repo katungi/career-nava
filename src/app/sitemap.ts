@@ -1,6 +1,6 @@
-import { allPosts } from "contentlayer/generated";
-import { type MetadataRoute } from "next";
-import { env } from "~/env.mjs";
+import { allPosts } from 'contentlayer/generated';
+import type { MetadataRoute } from 'next';
+import { env } from '~/env.mjs';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const posts = allPosts;
@@ -8,7 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: env.NEXT_PUBLIC_DEPLOYMENT_URL,
       lastModified: new Date(),
-      changeFrequency: "yearly",
+      changeFrequency: 'yearly',
       priority: 1,
     },
     ...posts.map((post) => ({

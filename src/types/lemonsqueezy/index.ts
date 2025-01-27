@@ -31,7 +31,7 @@ export interface LemonsqueezySubscriptionAttributes {
 }
 
 export interface LemonsqueezyOrderAttributes {
-  status: "paid";
+  status: 'paid';
   user_email: string;
   user_name: string;
   customer_id: number;
@@ -59,10 +59,10 @@ export interface LemonsqueezyWebhookPayload {
       user_id_in_database: string;
     };
     event_name:
-      | "order_created"
-      | "subscription_cancelled"
-      | "subscription_created"
-      | "subscription_updated";
+      | 'order_created'
+      | 'subscription_cancelled'
+      | 'subscription_created'
+      | 'subscription_updated';
     test_mode: boolean;
   };
 }

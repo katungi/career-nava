@@ -1,22 +1,22 @@
-"use client";
-import { Loader2, TestTube2 } from "lucide-react";
-import { useRouter } from "next/navigation";
-import {Link} from "next-view-transitions";
-import React, { useEffect } from "react";
-import { Button } from "~/components/ui/button";
-import { Skeleton } from "~/components/ui/skeleton";
-import { api } from "~/trpc/react";
-import { currency } from "~/lib/utils";
-import { Alert, AlertTitle, AlertDescription } from "~/components/ui/alert";
-import { Separator } from "~/components/ui/separator";
+'use client';
+import { Loader2, TestTube2 } from 'lucide-react';
+import { Link } from 'next-view-transitions';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
+import { Button } from '~/components/ui/button';
+import { Separator } from '~/components/ui/separator';
+import { Skeleton } from '~/components/ui/skeleton';
+import { currency } from '~/lib/utils';
+import { api } from '~/trpc/react';
 
 //lemosqueezy params
 const embed = false;
 const intervalLabels = {
-  day: "day",
-  week: "wk",
-  month: "mo",
-  year: "yr",
+  day: 'day',
+  week: 'wk',
+  month: 'mo',
+  year: 'yr',
 };
 
 const Subscriptions = () => {
@@ -26,8 +26,7 @@ const Subscriptions = () => {
 
   // Make sure Lemon.js is loaded
   useEffect(() => {
-    if (typeof window.createLemonSqueezy === "function") {
-      console.log("created lemon squeezy");
+    if (typeof window.createLemonSqueezy === 'function') {
       window.createLemonSqueezy();
     }
   }, []);
@@ -45,7 +44,7 @@ const Subscriptions = () => {
           On this screen you see the availabe subscriptions from Lemon Squeezy
           that user can choose from.
           <br />
-          You need to create them first in the{" "}
+          You need to create them first in the{' '}
           <Link
             className="underline"
             href="https://app.lemonsqueezy.com/products"
@@ -54,10 +53,10 @@ const Subscriptions = () => {
             Lemon Squeezy dashboard
           </Link>
           <br />
-          Sync them up in database on{" "}
+          Sync them up in database on{' '}
           <Link className="underline" href="/ls-setup">
             Lemon Squeezy setup page
-          </Link>{" "}
+          </Link>{' '}
           and then you can see them here.
         </h2>
         <Alert className="mt-4">
@@ -81,7 +80,7 @@ const Subscriptions = () => {
         )}
         {userSubscriptionsQuery.data?.subscription ? (
           <h1>
-            You are already subscribed. View your subscription{" "}
+            You are already subscribed. View your subscription{' '}
             <Link href="/app/billing" className="underline">
               here
             </Link>
@@ -94,16 +93,16 @@ const Subscriptions = () => {
                 className="divide-y divide-slate-200 rounded-lg border border-b shadow-sm"
               >
                 <div className="space-y-4 p-6">
-                  <h2 className="text-xl font-bold leading-6 text-foreground">
+                  <h2 className="font-bold text-foreground text-xl leading-6">
                     {variant.attributes.name}
                   </h2>
                   <p className="mt-8">
-                    <span className="text-4xl font-bold tracking-tighter text-foreground">
+                    <span className="font-bold text-4xl text-foreground tracking-tighter">
                       {currency}
                       {(variant.attributes.price / 100).toFixed(2)}
                     </span>
                     {variant.attributes.interval && (
-                      <span className="text-base font-medium text-muted-foreground">
+                      <span className="font-medium text-base text-muted-foreground">
                         /{intervalLabels[variant.attributes.interval]}
                       </span>
                     )}
@@ -123,9 +122,9 @@ const Subscriptions = () => {
                             embed
                               ? checkoutUrl &&
                                 window.LemonSqueezy.Url.Open(checkoutUrl)
-                              : router.push(checkoutUrl ?? "/");
+                              : router.push(checkoutUrl ?? '/');
                           },
-                        },
+                        }
                       );
                     }}
                     className="w-full"

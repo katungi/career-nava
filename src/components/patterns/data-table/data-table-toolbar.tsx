@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import * as React from "react";
+import type * as React from 'react';
 
-import type { Table } from "@tanstack/react-table";
+import type { Table } from '@tanstack/react-table';
 
-import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
+import { Button } from '~/components/ui/button';
+import { Input } from '~/components/ui/input';
 
-import { Delete, Trash2 } from "lucide-react";
-import {
-  type DataTableFilterableColumn,
-  type DataTableSearchableColumn,
-} from "~/types/data-table";
-import { DataTableViewOptions } from "./data-table-view-options";
-import { DataTableFacetedFilter } from "./data-table-faceted-filter";
+import { Trash2 } from 'lucide-react';
+import type {
+  DataTableFilterableColumn,
+  DataTableSearchableColumn,
+} from '~/types/data-table';
+import { DataTableFacetedFilter } from './data-table-faceted-filter';
+import { DataTableViewOptions } from './data-table-view-options';
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -36,14 +36,14 @@ export function DataTableToolbar<TData>({
         {searchableColumns.length > 0 &&
           searchableColumns.map(
             (column) =>
-              table.getColumn(column.id ? String(column.id) : "") && (
+              table.getColumn(column.id ? String(column.id) : '') && (
                 <Input
                   key={String(column.id)}
                   placeholder={column.placeholder}
                   value={
                     (table
                       .getColumn(String(column.id))
-                      ?.getFilterValue() as string) ?? ""
+                      ?.getFilterValue() as string) ?? ''
                   }
                   onChange={(event) =>
                     table
@@ -52,19 +52,19 @@ export function DataTableToolbar<TData>({
                   }
                   className="h-8 w-[150px] lg:w-[250px]"
                 />
-              ),
+              )
           )}
         {filterableColumns.length > 0 &&
           filterableColumns.map(
             (column) =>
-              table.getColumn(column.id ? String(column.id) : "") && (
+              table.getColumn(column.id ? String(column.id) : '') && (
                 <DataTableFacetedFilter
                   key={String(column.id)}
-                  column={table.getColumn(column.id ? String(column.id) : "")}
+                  column={table.getColumn(column.id ? String(column.id) : '')}
                   title={column.title}
                   options={column.options}
                 />
-              ),
+              )
           )}
 
         {isFiltered && (

@@ -1,28 +1,29 @@
-"use client";
+'use client';
 
-import { useSession } from "next-auth/react";
-import { usePathname, redirect } from "next/navigation";
-import { useEffect } from "react";
-import SplashScreen from "~/components/patterns/splash-screen";
+import { useSession } from 'next-auth/react';
+import { redirect, usePathname } from 'next/navigation';
+import { useEffect } from 'react';
+import SplashScreen from '~/components/patterns/splash-screen';
 
 const ProtectedRoutes = ({ children }: { children: React.ReactNode }) => {
   const { status } = useSession();
   const pathname = usePathname();
 
   useEffect(() => {
-    const allowedUnauthenticatedPaths = ["/app/login", "/app/signup", ""];
+    const allowedUnauthenticatedPaths = ['/app/login', '/app/signup', ''];
 
     if (
-      status !== "loading" &&
-      status !== "authenticated" &&
+      status !== 'loading' &&
+      status !== 'authenticated' &&
       !allowedUnauthenticatedPaths.includes(pathname)
     ) {
-      redirect("/app/login");
+      redirect('/app/login');
     }
   }, [status, pathname]);
 
-  if (status === "loading" && pathname.includes("/app"))
+  if (status === 'loading' && pathname.includes('/app')) {
     return <SplashScreen />;
+  }
   return <>{children}</>;
 };
 

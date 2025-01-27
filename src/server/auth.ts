@@ -1,20 +1,17 @@
-import { PrismaAdapter } from "@auth/prisma-adapter";
+import { PrismaAdapter } from '@auth/prisma-adapter';
+import * as Sentry from '@sentry/nextjs';
 import {
-  getServerSession,
   type DefaultSession,
   type NextAuthOptions,
-} from "next-auth";
-import { type Adapter } from "next-auth/adapters";
-import DiscordProvider from "next-auth/providers/discord";
-import GoogleProvider from "next-auth/providers/google";
-import * as Sentry from "@sentry/nextjs";
+  getServerSession,
+} from 'next-auth';
+import type { Adapter } from 'next-auth/adapters';
+import DiscordProvider from 'next-auth/providers/discord';
+import GoogleProvider from 'next-auth/providers/google';
 
-import { env } from "~/env.mjs";
-import { db } from "~/server/db";
-import { loops } from "~/lib/loops";
-import { NextApiRequest, NextApiResponse } from "next/types";
-import { Role } from "@prisma/client";
-import { getCookie } from "cookies-next";
+import { Role } from '@prisma/client';
+import { env } from '~/env.mjs';
+import { db } from '~/server/db';
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -22,13 +19,13 @@ import { getCookie } from "cookies-next";
  *
  * @see https://next-auth.js.org/getting-started/typescript#module-augmentation
  */
-declare module "next-auth" {
+declare module 'next-auth' {
   interface Session extends DefaultSession {
     user: {
       id: string;
       planId: string | null;
       role: string;
-    } & DefaultSession["user"];
+    } & DefaultSession['user'];
   }
 }
 
@@ -53,8 +50,8 @@ export function authOptions(): NextAuthOptions {
             ...session.user,
             id: user.id,
             planId: dbUser?.planId ?? null,
-            role: dbUser?.role ?? "MENTEE",
-            bio: dbUser?.Bio ?? "",
+            role: dbUser?.role ?? 'MENTEE',
+            bio: dbUser?.Bio ?? '',
             scholarshipAffiliations: dbUser?.scholarshipAffiliations ?? [],
           },
         };
@@ -62,24 +59,26 @@ export function authOptions(): NextAuthOptions {
     },
     events: {
       async signIn({ user, isNewUser, profile, account }) {
-        Sentry.setUser({ id: user.id, name: user.name, email: user.email ?? "" });
+        Sentry.setUser({
+          id: user.id,
+          name: user.name,
+          email: user.email ?? '',
+        });
         if (isNewUser) {
           await db.user.update({
             where: {
               id: user.id,
             },
             data: {
-              role: Role.USER
+              role: Role.USER,
             },
-          })
+          });
         }
       },
       signOut() {
         Sentry.setUser(null);
       },
-      updateUser({ user }) {
-        console.log("updateUser", user);
-      }
+      updateUser({ user }) {},
     },
     adapter: PrismaAdapter(db) as Adapter,
     providers: [
@@ -92,9 +91,9 @@ export function authOptions(): NextAuthOptions {
         clientSecret: env.GOOGLE_CLIENT_SECRET!,
         authorization: {
           params: {
-            role: Role
-          }
-        }
+            role: Role,
+          },
+        },
       }),
 
       /**
@@ -107,10 +106,10 @@ export function authOptions(): NextAuthOptions {
        * @see https://next-auth.js.org/providers/github
        */
     ],
-  }
+  };
 
   return options;
-};
+}
 
 /**
  * Wrapper for `getServerSession` so that you don't need to import the `authOptions` in every file.
@@ -118,4 +117,3 @@ export function authOptions(): NextAuthOptions {
  * @see https://next-auth.js.org/configuration/nextjs
  */
 export const getServerAuthSession = () => getServerSession(authOptions());
-

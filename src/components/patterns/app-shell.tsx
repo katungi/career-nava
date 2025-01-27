@@ -1,7 +1,9 @@
-import { Link } from "next-view-transitions";
-import { Menu } from "lucide-react";
-import { Button } from "~/components/ui/button";
+import { Menu } from 'lucide-react';
+import { Link } from 'next-view-transitions';
+import { Button } from '~/components/ui/button';
 
+import Image from 'next/image';
+import { redirect, usePathname } from 'next/navigation';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,28 +11,27 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "~/components/ui/dropdown-menu";
-import { Sheet, SheetContent, SheetTrigger } from "~/components/ui/sheet";
-import LoginLogoutButton from "./login-logout-button";
-import UserButton from "./user-button";
-import Image from "next/image";
-import { redirect, usePathname } from "next/navigation";
+} from '~/components/ui/dropdown-menu';
+import { Sheet, SheetContent, SheetTrigger } from '~/components/ui/sheet';
+import LoginLogoutButton from './login-logout-button';
+import UserButton from './user-button';
 
 export async function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isInApplicationRoute = pathname.includes("/app");
-  const isInOnboardingRoute = pathname.includes("/app/onboarding");
-  const isDashboardRoute = pathname.includes("/app/dashboard") || pathname.includes("/app/meeting") || pathname.includes("/app/mentor")
+  const isInApplicationRoute = pathname.includes('/app');
+  const isInOnboardingRoute = pathname.includes('/app/onboarding');
+  const isDashboardRoute =
+    pathname.includes('/app/dashboard') ||
+    pathname.includes('/app/meeting') ||
+    pathname.includes('/app/mentor');
 
-  const app_env = process.env.NODE_ENV;
-
-  console.log("APP ENV::", app_env)
+  const _app_env = process.env.NODE_ENV;
 
   return isInOnboardingRoute || isDashboardRoute ? (
     <main>{children}</main>
   ) : (
     <div className="flex min-h-screen w-full flex-col">
-      <header className="sticky top-0 z-30 flex h-16 items-center gap-4 px-4 md:px-6 bg-primary">
+      <header className="sticky top-0 z-30 flex h-16 items-center gap-4 bg-primary px-4 md:px-6">
         <Link href="/" passHref>
           <Image
             src="/logo.svg"
@@ -40,7 +41,7 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
             className=" hidden md:block"
           />
         </Link>
-        <nav className="hidden flex-col gap-8 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+        <nav className="hidden flex-col gap-8 font-medium text-lg md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
           {isInApplicationRoute ? (
             <>
               <Link
@@ -122,7 +123,7 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
             )}
           </SheetTrigger>
           <SheetContent side="left">
-            <nav className="grid gap-6 text-lg font-medium">
+            <nav className="grid gap-6 font-medium text-lg">
               {isInApplicationRoute ? (
                 <>
                   {/* <Link
@@ -171,15 +172,17 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
         </Sheet>
         <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
           <div className="ml-auto">
-            <nav className="w-full flex gap-12">
+            <nav className="flex w-full gap-12">
               <Link
                 href="/blog"
-                className="text-white transition-colors hover:text-secondary">
+                className="text-white transition-colors hover:text-secondary"
+              >
                 Blog
               </Link>
               <Link
                 href="/about"
-                className="text-white transition-colors hover:text-secondary">
+                className="text-white transition-colors hover:text-secondary"
+              >
                 About
               </Link>
             </nav>
@@ -195,10 +198,10 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                onClick={() =>
-                  redirect("/app/dashboard/?loginState=signedIn")
-                }
-              >Dashboard</DropdownMenuItem>
+                onClick={() => redirect('/app/dashboard/?loginState=signedIn')}
+              >
+                Dashboard
+              </DropdownMenuItem>
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <LoginLogoutButton />
@@ -207,9 +210,7 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
           </DropdownMenu>
         </div>
       </header>
-      <main className="flex flex-1 flex-col">
-        {children}
-      </main>
+      <main className="flex flex-1 flex-col">{children}</main>
     </div>
   );
 }

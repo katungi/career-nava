@@ -1,14 +1,20 @@
-"use client";
+'use client';
 
-import { ChevronRight, Loader, Loader2 } from "lucide-react";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { Button } from "~/components/ui/button";
-import { api } from "~/trpc/react";
-import { motion } from "framer-motion";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select";
-import { Role } from "@prisma/client";
+import { Role } from '@prisma/client';
+import { motion } from 'framer-motion';
+import { ChevronRight, Loader } from 'lucide-react';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { Button } from '~/components/ui/button';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '~/components/ui/select';
+import { api } from '~/trpc/react';
 
 const Onboarding = () => {
   const session = useSession();
@@ -19,7 +25,7 @@ const Onboarding = () => {
   const updateUserMutation = api.user.updateUser.useMutation({
     onSuccess: async () => {
       await utils.user.invalidate();
-      router.push("/app/onboarding/settings");
+      router.push('/app/onboarding/settings');
     },
   });
   const router = useRouter();
@@ -31,20 +37,21 @@ const Onboarding = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
-        <h1 className="text-center text-4xl font-bold tracking-tight">
-          {session.status === "authenticated"
-            ? `Welcome, ${getUserQuery.data?.name || ""}`
-            : "Welcome to CareerNava"}
+        <h1 className="text-center font-bold text-4xl tracking-tight">
+          {session.status === 'authenticated'
+            ? `Welcome, ${getUserQuery.data?.name || ''}`
+            : 'Welcome to CareerNava'}
         </h1>
-        <h2 className="text-center text-xl text-muted-foreground">
+        <h2 className="text-center text-muted-foreground text-xl">
           Update your Role and avatar so we can personalize your experience!
         </h2>
       </motion.div>
       <motion.div
         transition={{ delay: 0.4, duration: 0.4 }}
-        initial={{ x: "-5px", opacity: 0 }}
+        initial={{ x: '-5px', opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
-        className="mx-auto flex w-fit gap-2">
+        className="mx-auto flex w-fit gap-2"
+      >
         <div>
           <label className="sr-only" htmlFor="role">
             Role

@@ -1,28 +1,28 @@
-"use client";
+'use client';
 
-import * as React from "react";
+import * as React from 'react';
 
-import { useDataTable } from "~/hooks/use-data-table";
-import { DataTable } from "../data-table";
-import { useUserTable } from "../data-table-provider";
-import { DataTableToolbar } from "../data-table-toolbar";
-import { api } from "~/trpc/react";
+import { useDataTable } from '~/hooks/use-data-table';
+import { api } from '~/trpc/react';
+import { DataTable } from '../data-table';
+import { useUserTable } from '../data-table-provider';
+import { DataTableToolbar } from '../data-table-toolbar';
+import { TableSkeleton } from '../table-skeleton';
 import {
+  filterableColumns,
   getColumns,
   searchableColumns,
-  filterableColumns,
-} from "./user-table-columns";
-import { TableSkeleton } from "../table-skeleton";
+} from './user-table-columns';
 
-import { searchParamsSchema } from "../validations";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams } from 'next/navigation';
+import { searchParamsSchema } from '../validations';
 
 export function UserTable() {
   const { enableAdvancedFilter } = useUserTable();
   const searchParams = useSearchParams();
 
   const search = searchParamsSchema.parse(
-    Object.fromEntries(searchParams.entries()),
+    Object.fromEntries(searchParams.entries())
   );
 
   const { data, isLoading } = api.superAdmin.getUserData.useQuery(
@@ -38,7 +38,7 @@ export function UserTable() {
     },
     {
       placeholderData: (prev) => prev,
-    },
+    }
   );
 
   // Memoize the columns so they don't re-render on every render

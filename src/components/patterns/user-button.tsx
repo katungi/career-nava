@@ -1,12 +1,11 @@
-import { CircleUser } from "lucide-react";
-import { useSession } from "next-auth/react";
-import React from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { CircleUser } from 'lucide-react';
+import { useSession } from 'next-auth/react';
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 
 const UserButton = () => {
   const session = useSession();
   const isAuthenticated =
-    session.status !== "loading" && session.status === "authenticated";
+    session.status !== 'loading' && session.status === 'authenticated';
 
   return (
     <div>

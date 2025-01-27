@@ -1,23 +1,21 @@
-'use client'
-import React, { useState } from 'react';
+'use client';
 
-const TabsComponent = ({ tabsData, setActiveTab, activeTab}: any) => {
-
+const TabsComponent = ({ tabsData, setActiveTab, activeTab }: any) => {
   return (
     <div className="bg-white p-4">
-      <div className="bg-white rounded-lg p-4 flex justify-between items-center">
+      <div className="flex items-center justify-between rounded-lg bg-white p-4">
         <div className="flex space-x-4">
           {tabsData.map((tab: any, index: number) => (
             <button
               key={index}
-              className={`text-lg font-medium py-2 px-4 rounded-md transition-all ${
+              className={`rounded-md px-4 py-2 font-medium text-lg transition-all ${
                 activeTab === index
                   ? 'bg-purple-500 text-white'
-                  : 'text-purple-500 bg-transparent hover:bg-purple-300 hover:text-white'
+                  : 'bg-transparent text-purple-500 hover:bg-purple-300 hover:text-white'
               }`}
               onClick={() => setActiveTab(index)}
             >
-              {tab.title} 
+              {tab.title}
             </button>
           ))}
         </div>

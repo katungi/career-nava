@@ -1,18 +1,17 @@
-import { Role } from "@prisma/client";
-import { z } from "zod";
+import { Role } from '@prisma/client';
+import { z } from 'zod';
 
-import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
+import { createTRPCRouter, protectedProcedure } from '~/server/api/trpc';
 
 export const userRouter = createTRPCRouter({
   updateUser: protectedProcedure
     .input(
       z.object({
-        image: z.string().optional(), role: z.enum(
-          [Role.MENTOR, Role.USER]
-        ).optional(),
+        image: z.string().optional(),
+        role: z.enum([Role.MENTOR, Role.USER]).optional(),
         Bio: z.string().optional(),
-        scholarshipAffiliation: z.array(z.string()).optional()
-      }),
+        scholarshipAffiliation: z.array(z.string()).optional(),
+      })
     )
     .mutation(async ({ input, ctx }) => {
       const user = ctx.session?.user;
@@ -32,15 +31,17 @@ export const userRouter = createTRPCRouter({
     return user;
   }),
   getUserById: protectedProcedure
-    .input(z.object({
-      id: z.string()
-    }))
+    .input(
+      z.object({
+        id: z.string(),
+      })
+    )
     .query(async ({ input, ctx }) => {
       const user = await ctx.db.user.findUnique({
         where: {
-          id: input.id
-        }
-      })
-      return user
-    })
+          id: input.id,
+        },
+      });
+      return user;
+    }),
 });

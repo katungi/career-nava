@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { LoginScreen } from "~/components/patterns/login-screen";
+import type { Meta, StoryObj } from '@storybook/react';
+import { LoginScreen } from '~/components/patterns/login-screen';
 
 const meta = {
-  title: "Example/Login Screen",
+  title: 'Example/Login Screen',
   component: LoginScreen,
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
-    layout: "fullscreen",
+    layout: 'fullscreen',
   },
 } satisfies Meta<typeof LoginScreen>;
 

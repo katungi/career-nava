@@ -2,7 +2,7 @@
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
  * for Docker builds.
  */
-await import("./src/env.mjs");
+await import('./src/env.mjs');
 
 /** @type {import("next").NextConfig} */
 const config = {
@@ -16,8 +16,8 @@ const config = {
 
 // Injected content via Sentry wizard below
 
-import { withSentryConfig } from "@sentry/nextjs";
-import { withContentlayer } from "next-contentlayer";
+import { withSentryConfig } from '@sentry/nextjs';
+import { withContentlayer } from 'next-contentlayer';
 
 export default withSentryConfig(
   withContentlayer(config),
@@ -43,7 +43,7 @@ export default withSentryConfig(
     // Routes browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers. (increases server load)
     // Note: Check that the configured route will not match with your Next.js middleware, otherwise reporting of client-
     // side errors will fail.
-    tunnelRoute: "/monitoring",
+    tunnelRoute: '/monitoring',
 
     // Hides source maps from generated client bundles
     hideSourceMaps: true,
