@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { SiGoogle } from '@icons-pack/react-simple-icons';
-import { signIn } from 'next-auth/react';
-import { Novatrix, Zenitho } from 'uvcanvas';
+import { signIn } from "next-auth/react";
+import { Novatrix, Zenitho } from "uvcanvas";
+import { SiGoogle } from "@icons-pack/react-simple-icons";
 
-import { useRouter } from 'next/navigation';
-import { Button } from '~/components/ui/button';
+import { Button } from "~/components/ui/button";
+import { useRouter } from "next/navigation";
 
 export function LoginScreen() {
   const router = useRouter();
@@ -15,9 +15,9 @@ export function LoginScreen() {
         <div className="absolute inset-0 block lg:hidden [&_canvas]:h-[100vh] [&_canvas]:w-[100vw]">
           <Zenitho />
         </div>
-        <div className="relative mx-auto grid w-[350px] gap-6 rounded-lg bg-background px-4 py-8">
+        <div className="relative mx-auto  grid w-[350px] gap-6 rounded-lg bg-background px-4 py-8">
           <div className="grid gap-2 text-center">
-            <h1 className="font-bold text-3xl">Login</h1>
+            <h1 className="text-3xl font-bold">Login</h1>
             <p className="text-balance text-muted-foreground">
               Login to your account to continue!
             </p>
@@ -25,10 +25,10 @@ export function LoginScreen() {
           <div className="grid gap-4">
             <Button
               onClick={async () =>
-                await signIn('google', {
-                  callbackUrl: '/app/dashboard/?loginState=signedIn',
+                await signIn("google", {
+                  callbackUrl: "/app/dashboard/?loginState=signedIn",
                 })
-              }
+            }
               variant="outline"
               className="w-full"
             >
@@ -36,11 +36,8 @@ export function LoginScreen() {
               Login with Google
             </Button>
           </div>
-          <Button
-            variant={'ghost'}
-            className="m-4 font-bold underline decoration-primary decoration-wavy"
-            onClick={() => router.push('/app/signup')}
-          >
+          <Button variant={"ghost"} className="m-4 font-bold underline decoration-wavy decoration-primary"
+            onClick={() => router.push("/app/signup")}>
             I don't have an Account
           </Button>
         </div>

@@ -7,13 +7,13 @@
  * need to use are documented accordingly near the end.
  */
 
-import * as Sentry from '@sentry/nextjs';
-import { TRPCError, initTRPC } from '@trpc/server';
-import superjson from 'superjson';
-import { ZodError } from 'zod';
+import { initTRPC, TRPCError } from "@trpc/server";
+import superjson from "superjson";
+import { ZodError } from "zod";
+import * as Sentry from "@sentry/nextjs";
 
-import { getServerAuthSession } from '~/server/auth';
-import { db } from '~/server/db';
+import { getServerAuthSession } from "~/server/auth";
+import { db } from "~/server/db";
 
 /**
  * 1. CONTEXT
@@ -91,7 +91,7 @@ export const publicProcedure = t.procedure;
 /** Reusable middleware that enforces users are logged in before running the procedure. */
 const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
   if (!ctx.session || !ctx.session.user) {
-    throw new TRPCError({ code: 'UNAUTHORIZED' });
+    throw new TRPCError({ code: "UNAUTHORIZED" });
   }
   Sentry.setUser({ id: ctx.session.user.id });
   return next({
@@ -106,7 +106,7 @@ const sentryMiddleware = t.middleware(
   //@ts-expect-error this does not break even though types are mismatched
   Sentry.Handlers.trpcMiddleware({
     attachRpcInput: true,
-  })
+  }),
 );
 
 const finalMiddleware = sentryMiddleware.unstable_pipe(enforceUserIsAuthed);

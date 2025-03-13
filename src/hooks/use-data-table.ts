@@ -1,19 +1,14 @@
-'use client';
+"use client";
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import * as React from 'react';
-
-import type {
-  DataTableFilterableColumn,
-  DataTableSearchableColumn,
-} from '~/types/data-table';
+import * as React from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import {
-  type ColumnDef,
-  type ColumnFiltersState,
-  type PaginationState,
-  type SortingState,
-  type VisibilityState,
+  type DataTableSearchableColumn,
+  type DataTableFilterableColumn,
+} from "~/types/data-table";
+
+import {
   getCoreRowModel,
   getFacetedRowModel,
   getFacetedUniqueValues,
@@ -21,10 +16,15 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from '@tanstack/react-table';
-import { z } from 'zod';
+  type ColumnDef,
+  type ColumnFiltersState,
+  type PaginationState,
+  type SortingState,
+  type VisibilityState,
+} from "@tanstack/react-table";
+import { z } from "zod";
 
-import { useDebounce } from './use-debounce';
+import { useDebounce } from "./use-debounce";
 
 interface UseDataTableProps<TData, TValue> {
   /**
@@ -75,7 +75,7 @@ interface UseDataTableProps<TData, TValue> {
 const schema = z.object({
   page: z.coerce.number().default(1),
   per_page: z.coerce.number().default(10),
-  sort: z.string().optional().default('createdAt.desc'),
+  sort: z.string().optional().default("createdAt.desc"),
 });
 
 export function useDataTable<TData, TValue>({
@@ -92,9 +92,9 @@ export function useDataTable<TData, TValue>({
 
   // Search params
   const { page, per_page, sort } = schema.parse(
-    Object.fromEntries(searchParams)
+    Object.fromEntries(searchParams),
   );
-  const [column, order] = sort?.split('.') ?? [];
+  const [column, order] = sort?.split(".") ?? [];
 
   // Create query string
   const createQueryString = React.useCallback(
@@ -111,7 +111,7 @@ export function useDataTable<TData, TValue>({
 
       return newSearchParams.toString();
     },
-    [searchParams]
+    [searchParams],
   );
 
   // Initial column filters
@@ -119,16 +119,16 @@ export function useDataTable<TData, TValue>({
     return Array.from(searchParams.entries()).reduce<ColumnFiltersState>(
       (filters, [key, value]) => {
         const filterableColumn = filterableColumns.find(
-          (column) => column.id === key
+          (column) => column.id === key,
         );
         const searchableColumn = searchableColumns.find(
-          (column) => column.id === key
+          (column) => column.id === key,
         );
 
         if (filterableColumn) {
           filters.push({
             id: key,
-            value: value.split('.'),
+            value: value.split("."),
           });
         } else if (searchableColumn) {
           filters.push({
@@ -139,7 +139,7 @@ export function useDataTable<TData, TValue>({
 
         return filters;
       },
-      []
+      [],
     );
   }, [filterableColumns, searchableColumns, searchParams]);
 
@@ -162,7 +162,7 @@ export function useDataTable<TData, TValue>({
       pageIndex,
       pageSize,
     }),
-    [pageIndex, pageSize]
+    [pageIndex, pageSize],
   );
 
   React.useEffect(() => {
@@ -173,7 +173,7 @@ export function useDataTable<TData, TValue>({
       })}`,
       {
         scroll: false,
-      }
+      },
     );
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -182,8 +182,8 @@ export function useDataTable<TData, TValue>({
   // Handle server-side sorting
   const [sorting, setSorting] = React.useState<SortingState>([
     {
-      id: column ?? '',
-      desc: order === 'desc',
+      id: column ?? "",
+      desc: order === "desc",
     },
   ]);
 
@@ -192,9 +192,9 @@ export function useDataTable<TData, TValue>({
       `${pathname}?${createQueryString({
         page,
         sort: sorting[0]?.id
-          ? `${sorting[0]?.id}.${sorting[0]?.desc ? 'desc' : 'asc'}`
+          ? `${sorting[0]?.id}.${sorting[0]?.desc ? "desc" : "asc"}`
           : null,
-      })}`
+      })}`,
     );
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -206,10 +206,10 @@ export function useDataTable<TData, TValue>({
       JSON.stringify(
         columnFilters.filter((filter) => {
           return searchableColumns.find((column) => column.id === filter.id);
-        })
+        }),
       ),
-      500
-    )
+      500,
+    ),
   ) as ColumnFiltersState;
 
   const filterableColumnFilters = columnFilters.filter((filter) => {
@@ -220,9 +220,7 @@ export function useDataTable<TData, TValue>({
 
   React.useEffect(() => {
     // Opt out when advanced filter is enabled, because it contains additional params
-    if (enableAdvancedFilter) {
-      return;
-    }
+    if (enableAdvancedFilter) return;
 
     // Prevent resetting the page on initial render
     if (!mounted) {
@@ -237,17 +235,17 @@ export function useDataTable<TData, TValue>({
 
     // Handle debounced searchable column filters
     for (const column of debouncedSearchableColumnFilters) {
-      if (typeof column.value === 'string') {
+      if (typeof column.value === "string") {
         Object.assign(newParamsObject, {
-          [column.id]: typeof column.value === 'string' ? column.value : null,
+          [column.id]: typeof column.value === "string" ? column.value : null,
         });
       }
     }
 
     // Handle filterable column filters
     for (const column of filterableColumnFilters) {
-      if (typeof column.value === 'object' && Array.isArray(column.value)) {
-        Object.assign(newParamsObject, { [column.id]: column.value.join('.') });
+      if (typeof column.value === "object" && Array.isArray(column.value)) {
+        Object.assign(newParamsObject, { [column.id]: column.value.join(".") });
       }
     }
 
@@ -256,7 +254,7 @@ export function useDataTable<TData, TValue>({
       if (
         (searchableColumns.find((column) => column.id === key) &&
           !debouncedSearchableColumnFilters.find(
-            (column) => column.id === key
+            (column) => column.id === key,
           )) ??
         (filterableColumns.find((column) => column.id === key) &&
           !filterableColumnFilters.find((column) => column.id === key))

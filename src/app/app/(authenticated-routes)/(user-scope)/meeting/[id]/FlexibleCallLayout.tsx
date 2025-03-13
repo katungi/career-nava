@@ -2,40 +2,46 @@ import {
   CallControls,
   PaginatedGridLayout,
   SpeakerLayout,
-} from '@stream-io/video-react-sdk';
+  useCallStateHooks,
+  useCall
+} from "@stream-io/video-react-sdk";
 import {
   BetweenHorizonalEnd,
   BetweenVerticalEnd,
   LayoutGrid,
-} from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import useStreamCall from '~/hooks/use-stream-call';
-import EndCallButton from './EndCallButton';
+} from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import EndCallButton from "./EndCallButton";
+import useStreamCall from "~/hooks/use-stream-call";
 
-type CallLayout = 'speaker-vert' | 'speaker-horiz' | 'grid';
+type CallLayout = "speaker-vert" | "speaker-horiz" | "grid";
 
 export default function FlexibleCallLayout() {
-  const [layout, setLayout] = useState<CallLayout>('speaker-vert');
+  const [layout, setLayout] = useState<CallLayout>("speaker-vert");
 
   const call = useStreamCall();
 
   const router = useRouter();
+ 
 
   return (
     <div className="space-y-3">
-      <h1 className="font-bold text-2xl text-white">Meeting</h1>
-
-      <div className="-translate-x-1/2 absolute top-4 left-1/2 z-10 transform">
+      <h1 className="text-2xl font-bold text-white">Meeting</h1>
+      
+      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10">
         <CallLayoutButtons layout={layout} setLayout={setLayout} />
       </div>
 
-      <div className="w-full flex-1">
+      <div className="flex-1 w-full">
         <CallLayoutView layout={layout} />
       </div>
 
-      <div className="absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black/50 to-transparent p-4">
-        <CallControls onLeave={() => router.push(`/meeting/${call.id}/left`)} />
+      
+      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/50 to-transparent">
+        <CallControls 
+          onLeave={() => router.push(`/meeting/${call.id}/left`)} 
+        />
         <EndCallButton />
       </div>
 
@@ -52,18 +58,18 @@ interface CallLayoutButtonsProps {
 function CallLayoutButtons({ layout, setLayout }: CallLayoutButtonsProps) {
   return (
     <div className="mx-auto w-fit space-x-6">
-      <button onClick={() => setLayout('speaker-vert')}>
+      <button onClick={() => setLayout("speaker-vert")}>
         <BetweenVerticalEnd
-          className={layout !== 'speaker-vert' ? 'text-gray-400' : ''}
+          className={layout !== "speaker-vert" ? "text-gray-400" : ""}
         />
       </button>
-      <button onClick={() => setLayout('speaker-horiz')}>
+      <button onClick={() => setLayout("speaker-horiz")}>
         <BetweenHorizonalEnd
-          className={layout !== 'speaker-horiz' ? 'text-gray-400' : ''}
+          className={layout !== "speaker-horiz" ? "text-gray-400" : ""}
         />
       </button>
-      <button onClick={() => setLayout('grid')}>
-        <LayoutGrid className={layout !== 'grid' ? 'text-gray-400' : ''} />
+      <button onClick={() => setLayout("grid")}>
+        <LayoutGrid className={layout !== "grid" ? "text-gray-400" : ""} />
       </button>
     </div>
   );
@@ -74,7 +80,7 @@ interface CallLayoutViewProps {
 }
 
 function CallLayoutView({ layout }: CallLayoutViewProps) {
-  if (layout === 'speaker-vert') {
+  if (layout === "speaker-vert") {
     return (
       <div className="h-full">
         <SpeakerLayout />
@@ -82,7 +88,7 @@ function CallLayoutView({ layout }: CallLayoutViewProps) {
     );
   }
 
-  if (layout === 'speaker-horiz') {
+  if (layout === "speaker-horiz") {
     return (
       <div className="h-full">
         <SpeakerLayout participantsBarPosition="right" />
@@ -90,7 +96,7 @@ function CallLayoutView({ layout }: CallLayoutViewProps) {
     );
   }
 
-  if (layout === 'grid') {
+  if (layout === "grid") {
     return (
       <div className="h-full">
         <PaginatedGridLayout />

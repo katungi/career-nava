@@ -1,22 +1,22 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
-'use client';
+"use client";
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import * as React from 'react';
+import * as React from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-import { addDays, format } from 'date-fns';
-import type { DateRange } from 'react-day-picker';
+import { addDays, format } from "date-fns";
+import type { DateRange } from "react-day-picker";
 
-import { cn } from '~/lib/utils';
+import { cn } from "~/lib/utils";
 
-import { CalendarIcon } from 'lucide-react';
-import { Button, type ButtonProps } from '~/components/ui/button';
-import { Calendar } from '~/components/ui/calendar';
+import { Calendar } from "~/components/ui/calendar";
+import { Button, type ButtonProps } from "~/components/ui/button";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '~/components/ui/popover';
+} from "~/components/ui/popover";
+import { CalendarIcon } from "lucide-react";
 
 interface DateRangePickerProps
   extends React.ComponentPropsWithoutRef<typeof PopoverContent> {
@@ -41,14 +41,14 @@ interface DateRangePickerProps
    * @default "outline"
    * @type "default" | "outline" | "secondary" | "ghost"
    */
-  triggerVariant?: Exclude<ButtonProps['variant'], 'destructive' | 'link'>;
+  triggerVariant?: Exclude<ButtonProps["variant"], "destructive" | "link">;
 
   /**
    * The size of the calendar trigger button.
    * @default "default"
    * @type "default" | "sm" | "lg"
    */
-  triggerSize?: Exclude<ButtonProps['size'], 'icon'>;
+  triggerSize?: Exclude<ButtonProps["size"], "icon">;
 
   /**
    * The class name of the calendar trigger button.
@@ -61,8 +61,8 @@ interface DateRangePickerProps
 export function DateRangePicker({
   dateRange,
   dayCount,
-  triggerVariant = 'outline',
-  triggerSize = 'default',
+  triggerVariant = "outline",
+  triggerSize = "default",
   triggerClassName,
   className,
   ...props
@@ -95,15 +95,15 @@ export function DateRangePicker({
   React.useEffect(() => {
     const newSearchParams = new URLSearchParams(searchParams);
     if (date?.from) {
-      newSearchParams.set('from', format(date.from, 'yyyy-MM-dd'));
+      newSearchParams.set("from", format(date.from, "yyyy-MM-dd"));
     } else {
-      newSearchParams.delete('from');
+      newSearchParams.delete("from");
     }
 
     if (date?.to) {
-      newSearchParams.set('to', format(date.to, 'yyyy-MM-dd'));
+      newSearchParams.set("to", format(date.to, "yyyy-MM-dd"));
     } else {
-      newSearchParams.delete('to');
+      newSearchParams.delete("to");
     }
 
     router.push(`${pathname}?${newSearchParams.toString()}`, {
@@ -121,27 +121,27 @@ export function DateRangePicker({
             variant={triggerVariant}
             size={triggerSize}
             className={cn(
-              'w-full justify-start truncate text-left font-normal',
-              !date && 'text-muted-foreground',
-              triggerClassName
+              "w-full justify-start truncate text-left font-normal",
+              !date && "text-muted-foreground",
+              triggerClassName,
             )}
           >
             <CalendarIcon className="mr-2 size-4" />
             {date?.from ? (
               date.to ? (
                 <>
-                  {format(date.from, 'LLL dd, y')} -{' '}
-                  {format(date.to, 'LLL dd, y')}
+                  {format(date.from, "LLL dd, y")} -{" "}
+                  {format(date.to, "LLL dd, y")}
                 </>
               ) : (
-                format(date.from, 'LLL dd, y')
+                format(date.from, "LLL dd, y")
               )
             ) : (
               <span>Pick a date</span>
             )}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className={cn('w-auto p-0', className)} {...props}>
+        <PopoverContent className={cn("w-auto p-0", className)} {...props}>
           <Calendar
             initialFocus
             mode="range"

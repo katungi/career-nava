@@ -1,19 +1,20 @@
-'use client';
-import { format } from 'date-fns';
-import { AppWindow, Banknote, CreditCard } from 'lucide-react';
-import { Link } from 'next-view-transitions';
-import { Button } from '~/components/ui/button';
-import { Card } from '~/components/ui/card';
+"use client";
 import {
   DropdownMenu,
+  DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '~/components/ui/dropdown-menu';
-import { Separator } from '~/components/ui/separator';
-import { Skeleton } from '~/components/ui/skeleton';
-import { currency } from '~/lib/utils';
-import { api } from '~/trpc/react';
+} from "~/components/ui/dropdown-menu";
+import { Link } from "next-view-transitions";
+import React from "react";
+import { Card } from "~/components/ui/card";
+import { Skeleton } from "~/components/ui/skeleton";
+import { api } from "~/trpc/react";
+import { Button } from "~/components/ui/button";
+import { AppWindow, Banknote, CreditCard } from "lucide-react";
+import { format } from "date-fns";
+import { currency } from "~/lib/utils";
+import { Separator } from "~/components/ui/separator";
 
 const Billing = () => {
   const userSubscriptionQuery =
@@ -54,7 +55,7 @@ const Billing = () => {
                   <h2 className="text-lg">
                     {
                       allVariantsQuery.data?.data?.data.find(
-                        (variant) => variant.id === purchase.variantId
+                        (variant) => variant.id === purchase.variantId,
                       )?.attributes.name
                     }
                   </h2>
@@ -85,7 +86,7 @@ const Billing = () => {
                         href={subscription?.customerPortalUrl}
                       >
                         <div className="flex">
-                          <AppWindow className="mr-2 h-4 w-4 self-center" />{' '}
+                          <AppWindow className="mr-2 h-4 w-4 self-center" />{" "}
                           Customer portal
                         </div>
                       </Link>
@@ -98,7 +99,7 @@ const Billing = () => {
                         href={subscription?.updatePaymentMethodUrl}
                       >
                         <div className="flex">
-                          <CreditCard className="mr-2 h-4 w-4 self-center" />{' '}
+                          <CreditCard className="mr-2 h-4 w-4 self-center" />{" "}
                           Update payment method
                         </div>
                       </Link>
@@ -126,20 +127,20 @@ const Billing = () => {
                 {(variant?.data?.data.attributes.price / 100).toFixed(2)}
               </p>
             )}
-            {subscription?.renewsAt && subscription.status !== 'cancelled' && (
-              <p>Renews at: {format(new Date(subscription?.renewsAt), 'PP')}</p>
+            {subscription?.renewsAt && subscription.status !== "cancelled" && (
+              <p>Renews at: {format(new Date(subscription?.renewsAt), "PP")}</p>
             )}
             {subscription?.endsAt && (
-              <p>Ends at: {format(new Date(subscription?.endsAt), 'PP')}</p>
+              <p>Ends at: {format(new Date(subscription?.endsAt), "PP")}</p>
             )}
             <p>Status: {subscription?.status}</p>
           </Card>
         ) : (
           <p>
-            No subscription found.{' '}
+            No subscription found.{" "}
             <Link className="underline" href="/app/subscriptions">
               Subscribe here
-            </Link>{' '}
+            </Link>{" "}
           </p>
         )}
       </div>

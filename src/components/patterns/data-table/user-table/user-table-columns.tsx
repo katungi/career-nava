@@ -1,23 +1,25 @@
-'use client';
+"use client";
 
-import type { ColumnDef } from '@tanstack/react-table';
+import * as React from "react";
 
-import { formatDate } from '~/lib/utils';
+import { type ColumnDef } from "@tanstack/react-table";
 
-import type {
-  DataTableFilterableColumn,
-  DataTableSearchableColumn,
-} from '~/types/data-table';
+import { formatDate } from "~/lib/utils";
 
-import type { Plan, User } from '@prisma/client';
-import { DataTableColumnHeader } from '../data-table-column-header';
+import {
+  type DataTableSearchableColumn,
+  type DataTableFilterableColumn,
+} from "~/types/data-table";
+
+import { DataTableColumnHeader } from "../data-table-column-header";
+import { type Plan, type User } from "@prisma/client";
 
 export const searchableColumns: DataTableSearchableColumn<
   User & { plan: Plan | null }
 >[] = [
   {
-    id: 'email',
-    placeholder: 'Filter email...',
+    id: "email",
+    placeholder: "Filter email...",
   },
 ];
 
@@ -25,34 +27,34 @@ export const filterableColumns: DataTableFilterableColumn<
   User & { plan: Plan | null }
 >[] = [
   {
-    id: 'role',
-    title: 'Role',
+    id: "role",
+    title: "Role",
     options: [
       {
-        label: 'User',
-        value: 'USER',
+        label: "User",
+        value: "USER",
       },
       {
-        label: 'Super Admin',
-        value: 'SUPER_ADMIN',
+        label: "Super Admin",
+        value: "SUPER_ADMIN",
       },
     ],
   },
   {
-    id: 'planId',
-    title: 'Plan',
+    id: "planId",
+    title: "Plan",
     options: [
       {
-        label: 'Default',
-        value: '1',
+        label: "Default",
+        value: "1",
       },
       {
-        label: 'Monthly',
-        value: '2',
+        label: "Monthly",
+        value: "2",
       },
       {
-        label: 'Yearly',
-        value: '4',
+        label: "Yearly",
+        value: "4",
       },
     ],
   },
@@ -61,26 +63,26 @@ export const filterableColumns: DataTableFilterableColumn<
 export function getColumns(): ColumnDef<User & { plan: Plan | null }>[] {
   return [
     {
-      accessorKey: 'id',
+      accessorKey: "id",
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title="Id" />
       ),
-      cell: ({ row }) => <div>{row.getValue('id')}</div>,
+      cell: ({ row }) => <div>{row.getValue("id")}</div>,
       enableSorting: false,
       enableHiding: false,
     },
     {
-      accessorKey: 'email',
+      accessorKey: "email",
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title="Email" />
       ),
-      cell: ({ row }) => <div>{row.getValue('email')}</div>,
+      cell: ({ row }) => <div>{row.getValue("email")}</div>,
       enableSorting: true,
       enableHiding: true,
     },
 
     {
-      accessorKey: 'createdAt',
+      accessorKey: "createdAt",
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title="Created At" />
       ),
@@ -88,7 +90,7 @@ export function getColumns(): ColumnDef<User & { plan: Plan | null }>[] {
       enableColumnFilter: false,
     },
     {
-      accessorKey: 'planId',
+      accessorKey: "planId",
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title="Plan" />
       ),
@@ -100,11 +102,11 @@ export function getColumns(): ColumnDef<User & { plan: Plan | null }>[] {
       enableSorting: true,
     },
     {
-      accessorKey: 'role',
+      accessorKey: "role",
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title="Role" />
       ),
-      cell: ({ row }) => <div>{row.getValue('role')}</div>,
+      cell: ({ row }) => <div>{row.getValue("role")}</div>,
       enableColumnFilter: false,
       enableSorting: true,
     },

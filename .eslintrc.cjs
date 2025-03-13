@@ -1,39 +1,37 @@
 /** @type {import("eslint").Linter.Config} */
-'use strict';
-/** @type {import("eslint").Linter.Config} */
 const config = {
-  parser: '@typescript-eslint/parser',
-  ignorePatterns: ['prettier.config.mjs'],
+  parser: "@typescript-eslint/parser",
+  ignorePatterns: ["prettier.config.mjs"],
   parserOptions: {
     project: true,
   },
-  plugins: ['@typescript-eslint'],
+  plugins: ["@typescript-eslint"],
   extends: [
-    'next/core-web-vitals',
-    'plugin:@typescript-eslint/recommended-type-checked',
-    'plugin:@typescript-eslint/stylistic-type-checked',
-    'plugin:storybook/recommended',
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended-type-checked",
+    "plugin:@typescript-eslint/stylistic-type-checked",
+    "plugin:storybook/recommended",
   ],
   rules: {
-    '@typescript-eslint/array-type': 'off',
-    '@typescript-eslint/consistent-type-definitions': 'off',
-    '@typescript-eslint/consistent-type-imports': [
-      'warn',
+    "@typescript-eslint/array-type": "off",
+    "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/consistent-type-imports": [
+      "warn",
       {
-        prefer: 'type-imports',
-        fixStyle: 'inline-type-imports',
+        prefer: "type-imports",
+        fixStyle: "inline-type-imports",
       },
     ],
-    '@typescript-eslint/no-unused-vars': [
-      'warn',
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
       {
-        argsIgnorePattern: '^_',
+        argsIgnorePattern: "^_",
       },
     ],
-    '@typescript-eslint/non-nullable-type-assertion-style': 'off',
-    '@typescript-eslint/require-await': 'off',
-    '@typescript-eslint/no-misused-promises': [
-      'error',
+    "@typescript-eslint/non-nullable-type-assertion-style": "off",
+    "@typescript-eslint/require-await": "off",
+    "@typescript-eslint/no-misused-promises": [
+      "error",
       {
         checksVoidReturn: {
           attributes: false,

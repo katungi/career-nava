@@ -1,11 +1,11 @@
-import { useCallback, useMemo, useState } from 'react';
-import { toast } from 'sonner';
-import { api } from '~/trpc/react';
+import { useState, useCallback, useMemo } from "react";
+import { toast } from "sonner";
+import { api } from "~/trpc/react";
 
 const CREDITS_WITHOUT_SUBSCRIPTION = 5;
 
 const useGuardedSpendCredits = (
-  feature: 'buttonClicks' | 'aiCalls' | 'fileUploads'
+  feature: "buttonClicks" | "aiCalls" | "fileUploads",
 ) => {
   const [showUpgradeDialog, setShowUpgradeDialog] = useState(false);
   const utils = api.useUtils();
@@ -16,7 +16,7 @@ const useGuardedSpendCredits = (
     api.paymentManagement.getUsageForUser.useQuery({ feature });
   const spendCreditsMutation = api.paymentManagement.spendCredits.useMutation({
     onSuccess: () => {
-      toast.success('Credits spent successfully');
+      toast.success("Credits spent successfully");
     },
   });
 
@@ -32,7 +32,7 @@ const useGuardedSpendCredits = (
 
   const hasRunOutOfCredits = useMemo(
     () => featureCreditsLeft < 1,
-    [featureCreditsLeft]
+    [featureCreditsLeft],
   );
 
   const guardAndSpendCredits = useCallback(
@@ -41,24 +41,24 @@ const useGuardedSpendCredits = (
         isLoadingSubscription ||
         isLoadingUsage ||
         spendCreditsMutation.isPending
-      ) {
+      )
         return;
-      }
 
-      if (hasRunOutOfCredits) {
+      if (!hasRunOutOfCredits) {
+        try {
+          await spendCreditsMutation.mutateAsync({
+            amount: spendAmount,
+            feature,
+          });
+          await utils.paymentManagement.getUsageForUser.invalidate({
+            feature,
+          });
+        } catch (error) {
+          toast.error("Failed to spend credits");
+        }
+      } else {
         setShowUpgradeDialog(true);
         return { hasRunOutOfCredits };
-      }
-      try {
-        await spendCreditsMutation.mutateAsync({
-          amount: spendAmount,
-          feature,
-        });
-        await utils.paymentManagement.getUsageForUser.invalidate({
-          feature,
-        });
-      } catch (_error) {
-        toast.error('Failed to spend credits');
       }
     },
     [
@@ -68,7 +68,7 @@ const useGuardedSpendCredits = (
       spendCreditsMutation,
       utils,
       feature,
-    ]
+    ],
   );
 
   return {

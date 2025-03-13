@@ -1,4 +1,4 @@
-import { Mic, Webcam } from 'lucide-react';
+import { Mic, Webcam } from "lucide-react";
 
 export default function PermissionPrompt() {
   return (

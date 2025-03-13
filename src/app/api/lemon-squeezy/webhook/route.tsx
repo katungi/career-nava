@@ -1,20 +1,20 @@
-import crypto from 'node:crypto';
-import { env } from '~/env.mjs';
+import crypto from "node:crypto";
+import { env } from "~/env.mjs";
 
-import { slackNewChurnNotification, slackNewPaymentNotification } from '~/jobs';
-import { isTriggerEnabled } from '~/lib/trigger';
-import { assertNever } from '~/lib/utils';
-import type {
-  LemonsqueezyOrderAttributes,
-  LemonsqueezySubscriptionAttributes,
-  LemonsqueezyWebhookPayload,
-} from '~/types/lemonsqueezy';
-import { db } from '../../../../server/db';
-import { webhookHasMeta } from './utils';
+import { webhookHasMeta } from "./utils";
+import { db } from "../../../../server/db";
+import {
+  type LemonsqueezyOrderAttributes,
+  type LemonsqueezySubscriptionAttributes,
+  type LemonsqueezyWebhookPayload,
+} from "~/types/lemonsqueezy";
+import { isTriggerEnabled } from "~/lib/trigger";
+import { slackNewChurnNotification, slackNewPaymentNotification } from "~/jobs";
+import { assertNever } from "~/lib/utils";
 
 export async function POST(request: Request) {
   if (!env.LEMON_SQUEEZY_WEBHOOK_SECRET) {
-    return new Response('Lemon Squeezy Webhook Secret not set in .env', {
+    return new Response("Lemon Squeezy Webhook Secret not set in .env", {
       status: 500,
     });
   }
@@ -23,15 +23,15 @@ export async function POST(request: Request) {
   const rawBody = await request.text();
   const secret = env.LEMON_SQUEEZY_WEBHOOK_SECRET;
 
-  const hmac = crypto.createHmac('sha256', secret);
-  const digest = Buffer.from(hmac.update(rawBody).digest('hex'), 'utf8');
+  const hmac = crypto.createHmac("sha256", secret);
+  const digest = Buffer.from(hmac.update(rawBody).digest("hex"), "utf8");
   const signature = Buffer.from(
-    request.headers.get('X-Signature') ?? '',
-    'utf8'
+    request.headers.get("X-Signature") ?? "",
+    "utf8",
   );
 
   if (!crypto.timingSafeEqual(digest, signature)) {
-    return new Response('Invalid signature', { status: 400 });
+    return new Response("Invalid signature", { status: 400 });
   }
 
   const data = JSON.parse(rawBody) as LemonsqueezyWebhookPayload;
@@ -56,7 +56,7 @@ export async function POST(request: Request) {
     });
 
     if (isTriggerEnabled) {
-      if (event === 'subscription_created') {
+      if (event === "subscription_created") {
         await slackNewPaymentNotification.invoke({
           user: {
             email: webhookData.user_email,
@@ -66,8 +66,8 @@ export async function POST(request: Request) {
         });
       }
       if (
-        event === 'subscription_cancelled' ||
-        (event === 'subscription_updated' && webhookData.status === 'cancelled')
+        event === "subscription_cancelled" ||
+        (event === "subscription_updated" && webhookData.status === "cancelled")
       ) {
         await slackNewChurnNotification.invoke({
           user: {
@@ -77,7 +77,7 @@ export async function POST(request: Request) {
           productName: webhookData.product_name,
         });
       }
-      if (event === 'order_created') {
+      if (event === "order_created") {
         await slackNewChurnNotification.invoke({
           user: {
             email: webhookData.user_email,
@@ -89,9 +89,9 @@ export async function POST(request: Request) {
     }
 
     switch (event) {
-      case 'order_created': {
+      case "order_created":
         const orderData = data.data.attributes as LemonsqueezyOrderAttributes;
-        if (orderData.status === 'paid') {
+        if (orderData.status === "paid") {
           await db.oneTimePurchase.create({
             data: {
               userId: userIdInDatabase,
@@ -101,7 +101,7 @@ export async function POST(request: Request) {
               variantId: String(orderData.first_order_item.variant_id),
               orderId: orderData.first_order_item.id,
               lemonSqueezyId: data.data.id,
-              status: 'paid',
+              status: "paid",
             },
           });
           await slackNewPaymentNotification.invoke({
@@ -118,9 +118,8 @@ export async function POST(request: Request) {
           });
         }
         break;
-      }
-      case 'subscription_created':
-      case 'subscription_updated': {
+      case "subscription_created":
+      case "subscription_updated":
         await db.lemonSqueezySubscription.upsert({
           where: { lemonSqueezyId: lemonSqueezySubscriptionId },
           update: {
@@ -129,9 +128,9 @@ export async function POST(request: Request) {
               ? new Date(webhookData.renews_at)
               : null,
             endsAt:
-              webhookData.status === 'cancelled'
+              webhookData.status === "cancelled"
                 ? new Date(existingSubscription?.renewsAt ?? new Date())
-                : (webhookData.ends_at ?? null),
+                : webhookData.ends_at ?? null,
             trialEndsAt: webhookData.trial_ends_at
               ? new Date(webhookData.trial_ends_at)
               : null,
@@ -167,7 +166,7 @@ export async function POST(request: Request) {
           where: { id: createdWebhook.id },
           data: { processed: true },
         });
-        if (webhookData.status !== 'cancelled') {
+        if (webhookData.status !== "cancelled") {
           const planInDbCorrespondingToSubscription = await db.plan.findFirst({
             where: {
               lemonSqueezyVariantId: String(webhookData.variant_id),
@@ -189,12 +188,11 @@ export async function POST(request: Request) {
         }
 
         break;
-      }
-      case 'subscription_cancelled': {
+      case "subscription_cancelled":
         await db.lemonSqueezySubscription.update({
           where: { lemonSqueezyId: lemonSqueezySubscriptionId },
           data: {
-            status: 'cancelled',
+            status: "cancelled",
             endsAt: new Date(existingSubscription?.renewsAt ?? new Date()),
           },
           // Update with actual cancellation logic
@@ -210,13 +208,12 @@ export async function POST(request: Request) {
           },
         });
         break;
-      }
       default:
         assertNever(event);
     }
 
-    return new Response('OK', { status: 200 });
+    return new Response("OK", { status: 200 });
   }
 
-  return new Response('Data invalid', { status: 400 });
+  return new Response("Data invalid", { status: 400 });
 }

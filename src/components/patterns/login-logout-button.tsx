@@ -1,22 +1,22 @@
-'use client';
+"use client";
 
-import { DropdownMenuItem } from '~/components/ui/dropdown-menu';
+import { DropdownMenuItem } from "~/components/ui/dropdown-menu";
 
-import { signOut, useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const LoginLogoutButton = () => {
   const session = useSession();
   const isAuthenticated =
-    session.status !== 'loading' && session.status === 'authenticated';
+    session.status !== "loading" && session.status === "authenticated";
 
   const router = useRouter();
 
   return (
     <DropdownMenuItem
-      onClick={() => (isAuthenticated ? signOut() : router.push('/app/login'))}
+      onClick={() => (isAuthenticated ? signOut() : router.push("/app/login"))}
     >
-      {isAuthenticated ? 'Logout' : 'Login'}
+      {isAuthenticated ? "Logout" : "Login"}
     </DropdownMenuItem>
   );
 };

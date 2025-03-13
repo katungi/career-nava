@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
@@ -24,19 +24,21 @@ async function main() {
           // Optionally add a plan to the user
           ...(planId && { planId: planId }),
         },
-      })
+      }),
     );
   }
 
   // Wait for all User creations to be processed
   await Promise.all(userPromises);
+  console.log("100 users created, some with random plans.");
 }
 
 main()
   .then(async () => {
     await prisma.$disconnect();
   })
-  .catch(async (_e) => {
+  .catch(async (e) => {
+    console.error(e);
     await prisma.$disconnect();
     process.exit(1);
   });

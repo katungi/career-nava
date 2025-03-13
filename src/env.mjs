@@ -1,5 +1,5 @@
-import { createEnv } from '@t3-oss/env-nextjs';
-import { z } from 'zod';
+import { createEnv } from "@t3-oss/env-nextjs";
+import { z } from "zod";
 
 export const env = createEnv({
   /**
@@ -8,45 +8,45 @@ export const env = createEnv({
    */
   server: {
     POSTGRES_PRISMA_URL:
-      process.env.NODE_ENV === 'production'
+      process.env.NODE_ENV === "production"
         ? z.string().url()
         : z.string().optional(),
     POSTGRES_URL_NON_POOLING:
-      process.env.NODE_ENV === 'production'
+      process.env.NODE_ENV === "production"
         ? z.string().url()
         : z.string().optional(),
     NODE_ENV: z
-      .enum(['development', 'test', 'production'])
-      .default('development'),
+      .enum(["development", "test", "production"])
+      .default("development"),
     LOOPS_API_KEY: z.string().optional(),
     NEXTAUTH_SECRET:
-      process.env.NODE_ENV === 'production'
+      process.env.NODE_ENV === "production"
         ? z.string()
         : z.string().optional(),
     NEXTAUTH_URL:
-      process.env.NODE_ENV === 'production'
+      process.env.NODE_ENV === "production"
         ? z.preprocess(
             // This makes Vercel deployments not fail if you don't set NEXTAUTH_URL
             // Since NextAuth.js automatically uses the VERCEL_URL if present.
             (str) => process.env.VERCEL_URL ?? str,
             // VERCEL_URL doesn't include `https` so it cant be validated as a URL
-            process.env.VERCEL ? z.string() : z.string().url()
+            process.env.VERCEL ? z.string() : z.string().url(),
           )
         : z.string().optional(),
     DISCORD_CLIENT_ID:
-      process.env.NODE_ENV === 'production'
+      process.env.NODE_ENV === "production"
         ? z.string()
         : z.string().optional(),
     DISCORD_CLIENT_SECRET:
-      process.env.NODE_ENV === 'production'
+      process.env.NODE_ENV === "production"
         ? z.string()
         : z.string().optional(),
     GOOGLE_CLIENT_ID:
-      process.env.NODE_ENV === 'production'
+      process.env.NODE_ENV === "production"
         ? z.string()
         : z.string().optional(),
     GOOGLE_CLIENT_SECRET:
-      process.env.NODE_ENV === 'production'
+      process.env.NODE_ENV === "production"
         ? z.string()
         : z.string().optional(),
     TRIGGER_API_KEY: z.string().optional(),
@@ -66,11 +66,11 @@ export const env = createEnv({
    */
   client: {
     NEXT_PUBLIC_POSTHOG_API_KEY:
-      process.env.NODE_ENV === 'production'
+      process.env.NODE_ENV === "production"
         ? z.string()
         : z.string().optional(),
     NEXT_PUBLIC_POSTHOG_HOST:
-      process.env.NODE_ENV === 'production'
+      process.env.NODE_ENV === "production"
         ? z.string()
         : z.string().optional(),
     NEXT_PUBLIC_DEPLOYMENT_URL: z.string(),
@@ -107,10 +107,8 @@ export const env = createEnv({
     NEXT_PUBLIC_PLAUSIBLE_SELFHOSTED_URL:
       process.env.NEXT_PUBLIC_PLAUSIBLE_SELFHOSTED_URL,
     CASCADE_DEMO: process.env.CASCADE_DEMO,
-    NEXT_PUBLIC_STREAM_VIDEO_API_KEY:
-      process.env.NEXT_PUBLIC_STREAM_VIDEO_API_KEY,
-    NEXT_PUBLIC_STREAM_VIDEO_API_SECRET:
-      process.env.NEXT_PUBLIC_STREAM_VIDEO_API_SECRET,
+    NEXT_PUBLIC_STREAM_VIDEO_API_KEY: process.env.NEXT_PUBLIC_STREAM_VIDEO_API_KEY,
+    NEXT_PUBLIC_STREAM_VIDEO_API_SECRET: process.env.NEXT_PUBLIC_STREAM_VIDEO_API_SECRET,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

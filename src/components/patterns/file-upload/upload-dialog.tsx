@@ -1,13 +1,8 @@
-'use client';
+"use client";
 
-import * as React from 'react';
+import * as React from "react";
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
-import { z } from 'zod';
-import { FileUploader } from '~/components/patterns/file-upload/file-uploader';
-import { Button } from '~/components/ui/button';
+import { Button } from "~/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -15,20 +10,25 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '~/components/ui/dialog';
-import { useUploadFile } from '~/hooks/use-upload-file';
+} from "~/components/ui/dialog";
+import { FileUploader } from "~/components/patterns/file-upload/file-uploader";
+import { useUploadFile } from "~/hooks/use-upload-file";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
 
-import { useSession } from 'next-auth/react';
 import {
   Form,
-  FormControl,
   FormField,
   FormItem,
   FormLabel,
+  FormControl,
   FormMessage,
-} from '~/components/ui/form';
-import useGuardedSpendCredits from '~/hooks/use-guard-usage';
-import { api } from '~/trpc/react';
+} from "~/components/ui/form";
+import { api } from "~/trpc/react";
+import { useSession } from "next-auth/react";
+import useGuardedSpendCredits from "~/hooks/use-guard-usage";
 
 const schema = z.object({
   images: z.array(z.instanceof(File)),
@@ -45,8 +45,8 @@ export function UploadWithDialog({}) {
     },
   });
   const { uploadFiles, progresses, isUploading } = useUploadFile(
-    'imageUploader',
-    { defaultUploadedFiles: [] }
+    "imageUploader",
+    { defaultUploadedFiles: [] },
   );
   const form = useForm<Schema>({
     resolver: zodResolver(schema),
@@ -55,29 +55,29 @@ export function UploadWithDialog({}) {
     },
   });
 
-  const guardedUsage = useGuardedSpendCredits('fileUploads');
+  const guardedUsage = useGuardedSpendCredits("fileUploads");
 
   async function onSubmit(input: Schema) {
     const result = await guardedUsage.guardAndSpendCredits(1);
     if (result?.hasRunOutOfCredits) {
-      toast.error('You ran out of credits');
+      toast.error("You ran out of credits");
       setLoading(false);
       return;
     }
     setLoading(true);
-    const toastId = toast.loading('Uploading files...');
+    const toastId = toast.loading("Uploading files...");
     const res = await uploadFiles(input.images);
     toast.dismiss(toastId);
 
     if (res && res?.length > 0 && res[0]?.url) {
-      toast.success('File uploaded successfully');
+      toast.success("File uploaded successfully");
       updateUserMutation.mutate({
         image: res[0]?.url,
       });
       form.reset();
     }
     if (res?.length === 0) {
-      toast.error('Something went wrong during upload');
+      toast.error("Something went wrong during upload");
     }
 
     setLoading(false);
@@ -87,7 +87,7 @@ export function UploadWithDialog({}) {
     <Dialog>
       <DialogTrigger asChild>
         <Button disabled={guardedUsage.hasRunOutOfCredits} variant="outline">
-          {guardedUsage.hasRunOutOfCredits ? 'Ran out of credits' : 'Upload'}
+          {guardedUsage.hasRunOutOfCredits ? "Ran out of credits" : "Upload"}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-xl">
@@ -108,7 +108,7 @@ export function UploadWithDialog({}) {
               render={({ field }) => (
                 <div className="space-y-6">
                   <FormItem className="w-full">
-                    <FormLabel />
+                    <FormLabel></FormLabel>
                     <FormControl>
                       <FileUploader
                         value={field.value}

@@ -1,23 +1,24 @@
-'use client';
-import { api } from '~/trpc/react';
-import ScholarshipSlider from './scholarship-slider';
-import ScholarshipsTabComponent from './scholarship-tab-component';
+"use client"
+import { api } from "~/trpc/react";
+import ScholarshipsTabComponent from "./scholarship-tab-component";
+import ScholarshipSlider from "./scholarship-slider";
 
 const ScholarshipContents = () => {
-  const { data: scholarships } =
-    api.scholarshipSessions.getAllScholarships.useQuery({
-      limit: 1000,
-      offset: 0,
-    });
+    const { data: scholarships } = api.scholarshipSessions.getAllScholarships.useQuery({
+        limit: 1000, offset: 0
+    })
 
-  return (
-    <>
-      <ScholarshipsTabComponent />
-      <div className="mt-4">
-        <ScholarshipSlider scholarships={scholarships} />
-      </div>
-    </>
-  );
-};
+    console.log("SCH::", scholarships)
 
-export default ScholarshipContents;
+    return (
+        <>
+            <ScholarshipsTabComponent />
+            <div className="mt-4">
+                <ScholarshipSlider scholarships={scholarships} />
+            </div>
+        </>
+    )
+
+}
+
+export default ScholarshipContents

@@ -1,7 +1,7 @@
-import { z } from 'zod';
-import { openai } from '~/lib/openai';
+import { z } from "zod";
+import { openai } from "~/lib/openai";
 
-import { createTRPCRouter, protectedProcedure } from '~/server/api/trpc';
+import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 
 const actionableStepSchema = z.object({
   name: z.string(),
@@ -17,74 +17,74 @@ const launchPlanArgsSchema = z.object({
 export const aiRouter = createTRPCRouter({
   generateProjectPlan: protectedProcedure
     .input(
-      z.object({ projectName: z.string(), projectDescription: z.string() })
+      z.object({ projectName: z.string(), projectDescription: z.string() }),
     )
     .mutation(async ({ input }) => {
       const completion = await openai.chat.completions.create({
-        model: 'gpt-3.5-turbo',
+        model: "gpt-3.5-turbo",
         messages: [
           {
-            role: 'system',
+            role: "system",
             content:
-              'you are an AI specialised in creating plans for launching SaaS projects. Generate a comprehensive plan detailing the steps necessary for a successful launch, including market analysis, target audience identification, marketing strategies, and development roadmap.',
+              "you are an AI specialised in creating plans for launching SaaS projects. Generate a comprehensive plan detailing the steps necessary for a successful launch, including market analysis, target audience identification, marketing strategies, and development roadmap.",
           },
           {
-            role: 'user',
+            role: "user",
             content: `I'm planning to launch a new SaaS called "${input.projectName}". It's described as "${input.projectDescription}". Based on this, could you help me formulate a detailed launch plan?`,
           },
         ],
         tools: [
           {
-            type: 'function',
+            type: "function",
             function: {
-              name: 'generateSaaSPlan',
+              name: "generateSaaSPlan",
               description:
-                'Generates a comprehensive plan for launching a SaaS project',
+                "Generates a comprehensive plan for launching a SaaS project",
               parameters: {
-                type: 'object',
+                type: "object",
                 properties: {
                   productName: {
-                    type: 'string',
-                    description: 'Name of the SaaS product',
+                    type: "string",
+                    description: "Name of the SaaS product",
                   },
                   productDescription: {
-                    type: 'string',
-                    description: 'A brief description of the SaaS product',
+                    type: "string",
+                    description: "A brief description of the SaaS product",
                   },
                   actionableSteps: {
-                    type: 'array',
+                    type: "array",
                     description:
-                      'A list of actionable steps to take during the launch process',
+                      "A list of actionable steps to take during the launch process",
                     items: {
-                      type: 'object',
+                      type: "object",
                       properties: {
                         name: {
-                          type: 'string',
+                          type: "string",
                           description:
-                            'A short, descriptive name for the actionable step',
+                            "A short, descriptive name for the actionable step",
                         },
                         description: {
-                          type: 'string',
+                          type: "string",
                           description:
-                            'A detailed description of the actionable step. Maximum length is 200 characters. Make it relatable to the target audience and concrete.',
+                            "A detailed description of the actionable step. Maximum length is 200 characters. Make it relatable to the target audience and concrete.",
                         },
                       },
                     },
                   },
                 },
                 required: [
-                  'productName',
-                  'productDescription',
-                  'actionableSteps',
+                  "productName",
+                  "productDescription",
+                  "actionableSteps",
                 ],
               },
             },
           },
         ],
         tool_choice: {
-          type: 'function',
+          type: "function",
           function: {
-            name: 'generateSaaSPlan',
+            name: "generateSaaSPlan",
           },
         },
         temperature: 0.9,
@@ -101,6 +101,6 @@ export const aiRouter = createTRPCRouter({
     }),
 
   getSecretMessage: protectedProcedure.query(() => {
-    return 'you can now see this secret message!';
+    return "you can now see this secret message!";
   }),
 });

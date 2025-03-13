@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import * as React from 'react';
+import * as React from "react";
 
-import { DateRangePicker } from '../date-range-picker';
+import { DateRangePicker } from "../date-range-picker";
 
 interface UserTableContextProps {
   enableAdvancedFilter: boolean;
@@ -23,7 +23,7 @@ const UserTableContext = React.createContext<UserTableContextProps>({
 export function useUserTable() {
   const context = React.useContext(UserTableContext);
   if (!context) {
-    throw new Error('useUserTable must be used within a UserTableProvider');
+    throw new Error("useUserTable must be used within a UserTableProvider");
   }
   return context;
 }

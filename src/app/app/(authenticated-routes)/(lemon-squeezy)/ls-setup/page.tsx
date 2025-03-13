@@ -1,14 +1,15 @@
-'use client';
-import { AlertCircle, LinkIcon, Loader2 } from 'lucide-react';
-import { Link } from 'next-view-transitions';
-import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
-import { Badge } from '~/components/ui/badge';
-import { Button } from '~/components/ui/button';
-import { Card } from '~/components/ui/card';
-import { Separator } from '~/components/ui/separator';
-import { Skeleton } from '~/components/ui/skeleton';
-import { currency } from '~/lib/utils';
-import { api } from '~/trpc/react';
+"use client";
+import { AlertCircle, LinkIcon, Loader2 } from "lucide-react";
+import React from "react";
+import { Button } from "~/components/ui/button";
+import { Skeleton } from "~/components/ui/skeleton";
+import { Badge } from "~/components/ui/badge";
+import { api } from "~/trpc/react";
+import {Link} from "next-view-transitions";
+import { Separator } from "~/components/ui/separator";
+import { Card } from "~/components/ui/card";
+import { currency } from "~/lib/utils";
+import { Alert, AlertTitle, AlertDescription } from "~/components/ui/alert";
 
 const Page = () => {
   const utils = api.useUtils();
@@ -44,7 +45,7 @@ const Page = () => {
       <Separator />
       <h2 className="text-xl">Webhook setup</h2>
       <p>
-        For <b>local development</b> run the following command in your terminal:{' '}
+        For <b>local development</b> run the following command in your terminal:{" "}
         <br />
         <code>npx localtunnel --port 3000 --subdomain your-domain</code> and
         copy resulting URL to <b>LEMON_SQUEEZY_WEBHOOK_URL</b> in your .env
@@ -65,13 +66,13 @@ const Page = () => {
             {lemonSqueezyWebhookQuery.data.attributes.url && (
               <Badge variant="destructive" className="max-h-6 self-center">
                 {lemonSqueezyWebhookQuery.data.attributes.test_mode
-                  ? 'Test Mode'
-                  : 'Production'}
+                  ? "Test Mode"
+                  : "Production"}
               </Badge>
             )}
           </div>
           <div className="flex space-x-2 text-muted-foreground">
-            <div className="flex h-2 w-2 animate-pulse self-center rounded-full bg-green-500" />{' '}
+            <div className="flex h-2 w-2 animate-pulse self-center rounded-full bg-green-500" />{" "}
             <p>{lemonSqueezyWebhookQuery.data.attributes.url}</p>
             <Link
               href="https://app.lemonsqueezy.com/settings/webhooks"
@@ -125,7 +126,7 @@ const Page = () => {
                 <LinkIcon className="h-4 w-4" />
               </Link>
             </div>
-            <p>{product.attributes.description ?? 'Missing description'}</p>
+            <p>{product.attributes.description ?? "Missing description"}</p>
             <Separator />
             {
               <div className="space-y-2">

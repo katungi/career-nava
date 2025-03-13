@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useEffect, useRef } from 'react';
+import React, { useRef, useEffect } from "react";
 
 interface ScreenShareVideoProps {
   stream: MediaStream;
@@ -19,7 +18,7 @@ const ScreenShareVideo: React.FC<ScreenShareVideoProps> = ({ stream }) => {
       ref={videoRef}
       autoPlay
       muted={false}
-      className="h-full w-full object-cover"
+      className="w-full h-full object-cover"
     />
   );
 };

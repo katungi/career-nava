@@ -1,11 +1,12 @@
-import { Loader } from 'lucide-react';
+import { Loader } from "lucide-react";
+import React from "react";
 
 const SplashScreen = () => {
   return (
     <div className="-mt-5 flex h-screen flex-col items-center justify-center gap-8">
       <div className="text-center">
         <h1 className="text-4xl">Career Nava</h1>
-        <h2 className="text-wrap text-muted-foreground text-xl">
+        <h2 className="text-wrap text-xl text-muted-foreground">
           Your career path starts here.
         </h2>
       </div>

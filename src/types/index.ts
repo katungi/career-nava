@@ -1,4 +1,4 @@
-import type { LucideIcon } from 'lucide-react';
+import { type LucideIcon } from "lucide-react";
 
 export interface NavItem {
   title: string;
@@ -13,7 +13,7 @@ export type MpesaStkRequestBody = {
   BusinessShortCode: string;
   Password: string;
   Timestamp: string;
-  TransactionType: 'CustomerBuyGoodsOnline';
+  TransactionType: "CustomerBuyGoodsOnline";
   Amount: string;
   PartyA: string;
   PartyB: string;

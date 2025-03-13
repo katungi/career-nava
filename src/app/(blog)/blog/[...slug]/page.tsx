@@ -1,18 +1,18 @@
-import { allPosts } from 'contentlayer/generated';
-import { notFound } from 'next/navigation';
+import { notFound } from "next/navigation";
+import { allPosts } from "contentlayer/generated";
 
-import type { Metadata } from 'next';
-import { Link } from 'next-view-transitions';
-import Image from 'next/image';
+import { type Metadata } from "next";
+import Image from "next/image";
+import { Link } from "next-view-transitions";
 
-import { env } from '~/env.mjs';
+import { env } from "~/env.mjs";
 
-import { ChevronLeft } from 'lucide-react';
-import { buttonVariants } from '~/components/ui/button';
-import { absoluteUrl, cn, formatDate } from '~/lib/utils';
+import { buttonVariants } from "~/components/ui/button";
+import { absoluteUrl, cn, formatDate } from "~/lib/utils";
+import { ChevronLeft } from "lucide-react";
 
-import MdxContent from './mdx-content';
-import Newsletter from './newsletter';
+import MdxContent from "./mdx-content";
+import Newsletter from "./newsletter";
 
 interface PostPageProps {
   params: {
@@ -20,8 +20,8 @@ interface PostPageProps {
   };
 }
 
-async function getPostFromParams(params: PostPageProps['params']) {
-  const slug = params?.slug?.join('/');
+async function getPostFromParams(params: PostPageProps["params"]) {
+  const slug = params?.slug?.join("/");
   const post = allPosts.find((post) => post.slugAsParams === slug);
 
   if (!post) {
@@ -48,7 +48,7 @@ export async function generateMetadata({
     openGraph: {
       title: post.title,
       description: post.description,
-      type: 'article',
+      type: "article",
       url: absoluteUrl(post.slug),
       images: [
         {
@@ -60,7 +60,7 @@ export async function generateMetadata({
       ],
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title: post.title,
       description: post.description,
       images: [ogUrl.toString()],
@@ -69,10 +69,10 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams(): Promise<
-  PostPageProps['params'][]
+  PostPageProps["params"][]
 > {
   return allPosts.map((post) => ({
-    slug: post.slugAsParams.split('/'),
+    slug: post.slugAsParams.split("/"),
   }));
 }
 
@@ -88,8 +88,8 @@ export default async function PostPage({ params }: PostPageProps) {
       <Link
         href="/blog"
         className={cn(
-          buttonVariants({ variant: 'ghost' }),
-          'absolute top-14 left-[-200px] hidden xl:inline-flex'
+          buttonVariants({ variant: "ghost" }),
+          "absolute left-[-200px] top-14 hidden xl:inline-flex",
         )}
       >
         <ChevronLeft className="mr-2 h-4 w-4" />
@@ -99,16 +99,16 @@ export default async function PostPage({ params }: PostPageProps) {
         {post.date && (
           <time
             dateTime={post.date}
-            className="block text-muted-foreground text-sm"
+            className="block text-sm text-muted-foreground"
           >
             Published on {formatDate(post.date)}
           </time>
         )}
-        <h1 className="mt-2 inline-block font-heading text-4xl leading-tight lg:text-5xl">
+        <h1 className="font-heading mt-2 inline-block text-4xl leading-tight lg:text-5xl">
           {post.title}
         </h1>
         <Link
-          href={'https://twitter.com/divdev_'}
+          href={`https://twitter.com/divdev_`}
           target="_blank"
           className="mt-4 flex items-center space-x-2 text-sm"
         >
@@ -140,7 +140,7 @@ export default async function PostPage({ params }: PostPageProps) {
       <Newsletter />
 
       <div className="flex justify-center py-6 lg:py-10">
-        <Link href="/blog" className={cn(buttonVariants({ variant: 'ghost' }))}>
+        <Link href="/blog" className={cn(buttonVariants({ variant: "ghost" }))}>
           <ChevronLeft className="mr-2 h-4 w-4" />
           See all posts
         </Link>

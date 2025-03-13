@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion  */
-import { z } from 'zod';
+import { z } from "zod";
 
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "~/server/api/trpc";
 import {
   createCheckout,
   createWebhook,
@@ -9,20 +14,17 @@ import {
   listProducts,
   listVariants,
   listWebhooks,
-} from '@lemonsqueezy/lemonsqueezy.js';
-import { env } from '~/env.mjs';
-import {
-  createTRPCRouter,
-  protectedProcedure,
-  publicProcedure,
-} from '~/server/api/trpc';
+} from "@lemonsqueezy/lemonsqueezy.js";
+import { env } from "~/env.mjs";
 
-const paywalledFeatures = ['buttonClicks', 'aiCalls', 'fileUploads'] as const;
+const paywalledFeatures = ["buttonClicks", "aiCalls", "fileUploads"] as const;
 
 const setupLemonSqueezy = () => {
   lemonSqueezySetup({
     apiKey: env.LEMON_SQUEEZY_API_KEY,
-    onError(_error) {},
+    onError(error) {
+      console.log(error);
+    },
   });
 };
 
@@ -31,7 +33,7 @@ export async function hasWebhook() {
 
   if (!env.LEMON_SQUEEZY_WEBHOOK_URL) {
     throw new Error(
-      'Missing required WEBHOOK_URL env variable. Please, set it in your .env file.'
+      "Missing required WEBHOOK_URL env variable. Please, set it in your .env file.",
     );
   }
 
@@ -44,7 +46,7 @@ export async function hasWebhook() {
   const webhookUrl = env.LEMON_SQUEEZY_WEBHOOK_URL;
 
   const webhook = allWebhooks.data?.data.find(
-    (wh) => wh.attributes.url === webhookUrl && wh.attributes.test_mode
+    (wh) => wh.attributes.url === webhookUrl && wh.attributes.test_mode,
   );
 
   return webhook;
@@ -56,7 +58,7 @@ export const paymentManagementRouter = createTRPCRouter({
     const user = ctx.session?.user;
 
     if (!user) {
-      throw new Error('User not found in session');
+      throw new Error("User not found in session");
     }
 
     const subscription = await ctx.db.lemonSqueezySubscription.findFirst({
@@ -97,7 +99,7 @@ export const paymentManagementRouter = createTRPCRouter({
       z.object({
         variantId: z.string(),
         embed: z.boolean().optional(),
-      })
+      }),
     )
     .mutation(async ({ input, ctx }) => {
       setupLemonSqueezy();
@@ -106,7 +108,7 @@ export const paymentManagementRouter = createTRPCRouter({
 
       if (!env.LEMON_SQUEEZY_STORE_ID) {
         throw new Error(
-          'Missing required LEMON_SQUEEZY_STORE_ID env variable. Please, set it in your .env file.'
+          "Missing required LEMON_SQUEEZY_STORE_ID env variable. Please, set it in your .env file.",
         );
       }
 
@@ -115,7 +117,7 @@ export const paymentManagementRouter = createTRPCRouter({
         input.variantId,
         {
           checkoutData: {
-            email: user?.email ?? 'undefined',
+            email: user?.email ?? "undefined",
             custom: {
               userIdInDatabase: user?.id,
             },
@@ -126,7 +128,7 @@ export const paymentManagementRouter = createTRPCRouter({
           checkoutOptions: {
             embed: input.embed,
           },
-        }
+        },
       );
 
       return checkout;
@@ -135,16 +137,18 @@ export const paymentManagementRouter = createTRPCRouter({
   createLsWebhook: protectedProcedure.mutation(async ({ ctx }) => {
     lemonSqueezySetup({
       apiKey: env.LEMON_SQUEEZY_API_KEY,
-      onError(_error) {},
+      onError(error) {
+        console.log(error);
+      },
     });
 
-    if (ctx.session.user.role !== 'SUPER_ADMIN') {
-      throw new Error('Unauthorized access to the resource');
+    if (ctx.session.user.role !== "SUPER_ADMIN") {
+      throw new Error("Unauthorized access to the resource");
     }
 
     if (!env.LEMON_SQUEEZY_WEBHOOK_URL) {
       throw new Error(
-        'Missing required LEMON_SQUEEZY_WEBHOOK_URL env variable. Please, set it in your .env file.'
+        "Missing required LEMON_SQUEEZY_WEBHOOK_URL env variable. Please, set it in your .env file.",
       );
     }
     // Check if WEBHOOK_URL ends with a slash. If not, add it.
@@ -160,9 +164,9 @@ export const paymentManagementRouter = createTRPCRouter({
         url: webHookUrl,
         testMode: true, // will create a webhook in Test mode only!
         events: [
-          'subscription_created',
-          'subscription_expired',
-          'subscription_updated',
+          "subscription_created",
+          "subscription_expired",
+          "subscription_updated",
         ],
       });
     }
@@ -174,8 +178,8 @@ export const paymentManagementRouter = createTRPCRouter({
   }),
   createPlansFromLemonSqueezyVariants: protectedProcedure.mutation(
     async ({ ctx }) => {
-      if (ctx.session.user.role !== 'SUPER_ADMIN') {
-        throw new Error('Unauthorized access to the resource');
+      if (ctx.session.user.role !== "SUPER_ADMIN") {
+        throw new Error("Unauthorized access to the resource");
       }
 
       setupLemonSqueezy();
@@ -183,15 +187,15 @@ export const paymentManagementRouter = createTRPCRouter({
       // Fetch variants from Lemon Squeezy
       const products = await listProducts({
         filter: { storeId: Number(env.LEMON_SQUEEZY_STORE_ID) },
-        include: ['variants'],
+        include: ["variants"],
       });
 
       const variants = products.data?.data.flatMap(
-        (product) => product.relationships.variants
+        (product) => product.relationships.variants,
       )[0]?.data;
 
       if (!variants) {
-        throw new Error('Failed to fetch variants from Lemon Squeezy.');
+        throw new Error("Failed to fetch variants from Lemon Squeezy.");
       }
 
       // Iterate over each variant and create a plan in the database
@@ -214,11 +218,11 @@ export const paymentManagementRouter = createTRPCRouter({
           }
 
           return existingPlan;
-        })
+        }),
       );
 
       return plans;
-    }
+    },
   ),
   getProductsFromLemonSqueezy: protectedProcedure.query(async ({ ctx }) => {
     setupLemonSqueezy();
@@ -235,19 +239,19 @@ export const paymentManagementRouter = createTRPCRouter({
       },
     });
     const planVariantIdsInDB = plansInDatabase.map(
-      (plan) => plan.lemonSqueezyVariantId
+      (plan) => plan.lemonSqueezyVariantId,
     );
 
     // Iterate over products and their variants, checking if each variant has a corresponding plan in the database
     const productsWithVariants = products.data?.data.map((product) => {
       const productVariants = variants.data?.data
         .filter(
-          (variant) => String(variant.attributes.product_id) === product.id
+          (variant) => String(variant.attributes.product_id) === product.id,
         )
         .map((variant) => {
           // Check if the variant has a corresponding plan in the database
           const hasCorrespondingPlanInDB = planVariantIdsInDB.includes(
-            variant.id
+            variant.id,
           );
           // Add an attribute to each variant for this
           return { ...variant, hasCorrespondingPlanInDB };
@@ -269,7 +273,7 @@ export const paymentManagementRouter = createTRPCRouter({
       z.object({
         amount: z.number(),
         feature: z.enum(paywalledFeatures),
-      })
+      }),
     )
     .mutation(async ({ input, ctx }) => {
       const today = new Date();
@@ -300,7 +304,7 @@ export const paymentManagementRouter = createTRPCRouter({
     .input(
       z.object({
         feature: z.enum(paywalledFeatures),
-      })
+      }),
     )
     .query(async ({ ctx, input }) => {
       // Get the current day's start time
@@ -336,7 +340,7 @@ export const paymentManagementRouter = createTRPCRouter({
       // Aggregate current month's data if needed, e.g., total button clicks
       const totalUsageForFeatureThisMonth = currentMonthUsage.reduce(
         (acc, usage) => (acc + usage[feature]) as number,
-        0
+        0,
       );
 
       const totalUsageForFeatureThisDay =
