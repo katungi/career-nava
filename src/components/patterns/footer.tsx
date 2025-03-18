@@ -15,7 +15,7 @@ export default function Footer() {
                     backgroundPosition: 'center',
                     zIndex: 0,
                 }}
-            ></div>
+            />
             <div className="relative max-w-full mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 z-10">
                 <div className="space-y-2 col-span-1 md:col-span-1">
                     <h2 className="text-3xl font-bold">
@@ -71,8 +71,8 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
-            <div className="relative text-center mt-10 border-t border-primary pt-4 z-10">
-                <p>Copyright 2024</p>
+            <div className="relative text-center border-t border-primary pt-4 z-10 mt-28">
+                <p>Copyright © {new Date().getFullYear()}</p>
             </div>
         </footer>
     )

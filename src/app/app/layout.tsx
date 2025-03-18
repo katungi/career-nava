@@ -21,8 +21,9 @@ const ProtectedRoutes = ({ children }: { children: React.ReactNode }) => {
     }
   }, [status, pathname]);
 
-  if (status === "loading" && pathname.includes("/app"))
+  if (status === "loading" && pathname.includes("/app")) {
     return <SplashScreen />;
+  }
   return <>{children}</>;
 };
 
