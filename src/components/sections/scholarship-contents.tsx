@@ -1,14 +1,12 @@
 "use client"
 import { useState } from "react";
-import { api } from "~/trpc/react";
 import ScholarshipsTabComponent from "./scholarship-tab-component";
 import ScholarshipCard from "./scholarship-card";
 import { ChevronUp, ChevronDown } from "lucide-react";
+import { useAppStore } from "~/store/app.store";
 
 const ScholarshipContents = () => {
-    const { data: scholarships } = api.scholarshipSessions.getAllScholarships.useQuery({
-        limit: 1000, offset: 0
-    });
+    const { scholarships } = useAppStore();
 
     const [currentPage, setCurrentPage] = useState(0);
     const itemsPerPage = 6; // 3 columns x 2 rows

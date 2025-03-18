@@ -5,13 +5,37 @@ import SessionSlider from "~/components/patterns/session-slider";
 import DocumentSlider from "~/components/patterns/document-slider";
 import { api } from "~/trpc/react";
 import { Button } from "~/components/ui/button";
+import { useAppStore } from "~/store/app.store";
+import { useEffect } from "react";
 
 export default function Home() {
-    const { data: sessions, isLoading } = api.mentorshipSessions.getBookingSessions.useQuery({
+    const { data: sessions, isLoading: sessionsLoading } = api.mentorshipSessions.getBookingSessions.useQuery({
         limit: 100, offset: 0
-    })
+    });
 
-    const { data: documents } = api.documents.getUserDocuments.useQuery();
+    const { data: documents, isLoading: documentsLoading } = api.documents.getUserDocuments.useQuery();
+    const { data: scholarships, isLoading: scholarshipsLoading } = api.scholarshipSessions.getAllScholarships.useQuery({
+        limit: 1000, offset: 0
+    });
+
+    const { 
+        setDocuments, 
+        setSessions, 
+        setScholarships,
+        setIsLoading,
+        setError 
+    } = useAppStore();
+
+    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+    useEffect(() => {
+        setIsLoading(sessionsLoading || documentsLoading || scholarshipsLoading);
+        
+        if (sessions) setSessions(sessions);
+        if (documents) setDocuments(documents);
+        if (scholarships) setScholarships(scholarships);
+    }, [sessions, documents, scholarships, sessionsLoading, documentsLoading, scholarshipsLoading]);
+
+    const isLoading = sessionsLoading || documentsLoading;
 
     return (
         <div className="p-4 mx-12">
