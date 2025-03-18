@@ -65,9 +65,9 @@ export default function FounderShowcase() {
                             ))}
                         </div>
                         <div className="text-center text-white">
-                            <p className="text-lg italic mb-2">&quot;{founders[currentFounder].quote}&quot;</p>
-                            <p className="font-bold">{founders[currentFounder].name}</p>
-                            <p className="text-sm text-gray-300 mb-4">{founders[currentFounder].title}</p>
+                            <p className="text-lg italic mb-2">&quot;{founders[currentFounder]?.quote}&quot;</p>
+                            <p className="font-bold">{founders[currentFounder]?.name}</p>
+                            <p className="text-sm text-gray-300 mb-4">{founders[currentFounder]?.title}</p>
                             <div className="flex justify-center space-x-4">
                                 <Button variant="outline" size="icon" onClick={() => rotateFounders('left')} className="bg-purple-700 text-white hover:bg-purple-800">
                                     <ArrowLeft className="h-4 w-4" />
