@@ -9,31 +9,31 @@ const testimonials = [
         id: 1,
         message: "CareerNava was instrumental in my journey to securing a spot in the Jasiri Entrepreneurial Program. Their guidance was exceptional.",
         name: "Pascal Aloo",
-        image: "/public/images/kevin.jpeg"
+        image: "/images/kevin.jpeg"
     },
     {
         id: 2,
         message: "Thanks to CareerNava, I successfully navigated the Jasiri Talent Investor Program application process. Their expert advice and encouragement gave me the confidence I needed to stand out and secure my place. I highly recommend their services.",
         name: "Dennis Njogu",
-        image: "/public/images/people/njogu.jpg"
+        image: "/images/people/njogu.png"
     },
     {
         id: 3,
-        message: "CareerNava played a pivotal role in my master's scholarship application. Their support and thorough preparation helped me secure the Graduate Research Assistantship at Kentucky State University. I’m forever grateful for their unwavering guidance.",
+        message: "CareerNava played a pivotal role in my master's scholarship application. Their support and thorough preparation helped me secure the Graduate Research Assistantship at Kentucky State University. I'm forever grateful for their unwavering guidance.",
         name: "Germain Akeza Shine",
         image: "https://i.pravatar.cc/300"
     },
     {
         id: 4,
-        message: "CareerNava’s support was crucial in helping me through the interview process for my master's program at the University of Oslo. Their tailored coaching and insights were exactly what I needed to succeed.",
+        message: "CareerNava's support was crucial in helping me through the interview process for my master's program at the University of Oslo. Their tailored coaching and insights were exactly what I needed to succeed.",
         name: "Joan Mawia",
-        image: "/public/images/people/joan.jpg"
+        image: "/images/people/joan.png"
     },
     {
         id: 5,
-        message: "CareerNava’s expertise and personalized approach were key in my successful application for the Mandela Rhodes Scholarship. Their dedication to my success was evident every step of the way. I'm incredibly grateful for their support.",
+        message: "CareerNava's expertise and personalized approach were key in my successful application for the Mandela Rhodes Scholarship. Their dedication to my success was evident every step of the way. I'm incredibly grateful for their support.",
         name: "Emanuel Akaka",
-        image: "/public/images/lameck.png"
+        image: "/images/lameck.png"
     }
 ]
 
@@ -68,7 +68,7 @@ export default function TestimonialSection() {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-[400px] px-4 py-12 bg-[#af63f1]">
-            <h2 className="text-white text-3xl font-bold mb-4">What Our <span className="text-yellow-300">Users</span> Say</h2>
+            <h1 className="text-white text-6xl md:text-6xl  font-bold mb-4">What Our <span className="text-yellow-300">Users</span> Say</h1>
             <div className="w-full max-w-6xl mx-auto">
                 <AnimatePresence mode="wait">
                     <motion.div
