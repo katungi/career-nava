@@ -1,18 +1,12 @@
 
 "use client";
 import {Link} from "next-view-transitions";
-import { type NavItem } from "~/types";
+import type { NavItem } from "~/types";
 import { usePathname } from "next/navigation";
 import { useSidebar } from "~/hooks/use-sidebar";
 import { buttonVariants } from "../../ui/button";
-
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from "~/components/patterns/sidebar/subnav-accordion";
-import { useEffect, useState } from "react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "~/components/patterns/sidebar/subnav-accordion";
+import { useEffect, useState, useCallback, memo } from "react";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { cn } from "~/lib/utils";
 
@@ -22,7 +16,7 @@ interface SideNavProps {
     className?: string;
 }
 
-export function SideNav({ items, setOpen, className }: SideNavProps) {
+export const SideNav = memo(({ items, setOpen, className }: SideNavProps) => {
     const path = usePathname();
     const { isOpen } = useSidebar();
     const [openItem, setOpenItem] = useState("");
@@ -35,21 +29,25 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
             setLastOpenItem(openItem);
             setOpenItem("");
         }
-    }, [isOpen]);
+    }, [isOpen, lastOpenItem, openItem]);
+
+    const handleLinkClick = useCallback(() => {
+        if (setOpen) setOpen(false);
+    }, [setOpen]);
 
     return (
         <nav className="space-y-2">
             {items.map((item) =>
                 item.isChidren ? (
                     <Accordion
+                        key={item.title}
                         type="single"
                         collapsible
                         className="space-y-2"
-                        key={item.title}
                         value={openItem}
                         onValueChange={setOpenItem}
                     >
-                        <AccordionItem value={item.title} className="border-none ">
+                        <AccordionItem value={item.title} className="border-none">
                             <AccordionTrigger
                                 className={cn(
                                     buttonVariants({ variant: 'ghost' }),
@@ -61,13 +59,12 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
                                 </div>
                                 <div
                                     className={cn(
-                                        'absolute left-12 text-black duration-200 ',
+                                        'absolute left-12 text-black duration-200',
                                         !isOpen && className,
                                     )}
                                 >
                                     {item.title}
                                 </div>
-
                                 {isOpen && (
                                     <ChevronDownIcon className="h-4 w-4 shrink-0 text-white-foreground transition-transform duration-200" />
                                 )}
@@ -77,14 +74,12 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
                                     <Link
                                         key={child.title}
                                         href={child.href}
-                                        onClick={() => {
-                                            if (setOpen) setOpen(false)
-                                        }}
+                                        onClick={handleLinkClick}
+                                        prefetch={true}
                                         className={cn(
                                             buttonVariants({ variant: 'ghost' }),
                                             'group relative flex h-12 justify-start gap-x-3',
-                                            path === child.href &&
-                                            'bg-muted font-bold hover:bg-muted',
+                                            path === child.href && 'bg-muted font-bold hover:bg-muted',
                                         )}
                                     >
                                         <child.icon className={cn('h-5 w-5', child.color)} />
@@ -105,9 +100,8 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
                     <Link
                         key={item.title}
                         href={item.href}
-                        onClick={() => {
-                            if (setOpen) setOpen(false)
-                        }}
+                        onClick={handleLinkClick}
+                        prefetch={true}
                         className={cn(
                             buttonVariants({ variant: 'ghost' }),
                             'group relative flex h-12 justify-start text-white',
@@ -124,8 +118,10 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
                             {item.title}
                         </span>
                     </Link>
-                ),
+                )
             )}
         </nav>
     );
-}
+});
+
+SideNav.displayName = 'SideNav';

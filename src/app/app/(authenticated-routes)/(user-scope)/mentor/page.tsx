@@ -1,9 +1,10 @@
 "use client"
 
-import { ChevronRight, Loader } from "lucide-react"
+import { ChevronRight, ChevronRightIcon, Loader } from "lucide-react"
 import DocumentSlider from "~/components/patterns/document-slider"
 import SessionSlider from "~/components/patterns/session-slider"
 import DashboardBanner from "~/components/sections/banner"
+import { Button } from "~/components/ui/button"
 import { api } from "~/trpc/react"
 
 export default function MentorPage() {
@@ -18,47 +19,40 @@ export default function MentorPage() {
         <div className="p-4 mx-12">
             <div className="flex flex-row gap-4">
                 <div className="flex-1">
-                <DashboardBanner sessions={sessions} documents={documents} />
+                    <DashboardBanner sessions={sessions} documents={documents} />
                 </div>
             </div>
-            <div className="flex flex-row mt-20 w-full justify-between">
-                <div className="">
-                    <h1 className="text-3xl font-bold text-gray-800">Upcoming Sessions</h1>
-                    <p className="text-gray-900 text-xl mt-2">
-                        Manage your documents, subscriptions, and billing here.
-                    </p>
+            <div className="flex justify-between items-center mb-6 mt-24">
+                <div>
+                    <h2 className="text-2xl font-bold">Upcoming Sessions</h2>
+                    <p className="text-muted-foreground text-sm">Join your scheduled mentorship sessions</p>
                 </div>
-                <div className="">
-                    <button className="flex items-center bg-primary text-white w-44 h-12 justify-center rounded-md hover:bg-primary-dark">
-                        See All Sessions
-                        <ChevronRight className="w-6 h-6 text-white ml-2" />
-                    </button>
-                </div>
+                <Button variant="default" className="flex items-center gap-1 hover:bg-secondary">
+                    See All Sessions
+                    <ChevronRightIcon className="h-4 w-4" />
+                </Button>
             </div>
             <div className="mt-4">
                 {isLoading ? <div className="flex h-full items-center justify-center p-12">
-                    <Loader className="h-8 w-8 animate-spin rounded-full"></Loader>
+                    <Loader className="h-8 w-8 animate-spin rounded-full" />
                 </div> : <SessionSlider sessions={sessions} />}
             </div>
-            <div className="flex flex-row mt-20 w-full justify-between">
-                <div className="">
-                    <h1 className="text-3xl font-bold text-gray-800">New Documents</h1>
-                    <p className="text-gray-900 text-xl mt-2">
-                        Manage your documents, subscriptions, and billing here.
-                    </p>
+            <div className="flex justify-between items-center mb-6">
+                <div>
+                    <h2 className="text-2xl font-bold">New Documents</h2>
+                    <p className="text-muted-foreground text-sm">Recently uploaded documents and applications</p>
                 </div>
-                <div className="">
-                    <button className="flex items-center bg-primary text-white w-40 h-12 justify-center rounded-md hover:bg-primary-dark">
-                        See All Documents
-                        <ChevronRight className="w-6 h-6 text-white ml-2" />
-                    </button>
-                </div>
+                <Button variant="default" className="flex items-center gap-1 hover:bg-secondary">
+                    See All Documents
+                    <ChevronRightIcon className="h-4 w-4" />
+                </Button>
             </div>
+
             <div className="mt-4">
                 {isLoading ? <div className="flex h-full items-center justify-center p-12">
-                    <Loader className="h-8 w-8 animate-spin rounded-full"></Loader>
+                    <Loader className="h-8 w-8 animate-spin rounded-full" />
                 </div>
-                    : <DocumentSlider sessions={sessions} />}
+                    : <DocumentSlider sessions={documents} />}
             </div>
         </div>
     )

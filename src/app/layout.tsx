@@ -1,5 +1,5 @@
 "use client";
-
+import NextTopLoader from 'nextjs-toploader';
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 import "~/styles/globals.css";
 
@@ -10,7 +10,6 @@ import { Suspense } from "react";
 import { AppShell } from "~/components/patterns/app-shell";
 import Providers from "~/components/providers";
 
-import { TailwindIndicator } from "~/components/patterns/tailwind-indicator";
 import { Toaster } from "~/components/ui/sonner";
 
 const inter = Inter({
@@ -26,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans ${inter.variable}`}>
+        <NextTopLoader />
         <Script
           src="https://app.lemonsqueezy.com/js/lemon.js"
           strategy="beforeInteractive"

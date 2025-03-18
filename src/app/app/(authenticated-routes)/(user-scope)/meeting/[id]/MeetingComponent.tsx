@@ -1,6 +1,6 @@
 "use client"
 
-import { Call, CallControls, CallingState, DeviceSettings, SpeakerLayout, StreamCall, StreamTheme, VideoPreview, useCallStateHooks, useStreamVideoClient } from "@stream-io/video-react-sdk"
+import { CallingState, DeviceSettings, StreamCall, StreamTheme, VideoPreview, useCallStateHooks } from "@stream-io/video-react-sdk"
 import { Loader } from "lucide-react"
 import Link from "next/link"
 import { useEffect, useState } from "react"
@@ -16,16 +16,17 @@ interface MeetingPageProps {
 }
 
 export default function MeetingPageComponent({ id }: MeetingPageProps) {
-    // const [call, setCall] = useState<Call | undefined>()
     const { call, callLoading } = useLoadCall(id)
 
     if (callLoading) {
-        return <Loader className="mx-auto animate-spin" />
+        return <div className="flex items-center justify-center h-screen"><Loader className="animate-spin" /></div>
     }
 
     if (!call) {
         return (
-            <p>This call does not exist</p>
+            <div className="flex items-center justify-center h-screen">
+                <p className="text-xl">This call does not exist</p>
+            </div>
         )
     }
 
@@ -37,6 +38,7 @@ export default function MeetingPageComponent({ id }: MeetingPageProps) {
         </StreamCall>
     )
 }
+
 function MeetingScreen() {
     const [setupComplete, setSetupComplete] = useState(false)
     const { useCallEndedAt, useCallStartedAt } = useCallStateHooks()
@@ -47,64 +49,90 @@ function MeetingScreen() {
     const callStartAt = useCallStartedAt()
 
     async function handleSetupComplete() {
-        call.join()
-        setSetupComplete(true)
+        try {
+            await call.join()
+            setSetupComplete(true)
+        } catch (error) {
+            console.error('Failed to join call:', error)
+            // Handle error appropriately
+        }
     }
-    const callIsInFuture = callStartAt && new Date(callStartAt) > new Date();
 
-    const callHasEnded = !!callEndedAt;
+    const callIsInFuture = callStartAt && new Date(callStartAt) > new Date()
+    const callHasEnded = Boolean(callEndedAt)
 
-    if (callEndedAt) {
+    if (callHasEnded) {
         return <MeetingEndedScreen />
     }
 
     if (callIsInFuture) {
         return <UpcomingMeetingScreen />
     }
-    const description = call.state.custom.description;
 
-    return <div className="space-y-6">
-        {/* <h1 className="text-2xl font-bold">Meeting</h1> */}
-        {description && <p className="text-xl">{description}</p>}
-        {setupComplete ? (
-            <CallUI />
-        ) : (
-            <SetupUI onSetupComplete={handleSetupComplete} />
-        )}
-    </div>
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const description = call.state.custom?.description
+
+    return (
+        <div className="space-y-6">
+            {description && <p className="text-xl">{description}</p>}
+            {setupComplete ? <CallUI /> : <SetupUI onSetupComplete={handleSetupComplete} />}
+        </div>
+    )
 }
 
 interface SetupUIProps {
     onSetupComplete: () => void
 }
+
 function SetupUI({ onSetupComplete }: SetupUIProps) {
-    const call = useStreamCall();
+    const call = useStreamCall()
+    const { useMicrophoneState, useCameraState } = useCallStateHooks()
 
-    const { useMicrophoneState, useCameraState } = useCallStateHooks();
+    const micState = useMicrophoneState()
+    const camState = useCameraState()
 
-    const micState = useMicrophoneState();
-    const camState = useCameraState();
-
-    const [micCamDisabled, setMicCamDisabled] = useState(false);
+    const [micCamDisabled, setMicCamDisabled] = useState(false)
 
     useEffect(() => {
-        if (micCamDisabled) {
-            call.camera.disable();
-            call.microphone.disable();
-        } else {
-            call.camera.enable();
-            call.microphone.enable();
+        async function updateDeviceState() {
+            try {
+                if (micCamDisabled) {
+                    await Promise.all([
+                        call.camera.disable(),
+                        call.microphone.disable()
+                    ])
+                } else {
+                    await Promise.all([
+                        call.camera.enable(),
+                        call.microphone.enable()
+                    ])
+                }
+            } catch (error) {
+                console.error('Failed to update device state:', error)
+                // Handle error appropriately
+            }
         }
-    }, [micCamDisabled, call]);
+        updateDeviceState().catch(() => {
+            console.log('Failed to update device state')
+        })
+
+        return () => {
+            // Cleanup device states when component unmounts
+            call.camera.disable().catch(() => {
+                console.log('Failed to disable camera')
+            })
+            call.microphone.disable().catch(() => {
+                console.log('Failed to disable microphone')
+            })
+        }
+    }, [micCamDisabled, call])
 
     if (!micState.hasBrowserPermission || !camState.hasBrowserPermission) {
-        return <PermissionPrompt />;
+        return <PermissionPrompt />
     }
 
     return (
-        <div className="flex flex-col items-center gap-3 w-screen h-screen bg-center align-middle justify-center bg-primary"
-        //style={{ backgroundImage: `url(${'/images/transparent-bg.png'})`, objectFit: 'cover' }}
-        >
+        <div className="flex flex-col items-center gap-3 w-screen h-screen bg-center align-middle justify-center bg-primary">
             <h1 className="text-center text-5xl font-bold text-white">Setup Meeting ✨</h1>
             <h1 className="text-center text-xl font-bold text-white">Ready to join?</h1>
             <VideoPreview />
@@ -120,35 +148,35 @@ function SetupUI({ onSetupComplete }: SetupUIProps) {
                 />
                 Join with mic and camera off
             </label>
-            <Button onClick={onSetupComplete} variant={'secondary'} className="text-white">Join meeting</Button>
+            <Button onClick={onSetupComplete} variant="secondary" className="text-white">Join meeting</Button>
         </div>
-    );
+    )
 }
 
 function CallUI() {
-    const { useCallCallingState } = useCallStateHooks();
-
-    const callingState = useCallCallingState();
+    const { useCallCallingState } = useCallStateHooks()
+    const callingState = useCallCallingState()
 
     if (callingState !== CallingState.JOINED) {
-        return <Loader className="mx-auto animate-spin" />;
+        return <div className="flex items-center justify-center h-screen"><Loader className="animate-spin" /></div>
     }
 
-    return <FlexibleCallLayout />;
+    return <FlexibleCallLayout />
 }
 
 function UpcomingMeetingScreen() {
     const call = useStreamCall()
     return (
-        <div className="flex flex-col items-center justify-center h-screen ">
+        <div className="flex flex-col items-center justify-center h-screen">
             <p className="text-2xl">Meeting starts soon - {" "}
                 <span className="text-2xl">{call?.state?.startsAt?.toLocaleString()}</span>
             </p>
-            {call?.state?.custom.description && (<p className="text-2xl">Description:{" "}
-                <span className="text-2xl">{call?.state?.custom.description}</span>
-            </p>)}
-
-            <Link href='/app/dashboard'>
+            {call?.state?.custom?.description && (
+                <p className="text-2xl">Description:{" "}
+                    <span className="text-2xl">{call.state.custom.description}</span>
+                </p>
+            )}
+            <Link href="/app/dashboard">
                 <Button>Back to dashboard</Button>
             </Link>
         </div>
@@ -159,6 +187,9 @@ function MeetingEndedScreen() {
     return (
         <div className="flex flex-col items-center justify-center h-screen gap-6">
             <p className="text-2xl font-bold">Oops, Meeting has ended</p>
+            <Link href="/app/dashboard">
+                <Button>Back to dashboard</Button>
+            </Link>
         </div>
     )
 }

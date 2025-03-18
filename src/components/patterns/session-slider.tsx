@@ -1,10 +1,32 @@
 "use client"
-import React, { useState } from 'react';
+import type React from 'react';
+import { useState } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon, Loader } from 'lucide-react';
 import SessionCard from '../sections/session-card';
 import Empty from '../constants/empty';
+import { Button } from '../ui/button';
 
-const SessionSlider = ({ sessions, loading }: any) => {
+interface Session {
+  id: string;
+  title: string;
+  date?: string;
+  time?: string;
+  description?: string;
+  status?: string;
+  meetingLink?: string;
+  mentor?: {
+    name: string;
+    email: string;
+    image?: string;
+  };
+}
+
+interface SessionSliderProps {
+  sessions: Session[];
+  loading?: boolean;
+}
+
+const SessionSlider = ({ sessions, loading }: SessionSliderProps) => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const maxVisibleCards = 3;
     const maxSlideIndex = Math.ceil(sessions?.length / maxVisibleCards) - 1;
@@ -18,41 +40,57 @@ const SessionSlider = ({ sessions, loading }: any) => {
     };
 
     return (
-        <div className="items-center space-x-4 overflow-hidden relative px-2 flex-col">
-            {loading && <div className="flex align-middle h-full itemsP-center justify-center p-12 flex-col">
-                <Loader className="h-8 w-8 animate-spin rounded-full"></Loader>
-            </div>
-            }
-            {sessions?.length > 0 &&
-                <div className='left-0 flex flex-row items-center mb-3 w-64 ml-7'>
-                    <button onClick={prevSlide} className="mb-2 bg-gray-200 rounded-full p-2">
-                        <ChevronLeftIcon className="w-6 h-6 text-gray-600" />
-                    </button>
-                    <div className="flex flex-row justify-center mb-2 px-1 space-x-1">
-                        {Array.from({ length: maxSlideIndex + 1 }, (_, index) => (
-                            <div
-                                key={index}
-                                className={`h-2 w-2 rounded-full ${index === currentSlide ? 'bg-blue-600' : 'bg-gray-400'}`}
-                            ></div>
-                        ))}
-                    </div>
-                    <button onClick={nextSlide} className="bg-gray-200 rounded-full p-2">
-                        <ChevronRightIcon className="w-6 h-6 text-gray-600" />
-                    </button>
+        <div className="relative">
+            {loading && (
+                <div className="flex items-center justify-center p-12">
+                    <Loader className="h-8 w-8 animate-spin rounded-full" />
                 </div>
-            }
-            {sessions?.length > 0 ?
-                <div className="flex flex-grow space-x-4">
-                    {sessions.slice(currentSlide * maxVisibleCards, (currentSlide + 1) * maxVisibleCards).map((session: any, index: React.Key | null | undefined) => (
-                        <div key={index} className="flex-shrink-0 w-1/3 p-4">
-                            <SessionCard {...session} />
+            )}
+            {sessions?.length > 0 ? (
+                <>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-transform duration-300 ease-in-out transform">
+                        {sessions
+                            .slice(currentSlide * maxVisibleCards, (currentSlide + 1) * maxVisibleCards)
+                            .map((session: Session, index: number) => (
+                                <div key={session.id} className="transform transition-all duration-300 hover:scale-105">
+                                    <SessionCard {...session} />
+                                </div>
+                            ))}
+                    </div>
+
+                    <div className="flex justify-center mt-6 space-x-2">
+                        <Button
+                            variant="outline"
+                            size="icon"
+                            className="rounded-full h-8 w-8 transition-colors duration-200"
+                            onClick={prevSlide}
+                        >
+                            <ChevronLeftIcon className="h-4 w-4" />
+                        </Button>
+                        <div className="flex items-center space-x-2">
+                            {Array.from({ length: maxSlideIndex + 1 }, (_, index) => (
+                                <span
+                                    // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                                    key={index}
+                                    className={`h-2 w-2 rounded-full transition-colors duration-200 ${index === currentSlide ? 'bg-primary' : 'bg-gray-300'}`}
+                                />
+                            ))}
                         </div>
-                    ))}
-                </div> :
-                <div className="flex flex-grow w-[500px] h-[500px] mx-96">
+                        <Button
+                            variant="outline"
+                            size="icon"
+                            className="rounded-full h-8 w-8 transition-colors duration-200"
+                            onClick={nextSlide}
+                        >
+                            <ChevronRightIcon className="h-4 w-4" />
+                        </Button>
+                    </div>
+                </>
+            ) : (
+                <div className="flex justify-center items-center h-[500px]">
                     <Empty />
                 </div>
-            }
+            )}
         </div>
     );
 };

@@ -6,7 +6,7 @@ import { MentorNavItems, NavItems } from "~/components/constants/side-nav";
 import { useSidebar } from "~/hooks/use-sidebar"
 import { BsArrowLeftShort } from "react-icons/bs";
 import { cn } from "~/lib/utils";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 
@@ -29,7 +29,7 @@ export default function Sidebar({ className }: SidebarProps) {
     return (
         <nav
             className={cn(
-                `relative hidden h-screen border-r pt-20 md:block `,
+                "relative hidden h-screen border-r pt-20 md:block",
                 status && "duration-500",
                 isOpen ? "w-72" : "w-[78px]",
                 isMentor ? "bg-secondary" : "bg-primary",
