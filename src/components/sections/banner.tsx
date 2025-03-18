@@ -1,21 +1,37 @@
 "use client"
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import BannerCards from "./banner-cards";
+import { Calendar, CreditCard, Users } from "lucide-react";
+import StatCard from "./stat-card";
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export default function DashboardBanner({ sessions, documents }: any) {
     const session = useSession();
     return (
         <div className="flex flex-col w-full gap-4">
-            <div className="">
-                <h1 className="text-3xl font-bold text-gray-800">Welcome,
-                    <span className="text-primary"> {session?.data?.user.name || ""}</span>
+            <div className="mb-10">
+                <h1 className="text-3xl font-bold">
+                    Welcome, <span className="text-primary">{session?.data?.user.name || ""}</span>
                 </h1>
+                <p className="text-muted-foreground mt-1">Here's an overview of your academic progress</p>
             </div>
-            <BannerCards sessions={sessions?.length} documents={documents?.length} scholarhips={0} />
-            {/* <div className="bg-green-500 mt-0">
-                <Image src="/images/paper-planes.svg" width={350} height={300} alt="Career Nava Banner Logo" />
-            </div> */}
+            <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
+                <StatCard
+                    title="Upcoming Sessions"
+                    value={sessions?.length || 0}
+                    icon={Calendar}
+                />
+                <StatCard
+                    title="Documents Submitted"
+                    value={documents?.length || 0}
+                    icon={Users}
+                />
+                <StatCard
+                    title="Scholarships Applied"
+                    value={0}
+                    icon={CreditCard}
+                />
+            </div>
         </div>
     )
 }
