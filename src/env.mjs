@@ -33,14 +33,6 @@ export const env = createEnv({
             process.env.VERCEL ? z.string() : z.string().url(),
           )
         : z.string().optional(),
-    DISCORD_CLIENT_ID:
-      process.env.NODE_ENV === "production"
-        ? z.string()
-        : z.string().optional(),
-    DISCORD_CLIENT_SECRET:
-      process.env.NODE_ENV === "production"
-        ? z.string()
-        : z.string().optional(),
     GOOGLE_CLIENT_ID:
       process.env.NODE_ENV === "production"
         ? z.string()
@@ -65,14 +57,6 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
-    NEXT_PUBLIC_POSTHOG_API_KEY:
-      process.env.NODE_ENV === "production"
-        ? z.string()
-        : z.string().optional(),
-    NEXT_PUBLIC_POSTHOG_HOST:
-      process.env.NODE_ENV === "production"
-        ? z.string()
-        : z.string().optional(),
     NEXT_PUBLIC_DEPLOYMENT_URL: z.string(),
     NEXT_PUBLIC_PLAUSIBLE_SELFHOSTED_URL: z.string().optional(),
     NEXT_PUBLIC_STREAM_VIDEO_API_SECRET: z.string().optional(),
